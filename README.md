@@ -14,7 +14,7 @@ Betrayal at House on the Hill.
 
 To accomplish this, the following will be required:
 
-1. The ability for multiple player to play the game over the internet.
+1. The ability for multiple players to play the game over the internet.
 2. The game's boards layout, 3 levels, and tile generation.
 3. Both private and public spaces -- the players all see the board but also
   get private information for the specific tasks.
