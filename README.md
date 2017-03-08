@@ -17,9 +17,11 @@ To accomplish this, the following will be required:
 1. The ability for multiple players to play the game over the internet.
 2. The game's boards layout, 3 levels, and tile generation.
 3. Both private and public spaces -- the players all see the board but also
-  get private information for the specific tasks.
+get private information for the specific tasks.
 4. An implementation of the game's phases of pre haunt and post haunt.
-5. ..... (in progress)
+5. Implementation of items omens and events.
+6. Characters that players can choose between.
+7. ..... (in progress)
 
 _This portion of the README is due March 8th (see the project handout)!_
 
