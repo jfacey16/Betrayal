@@ -21,6 +21,7 @@ To accomplish this, the following will be required:
 7. Implementations of several different haunts (which are different scenarios and goals depending on the situation).  This will include implementing traitors, different monsters, different items, and custom rule sets depending on the haunt chosen during the game play.
 8. Implementation of a publicly visible track numbered 0-12 that will be incremented and decremented. 
 
+All of these are essential aspects to the tabletop game, so we feel that it is important to implement these. 
 
 ## Project Specs and Mockup
 _A link to your specifications document and your mockup will go here!_
