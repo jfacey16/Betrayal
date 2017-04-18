@@ -36,6 +36,7 @@ public class Pos {
     */
    Pos setX(int newX) {
      x = newX;
+     return this;
    }
 
    /** Sets this position's y value.
@@ -44,5 +45,6 @@ public class Pos {
     */
     Pos setY(int newY) {
       y = newY;
+      return this;
     }
 }

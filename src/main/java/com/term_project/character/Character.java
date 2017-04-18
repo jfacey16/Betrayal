@@ -5,7 +5,7 @@ package com.term_project.character;
  *
  * @author Zachary Hoffman
  */
-public interface Characters {
+public interface Character {
   /** Return's the description of a character
    * @return A description of a character.
    *
