@@ -18,14 +18,14 @@ public class Pos {
    * @return An integer representing a x position.
    *
    */
-  int getX() {
+  public int getX() {
     return x;
   }
 
   /** Return's an integer representing a y position.
    * @return An integer representing a y position.
    */
-   int getY() {
+  public int getY() {
      return y;
    }
 
@@ -34,7 +34,7 @@ public class Pos {
     * @return The position being set.
     *
     */
-   Pos setX(int newX) {
+   public Pos setX(int newX) {
      x = newX;
      return this;
    }
@@ -43,7 +43,7 @@ public class Pos {
     * @param newY The new y position.
     * @return The position being set.
     */
-    Pos setY(int newY) {
+    public Pos setY(int newY) {
       y = newY;
       return this;
     }
