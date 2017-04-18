@@ -1,4 +1,6 @@
 package com.term_project.character;
+import com.term_project.house.Pos;
+import com.term_project.house.Tile;
 
 /**
  * Interface that outlines what methods a character needs.
@@ -6,11 +8,29 @@ package com.term_project.character;
  * @author Zachary Hoffman
  */
 public interface Character {
-  /** Return's the description of a character
+  /** Return's the character's name.
+   * @return The character's name.
+   *
+   */
+  String getName();
+
+  /** Return's the description of a character.
    * @return A description of a character.
    *
    */
   String getDescription();
+
+  /** Return's the character's position.
+   * @return A Pos object representing the character's position.
+   *
+   */
+  Pos getPos();
+
+  /** Return's the tile the Character is residing on.
+   * @return A Tile object representing the tile the character is on.
+   *
+   */
+  Tile getTile();
 
   /** Gets the character's might.
    * @return An integer representing the Character's might.
