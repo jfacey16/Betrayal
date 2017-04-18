@@ -1,6 +1,5 @@
 package com.term_project.cards;
 
-
 /**
  * Interface that outlines what methods an event needs.
  *

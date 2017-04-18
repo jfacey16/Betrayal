@@ -18,4 +18,9 @@ public interface Item<Effected> {
    *
    */
    void use(Effected effected);
+   
+   /** Called on loss of an omen, producing the effect of that omen
+   *
+   */
+   void loss(Effected effected);
 }
