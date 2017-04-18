@@ -1,4 +1,9 @@
 package com.term_project.house;
+import com.term_project.cards.Event;
+import com.term_project.cards.Item;
+import com.term_project.cards.Omen;
+
+import java.util.List;
 /**
  * Interface that outlines what methods a tile needs.
  *
@@ -16,6 +21,21 @@ public interface Tile {
    *
   */
   void apply(Character effected);
+
+  /** Returns a list of events on this tile.
+   * @return A list of Omen.
+  */
+  List<Omen> getOmens();
+
+  /** Returns a list of items on this tile.
+   * @return A list of items.
+  */
+  List<Item> getItems();
+
+  /** Returns a list of omens on this tile.
+   * @return A list of Event.
+  */
+  List<Event> getEvents();
 
   /** Returns the Tile's position.
    * @return The tile's position
