@@ -13,13 +13,13 @@ public class ExampleItem implements Item {
 	}
 
 	@Override
-	public void use(Object effected) {
+	public void use() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void loss(Object effected) {
+	public void loss() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -7,28 +7,96 @@ import com.term_project.cards.Item;
 import com.term_project.cards.Omen;
 import com.term_project.house.Pos;
 import com.term_project.house.Tile;
-
+/**
+ * 
+ * @author jfacey
+ *
+ */
 public class ExampleCharacter implements Character {
 	
 	private int might;
 	private int speed;
 	private int knowledge;
 	private int sanity;
+	private List<Integer> mightScale;
+	private List<Integer> speedScale;
+	private List<Integer> knowledgeScale;
+	private List<Integer> sanityScale;
 	private Tile currentTile;
 	private Pos currentPos;
 	private List<Item> items;
 	private List<Omen> omens;
-	
+	/**
+	 * 
+	 */
 	public ExampleCharacter() {
-		might = 4;
-		speed = 5;
-		knowledge = 3;
-		sanity = 6;
+		might = 2;
+		speed = 2;
+		knowledge = 4;
+		sanity = 2;
+		// scales are of size 8. Death when index falls below 0
+		mightScale = buildMightScale();
+		speedScale = buildSpeedScale();
+		knowledgeScale = buildKnowledgeScale();
+		sanityScale = buildSanityScale();
+		
 		currentPos = new Pos(0,0);
 		//need an example tile
 		currentTile = null;
 		items = new ArrayList<>();
 		omens = new ArrayList<>();
+	}
+	
+	private List<Integer> buildMightScale() {
+		List<Integer> mightList = new ArrayList<>();
+		mightList.add(3);
+		mightList.add(3);
+		mightList.add(3);
+		mightList.add(4);
+		mightList.add(5);
+		mightList.add(6);
+		mightList.add(7);
+		mightList.add(8);
+		return mightList;
+	}
+	
+	private List<Integer> buildSpeedScale() {
+		List<Integer> speedList = new ArrayList<>();
+		speedList.add(3);
+		speedList.add(3);
+		speedList.add(4);
+		speedList.add(5);
+		speedList.add(6);
+		speedList.add(6);
+		speedList.add(7);
+		speedList.add(8);
+		return speedList;
+	}
+	
+	private List<Integer> buildKnowledgeScale() {
+		List<Integer> knowledgeList = new ArrayList<>();
+		knowledgeList.add(2);
+		knowledgeList.add(3);
+		knowledgeList.add(3);
+		knowledgeList.add(4);
+		knowledgeList.add(5);
+		knowledgeList.add(6);
+		knowledgeList.add(7);
+		knowledgeList.add(8);
+		return knowledgeList;
+	}
+	
+	private List<Integer> buildSanityScale() {
+		List<Integer> sanityList = new ArrayList<>();
+		sanityList.add(3);
+		sanityList.add(3);
+		sanityList.add(3);
+		sanityList.add(4);
+		sanityList.add(5);
+		sanityList.add(6);
+		sanityList.add(6);
+		sanityList.add(6);
+		return sanityList;
 	}
 
 	@Override
@@ -43,38 +111,32 @@ public class ExampleCharacter implements Character {
 
 	@Override
 	public Pos getPos() {
-		// TODO Auto-generated method stub
 		return currentPos;
 	}
 
 	@Override
 	public Tile getTile() {
-		// TODO Auto-generated method stub
 		return currentTile;
 	}
 
 	@Override
 	public int getMight() {
-		// TODO Auto-generated method stub
-		return might;
+		return mightScale.get(might);
 	}
 
 	@Override
 	public int getSpeed() {
-		// TODO Auto-generated method stub
-		return speed;
+		return speedScale.get(speed);
 	}
 
 	@Override
 	public int getKnowlege() {
-		// TODO Auto-generated method stub
-		return knowledge;
+		return knowledgeScale.get(knowledge);
 	}
 
 	@Override
 	public int getSanity() {
-		// TODO Auto-generated method stub
-		return sanity;
+		return sanityScale.get(sanity);
 	}
 	
 	@Override
@@ -89,37 +151,61 @@ public class ExampleCharacter implements Character {
 
 	@Override
 	public int modMight(int mightModifier) {
-		// TODO use modifier
-		return might;
+		might = might + mightModifier;
+		// cap of might
+		if (might > 7) {
+			might = 7;
+		}
+		return mightScale.get(might);
 	}
 
 	@Override
 	public int modSpeed(int speedModifier) {
-		// TODO use modifier
-		return speed;
+		speed = speed + speedModifier;
+		// cap of speed
+		if (speed > 7) {
+			speed = 7;
+		}
+		return speedScale.get(speed);
 	}
 
 	@Override
 	public int modKnowlege(int knowledgeModifier) {
-		// TODO use modifier
-		return knowledge;
+		knowledge = knowledge + knowledgeModifier;
+		// cap of knowledge
+		if (knowledge > 7) {
+			knowledge = 7;
+		}
+		return knowledgeScale.get(knowledge);
 	}
 
 	@Override
 	public int modSanity(int sanityModifier) {
-		// TODO use modifier
-		return sanity;
+		sanity = sanity + sanityModifier;
+		// cap of sanity
+		if (sanity > 7) {
+			sanity = 7;
+		}
+		return sanityScale.get(sanity);
 	}
 
 	@Override
 	public void addItem(Item item) {
-		// TODO Auto-generated method stub
 		items.add(item);
 	}
 
 	@Override
 	public void addOmen(Omen omen) {
-		// TODO Auto-generated method stub
 		omens.add(omen);
+	}
+
+	@Override
+	public void dropItem(Item item) {
+		items.remove(item);
+	}
+
+	@Override
+	public void dropOmen(Omen omen) {
+		omens.remove(omen);
 	}
 }

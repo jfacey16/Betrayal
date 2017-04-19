@@ -13,10 +13,12 @@ public final class Dice {
   /** Classes should have private constructors rather than no constructor.
    *
    */
+  //TODO: why is this not public so we can actually construct dice
   private Dice() {
   }
 
   /** Return's an integer representing a x position.
+   * 
    * @return An integer representing a x position.
    *
    */

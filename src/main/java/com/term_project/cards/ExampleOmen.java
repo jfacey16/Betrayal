@@ -9,13 +9,13 @@ public class ExampleOmen implements Omen{
 	}
 
 	@Override
-	public void apply(Object effected) {
+	public void apply() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void loss(Object effected) {
+	public void loss() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -9,7 +9,7 @@ public class ExampleEvent implements Event {
 	}
 
 	@Override
-	public void apply(int roll, Object effected) {
+	public void apply(int roll) {
 		// TODO Auto-generated method stub
 		
 	}

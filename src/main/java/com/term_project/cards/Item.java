@@ -4,9 +4,8 @@ package com.term_project.cards;
  * Interface that outlines what methods an item needs.
  *
  * @author Zachary Hoffman
- * @param <Effected> What the item must modify or effect.
  */
-public interface Item<Effected> {
+public interface Item {
   /** Return's the description of the item.
    * @return A description of the item.
    *
@@ -17,10 +16,10 @@ public interface Item<Effected> {
    * on a character/die amount/gamestate.
    *
    */
-   void use(Effected effected);
+   void use();
    
    /** Called on loss of an omen, producing the effect of that omen
    *
    */
-   void loss(Effected effected);
+   void loss();
 }
