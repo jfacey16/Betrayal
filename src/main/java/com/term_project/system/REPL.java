@@ -49,7 +49,7 @@ public final class REPL {
 
         //if command isn't in the hash print command not found.
         if (command == null) {
-          System.out.println("ERROR: " + parsedLine[0] + " not found.");
+          System.out.println("ERROR: Command " + parsedLine[0] + " not found.");
         } else {
           //if the command was found, run the command.
           try {
@@ -87,7 +87,7 @@ public final class REPL {
 
     //if command isn't in the hash print command not found.
     if (command == null) {
-      System.out.println("ERROR: " + parsedLine[0] + " not found.");
+      System.out.println("ERROR: Command [" + parsedLine[0] + "] not found.");
     } else {
       //if the command was found, run the command.
       try {
