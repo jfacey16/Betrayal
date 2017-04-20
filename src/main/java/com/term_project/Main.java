@@ -1,4 +1,4 @@
-package com.term_project;
+package com.term_project.System;
 
 /**
  * Hello world!

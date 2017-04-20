@@ -1,13 +1,11 @@
 package com.term_project.cards;
 
-
 /**
  * Interface that outlines what methods an event needs.
  *
  * @author Zachary Hoffman
- * @param <Effected> What the event must modify or effect.
  */
-public interface Event<Effected> {
+public interface Event {
   /** Return's the description of the event.
    * @return A description of the event.
    *
@@ -18,5 +16,5 @@ public interface Event<Effected> {
    * on a character/die amount/gamestate.
    *
    */
-   void apply(int roll, Effected effected);
+   void apply(int roll);
 }
