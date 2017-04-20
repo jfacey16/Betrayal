@@ -1,4 +1,4 @@
-package com.term_project.System;
+package com.term_project.system;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
