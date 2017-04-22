@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Betrayal Board</title>
+  <style>
+  #second, #basement, #all {display: none;}
+  #box {width:800px; height:503px; border: solid black 1px; overflow: hidden; border-width: 1px 1px 1px 0; position: relative; z-index: 0; }
+  #mfirst, #msecond, #mbasement, #mall {width:125px; height:125px; border:solid black 1px; border-width: 0 1px 1px 0}
+  #map {display: flex; flex-direction:column; border: solid black 1px; border-width: 1px 0 0 1px;}
+  #container {display:flex; flex-direction:row;}
+  #descr {position: absolute; right: 0; bottom: 0; width:350px; height:60px; border: solid black 1px; border-width: 1px 0 0 1px; z-index: 1; background: white;}
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript">
+  const T = 150;
+
+  $( function() {
+    $( "#first" ).draggable();
+  } );
+  $( function() {
+    $( "#second" ).draggable();
+  } );
+  $( function() {
+    $( "#basement" ).draggable();
+  } );
+  $( function() {
+    $( "#all" ).draggable();
+  } );
+
+  function showFirst() {
+  	first.style.display = 'block';
+  	second.style.display = 'none';
+  	basement.style.display = 'none';
+  	all.style.display = 'none';
+  }
+
+  function showSecond() {
+  	first.style.display = 'none';
+  	second.style.display = 'block';
+  	basement.style.display = 'none';
+  	all.style.display = 'none';
+  }
+
+  function showBasement() {
+  	first.style.display = 'none';
+  	second.style.display = 'none';
+  	basement.style.display = 'block';
+  	all.style.display = 'none';
+  }
+
+  function showAll() {
+  	first.style.display = 'none';
+  	second.style.display = 'none';
+  	basement.style.display = 'none';
+  	all.style.display = 'block';
+  }
+
+  // function testing() {
+  //   first.style.left = 0;
+  //   first.style.top = 0;
+  // }
+
+  </script>
+</head>
+<body>
+<div id="container">
+	<div id="map">
+		<canvas id="mfirst" onclick="showFirst();"></canvas>
+		<canvas id="msecond" onclick="showSecond();"></canvas>
+		<canvas id="mbasement" onclick="showBasement();"></canvas>
+		<canvas id="mall" onclick="showAll();"></canvas>
+	</div>
+	<div id="box">
+		<canvas id="first"></canvas>
+		<canvas id="second"></canvas>
+		<canvas id="basement"></canvas>
+		<canvas id="all"></canvas>
+		<div id="descr"></div>
+	</div>
+</div>
+<!-- <button onclick="testing();">don't do it</button> -->
+<script type="text/javascript"> 
+	const first = document.getElementById("first");
+	const second = document.getElementById("second");
+	const basement = document.getElementById("basement");
+	const all = document.getElementById("all");
+  first.width = 1000;
+  first.height = 1000;
+  second.width = 1000;
+  second.height = 1000;
+  basement.width = 1000;
+  basement.height = 1000;
+  all.width = 1000;
+  all.height = 1000;
+  const ctxf = first.getContext("2d");
+  const ctxs = second.getContext("2d");
+  const ctxb = basement.getContext("2d");
+  const ctxa = all.getContext("2d");
+  ctxf.rect(325,175,T,T);
+  ctxf.rect(475,175,T,T);
+  ctxf.rect(625,175,T,T);
+  ctxf.stroke();
+  ctxs.rect(325,175,T,T);
+  ctxs.stroke();
+  ctxb.rect(325,175,T,T);
+  ctxb.stroke();
+</script>
+</body>
+</html>
