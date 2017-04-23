@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
 import spark.ExceptionHandler;
 import spark.ModelAndView;
+import spark.QueryParamsMap;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
@@ -57,7 +59,7 @@ public class Main
     }
     
     /*
-     * Spark methods are currently residing in Main. We've discussed moving them if they get too over-bearing.
+     * Some Spark methods/classes are currently residing in Main. We've discussed moving them if they get too over-bearing.
      * 
      */
     private static FreeMarkerEngine createEngine() {
@@ -81,7 +83,9 @@ public class Main
         FreeMarkerEngine freeMarker = createEngine();
 
         // Setup Spark Routes
-        Spark.get("/betrayal_menu", new MenuHandler(), freeMarker);
+        Spark.get("/betrayal_menu", new MenuHandler(), freeMarker); 
+        Spark.post("/create_game", new LobbyHandler(), freeMarker);
+        Spark.get("/betrayal", new BetrayalHandler(), freeMarker); 
       }
       
       private static class MenuHandler implements TemplateViewRoute {
@@ -89,13 +93,42 @@ public class Main
     	    @Override
     	    public ModelAndView handle(Request req, Response res) {
 
-    	      String message = "Let's play Betrayal! Create or join a lobby below:";
+    	      String message = "<p>Let's play Betrayal!</p> To begin, either create your own game or join a lobby below:";
 
     	      Map<String, Object> variables = ImmutableMap.of("title",
     	          "Betrayal at House on the Hill", "message", message);
     	      return new ModelAndView(variables, "menu.ftl");
     	    }
       }
+      
+      private static class LobbyHandler implements TemplateViewRoute {
+
+    	    @Override
+    	    public ModelAndView handle(Request req, Response res) {
+    	      
+    	      QueryParamsMap qm = req.queryMap();
+  	          String game_name = qm.value("name");
+    	      String player_number = qm.value("players");
+
+    	      String message = "<p><h4>You're currently in the lobby of Game \"" + game_name + "\".</h4></p>";
+    	      message += "<p><h4>Waiting for X more players to join your lobby of " + player_number + ".</h4></p>";
+
+    	      Map<String, Object> variables = ImmutableMap.of("title",
+    	          "Betrayal at House on the Hill", "message", message);
+    	      return new ModelAndView(variables, "lobby.ftl");
+    	    }
+      }
+      
+      private static class BetrayalHandler implements TemplateViewRoute {
+
+  	    @Override
+  	    public ModelAndView handle(Request req, Response res) {
+
+  	      Map<String, Object> variables = ImmutableMap.of("title",
+  	          "Betrayal at House on the Hill");
+  	      return new ModelAndView(variables, "betrayal_testing.ftl");
+  	    }
+    }
       
       private static class ExceptionPrinter implements ExceptionHandler {
     	    @Override
@@ -109,6 +142,6 @@ public class Main
     	      }
     	      res.body(stacktrace.toString());
     	    }
-    	  }
+      }
     
 }
