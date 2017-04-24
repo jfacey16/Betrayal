@@ -8,8 +8,7 @@ public class ExampleItem implements Item {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return "this is an example item";
 	}
 
 	@Override

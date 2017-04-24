@@ -156,6 +156,9 @@ public class ExampleCharacter implements Character {
 		if (might > 7) {
 			might = 7;
 		}
+		if (might < 0) {
+			might = 0;
+		}
 		return mightScale.get(might);
 	}
 
@@ -165,6 +168,9 @@ public class ExampleCharacter implements Character {
 		// cap of speed
 		if (speed > 7) {
 			speed = 7;
+		}
+		if (speed < 0) {
+			speed = 0;
 		}
 		return speedScale.get(speed);
 	}
@@ -176,6 +182,9 @@ public class ExampleCharacter implements Character {
 		if (knowledge > 7) {
 			knowledge = 7;
 		}
+		if (knowledge < 0) {
+			knowledge = 0;
+		}
 		return knowledgeScale.get(knowledge);
 	}
 
@@ -185,6 +194,9 @@ public class ExampleCharacter implements Character {
 		// cap of sanity
 		if (sanity > 7) {
 			sanity = 7;
+		}
+		if (sanity < 0) {
+			sanity = 0;
 		}
 		return sanityScale.get(sanity);
 	}

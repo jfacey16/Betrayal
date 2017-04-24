@@ -4,8 +4,7 @@ public class ExampleOmen implements Omen{
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return "this is an example omen";
 	}
 
 	@Override

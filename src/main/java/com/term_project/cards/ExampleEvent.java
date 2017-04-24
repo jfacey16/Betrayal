@@ -4,8 +4,7 @@ public class ExampleEvent implements Event {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return "this is an example event";
 	}
 
 	@Override
