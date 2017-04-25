@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 
 public class PreHaunt implements GamePhase {
 	private MemorySlot gameMemory;
@@ -32,7 +34,17 @@ public class PreHaunt implements GamePhase {
 	}
 
 	@Override
-	public List<Action> getActions() {
-		return new ArrayList<>();
+	public Set<Action> getActions() {
+		return new HashSet<>(actions.values());
+	}
+
+	@Override
+	public void startTurn(GameChar character) {
+		remaining.put("Move", character.getSpeed());
+	}
+
+	@Override
+	public void endTurn(GameChar character) {
+
 	}
 }

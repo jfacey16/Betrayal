@@ -3,6 +3,7 @@ package com.term_project.game.haunts;
 import com.term_project.character.GameChar;
 import com.term_project.game.actions.Action;
 import java.util.List;
+import java.util.Set;
 
 public interface GamePhase {
 
@@ -17,5 +18,17 @@ public interface GamePhase {
 
 	public boolean win();
 
-	public List<Action> getActions();
+	public Set<Action> getActions();
+
+	/**
+	 * Starts character's turn.
+	 * @param character Character turn will start.
+	 */
+	void startTurn(GameChar character);
+
+	/**
+	 * Ends character's turn.
+	 * @param character Character whose turn it is now.
+	 */
+	void endTurn(GameChar character);
 }
