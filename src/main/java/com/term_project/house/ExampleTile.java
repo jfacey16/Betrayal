@@ -6,6 +6,7 @@ import java.util.List;
 import com.term_project.cards.Event;
 import com.term_project.cards.Item;
 import com.term_project.cards.Omen;
+import com.term_project.character.GameChar;
 
 /**
  *
@@ -46,19 +47,19 @@ public class ExampleTile implements Tile {
 	}
 
 	@Override
-	public void enter(Character effected) {
+	public void enter(GameChar effected) {
 		// TODO how to we do this for entering vs leaving room
 
 	}
 
 	@Override
-	public void exit(Character effected) {
+	public void exit(GameChar effected) {
 		// TODO how to we do this for entering vs leaving room
 
 	}
 
 	@Override
-	public void apply(Character effected) {
+	public void apply(GameChar effected) {
 		// TODO how to we do this for entering vs leaving room
 
 	}
