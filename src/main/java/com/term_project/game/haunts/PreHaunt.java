@@ -1,7 +1,7 @@
 package com.term_project.game.haunts;
 
-import com.term_project.game.GamePhase;
-import com.term_project.game.Action;
+import com.term_project.game.actions.Action;
+import com.term_project.character.Character;
 import com.term_project.system.MemorySlot;
 
 import java.util.HashMap;
@@ -18,7 +18,8 @@ public class PreHaunt implements GamePhase {
 	}
 
 	@Override
-	public void action(Character character, String action) {
+	public void action(Character character, String action, String specs)
+			throws RuntimeException {
 		// TODO Auto-generated method stub
 
 	}
