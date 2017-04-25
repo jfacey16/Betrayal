@@ -8,12 +8,12 @@ import com.term_project.cards.Item;
 import com.term_project.cards.Omen;
 
 /**
- * 
+ *
  * @author jfacey
  *
  */
 public class ExampleTile implements Tile {
-	
+
 	private Pos pos;
 	private Tile northTile;
 	private Tile southTile;
@@ -22,9 +22,9 @@ public class ExampleTile implements Tile {
 	private List<Item> items;
 	private List<Omen> omens;
 	private List<Event> events;
-	
+
 	/**
-	 * 
+	 *
 	 */
 	public ExampleTile() {
 		pos = new Pos(0,0);
@@ -33,7 +33,7 @@ public class ExampleTile implements Tile {
 		southTile = null;
 		westTile = null;
 		eastTile = null;
-		
+
 		//TODO: add examples that we want to use
 		items = new ArrayList<>();
 		omens = new ArrayList<>();
@@ -46,9 +46,21 @@ public class ExampleTile implements Tile {
 	}
 
 	@Override
+	public void enter(Character effected) {
+		// TODO how to we do this for entering vs leaving room
+
+	}
+
+	@Override
+	public void exit(Character effected) {
+		// TODO how to we do this for entering vs leaving room
+
+	}
+
+	@Override
 	public void apply(Character effected) {
 		// TODO how to we do this for entering vs leaving room
-		
+
 	}
 
 	@Override
@@ -94,24 +106,24 @@ public class ExampleTile implements Tile {
 	@Override
 	public void setNorth(Tile newTile) {
 		northTile = newTile;
-		
+
 	}
 
 	@Override
 	public void setSouth(Tile newTile) {
 		southTile = newTile;
-		
+
 	}
 
 	@Override
 	public void setEast(Tile newTile) {
 		eastTile = newTile;
-		
+
 	}
 
 	@Override
 	public void setWest(Tile newTile) {
 		westTile = newTile;
-		
+
 	}
 }

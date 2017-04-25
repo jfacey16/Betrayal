@@ -1,8 +1,8 @@
-package com.term_project.game;
+package com.term_project.game.haunts;
 
-import com.term_project.character.Character;
+import com.term_project.character.GameChar;
 import com.term_project.game.actions.Action;
-import java.util.Set;
+import java.util.List;
 
 public interface GamePhase {
 
@@ -12,10 +12,10 @@ public interface GamePhase {
 	 * @param action The action to be executed.
 	 * @param specs Special specifications for said action.
 	 */
-	public void action(Character character, String action, String specs)
+	public void action(GameChar character, String action, String specs)
 			throws RuntimeException;
 
 	public boolean win();
 
-	public Set<String> getActions();
+	public List<Action> getActions();
 }

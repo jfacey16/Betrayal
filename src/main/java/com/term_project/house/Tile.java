@@ -2,6 +2,7 @@ package com.term_project.house;
 import com.term_project.cards.Event;
 import com.term_project.cards.Item;
 import com.term_project.cards.Omen;
+import com.term_project.character.GameChar;
 
 import java.util.List;
 /**
@@ -21,19 +22,19 @@ public interface Tile {
    * on a character on entry.
    * @param affected The affected character.
    */
-  void enter(Character affected);
+  void enter(GameChar affected);
 
   /** Produces the effect described in the description
    * on a character on exit.
    * @param affected The affected character.
    */
-  void exit(Character affected);
+  void exit(GameChar affected);
 
   /** Produces an effect on the given character. Used for duration effects in
    * rooms.
    * @param affected The affected character.
    */
-  void apply(Character affected);
+  void apply(GameChar affected);
 
   /** Returns a list of events on this tile.
    *

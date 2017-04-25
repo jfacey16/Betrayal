@@ -14,7 +14,7 @@ import com.term_project.house.Tile;
  /*
  THIS SHOULD BE A CLASS WE WONT BE ADDING OTHER THINGS TO CHARACTER
  */
-public interface Character {
+public interface GameChar {
   /** Return's the character's name.
    *
    * @return The character's name.
@@ -129,19 +129,4 @@ public interface Character {
    * @param omen the omen to drop
    */
   void removeOmen(Omen omen);
-
-  /**
-   * Gets character's remaining movement.
-   *
-   * @return characters remaining movement
-   */
-  int getMovement();
-
-  /**
-   * Sets character's remaining movement.
-   *
-   * @param movement What to set movement to.
-   * @return Character's remaining movement.
-   */
-  int setMovement(int movment);
 }

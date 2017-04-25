@@ -8,12 +8,12 @@ import com.term_project.cards.Omen;
 import com.term_project.house.Pos;
 import com.term_project.house.Tile;
 /**
- * 
+ *
  * @author jfacey
  *
  */
-public class ExampleCharacter implements Character {
-	
+public class ExampleCharacter implements GameChar {
+
 	private int might;
 	private int speed;
 	private int knowledge;
@@ -27,7 +27,7 @@ public class ExampleCharacter implements Character {
 	private List<Item> items;
 	private List<Omen> omens;
 	/**
-	 * 
+	 *
 	 */
 	public ExampleCharacter() {
 		might = 2;
@@ -39,14 +39,14 @@ public class ExampleCharacter implements Character {
 		speedScale = buildSpeedScale();
 		knowledgeScale = buildKnowledgeScale();
 		sanityScale = buildSanityScale();
-		
+
 		currentPos = new Pos(0,0);
 		//need an example tile
 		currentTile = null;
 		items = new ArrayList<>();
 		omens = new ArrayList<>();
 	}
-	
+
 	private List<Integer> buildMightScale() {
 		List<Integer> mightList = new ArrayList<>();
 		mightList.add(3);
@@ -59,7 +59,7 @@ public class ExampleCharacter implements Character {
 		mightList.add(8);
 		return mightList;
 	}
-	
+
 	private List<Integer> buildSpeedScale() {
 		List<Integer> speedList = new ArrayList<>();
 		speedList.add(3);
@@ -72,7 +72,7 @@ public class ExampleCharacter implements Character {
 		speedList.add(8);
 		return speedList;
 	}
-	
+
 	private List<Integer> buildKnowledgeScale() {
 		List<Integer> knowledgeList = new ArrayList<>();
 		knowledgeList.add(2);
@@ -85,7 +85,7 @@ public class ExampleCharacter implements Character {
 		knowledgeList.add(8);
 		return knowledgeList;
 	}
-	
+
 	private List<Integer> buildSanityScale() {
 		List<Integer> sanityList = new ArrayList<>();
 		sanityList.add(3);
@@ -138,12 +138,7 @@ public class ExampleCharacter implements Character {
 	public int getSanity() {
 		return sanityScale.get(sanity);
 	}
-	
-	@Override
-	public void setPos(Pos newPos) {
-		currentPos = newPos;
-	}
-	
+
 	@Override
 	public void setTile(Tile newTile) {
 		currentTile = newTile;
@@ -212,12 +207,12 @@ public class ExampleCharacter implements Character {
 	}
 
 	@Override
-	public void dropItem(Item item) {
+	public void removeItem(Item item) {
 		items.remove(item);
 	}
 
 	@Override
-	public void dropOmen(Omen omen) {
+	public void removeOmen(Omen omen) {
 		omens.remove(omen);
 	}
 }
