@@ -2,6 +2,7 @@ package com.term_project.game;
 
 import com.term_project.system.MemorySlot;
 import com.term_project.house.Tile;
+import com.term_project.house.Pos;
 import com.term_project.game.actions.Action;
 import com.term_project.game.haunts.GamePhase;
 import com.term_project.game.haunts.PreHaunt;
@@ -48,7 +49,7 @@ public class GameState {
 		return idTurnOrder.get(currentTurn).equals(id);
 	}
 
-	public void action(Character character, String action) {
+	public void action(GameChar character, String action) {
 
 	}
 
@@ -58,18 +59,28 @@ public class GameState {
 	}
 
 	public boolean win() {
-		return false;
+		return phase.win();
 	}
 
 	public void endTurn() {
+		//end current players turn
+		GameChar curr = playersCharacters.get(idTurnOrder.get(currentTurn));
+		phase.endTurn(curr);
+
+		//increment turn
+		currentTurn = (currentTurn + 1) % NUMPLAYERS;
+
+		//start next player's turn
+		curr = playersCharacters.get(idTurnOrder.get(currentTurn));
+		phase.startTurn(curr);
 
 	}
 
-	public void addTile() {
+	public void addTile(Tile tile) {
 
 	}
 
-	public Tile getTile() {
+	public Tile getTile(Pos position) {
 		return null;
 	}
 }
