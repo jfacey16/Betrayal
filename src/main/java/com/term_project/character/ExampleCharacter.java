@@ -23,7 +23,6 @@ public class ExampleCharacter implements GameChar {
 	private List<Integer> knowledgeScale;
 	private List<Integer> sanityScale;
 	private Tile currentTile;
-	private Pos currentPos;
 	private List<Item> items;
 	private List<Omen> omens;
 	/**
@@ -40,7 +39,6 @@ public class ExampleCharacter implements GameChar {
 		knowledgeScale = buildKnowledgeScale();
 		sanityScale = buildSanityScale();
 
-		currentPos = new Pos(0,0);
 		//need an example tile
 		currentTile = null;
 		items = new ArrayList<>();
@@ -107,11 +105,6 @@ public class ExampleCharacter implements GameChar {
 	@Override
 	public String getDescription() {
 		return "This is an example character";
-	}
-
-	@Override
-	public Pos getPos() {
-		return currentPos;
 	}
 
 	@Override

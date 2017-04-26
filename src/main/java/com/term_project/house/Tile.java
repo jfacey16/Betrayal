@@ -11,9 +11,16 @@ import java.util.List;
  * @author Zachary Hoffman
  */
 public interface Tile {
-  /** Return's the description of the event.
+  /** Returns the name of the tile.
    *
-   * @return A description of the event.
+   * @return A description of the tile.
+   *
+   */
+  String getName();
+
+  /** Returns the description of the tile.
+   *
+   * @return A description of the tile.
    *
    */
   String getDescription();
@@ -64,26 +71,26 @@ public interface Tile {
    *
    * @return the tile that is linked to this tile in the North.
    */
-  Tile getNorth() throws NullPointerException;
+  Tile getNorth();
 
   /** Returns the tile that is linked to this tile in the South.
    *
    *
    * @return the tile that is linked to this tile in the South.
    */
-  Tile getSouth() throws NullPointerException;
+  Tile getSouth();
 
   /** Returns the tile that is linked to this tile in the East.
    *
    * @return the tile that is linked to this tile in the East.
    */
-  Tile getEast() throws NullPointerException;
+  Tile getEast();
 
   /** Returns the tile that is linked to this tile in the West.
    *
    * @return the tile that is linked to this tile in the West.
    */
-  Tile getWest() throws NullPointerException;
+  Tile getWest();
 
   /** Sets the tile that is linked to this tile in the North.
    *
@@ -104,4 +111,14 @@ public interface Tile {
    *
    */
   void setWest(Tile newTile);
+
+  /** Sets the tile's position.
+   *
+   */
+  void setPos(Pos newPos);
+
+  /** Returns the floors that this tile can be placed in.
+   * @return The floors that this tile can be placed in.
+   */
+  List<Floor> getAvailableFloors();
 }

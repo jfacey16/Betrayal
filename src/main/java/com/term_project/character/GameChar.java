@@ -2,7 +2,6 @@ package com.term_project.character;
 
 import com.term_project.cards.Item;
 import com.term_project.cards.Omen;
-import com.term_project.house.Pos;
 import com.term_project.house.Tile;
 
 /**
@@ -28,13 +27,6 @@ public interface GameChar {
    *
    */
   String getDescription();
-
-  /** Return's the character's position.
-   *
-   * @return A Pos object representing the character's position.
-   *
-   */
-  Pos getPos();
 
   /** Return's the tile the Character is residing on.
    *

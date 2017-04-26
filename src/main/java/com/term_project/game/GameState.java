@@ -35,11 +35,15 @@ public class GameState {
 	private final Integer NUMPLAYERS;
 	private GamePhase phase;
 	private MemorySlot memory;
+
+	//decks of these items
 	private Set<Action> actions;
 	private Queue<Item> items;
 	private Queue<Omen> omens;
 	private Queue<Event> events;
 	private Queue<Tile> tiles;
+
+	private Map<Pos, Tile> tileMap; //tiles placed on the map
 
 	public GameState(List<String> ids,
 						       Map<String, GameChar> playersCharacters,
@@ -55,12 +59,15 @@ public class GameState {
 		this.memory = memory;
 		phase =  new PreHaunt(memory);
 		actions = phase.getActions();
-		
+
 		//initiate decks
 		items =  new ItemsBuilder().buildDeck();
 		omens = new OmensBuilder().buildDeck();
 		events = new EventsBuilder().buildDeck();
 		tiles = new TileBuilder().buildDeck();
+
+		//initiate shared memory
+
 	}
 
 	public boolean isTurn(String id) {
