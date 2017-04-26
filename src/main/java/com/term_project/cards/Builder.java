@@ -1,6 +1,7 @@
 package com.term_project.cards;
 
 import java.util.List;
+import java.util.Queue;
 /**
  * Interface for building a random ordered deck of the type of card passed in.
  * 
@@ -15,5 +16,5 @@ public interface Builder<V> {
 	 * 
 	 * @return the deck of the type passed in as a list
 	 */
-	List<V> buildDeck();
+	Queue<V> buildDeck();
 }

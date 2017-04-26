@@ -6,6 +6,13 @@ import com.term_project.house.Pos;
 import com.term_project.game.actions.Action;
 import com.term_project.game.haunts.GamePhase;
 import com.term_project.game.haunts.PreHaunt;
+import com.term_project.cards.Event;
+import com.term_project.cards.EventsBuilder;
+import com.term_project.cards.Item;
+import com.term_project.cards.ItemsBuilder;
+import com.term_project.cards.Omen;
+import com.term_project.cards.OmensBuilder;
+import com.term_project.cards.TileBuilder;
 import com.term_project.character.GameChar;
 
 import java.util.Collections;
@@ -13,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.Map;
+import java.util.Queue;
 
 public class GameState {
 	// maps ids to respective character
@@ -28,13 +36,17 @@ public class GameState {
 	private GamePhase phase;
 	private MemorySlot memory;
 	private Set<Action> actions;
+	private Queue<Item> items;
+	private Queue<Omen> omens;
+	private Queue<Event> events;
+	private Queue<Tile> tiles;
 
 	public GameState(List<String> ids,
 						       Map<String, GameChar> playersCharacters,
 									 Integer numPlayers,
 									 MemorySlot memory){
 		//Randomize turn order
-		idTurnOrder = new ArrayList(ids);
+		idTurnOrder = new ArrayList<>(ids);
 		Collections.shuffle(idTurnOrder);
 
 		this.playersCharacters = playersCharacters;
@@ -43,6 +55,12 @@ public class GameState {
 		this.memory = memory;
 		phase =  new PreHaunt(memory);
 		actions = phase.getActions();
+		
+		//initiate decks
+		items =  new ItemsBuilder().buildDeck();
+		omens = new OmensBuilder().buildDeck();
+		events = new EventsBuilder().buildDeck();
+		tiles = new TileBuilder().buildDeck();
 	}
 
 	public boolean isTurn(String id) {
@@ -76,9 +94,13 @@ public class GameState {
 
     return win();
 	}
-
-	public void addTile(Tile tile) {
-
+	// what do we want to do here.
+	// adding requires first player getting tile, then adding it where it is viable
+	public void addTile() {
+		// add new tile from deck if viable,
+		if (!tiles.isEmpty()) {
+			Tile tile = tiles.remove();
+		}
 	}
 
 	public Tile getTile(Pos position) {
