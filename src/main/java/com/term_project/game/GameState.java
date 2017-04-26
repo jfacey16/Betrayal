@@ -62,7 +62,7 @@ public class GameState {
 		return phase.win();
 	}
 
-	public void endTurn() {
+	public boolean endTurn() {
 		//end current players turn
 		GameChar curr = playersCharacters.get(idTurnOrder.get(currentTurn));
 		phase.endTurn(curr);
@@ -74,6 +74,7 @@ public class GameState {
 		curr = playersCharacters.get(idTurnOrder.get(currentTurn));
 		phase.startTurn(curr);
 
+    return win();
 	}
 
 	public void addTile(Tile tile) {
