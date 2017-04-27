@@ -12,8 +12,12 @@ public class EventsBuilder implements Builder<Event> {
 	
 	@Override
 	public Queue<Event> buildDeck() {
-		Queue<Event> eventDeck = new LinkedList<>();
-		eventDeck.add(new ExampleEvent());
+		List<Event> eventList = new ArrayList<>();
+		
+		eventList.add(new ExampleEvent());
+		
+		Collections.shuffle(eventList);
+		Queue<Event> eventDeck = new LinkedList<>(eventList);
 		return eventDeck;
 	}
 }
