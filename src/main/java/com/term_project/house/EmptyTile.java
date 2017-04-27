@@ -13,20 +13,13 @@ import java.util.Map;
  * @author Zachary Hoffman
  */
 
-public class EmptyTile implements Tile {
-  private String name;
-  private Pos pos;
-  private Map<Direction, Tile> connectedTiles;
-  private List<Item> items;
-  private List<Omen> omens;
-  private List<Event> events;
-  private List<Floor> availableFloors;
-
-  public EmptyTile() {
-    availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.ATTIC);
-    availableFloors.add(Floor.GROUND);
-    availableFloors.add(Floor.BASEMENT);
+public class EmptyTile extends AbstractTile implements Tile {
+  public EmptyTile(Map<Direction, Tile> connectedTiles) {
+    super(connectedTiles,
+          new ArrayList<>(),
+          new ArrayList<>(),
+          new ArrayList<>(),
+          new ArrayList<>());
   }
 
   @Override
@@ -52,75 +45,5 @@ public class EmptyTile implements Tile {
   @Override
   public void apply(GameChar affected) {
     return;
-  }
-
-  @Override
-  public List<Omen> getOmens() {
-    return null;
-  }
-
-  @Override
-  public List<Item> getItems() {
-    return null;
-  }
-
-  @Override
-  public List<Event> getEvents() {
-    return null;
-  }
-
-  @Override
-  public Pos getPos() {
-    return null;
-  }
-
-  @Override
-  public Tile getNorth() {
-    return null;
-  }
-
-  @Override
-  public Tile getSouth() {
-    return null;
-  }
-
-  @Override
-  public Tile getEast() {
-    return null;
-  }
-
-  @Override
-  public Tile getWest() {
-    return null;
-  }
-
-  @Override
-  public void setNorth(Tile newTile) {
-    return;
-  }
-
-  @Override
-  public void setSouth(Tile newTile) {
-    return;
-  }
-
-  @Override
-  public void setEast(Tile newTile) {
-    return;
-  }
-
-  @Override
-  public void setWest(Tile newTile) {
-    return;
-  }
-
-  @Override
-  public void setPos(Pos newPos) {
-    return;
-  }
-
-  @Override
-  public List<Floor> getAvailableFloors() {
-    return availableFloors;
   }
 }

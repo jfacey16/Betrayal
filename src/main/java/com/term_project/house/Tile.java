@@ -71,26 +71,26 @@ public interface Tile {
    *
    * @return the tile that is linked to this tile in the North.
    */
-  Tile getNorth();
+  Tile getNorth() throws NullPointerException;
 
   /** Returns the tile that is linked to this tile in the South.
    *
    *
    * @return the tile that is linked to this tile in the South.
    */
-  Tile getSouth();
+  Tile getSouth() throws NullPointerException;
 
   /** Returns the tile that is linked to this tile in the East.
    *
    * @return the tile that is linked to this tile in the East.
    */
-  Tile getEast();
+  Tile getEast() throws NullPointerException;
 
   /** Returns the tile that is linked to this tile in the West.
    *
    * @return the tile that is linked to this tile in the West.
    */
-  Tile getWest();
+  Tile getWest() throws NullPointerException;
 
   /** Sets the tile that is linked to this tile in the North.
    *
@@ -121,4 +121,8 @@ public interface Tile {
    * @return The floors that this tile can be placed in.
    */
   List<Floor> getAvailableFloors();
+
+  /** Rotates the tile clockwise by 90 degrees.
+  */
+  void rotateClockwise();
 }

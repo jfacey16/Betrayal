@@ -11,6 +11,7 @@ import com.term_project.cards.Item;
 import com.term_project.cards.Omen;
 import com.term_project.house.Tile;
 import com.term_project.house.Pos;
+import com.term_project.game.GameState;
 
 /**
  * This is a class that will be used to hold a peice of information.
@@ -29,6 +30,7 @@ public final class MemorySlot {
 	private Queue<Event> events;
 	private Queue<Tile> tiles;
   private Map<Pos, Tile> tileMap;
+  private GameState gameState;
 
   /**
    * Initializes a MemorySlot.
@@ -131,6 +133,16 @@ public final class MemorySlot {
     return this;
   }
 
+  /**
+   * Stores the gamestate.
+   * @param game The gamestate this MemorySlot manages.
+   * @return The MemorySlot that was just modified.
+   */
+  public MemorySlot setGameState(GameState game) {
+    gameState = game;
+    return this;
+  }
+
   /** Gets the list of strings this object stores.
    * @return The list of strings this object stores.
    */
@@ -199,6 +211,14 @@ public final class MemorySlot {
    */
   public Map<Pos, Tile> getTileMap() {
     return tileMap;
+  }
+
+  /**
+   * Gets the gamestate this MemorySlot manages.
+   * @return The gamestate this MemorySlot manages.
+   */
+  public GameState getGameState() {
+    return gameState;
   }
 
 }

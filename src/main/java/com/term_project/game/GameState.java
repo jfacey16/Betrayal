@@ -45,6 +45,9 @@ public class GameState {
 
 	private Map<Pos, Tile> tileMap; //tiles placed on the map
 
+	// The current state of the gamestate that is currently being displayed
+	// private Display curr;
+
 	public GameState(List<String> ids,
 						       Map<String, GameChar> playersCharacters,
 									 Integer numPlayers,
