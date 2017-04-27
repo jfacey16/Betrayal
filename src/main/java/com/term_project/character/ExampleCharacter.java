@@ -144,10 +144,16 @@ public class ExampleCharacter implements GameChar {
 		if (might > 7) {
 			might = 7;
 		}
+		int tempMight = might;
 		if (might < 0) {
 			might = 0;
 		}
-		return mightScale.get(might);
+		if (tempMight < 0) {
+			return tempMight;
+		} else {
+			return mightScale.get(might);
+		}
+		
 	}
 
 	@Override
@@ -157,10 +163,15 @@ public class ExampleCharacter implements GameChar {
 		if (speed > 7) {
 			speed = 7;
 		}
+		int tempSpeed = 0;
 		if (speed < 0) {
 			speed = 0;
 		}
-		return speedScale.get(speed);
+		if (tempSpeed < 0) {
+			return tempSpeed;
+		} else {
+			return speedScale.get(speed);
+		}	
 	}
 
 	@Override
@@ -170,10 +181,15 @@ public class ExampleCharacter implements GameChar {
 		if (knowledge > 7) {
 			knowledge = 7;
 		}
+		int tempKnowledge = 0;
 		if (knowledge < 0) {
 			knowledge = 0;
 		}
-		return knowledgeScale.get(knowledge);
+		if (tempKnowledge < 0) {
+			return tempKnowledge;
+		} else {
+			return knowledgeScale.get(knowledge);
+		}	
 	}
 
 	@Override
@@ -183,10 +199,15 @@ public class ExampleCharacter implements GameChar {
 		if (sanity > 7) {
 			sanity = 7;
 		}
+		int tempSanity = sanity;
 		if (sanity < 0) {
 			sanity = 0;
 		}
-		return sanityScale.get(sanity);
+		if (tempSanity < 0) {
+			return tempSanity;
+		} else {
+			return sanityScale.get(sanity);
+		}
 	}
 
 	@Override
