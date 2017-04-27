@@ -66,7 +66,13 @@ public class GameState {
 		String currentId = idTurnOrder.get(currentTurn);
 		phase.run(qm.value("name"), qm, playersCharacters.get(currentId), variables);
 
-		//stuff map always needs
+		if(qm.value("name").equals("end")){
+			endTurn();
+		}
+		return variables;
+	}
 
+	private void endTurn() {
+		return;
 	}
 }

@@ -4,6 +4,7 @@ import com.term_project.game.actions.Action;
 import com.term_project.game.actions.Mover;
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
+import com.term_project.house.Tile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,42 +17,80 @@ import java.util.HashSet;
 import spark.QueryParamsMap;
 
 public class PreHaunt implements GamePhase {
-	private MemorySlot gameMemory;
+	private MemorySlot memory;
 
 	private String mode;
 	private Integer phase;
 
 	private Mover move;
+	Map<String, Integer> remaining;
 
 
-	public PreHaunt(MemorySlot gameMemory) {
-		this.gameMemory = gameMemory;
-		mode = "idle";
+	public PreHaunt(MemorySlot memory) {
+		this.memory = memory;
+		mode = "start";
 		phase = 0;
 		move = new Mover();
+
+		remaining = new HashMap<>();
 	}
 	/**
 	 * Runs
 	 */
 	public void run(String name, QueryParamsMap qm, GameChar character, Map<String, Object> variables) {
-		if(mode != "idle") {
-			name == mode;
+		//if person is starting turn reset available actions
+		if (mode == "start") {
+			remaining.put("move", character.getSpeed());
+			mode = "idle";
+			phase = 0;
 		}
+
+		//make sure backend matches frontend
+		if(mode != "idle") {
+			if(name != mode) {
+				System.out.println("NAME DOESN'T EQUAL MODE");
+				return;
+			}
+		}
+
+		//make sure player has enough actions
+		if (remaining.get(name) <= 0) {
+			variables.put("Error", "Cannot perform action as no more are remaining.");
+			return;
+		}
+
 		switch (name) {
       case "move":
 				if(phase == 0) {
 					mode = "move";
 					phase = 1;
 
+					//get the direction the player is trying to move in
 					String direction = qm.value("direction");
-					move.run(direction, character, memory);
+
+					//try to move in given direction
+					//fails if no door exists
+					try {
+						move.run(direction, character, memory);
+
+						//use up one movement
+						remaining.put("move", remaining.get("move") - 1);
+					} catch(NullPointerException e) {
+
+					}
 
 					if(move.getFinished()) {
 						mode = "idle";
 						phase = 0;
+						variables.put("tiles", new ArrayList<Tile>(memory.getTileMap().values()));
+						variables.put("characters", memory.getGameCharacters());
 						return;
 					}
 				}
       break;
+
+			case "end":
+				mode == "start";
+			break;
     }
 }
