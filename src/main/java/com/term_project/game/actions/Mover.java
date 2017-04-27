@@ -20,5 +20,56 @@ public class Mover {
 		return finished;
 	}
 
-	public void run
+	public void run(String direction, GameChar character, MemorySlot memory) throws NullPointerException {
+		finished = false;
+
+		assert (direction.equals("NORTH")
+						|| direction.equals("SOUTH")
+						|| direction.equals("EAST")
+						|| direction.equals("WEST"));
+
+		Tile currentTile = character.getTile();
+
+		switch (specs) {
+			case "NORTH":
+				try {
+					Tile newTile = currentTile.getNorth();
+					character.setTile(newTile);
+					newTile.enter(character);
+				} catch(NullPointerException e) {
+					throw new NullPointerException("No available tile to the north.");
+				}
+			break;
+
+			case "SOUTH":
+				try {
+					Tile newTile = currentTile.getSouth();
+					character.setTile(newTile);
+					newTile.enter(character);
+				} catch(NullPointerException e) {
+					throw new NullPointerException("No available tile to the south.");
+				}
+			break;
+
+			case "EAST":
+				try {
+					Tile newTile = currentTile.getEast();
+					character.setTile(newTile);
+					newTile.enter(character);
+				} catch(NullPointerException e) {
+					throw new NullPointerException("No available tile to the east.");
+				}
+			break;
+
+			case "WEST":
+				try {
+					Tile newTile = currentTile.getWest();
+					character.setTile(newTile);
+					newTile.enter(character);
+				} catch(NullPointerException e) {
+					throw new NullPointerException("No available tile to the west.");
+				}
+			break;
+		}
+	}
 }
