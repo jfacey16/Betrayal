@@ -59,6 +59,7 @@ public class GameState {
 	}
 
 	public update(QueryParamsMap qm) {
-		phase.run(qm.value("name"), qm);
+		String currentId = idTurnOrder.get(currentTurn);
+		phase.run(qm.value("name"), qm, playersCharacters.get(currentId));
 	}
 }
