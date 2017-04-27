@@ -12,39 +12,31 @@ import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
 
+import spark.QueryParamsMap;
+
 public class PreHaunt implements GamePhase {
 	private MemorySlot gameMemory;
-	private Map<String, Action> actions;
-	private Map<String, Integer> remaining;
+	String mode;
+	Integer phase;
+	Mover move;
+
 	public PreHaunt(MemorySlot gameMemory) {
 		this.gameMemory = gameMemory;
+		mode = "idle";
+		phase = 0;
+		move = new Mover();
 	}
-
-	@Override
-	public void action(GameChar character, String action, String specs)
-			throws RuntimeException {
-
-		Action toExecute = actions.get(action);
-		toExecute.execute(gameMemory, character, specs, remaining);
-	}
-
-	@Override
-	public boolean win() {
-		return false;
-	}
-
-	@Override
-	public Set<Action> getActions() {
-		return new HashSet<>(actions.values());
-	}
-
-	@Override
-	public void startTurn(GameChar character) {
-		remaining.put("Move", character.getSpeed());
-	}
-
-	@Override
-	public void endTurn(GameChar character) {
-
-	}
+	/**
+	 * Runs
+	 */
+	public run(String name, QueryParamsMap qm, GameChar character) {
+		if(mode != "idle") {
+			name == mode;
+		}
+		switch (name) {
+      case "move":
+				String direction = qm.value("direction");
+				move.run(direction, character, memory);
+      break;
+    }
 }
