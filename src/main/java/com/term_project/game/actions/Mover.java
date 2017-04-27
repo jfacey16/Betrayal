@@ -10,5 +10,13 @@ import com.term_project.house.Pos;
 import java.util.Map;
 
 public class Mover {
-	
+	Boolean finished;
+
+	public Mover() {
+		finished = true;
+	}
+
+	public Boolean getFinished() {
+		return finished;
+	}
 }
