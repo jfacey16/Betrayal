@@ -32,6 +32,15 @@ public final class MemorySlot {
   private Map<Pos, Tile> tileMap;
   private GameState gameState;
 
+  /* Frontend needs
+  List<Events>
+  List<Omens>
+  List<item>
+  Tilemap
+  gameState
+  List<Character>
+  */
+
   /**
    * Initializes a MemorySlot.
    */
