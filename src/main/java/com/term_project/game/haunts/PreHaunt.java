@@ -30,7 +30,7 @@ public class PreHaunt implements GamePhase {
 		this.memory = memory;
 		mode = "start";
 		phase = 0;
-		move = new Mover();
+		move = new Mover(memory);
 
 		remaining = new HashMap<>();
 	}
@@ -71,7 +71,7 @@ public class PreHaunt implements GamePhase {
 					//try to move in given direction
 					//fails if no door exists
 					try {
-						move.run(direction, character, memory);
+						move.run(direction, character);
 
 						//use up one movement
 						remaining.put("move", remaining.get("move") - 1);
@@ -93,13 +93,13 @@ public class PreHaunt implements GamePhase {
 					try {
 						move.addTile(character,
 										 		 Integer.parseInt(qm.value("rotations")),
-										 	 	 memory.getTileMap);
+										 	 	 memory.getTileMap());
 
 						variables.put("tiles", new ArrayList<Tile>(memory.getTileMap().values()));
 						variables.put("characters", memory.getGameCharacters());
 
 						mode = "idle";
-						phase == 0
+						phase = 0;
 					} catch (RuntimeException e) {
 						variables.put("Error", e.getMessage());
 						return;
@@ -108,7 +108,8 @@ public class PreHaunt implements GamePhase {
       break;
 
 			case "end":
-				mode == "start";
+				mode = "start";
 			break;
     }
+	}
 }

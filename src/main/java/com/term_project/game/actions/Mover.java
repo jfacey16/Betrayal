@@ -14,8 +14,10 @@ public class Mover {
 	private Boolean finished;
 	private String dir;
 	private Tile toAdd;
+	private MemorySlot memory;
 
-	public Mover() {
+	public Mover(MemorySlot memory) {
+		this.memory = memory;
 		finished = true;
 		dir = null;
 	}
@@ -24,7 +26,7 @@ public class Mover {
 		return finished;
 	}
 
-	public void run(String direction, GameChar character, MemorySlot memory) throws NullPointerException {
+	public void run(String direction, GameChar character) throws NullPointerException {
 		finished = false;
 		dir = direction;
 
@@ -39,7 +41,7 @@ public class Mover {
 			case "NORTH":
 				try {
 					Tile newTile = currentTile.getNorth();
-					moveTileHandler(newTile, character)
+					moveTileHandler(newTile, character);
 				} catch(NullPointerException e) {
 					throw new NullPointerException("No available tile to the north.");
 				}
@@ -48,7 +50,7 @@ public class Mover {
 			case "SOUTH":
 				try {
 					Tile newTile = currentTile.getSouth();
-					moveTileHandler(newTile, character)
+					moveTileHandler(newTile, character);
 				} catch(NullPointerException e) {
 					throw new NullPointerException("No available tile to the south.");
 				}
@@ -57,7 +59,7 @@ public class Mover {
 			case "EAST":
 				try {
 					Tile newTile = currentTile.getEast();
-					moveTileHandler(newTile, character)
+					moveTileHandler(newTile, character);
 				} catch(NullPointerException e) {
 					throw new NullPointerException("No available tile to the east.");
 				}
@@ -66,7 +68,7 @@ public class Mover {
 			case "WEST":
 				try {
 					Tile newTile = currentTile.getWest();
-					moveTileHandler(newTile, character)
+					moveTileHandler(newTile, character);
 				} catch(NullPointerException e) {
 					throw new NullPointerException("No available tile to the west.");
 				}

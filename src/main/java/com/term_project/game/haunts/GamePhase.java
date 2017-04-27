@@ -4,6 +4,7 @@ import com.term_project.character.GameChar;
 import com.term_project.game.actions.Action;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
 import spark.QueryParamsMap;
 
 public interface GamePhase {
