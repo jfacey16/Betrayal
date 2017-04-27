@@ -44,6 +44,11 @@ public class PreHaunt implements GamePhase {
 
 					String direction = qm.value("direction");
 					move.run(direction, character, memory);
+
+					if(move.getFinished()) {
+						mode = "idle";
+						phase = 0;	
+					}
 				}
       break;
     }
