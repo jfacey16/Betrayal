@@ -76,7 +76,8 @@ public class PreHaunt implements GamePhase {
 						//use up one movement
 						remaining.put("move", remaining.get("move") - 1);
 					} catch(NullPointerException e) {
-
+						variables.put("Error", "No door in given direction.");
+						return;
 					}
 
 					if(move.getFinished()) {
