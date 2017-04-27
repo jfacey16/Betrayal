@@ -33,11 +33,10 @@ public final class MemorySlot {
   private GameState gameState;
 
   /* Frontend needs
-  List<Events>
+  List<Events> *SPECIAL EVENTS Attack, Win, Give*
   List<Omens>
   List<item>
   Tilemap
-  gameState
   List<Character>
   */
 
