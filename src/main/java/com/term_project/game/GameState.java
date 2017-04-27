@@ -19,7 +19,9 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Queue;
 
 import spark.QueryParamsMap;
@@ -58,8 +60,13 @@ public class GameState {
 		phase =  new PreHaunt(memory);
 	}
 
-	public update(QueryParamsMap qm) {
+	public Map<String, Object> update(QueryParamsMap qm) {
+		Map<String, Object> variables = new HashMap<>();
+
 		String currentId = idTurnOrder.get(currentTurn);
-		phase.run(qm.value("name"), qm, playersCharacters.get(currentId));
+		phase.run(qm.value("name"), qm, playersCharacters.get(currentId), variables);
+
+		//stuff map always needs
+
 	}
 }

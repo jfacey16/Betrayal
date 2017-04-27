@@ -13,5 +13,5 @@ public interface GamePhase {
 	 * @param action The action to be executed.
 	 * @param specs Special specifications for said action.
 	 */
-	public void run(String name, QueryParamsMap qm);
+	public void run(String name, QueryParamsMap qm, GameChar character, Map<String, Object> variables);
 }

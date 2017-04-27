@@ -32,7 +32,7 @@ public class PreHaunt implements GamePhase {
 	/**
 	 * Runs
 	 */
-	public run(String name, QueryParamsMap qm, GameChar character) {
+	public void run(String name, QueryParamsMap qm, GameChar character, Map<String, Object> variables) {
 		if(mode != "idle") {
 			name == mode;
 		}
@@ -47,7 +47,8 @@ public class PreHaunt implements GamePhase {
 
 					if(move.getFinished()) {
 						mode = "idle";
-						phase = 0;	
+						phase = 0;
+						return;
 					}
 				}
       break;

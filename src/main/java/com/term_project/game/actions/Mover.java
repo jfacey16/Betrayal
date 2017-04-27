@@ -19,4 +19,6 @@ public class Mover {
 	public Boolean getFinished() {
 		return finished;
 	}
+
+	public void run
 }
