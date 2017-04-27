@@ -22,13 +22,13 @@ public class PreHaunt implements GamePhase {
 
 	private Mover move;
 
+
 	public PreHaunt(MemorySlot gameMemory) {
 		this.gameMemory = gameMemory;
 		mode = "idle";
 		phase = 0;
 		move = new Mover();
 	}
-
 	/**
 	 * Runs
 	 */
@@ -41,11 +41,10 @@ public class PreHaunt implements GamePhase {
 				if(phase == 0) {
 					mode = "move";
 					phase = 1;
-					
+
 					String direction = qm.value("direction");
 					move.run(direction, character, memory);
 				}
       break;
     }
-	}
 }
