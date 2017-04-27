@@ -18,11 +18,12 @@ public class GenericTile extends AbstractTile implements Tile {
 
   public GenericTile(
     Map<Direction, Tile> connectedTiles,
-    List<Item> items,
-    List<Omen> omens,
-    List<Event> events,
+    int items,
+    int events,
+    int omens,
     List<Floor> availableFloors) {
-    super(connectedTiles, items, omens, events, availableFloors);
+
+    super(connectedTiles, items, events, omens, availableFloors);
   }
 
   /**

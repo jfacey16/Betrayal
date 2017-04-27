@@ -15,6 +15,9 @@ import java.util.Map;
 public abstract class AbstractTile implements Tile {
   private Pos pos;
   private Map<Direction, Tile> connectedTiles;
+  private int itemCount;
+  private int omenCount;
+  private int eventCount;
   private List<Item> items;
   private List<Omen> omens;
   private List<Event> events;
@@ -22,15 +25,17 @@ public abstract class AbstractTile implements Tile {
 
   public AbstractTile(
     Map<Direction, Tile> connectedTiles,
-    List<Item> items,
-    List<Omen> omens,
-    List<Event> events,
+    int items,
+    int events,
+    int omens,
     List<Floor> availableFloors) {
+	  
+	this.itemCount = items;
+	this.omenCount = omens;
+	this.eventCount = events;
+	
     this.pos = null;
     this.connectedTiles = connectedTiles;
-    this.items = items;
-    this.omens = omens;
-    this.events = events;
     this.availableFloors = availableFloors;
   }
 
@@ -144,5 +149,11 @@ public abstract class AbstractTile implements Tile {
 
     //Make north value the west value
     connectedTiles.put(Direction.NORTH, holderOne);
+  }
+
+  @Override
+  public void generate() {
+	// TODO Auto-generated method stub
+	
   }
 }

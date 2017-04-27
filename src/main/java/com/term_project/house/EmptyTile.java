@@ -16,9 +16,9 @@ import java.util.Map;
 public class EmptyTile extends AbstractTile implements Tile {
   public EmptyTile(Map<Direction, Tile> connectedTiles) {
     super(connectedTiles,
-          new ArrayList<>(),
-          new ArrayList<>(),
-          new ArrayList<>(),
+    	  0,
+    	  0,
+    	  0,
           new ArrayList<>());
   }
 
@@ -46,4 +46,10 @@ public class EmptyTile extends AbstractTile implements Tile {
   public void apply(GameChar affected) {
     return;
   }
+
+@Override
+public void add() {
+	// TODO Auto-generated method stub
+	
+}
 }
