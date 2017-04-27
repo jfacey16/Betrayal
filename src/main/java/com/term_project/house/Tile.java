@@ -125,4 +125,6 @@ public interface Tile {
   /** Rotates the tile clockwise by 90 degrees.
   */
   void rotateClockwise();
+  
+  void generate();
 }
