@@ -3,6 +3,7 @@ package com.term_project.game.actions;
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 import com.term_project.house.Tile;
+import com.term_project.house.EmptyTile;
 
 import java.util.Map;
 
@@ -83,5 +84,44 @@ public class Move implements Action{
 		}
 
 		remaining.put(getName(), movement - 1);
+	}
+
+
+	private void addTile(MemorySlot memory, Tile currentTile, String specs) {
+		//takes the first tile off the poll.
+		Tile toAdd = memory.getTiles().poll();
+		while(true) {
+			//if we can place toAdd on the current floor break loop
+			if(toAdd.getAvailableFloors().contains(currentTile.getFloor())) {
+				break;
+			} else {
+				memory.getTiles().add(toAdd);
+				toAdd = memory.getTiles().poll();
+			}
+		}
+		for() {
+
+		}
+		switch (specs) {
+			case "NORTH":
+				assert (currentTile.getNorth() instanceof EmptyTile);
+				currentTile.setNorth();
+			break;
+
+			case "SOUTH":
+				assert (currentTile.getSouth() instanceof EmptyTile);
+
+			break;
+
+			case "EAST":
+				assert (currentTile.getSouth() instanceof EmptyTile);
+
+			break;
+
+			case "WEST":
+				assert (currentTile.getEast() instanceof EmptyTile);
+
+			break;
+		}
 	}
 }

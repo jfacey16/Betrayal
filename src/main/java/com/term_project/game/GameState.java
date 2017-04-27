@@ -43,7 +43,14 @@ public class GameState {
 	private Queue<Event> events;
 	private Queue<Tile> tiles;
 
-	private Map<Pos, Tile> tileMap; //tiles placed on the map
+	//currently active event
+	private Event current;
+
+	//current mode
+	private mode;
+
+	//tiles placed on the map
+	private Map<Pos, Tile> tileMap;
 
 	// The current state of the gamestate that is currently being displayed
 	// private Display curr;
@@ -69,15 +76,16 @@ public class GameState {
 		events = new EventsBuilder().buildDeck();
 		tiles = new TileBuilder().buildDeck();
 
-		//initiate shared memory
-
+		//Setting up current state
+		mode = "idle";
+		event = null;
 	}
 
 	public boolean isTurn(String id) {
 		return idTurnOrder.get(currentTurn).equals(id);
 	}
 
-	public void action(GameChar character, String action) {
+	public void action(GameChar character, String action, String specs) {
 
 	}
 

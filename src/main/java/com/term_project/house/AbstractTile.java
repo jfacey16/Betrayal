@@ -19,6 +19,7 @@ public abstract class AbstractTile implements Tile {
   private List<Omen> omens;
   private List<Event> events;
   private List<Floor> availableFloors;
+  private getFLoor;
 
   public AbstractTile(
     Map<Direction, Tile> connectedTiles,
@@ -144,5 +145,16 @@ public abstract class AbstractTile implements Tile {
 
     //Make north value the west value
     connectedTiles.put(Direction.NORTH, holderOne);
+  }
+
+  @Override
+  public Tile getFloor() {
+    return floor;
+  }
+
+  @Override
+  public void setFloor(Floor newFloor) {
+    assert(availableFloors.contains(newFloor));
+    floor = newFloor;
   }
 }
