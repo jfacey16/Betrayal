@@ -88,6 +88,23 @@ public class PreHaunt implements GamePhase {
 						return;
 					}
 				}
+
+				if (phase == 1) {
+					try {
+						move.addTile(character,
+										 		 Integer.parseInt(qm.value("rotations")),
+										 	 	 memory.getTileMap);
+
+						variables.put("tiles", new ArrayList<Tile>(memory.getTileMap().values()));
+						variables.put("characters", memory.getGameCharacters());
+
+						mode = "idle";
+						phase == 0
+					} catch (RuntimeException e) {
+						variables.put("Error", e.getMessage());
+						return;
+					}
+				}
       break;
 
 			case "end":

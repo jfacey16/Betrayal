@@ -147,7 +147,7 @@ public class Mover {
 		}
 	}
 
-	public void addTile(Integer numClockwiseRotations, Map<Pos, Tile> tileMap)
+	public void addTile(GameChar character, Integer numClockwiseRotations, Map<Pos, Tile> tileMap)
 			throws RuntimeException {
 		for (int i = 0; i < numClockwiseRotations; i++) {
 			toAdd.rotateClockwise();
@@ -256,5 +256,13 @@ public class Mover {
 				westOfAdded.setEast(null);
 			}
 		}
+
+		//Add character to the tile we just added!
+		character.setTile(toAdd);
+		toAdd.enter(character);
+
+		//Finally add tile to tileMap
+		memory.getTileMap().put(toAdd.getPos(), toAdd);
+		finished = true;
 	}
 }
