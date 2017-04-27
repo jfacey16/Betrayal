@@ -54,6 +54,8 @@ public class GameState {
 
 		//initiate decks
 		this.memory = memory;
+
+		phase =  new PreHaunt(memory);
 	}
 
 	public update(QueryParamsMap qm) {

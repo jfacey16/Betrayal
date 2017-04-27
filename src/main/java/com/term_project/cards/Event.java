@@ -6,6 +6,8 @@ package com.term_project.cards;
  * @author Zachary Hoffman
  */
 public interface Event {
+	
+	
   /** Return's the description of the event.
    * @return A description of the event.
    *

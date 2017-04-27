@@ -13,6 +13,11 @@ public interface Omen {
    */
   String getDescription();
 
+  /**
+   * Called on the pickup of an omen, producing the effect of the item
+   */
+   void add();
+   
   /** Produces the effect described in the description
    * on a character/die amount/gamestate.
    *

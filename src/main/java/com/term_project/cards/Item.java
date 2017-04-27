@@ -11,14 +11,19 @@ public interface Item {
    *
    */
   String getDescription();
-
+  
+  /**
+   * Called on the pickup of an item, producing the effect of the item
+   */
+   void add();
+   
   /** Uses the item producing the effect described in the description
    * on a character/die amount/gamestate.
    *
    */
    void use();
    
-   /** Called on loss of an omen, producing the effect of that omen
+   /** Called on loss of an item, lossing the effect of that omen
    *
    */
    void loss();

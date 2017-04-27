@@ -7,8 +7,12 @@ import java.util.ArrayList;
 import java.util.Queue;
 
 import com.term_project.cards.Event;
+import com.term_project.cards.EventsBuilder;
 import com.term_project.cards.Item;
+import com.term_project.cards.ItemsBuilder;
 import com.term_project.cards.Omen;
+import com.term_project.cards.OmensBuilder;
+import com.term_project.cards.TileBuilder;
 import com.term_project.house.Tile;
 import com.term_project.house.Pos;
 import com.term_project.game.GameState;
@@ -47,6 +51,11 @@ public final class MemorySlot {
     bools = new HashMap<String, Boolean>();
     ints = new HashMap<String, Integer>();
     stringList = new ArrayList<>();
+  //initiate decks
+  	items =  new ItemsBuilder().buildDeck();
+  	omens = new OmensBuilder().buildDeck();
+  	events = new EventsBuilder().buildDeck();
+  	tiles = new TileBuilder().buildDeck();
   }
 
   /**
