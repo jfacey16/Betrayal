@@ -37,10 +37,6 @@ public class GameState {
 
 	//decks of these items
 	private Set<Action> actions;
-	private Queue<Item> items;
-	private Queue<Omen> omens;
-	private Queue<Event> events;
-	private Queue<Tile> tiles;
 
 	//tiles placed on the map
 	private Map<Pos, Tile> tileMap;
@@ -60,12 +56,6 @@ public class GameState {
 		this.memory = memory;
 		phase =  new PreHaunt(memory);
 		actions = phase.getActions();
-
-		//initiate decks
-		items =  new ItemsBuilder().buildDeck();
-		omens = new OmensBuilder().buildDeck();
-		events = new EventsBuilder().buildDeck();
-		tiles = new TileBuilder().buildDeck();
 	}
 
 	public boolean isTurn(String id) {
@@ -103,9 +93,7 @@ public class GameState {
 	// adding requires first player getting tile, then adding it where it is viable
 	public void addTile() {
 		// add new tile from deck if viable,
-		if (!tiles.isEmpty()) {
-			Tile tile = tiles.remove();
-		}
+		
 	}
 
 	public Tile getTile(Pos position) {

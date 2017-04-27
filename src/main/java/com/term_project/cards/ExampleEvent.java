@@ -1,6 +1,10 @@
 package com.term_project.cards;
 
 public class ExampleEvent implements Event {
+	
+	public ExampleEvent() {
+		
+	}
 
 	@Override
 	public String getDescription() {

@@ -15,13 +15,7 @@ private static int DECK_LENGTH = 10;
 	@Override
 	public Queue<Item> buildDeck() {
 		Queue<Item> itemDeck = new LinkedList<>();
-		List<Integer> range = IntStream.rangeClosed(0, DECK_LENGTH)
-			    .boxed().collect(Collectors.toList());
-		Collections.shuffle(range);
-		
-		for (int i = 0; i < DECK_LENGTH; i++) {
-			// TODO: build each item and add to deck
-		}
+		itemDeck.add(new ExampleItem());
 		return itemDeck;
 	}
 }

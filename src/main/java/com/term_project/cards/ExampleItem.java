@@ -12,6 +12,12 @@ public class ExampleItem implements Item {
 	}
 
 	@Override
+	public void add() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public void use() {
 		// TODO Auto-generated method stub
 		
