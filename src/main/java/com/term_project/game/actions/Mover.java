@@ -10,5 +10,5 @@ import com.term_project.house.Pos;
 import java.util.Map;
 
 public class Mover {
-	
+
 }

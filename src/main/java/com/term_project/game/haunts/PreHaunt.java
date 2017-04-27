@@ -17,10 +17,10 @@ import spark.QueryParamsMap;
 public class PreHaunt implements GamePhase {
 	private MemorySlot gameMemory;
 
-	String mode;
-	Integer phase;
+	private String mode;
+	private Integer phase;
 
-	Mover move;
+	private Mover move;
 
 	public PreHaunt(MemorySlot gameMemory) {
 		this.gameMemory = gameMemory;
@@ -38,8 +38,13 @@ public class PreHaunt implements GamePhase {
 		}
 		switch (name) {
       case "move":
-				String direction = qm.value("direction");
-				move.run(direction, character, memory);
+				if(phase == 0) {
+					mode = "move";
+					phase = 1;
+					
+					String direction = qm.value("direction");
+					move.run(direction, character, memory);
+				}
       break;
     }
 	}
