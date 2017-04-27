@@ -22,6 +22,8 @@ import java.util.Set;
 import java.util.Map;
 import java.util.Queue;
 
+import spark.QueryParamsMap;
+
 public class GameState {
 	// maps ids to respective character
 	private Map<String, GameChar> playersCharacters;
@@ -32,18 +34,10 @@ public class GameState {
 	// integer representing the index in idTurnOrder of whose turn it is
 	private Integer currentTurn;
 
-	private GamePhase phase;
+	//data storage for gameState
 	private MemorySlot memory;
 
-	//decks of these items
-	private Set<Action> actions;
-	private Queue<Item> items;
-	private Queue<Omen> omens;
-	private Queue<Event> events;
-	private Queue<Tile> tiles;
-
-	//tiles placed on the map
-	private Map<Pos, Tile> tileMap;
+	private GamePhase phase;
 
 	// The current state of the gamestate that is currently being displayed
 	// private Display curr;
@@ -57,58 +51,12 @@ public class GameState {
 
 		this.playersCharacters = playersCharacters;
 		currentTurn = 0;
-		this.memory = memory;
-		phase =  new PreHaunt(memory);
-		actions = phase.getActions();
 
 		//initiate decks
-		items =  new ItemsBuilder().buildDeck();
-		omens = new OmensBuilder().buildDeck();
-		events = new EventsBuilder().buildDeck();
-		tiles = new TileBuilder().buildDeck();
+		this.memory = memory;
 	}
 
-	public boolean isTurn(String id) {
-		return idTurnOrder.get(currentTurn).equals(id);
-	}
-
-	public void action(GameChar character, String action, String specs) {
-
-	}
-
-	public List<String> getActions() {
-		// change string to action?
-		return null;
-	}
-
-	public boolean win() {
-		return phase.win();
-	}
-
-	public boolean endTurn() {
-		//end current players turn
-		GameChar curr = playersCharacters.get(idTurnOrder.get(currentTurn));
-		phase.endTurn(curr);
-
-		//increment turn
-		currentTurn = (currentTurn + 1) % idTurnOrder.size();
-
-		//start next player's turn
-		curr = playersCharacters.get(idTurnOrder.get(currentTurn));
-		phase.startTurn(curr);
-
-    return win();
-	}
-	// what do we want to do here.
-	// adding requires first player getting tile, then adding it where it is viable
-	public void addTile() {
-		// add new tile from deck if viable,
-		if (!tiles.isEmpty()) {
-			Tile tile = tiles.remove();
-		}
-	}
-
-	public Tile getTile(Pos position) {
-		return null;
+	public update(QueryParamsMap qm) {
+		phase.run(qm.value("name"), qm);
 	}
 }

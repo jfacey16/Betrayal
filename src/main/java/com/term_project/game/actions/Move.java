@@ -104,6 +104,7 @@ public class Move implements Action{
 				toAdd = memory.getTiles().poll();
 			}
 		}
+		
 		switch (specs) {
 
 			case "NORTH":

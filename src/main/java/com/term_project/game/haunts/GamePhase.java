@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 public interface GamePhase {
-
+	String mode;
+	int phase;
 	/**
 	 * Executes an action by the specified character.
 	 * @param character The character doing the specified action.
