@@ -4,6 +4,7 @@ import com.term_project.game.actions.Action;
 import com.term_project.game.actions.Mover;
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
+import com.term_project.house.Tile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.HashSet;
 import spark.QueryParamsMap;
 
 public class PreHaunt implements GamePhase {
-	private MemorySlot gameMemory;
+	private MemorySlot memory;
 
 	private String mode;
 	private Integer phase;
@@ -24,8 +25,8 @@ public class PreHaunt implements GamePhase {
 	private Mover move;
 
 
-	public PreHaunt(MemorySlot gameMemory) {
-		this.gameMemory = gameMemory;
+	public PreHaunt(MemorySlot memory) {
+		this.memory = memory;
 		mode = "idle";
 		phase = 0;
 		move = new Mover();
@@ -49,6 +50,8 @@ public class PreHaunt implements GamePhase {
 					if(move.getFinished()) {
 						mode = "idle";
 						phase = 0;
+						variables.put("tiles", new ArrayList<Tile>(memory.getTileMap().values()));
+						variables.put("characters", memory.getGameCharacters());
 						return;
 					}
 				}

@@ -16,6 +16,7 @@ import com.term_project.cards.TileBuilder;
 import com.term_project.house.Tile;
 import com.term_project.house.Pos;
 import com.term_project.game.GameState;
+import com.term_project.character.GameChar;
 
 /**
  * This is a class that will be used to hold a peice of information.
@@ -29,12 +30,14 @@ public final class MemorySlot {
   private Map<String, Integer> ints;
   private List<String> stringList;
   private DB database;
+
   private Queue<Item> items;
 	private Queue<Omen> omens;
 	private Queue<Event> events;
 	private Queue<Tile> tiles;
   private Map<Pos, Tile> tileMap;
   private GameState gameState;
+  private List<GameChar> gameCharacters;
 
   /* Frontend needs
   List<Events> *SPECIAL EVENTS Attack, Win, Give*
@@ -160,6 +163,16 @@ public final class MemorySlot {
     return this;
   }
 
+  /**
+   * Stores game characters;
+   * @param gameCharactersList List of characters in the game.
+   * @return The MemorySlot that was just modified.
+   */
+  public MemorySlot setGameCharacters(List<GameChar> gameCharactersList) {
+    gameCharacters = gameCharactersList;
+    return this;
+  }
+
   /** Gets the list of strings this object stores.
    * @return The list of strings this object stores.
    */
@@ -238,4 +251,11 @@ public final class MemorySlot {
     return gameState;
   }
 
+  /**
+   * Gets the List of Game Characters.
+   * @return The list of gameCharacters.
+   */
+  public List<GameChar> getGameCharacters() {
+    return gameCharacters;
+  }
 }
