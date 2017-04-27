@@ -15,6 +15,10 @@ public class OmensBuilder implements Builder<Omen> {
 		List<Omen> omenList = new ArrayList<>();
 		
 		omenList.add(new ExampleOmen());
+		omenList.add(new OmenTwo());
+		omenList.add(new OmenThree());
+		omenList.add(new OmenFour());
+		omenList.add(new OmenFive());
 		
 		Collections.shuffle(omenList);
 		Queue<Omen> omenDeck = new LinkedList<>(omenList);

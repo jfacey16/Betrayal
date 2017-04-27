@@ -1,11 +1,14 @@
 package com.term_project.cards;
 
-public class Attack implements Event {
+public class EventTwo implements Event {
+	
+	public EventTwo() {
+		
+	}
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return "this is an example event";
 	}
 
 	@Override
@@ -13,5 +16,4 @@ public class Attack implements Event {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

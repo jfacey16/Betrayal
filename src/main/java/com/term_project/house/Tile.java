@@ -60,6 +60,45 @@ public interface Tile {
    * @return A list of Event.
   */
   List<Event> getEvents();
+  
+  /** Sets a list of events on this tile.
+  *
+  * @return A list of Omen.
+  */
+  void setOmens(List<Omen> omens);
+
+ /** Sets a list of items on this tile.
+  *
+  * @return A list of items.
+  */
+  void setItems(List<Item> items);
+
+ /** Sets a list of omens on this tile.
+  *
+  * @return A list of Event.
+  */
+  void setEvents(List<Event> events);
+  
+  /**
+   * Returns the number of items needed to be generated.
+   * 
+   * @return the item count
+   */
+  int getItemCount();
+  
+  /**
+   * Returns the number of omens needed to be generated.
+   * 
+   * @return the omen count
+   */
+  int getOmenCount();
+  
+  /**
+   * Returns the number of events needed to be generated.
+   * 
+   * @return the event count
+   */
+  int getEventCount();
 
   /** Returns the Tile's position.
    *
@@ -91,6 +130,30 @@ public interface Tile {
    * @return the tile that is linked to this tile in the West.
    */
   Tile getWest() throws NullPointerException;
+  
+  /** Returns if the tile has a door to the north
+   * 
+   * @return the boolean of if a door exists
+   */
+  boolean hasNorth();
+  
+  /** Returns if the tile has a door to the south
+   * 
+   * @return the boolean of if a door exists
+   */
+  boolean hasSouth();
+  
+  /** Returns if the tile has a door to the east
+   * 
+   * @return the boolean of if a door exists
+   */
+  boolean hasEast();
+  
+  /** Returns if the tile has a door to the west
+   * 
+   * @return the boolean of if a door exists
+   */
+  boolean hasWest();
 
   /** Sets the tile that is linked to this tile in the North.
    *
@@ -126,5 +189,9 @@ public interface Tile {
   */
   void rotateClockwise();
   
-  void generate();
+  /**
+   * Rotates the tile counter clockwise by 90 degrees.
+   */
+  void rotateCounterClockwise();
+
 }

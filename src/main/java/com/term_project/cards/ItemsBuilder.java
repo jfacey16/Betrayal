@@ -15,6 +15,10 @@ public class ItemsBuilder implements Builder<Item> {
 		List<Item> itemList = new ArrayList<>();
 		
 		itemList.add(new ExampleItem());
+		itemList.add(new ItemTwo());
+		itemList.add(new ItemThree());
+		itemList.add(new ItemFour());
+		itemList.add(new ItemFive());
 		
 		Collections.shuffle(itemList);
 		Queue<Item> itemDeck = new LinkedList<>(itemList);

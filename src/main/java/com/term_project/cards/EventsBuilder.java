@@ -15,6 +15,10 @@ public class EventsBuilder implements Builder<Event> {
 		List<Event> eventList = new ArrayList<>();
 		
 		eventList.add(new ExampleEvent());
+		eventList.add(new EventTwo());
+		eventList.add(new EventThree());
+		eventList.add(new EventFour());
+		eventList.add(new EventFive());
 		
 		Collections.shuffle(eventList);
 		Queue<Event> eventDeck = new LinkedList<>(eventList);

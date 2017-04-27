@@ -53,6 +53,36 @@ public abstract class AbstractTile implements Tile {
   public List<Event> getEvents() {
     return events;
   }
+  
+  @Override
+  public void setItems(List<Item> items) {
+	  this.items = items;
+  }
+  
+  @Override
+  public void setEvents(List<Event> events) {
+	  this.events = events;
+  }
+  
+  @Override
+  public void setOmens(List<Omen> omens) {
+	  this.omens = omens;
+  }
+  
+  @Override
+  public int getItemCount() {
+	  return itemCount;
+  }
+  
+  @Override
+  public int getOmenCount() {
+	  return omenCount;
+  }
+  
+  @Override
+  public int getEventCount() {
+	  return eventCount;
+  }
 
   @Override
   public Pos getPos() {
@@ -98,6 +128,30 @@ public abstract class AbstractTile implements Tile {
       throw new NullPointerException("There is no door/tile to the west.");
     }
   }
+  
+  @Override
+  public boolean hasNorth() {
+    Tile north = connectedTiles.get(Direction.NORTH);
+    return north != null;
+  }
+  
+  @Override
+  public boolean hasSouth() {
+    Tile south = connectedTiles.get(Direction.SOUTH);
+    return south != null;
+  }
+  
+  @Override
+  public boolean hasEast() {
+    Tile east = connectedTiles.get(Direction.EAST);
+    return east != null;
+  }
+  
+  @Override
+  public boolean hasWest() {
+    Tile west = connectedTiles.get(Direction.WEST);
+    return west != null;
+  }
 
   @Override
   public void setNorth(Tile newTile) {
@@ -135,7 +189,7 @@ public abstract class AbstractTile implements Tile {
     Tile holderOne;
     Tile holderTwo;
 
-    //make north value the eastern value
+    //make east value the northern value
     holderOne = connectedTiles.get(Direction.EAST);
     connectedTiles.put(Direction.EAST, connectedTiles.get(Direction.NORTH));
 
@@ -150,10 +204,26 @@ public abstract class AbstractTile implements Tile {
     //Make north value the west value
     connectedTiles.put(Direction.NORTH, holderOne);
   }
-
+  
   @Override
-  public void generate() {
-	// TODO Auto-generated method stub
-	
+  public void rotateCounterClockwise() {
+    //will be placement will switching tiles
+    Tile holderOne;
+    Tile holderTwo;
+
+    //make east value the southern value
+    holderOne = connectedTiles.get(Direction.EAST);
+    connectedTiles.put(Direction.EAST, connectedTiles.get(Direction.SOUTH));
+
+    //make north value the eastern value
+    holderTwo = connectedTiles.get(Direction.NORTH);
+    connectedTiles.put(Direction.NORTH, holderOne);
+
+    //Make west value the north value
+    holderOne = connectedTiles.get(Direction.WEST);
+    connectedTiles.put(Direction.WEST, holderTwo);
+
+    //Make north value the west value
+    connectedTiles.put(Direction.SOUTH, holderOne);
   }
 }

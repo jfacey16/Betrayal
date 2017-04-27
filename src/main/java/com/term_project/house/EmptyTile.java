@@ -46,10 +46,4 @@ public class EmptyTile extends AbstractTile implements Tile {
   public void apply(GameChar affected) {
     return;
   }
-
-@Override
-public void add() {
-	// TODO Auto-generated method stub
-	
-}
 }
