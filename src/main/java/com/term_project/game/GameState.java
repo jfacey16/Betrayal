@@ -42,12 +42,6 @@ public class GameState {
 	private Queue<Event> events;
 	private Queue<Tile> tiles;
 
-	//currently active event
-	private Event current;
-
-	//current mode
-	private mode;
-
 	//tiles placed on the map
 	private Map<Pos, Tile> tileMap;
 
@@ -56,14 +50,12 @@ public class GameState {
 
 	public GameState(List<String> ids,
 						       Map<String, GameChar> playersCharacters,
-									 Integer numPlayers,
 									 MemorySlot memory){
 		//Randomize turn order
 		idTurnOrder = new ArrayList<>(ids);
 		Collections.shuffle(idTurnOrder);
 
 		this.playersCharacters = playersCharacters;
-		NUMPLAYERS = numPlayers;
 		currentTurn = 0;
 		this.memory = memory;
 		phase =  new PreHaunt(memory);
@@ -74,10 +66,6 @@ public class GameState {
 		omens = new OmensBuilder().buildDeck();
 		events = new EventsBuilder().buildDeck();
 		tiles = new TileBuilder().buildDeck();
-
-		//Setting up current state
-		mode = "idle";
-		event = null;
 	}
 
 	public boolean isTurn(String id) {
