@@ -19,7 +19,6 @@ public abstract class AbstractTile implements Tile {
   private List<Omen> omens;
   private List<Event> events;
   private List<Floor> availableFloors;
-  private getFLoor;
 
   public AbstractTile(
     Map<Direction, Tile> connectedTiles,
