@@ -76,7 +76,8 @@ public class PreHaunt implements GamePhase {
 						//use up one movement
 						remaining.put("move", remaining.get("move") - 1);
 					} catch(NullPointerException e) {
-
+						variables.put("Error", "No door in given direction.");
+						return;
 					}
 
 					if(move.getFinished()) {
@@ -84,6 +85,23 @@ public class PreHaunt implements GamePhase {
 						phase = 0;
 						variables.put("tiles", new ArrayList<Tile>(memory.getTileMap().values()));
 						variables.put("characters", memory.getGameCharacters());
+						return;
+					}
+				}
+
+				if (phase == 1) {
+					try {
+						move.addTile(character,
+										 		 Integer.parseInt(qm.value("rotations")),
+										 	 	 memory.getTileMap);
+
+						variables.put("tiles", new ArrayList<Tile>(memory.getTileMap().values()));
+						variables.put("characters", memory.getGameCharacters());
+
+						mode = "idle";
+						phase == 0
+					} catch (RuntimeException e) {
+						variables.put("Error", e.getMessage());
 						return;
 					}
 				}
