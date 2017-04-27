@@ -1,6 +1,7 @@
 package com.term_project.game.haunts;
 
 import com.term_project.game.actions.Action;
+import com.term_project.game.actions.Mover;
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 

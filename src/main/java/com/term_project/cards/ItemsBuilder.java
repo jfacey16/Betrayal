@@ -10,12 +10,15 @@ import java.util.stream.IntStream;
 
 public class ItemsBuilder implements Builder<Item> {
 
-private static int DECK_LENGTH = 10;
-	
 	@Override
 	public Queue<Item> buildDeck() {
-		Queue<Item> itemDeck = new LinkedList<>();
-		itemDeck.add(new ExampleItem());
+		List<Item> itemList = new ArrayList<>();
+		
+		itemList.add(new ExampleItem());
+		
+		Collections.shuffle(itemList);
+		Queue<Item> itemDeck = new LinkedList<>(itemList);
+		
 		return itemDeck;
 	}
 }
