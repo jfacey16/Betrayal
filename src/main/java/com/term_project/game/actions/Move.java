@@ -92,7 +92,7 @@ public class Move implements Action{
 		Tile toAdd = memory.getTiles().poll();
 		while(true) {
 			//if we can place toAdd on the current floor break loop
-			if(toAdd.getAvailableFloors().contains(currentTile.getFloor())) {
+			if(toAdd.getAvailableFloors().contains(currentTile.getPos.getFloor())) {
 				break;
 			} else {
 				memory.getTiles().add(toAdd);
@@ -105,7 +105,10 @@ public class Move implements Action{
 		switch (specs) {
 			case "NORTH":
 				assert (currentTile.getNorth() instanceof EmptyTile);
-				currentTile.setNorth();
+				Pos curPos = currentTile.getPos();
+				Pos newPos = new Pos(curPos.getX(), curPos.getY() + 1, );
+
+
 			break;
 
 			case "SOUTH":

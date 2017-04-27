@@ -146,15 +146,4 @@ public abstract class AbstractTile implements Tile {
     //Make north value the west value
     connectedTiles.put(Direction.NORTH, holderOne);
   }
-
-  @Override
-  public Tile getFloor() {
-    return floor;
-  }
-
-  @Override
-  public void setFloor(Floor newFloor) {
-    assert(availableFloors.contains(newFloor));
-    floor = newFloor;
-  }
 }

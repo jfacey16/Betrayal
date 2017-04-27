@@ -125,16 +125,4 @@ public interface Tile {
   /** Rotates the tile clockwise by 90 degrees.
   */
   void rotateClockwise();
-
-  /**
-   * Gets the floor this tile has been placed on.
-   * @return The floor this tile is on.
-   */
-  Tile getFloor();
-
-  /**
-   * Sets the floor this tile is on.
-   * @param newFloor The floor to set.
-   */
-  void setFloor(Floor newFloor);
 }

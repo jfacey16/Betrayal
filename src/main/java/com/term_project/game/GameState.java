@@ -32,7 +32,6 @@ public class GameState {
 	// integer representing the index in idTurnOrder of whose turn it is
 	private Integer currentTurn;
 
-	private final Integer NUMPLAYERS;
 	private GamePhase phase;
 	private MemorySlot memory;
 
@@ -104,7 +103,7 @@ public class GameState {
 		phase.endTurn(curr);
 
 		//increment turn
-		currentTurn = (currentTurn + 1) % NUMPLAYERS;
+		currentTurn = (currentTurn + 1) % idTurnOrder.size();
 
 		//start next player's turn
 		curr = playersCharacters.get(idTurnOrder.get(currentTurn));
