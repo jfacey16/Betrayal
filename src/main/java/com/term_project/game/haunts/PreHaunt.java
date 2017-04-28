@@ -96,6 +96,17 @@ public class PreHaunt implements GamePhase {
               new ArrayList<Tile>(memory.getTileMap().values()));
           variables.put("characters", memory.getGameCharacters());
 
+          for (int i = 0; i < character.getTile().getItemCount(); i++) {
+            memory.getItems().poll().add(character, variables);
+          }
+
+          for (int i = 0; i < character.getTile().getOmenCount(); i++) {
+            memory.getOmens().poll().add(character, variables);
+          }
+
+          for (int i = 0; i < character.getTile().getEventCount(); i++) {
+            // TODO: do event things
+          }
           mode = "idle";
           phase = 0;
         } catch (RuntimeException e) {
