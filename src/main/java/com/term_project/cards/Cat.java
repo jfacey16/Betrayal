@@ -18,6 +18,7 @@ public class Cat implements Item {
 
   @Override
   public void add(GameChar character, Map<String, Object> variables) {
+    character.modSanity(2);
     character.addItem(this);
     variables.put("item", "cat");
     variables.put("description", this.getDescription());
@@ -36,6 +37,9 @@ public class Cat implements Item {
 
   @Override
   public void loss(GameChar character, Map<String, Object> variables) {
+    character.modSanity(-2);
+    character.removeItem(this);
+    character.getTile().addItem(this);
     variables.put("item", "cat");
     variables.put("description", this.getDescription());
     variables.put("knowledge", character.getKnowlege());

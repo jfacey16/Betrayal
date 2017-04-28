@@ -38,6 +38,7 @@ public class Rock implements Item {
   public void loss(GameChar character, Map<String, Object> variables) {
     character.modKnowlege(-2);
     character.removeItem(this);
+    character.getTile().addItem(this);
     variables.put("item", "rock");
     variables.put("description", this.getDescription());
     variables.put("knowledge", character.getKnowlege());
