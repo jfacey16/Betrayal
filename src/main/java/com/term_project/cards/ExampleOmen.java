@@ -1,27 +1,40 @@
 package com.term_project.cards;
 
-public class ExampleOmen implements Omen{
+import java.util.Map;
 
-	@Override
-	public String getDescription() {
-		return "this is an example omen";
-	}
-	
-	@Override
-	public void add() {
-		// TODO Auto-generated method stub
-		
-	}
+import com.term_project.character.GameChar;
+import com.term_project.system.MemorySlot;
 
-	@Override
-	public void apply() {
-		// TODO Auto-generated method stub
-		
-	}
+public class ExampleOmen implements Omen {
 
-	@Override
-	public void loss() {
-		// TODO Auto-generated method stub
-		
-	}
+  @Override
+  public String getDescription() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String getName() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void add(GameChar character, Map<String, Object> variables) {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void use(GameChar character, MemorySlot memory,
+      Map<String, Object> variables) {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void loss(GameChar character, Map<String, Object> variables) {
+    // TODO Auto-generated method stub
+
+  }
 }
