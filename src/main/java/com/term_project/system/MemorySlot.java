@@ -1,8 +1,23 @@
 package com.term_project.system;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Queue;
+
+import com.term_project.cards.Event;
+import com.term_project.cards.EventsBuilder;
+import com.term_project.cards.Item;
+import com.term_project.cards.ItemsBuilder;
+import com.term_project.cards.Omen;
+import com.term_project.cards.OmensBuilder;
+import com.term_project.cards.TileBuilder;
+import com.term_project.house.Tile;
+import com.term_project.house.Pos;
+import com.term_project.game.GameState;
+import com.term_project.character.GameChar;
+
 /**
  * This is a class that will be used to hold a peice of information.
  * It is used to store different types of information in the Environment's
@@ -11,10 +26,26 @@ import java.util.ArrayList;
  * @author ZacharyHoffman
  */
 public final class MemorySlot {
-  private HashMap<String, Boolean> bools;
-  private HashMap<String, Integer> ints;
+  private Map<String, Boolean> bools;
+  private Map<String, Integer> ints;
   private List<String> stringList;
   private DB database;
+
+  private Queue<Item> items;
+	private Queue<Omen> omens;
+	private Queue<Event> events;
+	private Queue<Tile> tiles;
+  private Map<Pos, Tile> tileMap;
+  private GameState gameState;
+  private List<GameChar> gameCharacters;
+
+  /* Frontend needs
+  List<Events> *SPECIAL EVENTS Attack, Win, Give*
+  List<Omens>
+  List<item>
+  Tilemap
+  List<Character>
+  */
 
   /**
    * Initializes a MemorySlot.
@@ -23,6 +54,11 @@ public final class MemorySlot {
     bools = new HashMap<String, Boolean>();
     ints = new HashMap<String, Integer>();
     stringList = new ArrayList<>();
+  //initiate decks
+  	items =  new ItemsBuilder().buildDeck();
+  	omens = new OmensBuilder().buildDeck();
+  	events = new EventsBuilder().buildDeck();
+  	tiles = new TileBuilder().buildDeck();
   }
 
   /**
@@ -67,6 +103,76 @@ public final class MemorySlot {
     return this;
   }
 
+  /**
+   * Stores the items deck
+   * @param itemsQueue The items deck.
+   * @return The MemorySlot that was just modified.
+   */
+  public MemorySlot setItems(Queue<Item> itemsQueue) {
+    items = itemsQueue;
+    return this;
+  }
+
+  /**
+   * Stores the omens deck
+   * @param omensQueue The omens deck.
+   * @return The MemorySlot that was just modified.
+   */
+  public MemorySlot setOmens(Queue<Omen> omensQueue) {
+    omens = omensQueue;
+    return this;
+  }
+
+  /**
+   * Stores the events deck
+   * @param eventsQueue The events deck.
+   * @return The MemorySlot that was just modified.
+   */
+  public MemorySlot setEvents(Queue<Event> eventsQueue) {
+    events = eventsQueue;
+    return this;
+  }
+
+  /**
+   * Stores the tiles deck
+   * @param tilesQueue The tiles deck.
+   * @return The MemorySlot that was just modified.
+   */
+  public MemorySlot setTiles(Queue<Tile> tilesQueue) {
+    tiles = tilesQueue;
+    return this;
+  }
+
+  /**
+   * Stores the current game map of tiles.
+   * @param houseMap The current tiles making up the house.
+   * @return The MemorySlot that was just modified.
+   */
+  public MemorySlot setTileMap(Map<Pos, Tile> houseMap) {
+    tileMap = houseMap;
+    return this;
+  }
+
+  /**
+   * Stores the gamestate.
+   * @param game The gamestate this MemorySlot manages.
+   * @return The MemorySlot that was just modified.
+   */
+  public MemorySlot setGameState(GameState game) {
+    gameState = game;
+    return this;
+  }
+
+  /**
+   * Stores game characters;
+   * @param gameCharactersList List of characters in the game.
+   * @return The MemorySlot that was just modified.
+   */
+  public MemorySlot setGameCharacters(List<GameChar> gameCharactersList) {
+    gameCharacters = gameCharactersList;
+    return this;
+  }
+
   /** Gets the list of strings this object stores.
    * @return The list of strings this object stores.
    */
@@ -97,4 +203,59 @@ public final class MemorySlot {
     return database;
   }
 
+  /**
+   * Gets the items deck being stored in memory.
+   * @return The items deck being stored in memory.
+   */
+  public Queue<Item> getItems() {
+    return items;
+  }
+
+  /**
+   * Gets the omen deck being stored in memory.
+   * @return The omen deck being stored in memory.
+   */
+  public Queue<Omen> getOmens() {
+    return omens;
+  }
+
+  /**
+    * Gets the event deck being stored in memory.
+    * @return The event deck being stored in memory.
+   */
+  public Queue<Event> getEvents() {
+    return events;
+  }
+
+  /**
+   * Gets the tile deck being stored in memory.
+   * @return The tile deck being stored in memory.
+   */
+  public Queue<Tile> getTiles() {
+    return tiles;
+  }
+
+  /**
+   * Gets the tileMap being stored in memory.
+   * @return The tileMap being stored in memory.
+   */
+  public Map<Pos, Tile> getTileMap() {
+    return tileMap;
+  }
+
+  /**
+   * Gets the gamestate this MemorySlot manages.
+   * @return The gamestate this MemorySlot manages.
+   */
+  public GameState getGameState() {
+    return gameState;
+  }
+
+  /**
+   * Gets the List of Game Characters.
+   * @return The list of gameCharacters.
+   */
+  public List<GameChar> getGameCharacters() {
+    return gameCharacters;
+  }
 }

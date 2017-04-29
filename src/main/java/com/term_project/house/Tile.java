@@ -1,94 +1,255 @@
 package com.term_project.house;
+
+import java.util.List;
+
 import com.term_project.cards.Event;
 import com.term_project.cards.Item;
 import com.term_project.cards.Omen;
+import com.term_project.character.GameChar;
 
-import java.util.List;
 /**
  * Interface that outlines what methods a tile needs.
  *
  * @author Zachary Hoffman
  */
 public interface Tile {
-  /** Return's the description of the event.
-   * 
-   * @return A description of the event.
+  /**
+   * Returns the name of the tile.
+   *
+   * @return A description of the tile.
+   *
+   */
+  String getName();
+
+  /**
+   * Returns the description of the tile.
+   *
+   * @return A description of the tile.
    *
    */
   String getDescription();
 
-  /** Produces the effect described in the description
-   * on a character.
+  /**
+   * Produces the effect described in the description on a character on entry.
    *
+   * @param affected
+   *          The affected character.
    */
-  void apply(Character effected);
+  void enter(GameChar affected);
 
-  /** Returns a list of events on this tile.
-   * 
+  /**
+   * Produces the effect described in the description on a character on exit.
+   *
+   * @param affected
+   *          The affected character.
+   */
+  void exit(GameChar affected);
+
+  /**
+   * Produces an effect on the given character. Used for duration effects in
+   * rooms.
+   *
+   * @param affected
+   *          The affected character.
+   */
+  void apply(GameChar affected);
+
+  /**
+   * Returns a list of events on this tile.
+   *
    * @return A list of Omen.
-  */
+   */
   List<Omen> getOmens();
 
-  /** Returns a list of items on this tile.
-   * 
+  /**
+   * Returns a list of items on this tile.
+   *
    * @return A list of items.
-  */
+   */
   List<Item> getItems();
 
-  /** Returns a list of omens on this tile.
-   * 
+  /**
+   * Returns a list of omens on this tile.
+   *
    * @return A list of Event.
-  */
+   */
   List<Event> getEvents();
 
-  /** Returns the Tile's position.
-   * 
+  /**
+   * Sets a list of events on this tile.
+   *
+   * @return A list of Omen.
+   */
+  void setOmens(List<Omen> omens);
+
+  /**
+   * Sets a list of items on this tile.
+   *
+   * @return A list of items.
+   */
+  void setItems(List<Item> items);
+
+  /**
+   * Sets a list of omens on this tile.
+   *
+   * @return A list of Event.
+   */
+  void setEvents(List<Event> events);
+
+  /**
+   * Returns the number of items needed to be generated.
+   *
+   * @return the item count
+   */
+  int getItemCount();
+
+  /**
+   * Returns the number of omens needed to be generated.
+   *
+   * @return the omen count
+   */
+  int getOmenCount();
+
+  /**
+   * Returns the number of events needed to be generated.
+   *
+   * @return the event count
+   */
+  int getEventCount();
+
+  /**
+   * Returns the Tile's position.
+   *
    * @return The tile's position
-  */
+   */
   Pos getPos();
 
-  /** Returns the tile that is linked to this tile in the North.
-   * 
+  /**
+   * Returns the tile that is linked to this tile in the North.
+   *
    * @return the tile that is linked to this tile in the North.
    */
-  Tile getNorth();
+  Tile getNorth() throws NullPointerException;
 
-  /** Returns the tile that is linked to this tile in the South.
-   * 
-   * 
+  /**
+   * Returns the tile that is linked to this tile in the South.
+   *
+   *
    * @return the tile that is linked to this tile in the South.
    */
-  Tile getSouth();
+  Tile getSouth() throws NullPointerException;
 
-  /** Returns the tile that is linked to this tile in the East.
-   * 
+  /**
+   * Returns the tile that is linked to this tile in the East.
+   *
    * @return the tile that is linked to this tile in the East.
    */
-  Tile getEast();
+  Tile getEast() throws NullPointerException;
 
-  /** Returns the tile that is linked to this tile in the West.
-   * 
+  /**
+   * Returns the tile that is linked to this tile in the West.
+   *
    * @return the tile that is linked to this tile in the West.
    */
-  Tile getWest();
-  
-  /** Sets the tile that is linked to this tile in the North.
-   * 
+  Tile getWest() throws NullPointerException;
+
+  /**
+   * Returns if the tile has a door to the north
+   *
+   * @return the boolean of if a door exists
+   */
+  boolean hasNorth();
+
+  /**
+   * Returns if the tile has a door to the south
+   *
+   * @return the boolean of if a door exists
+   */
+  boolean hasSouth();
+
+  /**
+   * Returns if the tile has a door to the east
+   *
+   * @return the boolean of if a door exists
+   */
+  boolean hasEast();
+
+  /**
+   * Returns if the tile has a door to the west
+   *
+   * @return the boolean of if a door exists
+   */
+  boolean hasWest();
+
+  /**
+   * Sets the tile that is linked to this tile in the North.
+   *
    */
   void setNorth(Tile newTile);
 
-  /** Sets the tile that is linked to this tile in the South.
+  /**
+   * Sets the tile that is linked to this tile in the South.
    *
    */
   void setSouth(Tile newTile);
 
-  /** Sets the tile that is linked to this tile in the East.
-   * 
+  /**
+   * Sets the tile that is linked to this tile in the East.
+   *
    */
   void setEast(Tile newTile);
 
-  /** Sets the tile that is linked to this tile in the West.
-   * 
+  /**
+   * Sets the tile that is linked to this tile in the West.
+   *
    */
   void setWest(Tile newTile);
+
+  /**
+   * Sets the tile's position.
+   *
+   */
+  void setPos(Pos newPos);
+
+  /**
+   * Returns the floors that this tile can be placed in.
+   *
+   * @return The floors that this tile can be placed in.
+   */
+  List<Floor> getAvailableFloors();
+
+  /**
+   * Rotates the tile clockwise by 90 degrees.
+   */
+  void rotateClockwise();
+
+  /**
+   * Rotates the tile counter clockwise by 90 degrees.
+   */
+  void rotateCounterClockwise();
+
+  /**
+   * Adds an item to the room
+   *
+   * @param item
+   *          the item
+   */
+  void addItem(Item item);
+
+  /**
+   * Adds an omen to the room
+   *
+   * @param omen
+   *          the omen
+   */
+  void addOmen(Omen omen);
+
+  /**
+   * Adds an event to the event
+   *
+   * @param event
+   *          the event
+   */
+  void addEvent(Event event);
+
 }

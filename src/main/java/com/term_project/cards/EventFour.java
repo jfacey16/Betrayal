@@ -1,8 +1,10 @@
 package com.term_project.cards;
 
-public class ExampleEvent implements Event {
+import com.term_project.cards.Event;
+
+public class EventFour implements Event {
 	
-	public ExampleEvent() {
+	public EventFour() {
 		
 	}
 

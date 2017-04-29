@@ -5,7 +5,7 @@ import java.util.Map;
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
-public class ExampleOmen implements Omen {
+public class OmenFive implements Omen {
 
   @Override
   public String getDescription() {

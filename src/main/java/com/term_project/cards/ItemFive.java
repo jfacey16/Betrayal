@@ -5,12 +5,15 @@ import java.util.Map;
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
-public class ExampleOmen implements Omen {
+public class ItemFive implements Item {
+
+  public ItemFive() {
+
+  }
 
   @Override
   public String getDescription() {
-    // TODO Auto-generated method stub
-    return null;
+    return "this is an example item";
   }
 
   @Override
