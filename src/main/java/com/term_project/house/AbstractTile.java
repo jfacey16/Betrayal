@@ -1,11 +1,14 @@
 package com.term_project.house;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
 import com.term_project.cards.Event;
 import com.term_project.cards.Item;
 import com.term_project.cards.Omen;
-import com.term_project.character.GameChar;
 
-import java.util.List;
-import java.util.Map;
 /**
  * Generic tile with no entry and exit events
  *
@@ -23,16 +26,15 @@ public abstract class AbstractTile implements Tile {
   private Map<String, Event> events;
   private List<Floor> availableFloors;
 
-  public AbstractTile(
-    Map<Direction, Tile> connectedTiles,
-    int items,
-    int events,
-    int omens,
-    List<Floor> availableFloors) {
+  public AbstractTile(Map<Direction, Tile> connectedTiles,
+                      int items,
+                      int events,
+                      int omens,
+                      List<Floor> availableFloors) {
 
-	this.itemCount = items;
-	this.omenCount = omens;
-	this.eventCount = events;
+    this.items = new ArrayList<>();
+    this.omens = new ArrayList<>();
+    this.events = new HashMap<>();
 
     this.pos = null;
     this.connectedTiles = connectedTiles;
@@ -61,7 +63,7 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public void setItems(List<Item> items) {
-	  this.items = items;
+    this.items = items;
   }
 
   @Override
@@ -71,22 +73,22 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public void setOmens(List<Omen> omens) {
-	  this.omens = omens;
+    this.omens = omens;
   }
 
   @Override
   public int getItemCount() {
-	  return itemCount;
+    return itemCount;
   }
 
   @Override
   public int getOmenCount() {
-	  return omenCount;
+    return omenCount;
   }
 
   @Override
   public int getEventCount() {
-	  return eventCount;
+    return eventCount;
   }
 
   @Override
@@ -190,45 +192,55 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public void rotateClockwise() {
-    //will be placement will switching tiles
+    // will be placement will switching tiles
     Tile holderOne;
     Tile holderTwo;
 
-    //make east value the northern value
+    // make east value the northern value
     holderOne = connectedTiles.get(Direction.EAST);
     connectedTiles.put(Direction.EAST, connectedTiles.get(Direction.NORTH));
 
-    //make south value the eastern value
+    // make south value the eastern value
     holderTwo = connectedTiles.get(Direction.SOUTH);
     connectedTiles.put(Direction.SOUTH, holderOne);
 
-    //Make west value the south value
+    // Make west value the south value
     holderOne = connectedTiles.get(Direction.WEST);
     connectedTiles.put(Direction.WEST, holderTwo);
 
-    //Make north value the west value
+    // Make north value the west value
     connectedTiles.put(Direction.NORTH, holderOne);
   }
 
   @Override
   public void rotateCounterClockwise() {
-    //will be placement will switching tiles
+    // will be placement will switching tiles
     Tile holderOne;
     Tile holderTwo;
 
-    //make east value the southern value
+    // make east value the southern value
     holderOne = connectedTiles.get(Direction.EAST);
     connectedTiles.put(Direction.EAST, connectedTiles.get(Direction.SOUTH));
 
-    //make north value the eastern value
+    // make north value the eastern value
     holderTwo = connectedTiles.get(Direction.NORTH);
     connectedTiles.put(Direction.NORTH, holderOne);
 
-    //Make west value the north value
+    // Make west value the north value
     holderOne = connectedTiles.get(Direction.WEST);
     connectedTiles.put(Direction.WEST, holderTwo);
 
-    //Make north value the west value
+    // Make north value the west value
     connectedTiles.put(Direction.SOUTH, holderOne);
+  }
+
+  @Override
+  public void addItem(Item item) {
+    items.add(item);
+  }
+
+  @Override
+  public void addOmen(Omen omen) {
+    omens.add(omen);
   }
 }

@@ -1,4 +1,7 @@
 package com.term_project.house;
+
+import java.util.List;
+
 import com.term_project.cards.Event;
 import com.term_project.cards.Item;
 import com.term_project.cards.Omen;
@@ -12,48 +15,58 @@ import java.util.Map;
  * @author Zachary Hoffman
  */
 public interface Tile {
-  /** Returns the name of the tile.
+  /**
+   * Returns the name of the tile.
    *
    * @return A description of the tile.
    *
    */
   String getName();
 
-  /** Returns the description of the tile.
+  /**
+   * Returns the description of the tile.
    *
    * @return A description of the tile.
    *
    */
   String getDescription();
 
-  /** Produces the effect described in the description
-   * on a character on entry.
-   * @param affected The affected character.
+  /**
+   * Produces the effect described in the description on a character on entry.
+   *
+   * @param affected
+   *          The affected character.
    */
   void enter(GameChar affected);
 
-  /** Produces the effect described in the description
-   * on a character on exit.
-   * @param affected The affected character.
+  /**
+   * Produces the effect described in the description on a character on exit.
+   *
+   * @param affected
+   *          The affected character.
    */
   void exit(GameChar affected);
 
-  /** Produces an effect on the given character. Used for duration effects in
+  /**
+   * Produces an effect on the given character. Used for duration effects in
    * rooms.
-   * @param affected The affected character.
+   *
+   * @param affected
+   *          The affected character.
    */
   void apply(GameChar affected);
 
   /** Returns a list of omens on this tile.
    *
    * @return A list of Omen.
-  */
+   */
   List<Omen> getOmens();
 
-  /** Returns a list of items on this tile.
+  /**
+   * Returns a list of items on this tile.
    *
    * @return A list of items.
-  */
+   */
   List<Item> getItems();
 
   /** Returns a map of events on this tile.
@@ -103,32 +116,37 @@ public interface Tile {
    */
   int getEventCount();
 
-  /** Returns the Tile's position.
+  /**
+   * Returns the Tile's position.
    *
    * @return The tile's position
-  */
+   */
   Pos getPos();
 
-  /** Returns the tile that is linked to this tile in the North.
+  /**
+   * Returns the tile that is linked to this tile in the North.
    *
    * @return the tile that is linked to this tile in the North.
    */
   Tile getNorth() throws NullPointerException;
 
-  /** Returns the tile that is linked to this tile in the South.
+  /**
+   * Returns the tile that is linked to this tile in the South.
    *
    *
    * @return the tile that is linked to this tile in the South.
    */
   Tile getSouth() throws NullPointerException;
 
-  /** Returns the tile that is linked to this tile in the East.
+  /**
+   * Returns the tile that is linked to this tile in the East.
    *
    * @return the tile that is linked to this tile in the East.
    */
   Tile getEast() throws NullPointerException;
 
-  /** Returns the tile that is linked to this tile in the West.
+  /**
+   * Returns the tile that is linked to this tile in the West.
    *
    * @return the tile that is linked to this tile in the West.
    */
@@ -158,38 +176,46 @@ public interface Tile {
    */
   boolean hasWest();
 
-  /** Sets the tile that is linked to this tile in the North.
+  /**
+   * Sets the tile that is linked to this tile in the North.
    *
    */
   void setNorth(Tile newTile);
 
-  /** Sets the tile that is linked to this tile in the South.
+  /**
+   * Sets the tile that is linked to this tile in the South.
    *
    */
   void setSouth(Tile newTile);
 
-  /** Sets the tile that is linked to this tile in the East.
+  /**
+   * Sets the tile that is linked to this tile in the East.
    *
    */
   void setEast(Tile newTile);
 
-  /** Sets the tile that is linked to this tile in the West.
+  /**
+   * Sets the tile that is linked to this tile in the West.
    *
    */
   void setWest(Tile newTile);
 
-  /** Sets the tile's position.
+  /**
+   * Sets the tile's position.
    *
    */
   void setPos(Pos newPos);
 
-  /** Returns the floors that this tile can be placed in.
+  /**
+   * Returns the floors that this tile can be placed in.
+   *
    * @return The floors that this tile can be placed in.
    */
   List<Floor> getAvailableFloors();
 
-  /** Rotates the tile clockwise by 90 degrees.
-  */
+  /**
+   * Rotates the tile clockwise by 90 degrees.
+   */
   void rotateClockwise();
 
   /**
@@ -197,4 +223,19 @@ public interface Tile {
    */
   void rotateCounterClockwise();
 
+  /**
+   * Adds an item to the room
+   *
+   * @param item
+   *          the item
+   */
+  void addItem(Item item);
+
+  /**
+   * Adds an omen to the room
+   *
+   * @param omen
+   *          the omen
+   */
+  void addOmen(Omen omen);
 }

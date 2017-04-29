@@ -46,4 +46,9 @@ public class EmptyTile extends AbstractTile implements Tile {
   public void apply(GameChar affected) {
     return;
   }
+
+  @Override
+  public void addEvent(String name, Event event) {
+    return;
+  }
 }

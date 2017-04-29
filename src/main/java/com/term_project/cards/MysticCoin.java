@@ -58,6 +58,7 @@ public class MysticCoin implements Item {
   @Override
   public void loss(GameChar character, Map<String, Object> variables) {
     character.removeItem(this);
+    character.getTile().addItem(this);
     variables.put("item", "mystic coin");
     variables.put("description", this.getDescription());
     variables.put("knowledge", character.getKnowlege());
