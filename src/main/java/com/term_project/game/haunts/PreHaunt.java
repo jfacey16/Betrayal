@@ -231,10 +231,14 @@ public class PreHaunt implements GamePhase {
           */
         }
         toResolve.remove("omen");
+
+        mode = "idle";
+        phase = 0;
       break;
 
 	    case "end":
 	      mode = "start";
+        memory.getGameState().endTurn();
 	    break;
     }
   }
