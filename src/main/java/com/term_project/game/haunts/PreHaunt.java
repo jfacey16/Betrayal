@@ -11,6 +11,7 @@ import com.term_project.house.Tile;
 import com.term_project.system.MemorySlot;
 import com.term_project.cards.Event;
 import com.term_project.game.Dice;
+import com.term_project.cards.Omen;
 
 import spark.QueryParamsMap;
 
@@ -20,21 +21,42 @@ public class PreHaunt implements GamePhase {
   private String mode;
   private Integer phase;
 
+  private Integer omenCount;
+
   private Mover move;
   Map<String, Integer> remaining;
+
+  private List<String> toResolve;
 
   public PreHaunt(MemorySlot memory) {
     this.memory = memory;
     mode = "start";
     phase = 0;
-    move = new Mover(memory);
 
+    omenCount = 0;
+
+    move = new Mover(memory);
     remaining = new HashMap<>();
+    toResolve =  new ArrayList<>();
   }
 
-  /**
-   * Runs
-   */
+  @Override
+  public void addActions(GameChar character, Map<String, Object> variables) {
+    List<String> actions = new ArrayList<>();
+    Tile tile = character.getTile();
+
+    if(tile.getEvents().size() > 0) {
+      actions.add("event");
+      variables.put("events", tile.getEvents());
+    }
+
+    if(remaining.get("move") > 0) {
+      actions.add("move");
+    }
+
+    variables.put("actions", actions);
+  }
+
   @Override
   public void run(String name, QueryParamsMap qm, GameChar character,
       Map<String, Object> variables) {
@@ -48,14 +70,18 @@ public class PreHaunt implements GamePhase {
     // make sure backend matches frontend
     if (mode != "idle") {
       if (name != mode) {
-        System.out.println("NAME DOESN'T EQUAL MODE");
+        System.out.println("NAME DOESN'T EQUAL MODE. NAME:" + name + " MODE:" + mode);
         return;
       }
+    } else if(toResolve.size() > 0 && !toResolve.contains(name)) {
+      System.out.println("STILL NEED TO RESOLVE " +  toResolve.toString() + "NOT " + name);
+      return;
     }
 
     // make sure player has enough actions
     if (remaining.get(name) <= 0) {
       variables.put("Error", "Cannot perform action as no more are remaining.");
+      addActions(character, variables);
       return;
     }
 
@@ -88,6 +114,7 @@ public class PreHaunt implements GamePhase {
 	          variables.put("tiles",
 	              new ArrayList<Tile>(memory.getTileMap().values()));
 	          variables.put("characters", memory.getGameCharacters());
+            addActions(character, variables);
 	          return;
 	        }
 	      }
@@ -117,13 +144,17 @@ public class PreHaunt implements GamePhase {
 	            memory.getItems().poll().add(character, variables);
 	          }
 
+            for (int i = 0; i < character.getTile().getEventCount(); i++) {
+              // TODO: do event things
+              toResolve.add("event");
+            }
+
 	          for (int i = 0; i < character.getTile().getOmenCount(); i++) {
 	            memory.getOmens().poll().add(character, variables);
-	          }
 
-	          for (int i = 0; i < character.getTile().getEventCount(); i++) {
-	            // TODO: do event things
+              toResolve.add("omen");
 	          }
+            variables.put("toResolve", toResolve);
 
 	          mode = "event";
 	          phase = 1;
@@ -139,6 +170,7 @@ public class PreHaunt implements GamePhase {
 					String eventName = qm.value("event");
 					Event event = character.getTile().getEvent(eventName);
 					variables.put("event", event);
+          phase =  1;
 					return;
 				} else if (phase == 1) {
 					String eventName = qm.value("event");
@@ -164,17 +196,61 @@ public class PreHaunt implements GamePhase {
 					List<Integer> rolls = Dice.roll(statVal);
 					variables.put("rolls", rolls);
 
+          //apply and return the results of event
 					Integer rollSum = Dice.sum(rolls);
 					String result = event.apply(rollSum, character);
+          variables.put("result", result);
 
+          //send to frontend remaining actions.
+          addActions(character, variables);
 					mode = "idle";
 					phase = 0;
+
+          //we have resolved this event
+          toResolve.remove("event");
+          return;
 				}
 			break;
+
+      case "omen":
+        omenCount += 1;
+        List<Integer> rolls = Dice.roll(6);
+        variables.put("rolls", rolls);
+
+        //apply and return the results of event
+        Integer rollSum = Dice.sum(rolls);
+
+        if(rollSum > omenCount) {
+          //generate a random haunt
+          /*
+          Gamphase haunt = ?
+          memory.getGameState().setPhase(haunt);
+          variables.put("description", haunt.getDescription());
+          variables.put("traitor", haunt.getTraitorDescription());
+          variables.put("explorers", haunt.getExplorersDescription());
+          */
+        }
+        toResolve.remove("omen");
+      break;
 
 	    case "end":
 	      mode = "start";
 	    break;
     }
+  }
+
+  @Override
+  public String getDescription() {
+    return "Explore the house, search for items, and find omens!";
+  }
+
+  @Override
+  public String getTraitorDescription() {
+    return "Nothing in this phase.";
+  }
+
+  @Override
+  public String getExplorersDescription() {
+    return "Nothing in this phase.";
   }
 }

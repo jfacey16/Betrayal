@@ -54,10 +54,11 @@ public class GameState {
 		this.playersCharacters = playersCharacters;
 		currentTurn = 0;
 
-		//initiate decks
+		//initiate memory
 		this.memory = memory;
+		memory.setGameState(this);
 
-		phase =  new PreHaunt(memory);
+		phase = new PreHaunt(memory);
 	}
 
 	public Map<String, Object> update(QueryParamsMap qm) {
@@ -72,7 +73,11 @@ public class GameState {
 		return variables;
 	}
 
-	private void endTurn() {
+	public void endTurn() {
 		return;
+	}
+
+	public void setPhase(GamePhase newPhase) {
+		phase = newPhase;
 	}
 }
