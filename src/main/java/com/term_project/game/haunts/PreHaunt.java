@@ -126,7 +126,7 @@ public class PreHaunt implements GamePhase {
 	          }
 
 	          mode = "event";
-	          phase = 0;
+	          phase = 1;
 	        } catch (RuntimeException e) {
 	          variables.put("Error", e.getMessage());
 	          return;
@@ -136,6 +136,11 @@ public class PreHaunt implements GamePhase {
 
 			case "event":
 				if (phase == 0) {
+					String eventName = qm.value("event");
+					Event event = character.getTile().getEvent(eventName);
+					variables.put("event", event);
+					return;
+				} else if (phase == 1) {
 					String eventName = qm.value("event");
 					Event event = character.getTile().getEvent(eventName);
 					String statToUse = qm.value("stat");
@@ -161,6 +166,9 @@ public class PreHaunt implements GamePhase {
 
 					Integer rollSum = Dice.sum(rolls);
 					String result = event.apply(rollSum, character);
+
+					mode = "idle";
+					phase = 0;
 				}
 			break;
 
