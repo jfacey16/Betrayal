@@ -34,4 +34,14 @@ public final class Dice {
     }
     return rolls;
   }
+
+  public static Integer sum(List<Integer> rolls){
+    int sum = 0;
+
+    for (Integer i : rolls) {
+        sum = sum + i;
+    }
+
+    return sum;
+  }
 }

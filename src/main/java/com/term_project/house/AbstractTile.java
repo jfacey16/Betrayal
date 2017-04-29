@@ -20,7 +20,7 @@ public abstract class AbstractTile implements Tile {
   private int eventCount;
   private List<Item> items;
   private List<Omen> omens;
-  private List<Event> events;
+  private Map<String, Event> events;
   private List<Floor> availableFloors;
 
   public AbstractTile(
@@ -29,11 +29,11 @@ public abstract class AbstractTile implements Tile {
     int events,
     int omens,
     List<Floor> availableFloors) {
-	  
+
 	this.itemCount = items;
 	this.omenCount = omens;
 	this.eventCount = events;
-	
+
     this.pos = null;
     this.connectedTiles = connectedTiles;
     this.availableFloors = availableFloors;
@@ -50,35 +50,40 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public List<Event> getEvents() {
+  public Map<String, Event> getEvents() {
     return events;
   }
-  
+
+  @Override
+  public Event getEvent(String name) {
+    return events.get(name);
+  }
+
   @Override
   public void setItems(List<Item> items) {
 	  this.items = items;
   }
-  
+
   @Override
-  public void setEvents(List<Event> events) {
-	  this.events = events;
+  public void addEvent(String name, Event event) {
+	  events.put(name, event);
   }
-  
+
   @Override
   public void setOmens(List<Omen> omens) {
 	  this.omens = omens;
   }
-  
+
   @Override
   public int getItemCount() {
 	  return itemCount;
   }
-  
+
   @Override
   public int getOmenCount() {
 	  return omenCount;
   }
-  
+
   @Override
   public int getEventCount() {
 	  return eventCount;
@@ -128,25 +133,25 @@ public abstract class AbstractTile implements Tile {
       throw new NullPointerException("There is no door/tile to the west.");
     }
   }
-  
+
   @Override
   public boolean hasNorth() {
     Tile north = connectedTiles.get(Direction.NORTH);
     return north != null;
   }
-  
+
   @Override
   public boolean hasSouth() {
     Tile south = connectedTiles.get(Direction.SOUTH);
     return south != null;
   }
-  
+
   @Override
   public boolean hasEast() {
     Tile east = connectedTiles.get(Direction.EAST);
     return east != null;
   }
-  
+
   @Override
   public boolean hasWest() {
     Tile west = connectedTiles.get(Direction.WEST);
@@ -204,7 +209,7 @@ public abstract class AbstractTile implements Tile {
     //Make north value the west value
     connectedTiles.put(Direction.NORTH, holderOne);
   }
-  
+
   @Override
   public void rotateCounterClockwise() {
     //will be placement will switching tiles

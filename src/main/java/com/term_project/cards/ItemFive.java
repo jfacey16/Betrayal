@@ -5,6 +5,7 @@ import java.util.Map;
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
+/*PUT ITEM INSTANCES INTO THE ITEM FOLDER*/
 public class ItemFive implements Item {
 
   public ItemFive() {

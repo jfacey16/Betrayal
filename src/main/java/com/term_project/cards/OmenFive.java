@@ -5,6 +5,7 @@ import java.util.Map;
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
+/*PUT OMEN INSTANCES INTO THE ITEM FOLDER*/
 public class OmenFive implements Omen {
 
   @Override

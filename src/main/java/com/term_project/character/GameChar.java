@@ -212,4 +212,10 @@ public interface GameChar {
    *          value
    */
   void setSanityScale(List<Integer> sanityScale);
+
+  /** Gets value of character's stat by name.
+   * @param name The name of a stat: speed, might, knowlege, sanity.
+   * @return The value of the given stat.
+   */
+  int getStatByName(String name);
 }

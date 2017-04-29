@@ -201,4 +201,24 @@ public abstract class AbstractChar implements GameChar {
   public void setSanityScale(List<Integer> sanityScale) {
     this.sanityScale = sanityScale;
   }
+
+  @Override
+	public int getStatByName(String name) {
+		switch (name) {
+			case "might":
+				return getMight();
+
+			case "speed":
+        return getSpeed();
+
+			case "sanity":
+        return getSanity();
+
+			case "knowlege":
+        return getKnowlege();
+
+			default:
+				throw new NullPointerException("Given stat " + name + " doesn't exist.");
+		}
+	}
 }
