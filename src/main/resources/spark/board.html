@@ -3,13 +3,15 @@
 <head>
   <title>Betrayal Board</title>
   <style>
-  #first, #second, #basement {position: relative; top:-425px; left:-275px;}
+  #first, #second, #basement {position: relative; top:-425px; left:-375px;}
   #second, #basement {display: none;}
-  #box {width:800px; height:512px; border: solid black 1px; overflow: hidden; border-width: 1px 1px 1px 0; position: relative; z-index: 0;}
-  #mapf, #maps, #mapb {overflow: hidden; border:solid black 1px; border-width: 0 1px 1px 0; width:170px; height:170px;}
-  #map {display: flex; flex-direction:column; border: solid black 1px; border-width: 1px 0 0 1px;}
+  #box {width:800px; height:514px; border: solid black 1px; overflow: hidden; border-width: 0px 0px 2px 0; position: relative; z-index: 0;}
+  #mapf, #maps, #mapb {overflow: hidden; border:solid black 1px; border-width: 0 2px 2px 0; width:170px; height:170px;}
+  #map {display: flex; flex-direction:column;}
   #container {display:flex; flex-direction:row;}
-  #descr {position: absolute; right: 0; bottom: 0; width:350px; height:60px; border: solid black 1px; border-width: 1px 0 0 1px; z-index: 1; background: white;}
+  #descr {position: absolute; right: 0; bottom: 0; width:150px; height:514px;
+    background: #eeeeee; border: solid black 1px; border-width: 1px 0 0 1px; z-index: 1;}
+  button {padding:5px; margin:5px; background:#eeeeee; font-size:14px; width:130px; height:40px;}
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -49,7 +51,7 @@
   const D = 50;
   const X = 10;
   const S = 7.5;
-  const offx = -275;
+  const offx = -375;
   const offy = -425;
   let turn = 0;
   const outside = new Tile(450,600,false,false,false,false); 
@@ -113,7 +115,7 @@
         turn = 0;
       else 
         turn++;
-      player.innerHTML = turn + 1;
+      // player.innerHTML = turn + 1;
       moves = 10;
       movesp.innerHTML = 10;
       if (positions[turn].floor == 0) {
@@ -508,7 +510,7 @@
       </div>
       
       <div class="stat">
-        <center>K N O W L E D G E</center>
+        <center>K N O WLEDGE</center>
       </div>
       
       <div class="stat">
@@ -564,13 +566,17 @@
 		<canvas id="first"></canvas>
 		<canvas id="second"></canvas>
 		<canvas id="basement"></canvas>
-		<div id="descr"></div>
+		<div id="descr">
+    <!-- <div> Player <span id="player">1</span>'s turn</div> -->
+    <center><div> Speed Left: <span id="moves">10</span></div></center>
+    <center><button onclick="endturn();">End Turn</button></center>
+    <center><button disabled>Attack</button></center>
+    <center><button disabled>Pick up Items</button></center>
+    <center><button disabled>Interact w/Room</button></center>
+    <div id="scription"></div>
+    </div>
 	</div>
 </div>
-<button onclick="endturn();">End Turn</button>
-<div> Player <span id="player">1</span>'s turn</div>
-<div> Moves: <span id="moves">10</span></div>
-
 </div>
     
     <style type="text/css">
@@ -653,7 +659,7 @@
   .main_game{
     display:flex; 
     flex-direction:row;
-    height:560px}
+    height:514px}
   </style>
 
 </div>
@@ -697,10 +703,10 @@
   let b1 = false;
   $("#first").mousedown(function(){b1=false;}).mousemove(function(){b1=true;}).mouseup(function(event){
     if(!b1){
-        const x = event.pageX - first.offsetLeft;
-        const y = event.pageY - first.offsetTop;
-        const xpos = x - (x % T) - T + edgex[1];
-        const ypos = y - (y % T) + edgey[1];
+        const x = event.pageX - first.offsetLeft - 336;
+        const y = event.pageY - first.offsetTop - 204;
+        const xpos = x - (x % T) + edgex[1];
+        const ypos = y - (y % T) + edgex[1];
         descr.innerHTML = xpos + " " + ypos;
      }
   });
@@ -708,9 +714,9 @@
   let b2 = false;
   $("#second").mousedown(function(){b2=false;}).mousemove(function(){b2=true;}).mouseup(function(event){
     if(!b2){
-        const x = event.pageX - second.offsetLeft;
-        const y = event.pageY - second.offsetTop;
-        const xpos = x - (x % T) - T + edgex[2];
+        const x = event.pageX - second.offsetLeft - 336;
+        const y = event.pageY - second.offsetTop - 204;
+        const xpos = x - (x % T) + edgex[2];
         const ypos = y - (y % T) + edgey[2];
         descr.innerHTML = xpos + " " + ypos;
      }
@@ -719,9 +725,9 @@
   let b3 = false;
   $("#basement").mousedown(function(){b3=false;}).mousemove(function(){b3=true;}).mouseup(function(event){
     if(!b3){
-        const x = event.pageX - basement.offsetLeft;
-        const y = event.pageY - basement.offsetTop;
-        const xpos = x - (x % T) - T + edgex[0];
+        const x = event.pageX - basement.offsetLeft - 336;
+        const y = event.pageY - basement.offsetTop - 204;
+        const xpos = x - (x % T) + edgex[0];
         const ypos = y - (y % T) + edgey[0];
         descr.innerHTML = xpos + " " + ypos;
      }
@@ -731,8 +737,8 @@
     const first = document.getElementById("first");
     const second = document.getElementById("second");
     const basement = document.getElementById("basement");
-    const descr = document.getElementById("descr");
-    const player = document.getElementById("player");
+    const descr = document.getElementById("scription");
+    // const player = document.getElementById("player");
     const movesp = document.getElementById("moves");
     const mfirst = document.getElementById("mfirst");
     const msecond = document.getElementById("msecond");
@@ -804,7 +810,7 @@
           second.style.display = 'block';
           basement.style.display = 'none';
           second.style.top = '-425px';
-          second.style.left = '-275px';
+          second.style.left = '-375px';
           positions[turn].posx = 600;
           positions[turn].floor = 2;
           positions[turn].north = true;
@@ -824,7 +830,7 @@
           second.style.display = 'none';
           basement.style.display = 'none';
           first.style.top = '-425px';
-          first.style.left = '-275px';
+          first.style.left = '-375px';
           positions[turn].posx = 900;
           positions[turn].floor = 1;
           positions[turn].north = false;
@@ -876,6 +882,10 @@
             }
             positions[turn].posy = positions[turn].posy - T;
             moves--;
+            const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
+            const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
+            lev.style.top = ypos + 'px';
+            lev.style.left = xpos + 'px';
           } 
         } else if (event.which == 68) {
           if (positions[turn].posx + T >= lev.width + edgex[positions[turn].floor]) {
@@ -920,6 +930,10 @@
             }
             positions[turn].posx = positions[turn].posx + T;
             moves--;
+            const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
+            const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
+            lev.style.top = ypos + 'px';
+            lev.style.left = xpos + 'px';
           } 
         } else if (event.which == 83) {
           if (positions[turn].posy + T >= lev.height + edgey[positions[turn].floor]) {
@@ -964,6 +978,10 @@
             }
             positions[turn].posy = positions[turn].posy + T;
             moves--;
+            const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
+            const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
+            lev.style.top = ypos + 'px';
+            lev.style.left = xpos + 'px';
           }
         } else if (event.which == 65) {
           if (positions[turn].posx - T < edgex[positions[turn].floor]) {
@@ -1009,6 +1027,10 @@
             }
             positions[turn].posx = positions[turn].posx - T;
             moves--;
+            const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
+            const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
+            lev.style.top = ypos + 'px';
+            lev.style.left = xpos + 'px';
           } 
         }
         movesp.innerHTML = moves;
