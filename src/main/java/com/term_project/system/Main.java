@@ -126,7 +126,7 @@ public class Main
 
   	      Map<String, Object> variables = ImmutableMap.of("title",
   	          "Betrayal at House on the Hill");
-  	      return new ModelAndView(variables, "betrayal_testing.ftl");
+  	      return new ModelAndView(variables, "betrayal.ftl");
   	    }
     }
       

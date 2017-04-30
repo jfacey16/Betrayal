@@ -548,7 +548,6 @@
       flex-direction:column;
       float:left;
       width:15%;
-      height:100%;
       border-style:solid;
       border-width:2px;
       margin:5px;
@@ -583,7 +582,6 @@
     .board{
       float:left;
       width:70%;
-      height:100%;
       border-style:solid;
       border-width:2px;
       margin:5px;
@@ -653,7 +651,6 @@
       display:flex; 
       flex-direction:column;
       width:25%;
-      height:100.5%;
       margin:5px;}
     </style>
   </div>
@@ -671,9 +668,8 @@
 .game{
   display:flex; 
   flex-direction:column;
-  height:100%;
   width:100%;
-  background-color:#ffffff;}
+  background-color:#727272;}
 </style>
 
 <script type="text/javascript">
