@@ -52,20 +52,7 @@ public class Lobby implements GamePhase {
 
     //in this phase we modify backend to match frontend choices of characters
     if(phase == 1) {
-      Map<String, GameChar> playersCharacters = new HashMap<>();
-      //gets list of id from memory
-      List<String> ids = memory.getStringList();
-
-      //loops through and sets characters
-      for (int i = 0; i < ids.size(); i++) {
-        String id = ids.get(i);
-        //playersCharacters.put(id, CharacterGen.getCharactersByName(qm.value(id)));
-      }
-      //set turn order
-      memory.getGameState().setPlayersCharacters(playersCharacters);
-
-      //set starting tiles, put all players on those tiles:
-      /*do we have the starting tiles made yet?*/
+      //set starting tiles
       //tile where players start
       Map<Direction, Tile> frontDoorConnected = new HashMap<>();
       List<Floor> frontDoorAvailable = new ArrayList<>();
@@ -139,6 +126,21 @@ public class Lobby implements GamePhase {
      tileMap.put(upper.getPos(), upper);
      tileMap.put(basement.getPos(), basement);
 
+
+     //set list of playersCharacters
+     Map<String, GameChar> playersCharacters = new HashMap<>();
+     //gets list of id from memory
+     List<String> ids = memory.getStringList();
+
+     //loops through and sets characters
+     for (int i = 0; i < ids.size(); i++) {
+       String id = ids.get(i);
+       // GameChar character = CharacterGen.getCharactersByName(qm.value(id));
+       //playersCharacters.put(id, character);
+       //character.setTile(frontDoor);
+     }
+     //set turn order
+     memory.getGameState().setPlayersCharacters(playersCharacters);
 
       //switch game phases
       memory.getGameState().setPhase(new PreHaunt(memory));
