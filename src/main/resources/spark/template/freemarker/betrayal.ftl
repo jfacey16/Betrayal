@@ -15,6 +15,7 @@
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="js/betrayal_testing.js"></script>
   <script type="text/javascript">
   class Tile {
     constructor(posx, posy, north, east, south, west) {
@@ -555,6 +556,25 @@
     </style>
     
     <div class="board">
+    
+    <div id="item" class="card_draw"> This is a card! </div>
+
+	<style type="text/css">
+	.card_draw{
+		display:block;
+		position:absolute;
+		top:36%;
+		left:38%;
+		float:left;
+		z-index:20;
+		height:350px;
+		width:250px;
+      	border-style:solid;
+      	border-width:2px;
+      	margin-bottom:5px;
+      	background-color:#ffffff;}
+     </style>
+    
 <div id="container">
 	<div id="map">
     <div id="mapf"><canvas id="mfirst"></canvas></div>
