@@ -304,10 +304,7 @@
 			background-color:#eeeeee;}
 		</style>
 		
-		<div class="board">
-			<p></p>
-			<center><img src="http://avalonhill.wizards.com/sites/default/files/media/styles/product_carousel/public/images/image-gallery/Betrayal_gallery_1_0.jpg?itok=ndlF3W8l" alt="Player 1" style="width:90%;height:100%;"></center>
-		</div>
+		<div class="board"></div>
 		
 		<style type="text/css">
 		.board{
@@ -325,12 +322,15 @@
 				<center>Objectives</center>
 				
 				<div class="obj_info">
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."			
+					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur..."
+							
 				</div>
 				
 				<style type="text/css">
 				.obj_info{
+					overflow-y:auto;
 					margin:5px;
+					height:85%;
 					background-color:#eeeeee;}
 				</style>
 				
