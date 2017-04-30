@@ -45,18 +45,17 @@ public class GameState {
 	// private Display curr;
 
 	public GameState(List<String> ids,
-						       Map<String, GameChar> playersCharacters,
 									 MemorySlot memory){
 		//Randomize turn order
 		idTurnOrder = new ArrayList<>(ids);
 		Collections.shuffle(idTurnOrder);
 
-		this.playersCharacters = playersCharacters;
 		currentTurn = 0;
 
 		//initiate memory
 		this.memory = memory;
 		memory.setGameState(this);
+		memory.setStringList(ids);
 
 		phase = new PreHaunt(memory);
 	}
@@ -74,10 +73,18 @@ public class GameState {
 	}
 
 	public void endTurn() {
-		return;
+		currentTurn = (currentTurn + 1) % getNumPlayers();
 	}
 
 	public void setPhase(GamePhase newPhase) {
 		phase = newPhase;
+	}
+
+	public int getNumPlayers() {
+		return idTurnOrder.size();
+	}
+
+	public void setPlayersCharacters(Map<String, GameChar> newCharacters) {
+		playersCharacters = newCharacters;
 	}
 }
