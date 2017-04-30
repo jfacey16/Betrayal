@@ -45,7 +45,7 @@ public class Lobby implements GamePhase {
       /*we want a character generator that generates a list of pairs of characters. */
       /*
       List<List<GameChar>> characters = CharacterGen.genList(numplayers);
-      variables.out("characterChoices", characters);
+      variables.put("characterChoices", characters);
       */
       return;
     }
@@ -139,8 +139,13 @@ public class Lobby implements GamePhase {
         //playersCharacters.put(id, character);
         //character.setTile(frontDoor);
       }
-       //set turn order
-       memory.getGameState().setPlayersCharacters(playersCharacters);
+      //set turn order
+      memory.getGameState().setPlayersCharacters(playersCharacters);
+
+      //send frontend tiles and characters
+      variables.put("tiles",
+          new ArrayList<Tile>(memory.getTileMap().values()));
+      variables.put("characters", memory.getGameCharacters());
 
       //switch game phases
       memory.getGameState().setPhase(new PreHaunt(memory));
