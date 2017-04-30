@@ -56,6 +56,7 @@ public class GameState {
 		this.memory = memory;
 		memory.setGameState(this);
 		memory.setStringList(ids);
+		memory.setTileMap(new HashMap<>());
 
 		phase = new PreHaunt(memory);
 	}

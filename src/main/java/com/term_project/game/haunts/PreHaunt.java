@@ -53,7 +53,7 @@ public class PreHaunt implements GamePhase {
     if(remaining.get("move") > 0) {
       actions.add("move");
     }
-
+    
     variables.put("actions", actions);
   }
 
