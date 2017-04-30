@@ -10,7 +10,7 @@
   #map {display: flex; flex-direction:column;}
   #container {display:flex; flex-direction:row;}
   #descr {position: absolute; right: 0; bottom: 0; width:150px; height:514px;
-    background: #eeeeee; border: solid black 1px; border-width: 1px 0 0 1px; z-index: 1;}
+    background: #eeeeee; border: solid black 1px; border-width: 1px 0 0 2px; z-index: 1;}
   button {padding:5px; margin:5px; background:#eeeeee; font-size:14px; width:130px; height:40px;}
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -659,7 +659,7 @@
   .main_game{
     display:flex; 
     flex-direction:row;
-    height:514px}
+    height:528px}
   </style>
 
 </div>
