@@ -264,11 +264,13 @@ public interface Tile {
   void addOmen(Omen omen);
 
 
-  public boolean hasDown();
+  boolean hasDown();
 
-  public boolean hasUp();
+  boolean hasUp();
 
-  public Tile getUp() throws NullPointerException;
+  Tile getUp() throws NullPointerException;
 
-  public Tile getDown() throws NullPointerException;
+  Tile getDown() throws NullPointerException;
+
+  TileBean getBean();
 }

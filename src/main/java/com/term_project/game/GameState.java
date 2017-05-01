@@ -73,7 +73,6 @@ public class GameState {
 		Map<String, Object> variables = new HashMap<>();
 		System.out.println("MAP BUILDING");
 		phase.run(null, qm, null, variables);
-		System.out.println(playersCharacters);
 		return variables;
 	}
 

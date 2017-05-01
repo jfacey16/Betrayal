@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.term_project.character.GameChar;
+import com.term_project.character.CharBean;
 import com.term_project.builders.CharacterGen;
 import com.term_project.events.Event;
 import com.term_project.game.actions.Mover;
 import com.term_project.house.Tile;
+import com.term_project.house.TileBean;
 import com.term_project.omens.Omen;
 import com.term_project.system.MemorySlot;
 import com.term_project.game.Dice;
@@ -19,12 +21,14 @@ import com.term_project.house.Pos;
 import com.term_project.house.GenericTile;
 
 import spark.QueryParamsMap;
+import com.google.gson.Gson;
 
 public class Lobby implements GamePhase {
   private MemorySlot memory;
 
   private int phase;
-  CharacterGen charGen;
+  private CharacterGen charGen;
+  private Gson GSON = new Gson();
 
   public Lobby(MemorySlot memory) {
     this.memory = memory;
@@ -148,9 +152,19 @@ public class Lobby implements GamePhase {
 
 
       //send frontend tiles and characters
-      variables.put("tiles",
-          new ArrayList<Tile>(memory.getTileMap().values()));
-      variables.put("characters", memory.getGameCharacters());
+      List<TileBean> guiAble = new ArrayList<>();
+      List<Tile> theTiles =  new ArrayList<Tile>(memory.getTileMap().values());
+      for(Tile tile : theTiles) {
+        guiAble.add(tile.getBean());
+      }
+
+      List<CharBean> charBeans = new ArrayList<>();
+      List<GameChar> memChar = memory.getGameCharacters();
+      for(int i = 0; i < memChar.size(); i++) {
+        charBeans.add(memChar.get(i).getCharBean());
+      }
+      variables.put("tiles", guiAble);
+      variables.put("characters", charBeans);
 
       //switch game phases
       memory.getGameState().setPhase(new PreHaunt(memory));

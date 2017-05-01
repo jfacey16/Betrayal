@@ -101,7 +101,7 @@ public class Main {
 		Spark.post("/create_game", new LobbyStart());
 	  Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
 		Spark.post("/betrayal", new PlayBetrayalHandler());
-//		Spark.post("/tileStart", new TileStart());
+		Spark.post("/tileStart", new TileStart());
 	}
 
 	private static class MenuHandler implements TemplateViewRoute {

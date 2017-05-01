@@ -32,7 +32,6 @@ public abstract class AbstractTile implements Tile {
   public AbstractTile(List<Direction> availableDoors, int items,
       int events, int omens, List<Floor> availableFloors, MemorySlot memory) {
 
-    this.availableDoors = availableDoors;
     this.items = new ArrayList<>();
     this.omens = new ArrayList<>();
     this.events = new HashMap<>();
@@ -299,5 +298,10 @@ public abstract class AbstractTile implements Tile {
   @Override
   public int hashCode() {
     return this.getName().hashCode();
+  }
+
+  @Override
+  public TileBean getBean(){
+    return new TileBean(availableDoors, itemCount, eventCount , omenCount, pos);
   }
 }

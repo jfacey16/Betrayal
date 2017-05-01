@@ -20,8 +20,8 @@ $(document).ready(() => {
         console.log("HI2");
       const ro2 = JSON.parse(rj2);
       console.log("HI2");
-      console.log(ro2.tile);
-      console.log(ro2.character);
+      console.log(ro2.tiles);
+      console.log(ro2.characters);
     });
 
   });
