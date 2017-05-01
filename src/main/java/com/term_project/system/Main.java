@@ -182,6 +182,9 @@ public class Main {
 			
 		      Map<String, Object> variables = new HashMap<>();
 
+		      
+		      //the querymap sent back is basically just whatever action has just taken place
+		      //variables will have all information concerning the current player whose turn it is 
 					variables.putAll(gameState.update(qm));
 					variables = ImmutableMap.copyOf(variables);
 
