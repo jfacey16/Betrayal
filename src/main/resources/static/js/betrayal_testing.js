@@ -29,9 +29,47 @@ $(document).ready(() => {
             }
         }
     });
+    
+    const $create = $("#create");
+    
+    $($create).keyup(event => {
+    	
+    	console.log("yay!"); 
+    	
+    	const $temp_lobby = $("#temp_lobby");
+    	
+    	$temp_lobby.hide();
+    	
+    	setStartingState();
+    	
+    });
 });  
+
+const pickCharacters = () => {
+	const postParameters = {players:"6"};
+
+    $.post("/create_game", postParameters, responseJSON => {
+
+        // TODO: Parse the JSON response into a JavaScript object. DONE
+        const responseObject = JSON.parse(responseJSON);
+
+    	const $opt_1 = $("#opt_1");
+    	const $opt_2 = $("#opt_2");
+    	const $opt_3 = $("#opt_3");
+    	const $opt_4 = $("#opt_4");
+    	const $opt_5 = $("#opt_5");
+    	const $opt_6 = $("#opt_6");
+    	const $opt_7 = $("#opt_7");
+    	const $opt_8 = $("#opt_8");
+    	const $opt_9 = $("#opt_9");
+    	const $opt_10 = $("#opt_10");
+    	const $opt_11 = $("#opt_11");
+    	const $opt_12 = $("#opt_12");
+    });
+}
   
 const setStartingState = () => {
+	
 	const $player_1_name = $("#name_1");
 	const $player_2_name = $("#name_2");
 	const $player_3_name = $("#name_3");
@@ -51,6 +89,7 @@ const setStartingState = () => {
 	const $player_1_might = $("#might_1");
 	const $player_1_knowledge = $("#knowledge_1");
 	const $player_1_sanity = $("#sanity_1");
+	
 	const $player_2_stats = $("#stats_2");
 	const $player_3_stats = $("#stats_3");
 	const $player_4_stats = $("#stats_4");

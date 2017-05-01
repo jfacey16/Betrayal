@@ -75,4 +75,20 @@ public class Mask implements Omen {
     character.removeOmen(this);
     character.getTile().addOmen(this);
   }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == this)
+      return true;
+    if (!(object instanceof Mask)) {
+      return false;
+    }
+
+    return this.getName().equals(((Mask) object).getName());
+  }
+
+  @Override
+  public int hashCode() {
+    return this.getName().hashCode();
+  }
 }

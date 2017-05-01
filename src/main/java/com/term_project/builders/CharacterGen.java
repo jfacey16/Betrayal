@@ -22,10 +22,12 @@ import com.term_project.character.Zostra;
 public class CharacterGen {
 
   private List<List<GameChar>> characters;
+  private List<GameChar> charactersSimple;
   private Map<String, GameChar> charMap;
 
   public CharacterGen() {
     characters = new ArrayList<List<GameChar>>();
+    charactersSimple = new ArrayList<>();
     charMap = this.buildCharMap();
 
   }
@@ -84,6 +86,18 @@ public class CharacterGen {
     return characters;
   }
 
+  public List<GameChar> buildSimple() {
+
+    charactersSimple.add(new Ox());
+    charactersSimple.add(new Zostra());
+    charactersSimple.add(new Brandon());
+    charactersSimple.add(new Missy());
+    charactersSimple.add(new Longfellow());
+    charactersSimple.add(new Jenny());
+
+    return charactersSimple;
+  }
+
   public GameChar getCharactersByName(String name) {
     return charMap.get(name);
   }
@@ -92,7 +106,7 @@ public class CharacterGen {
     Map<String, GameChar> theMap = new HashMap<>();
     List<List<GameChar>> chars = build();
 
-    for(int i = 0; i < chars.size(); i++) {
+    for (int i = 0; i < chars.size(); i++) {
       theMap.put(Integer.toString(i), chars.get(i).get(i));
     }
     return theMap;
