@@ -199,17 +199,6 @@ const setStartingState = () => {
 				$might += $char_1.mightScale[i] + " ";
 			}
 	    }
-	
-		const $player_1_knowledge = $("#knowledge_1");
-		var $knowledge = "<center>";
-		
-		for (let i = 0, len = $char_1.knowledgeScale.length; i < len; i++) {
-			if(i === $char_1.knowledge) {
-				$knowledge += "<font color=\"red\">" + $char_1.knowledgeScale[i] + "</font> ";
-			} else {
-				$knowledge += $char_1.knowledgeScale[i] + " ";
-			}
-	    }
 		
 		const $player_1_sanity = $("#sanity_1");
 		var $sanity = "<center>";
@@ -219,6 +208,17 @@ const setStartingState = () => {
 				$sanity += "<font color=\"red\">" + $char_1.sanityScale[i] + "</font> ";
 			} else {
 				$sanity += $char_1.sanityScale[i] + " ";
+			}
+	    }
+	
+		const $player_1_knowledge = $("#knowledge_1");
+		var $knowledge = "<center>";
+		
+		for (let i = 0, len = $char_1.knowledgeScale.length; i < len; i++) {
+			if(i === $char_1.knowledge) {
+				$knowledge += "<font color=\"red\">" + $char_1.knowledgeScale[i] + "</font> ";
+			} else {
+				$knowledge += $char_1.knowledgeScale[i] + " ";
 			}
 	    }
 		
@@ -234,30 +234,30 @@ const setStartingState = () => {
 		const $player_5_stats = $("#stats_5");
 		const $player_6_stats = $("#stats_6");
 		
-		$player_2_stats.html("<center>" + $char_2.speedScale[$char_2.speed - 1] + " " +
-				$char_2.mightScale[$char_2.might - 1] + " " + 
-				$char_2.knowledgeScale[$char_2.knowledge - 1] + " " +
-				$char_2.sanityScale[$char_2.sanity - 1] + " " + "</center>");
+		$player_2_stats.html("<center>" + $char_2.speedScale[$char_2.speed] + " " +
+				$char_2.mightScale[$char_2.might] + " " + 
+				$char_2.sanityScale[$char_2.sanity] + " " +
+				$char_2.knowledgeScale[$char_2.knowledge] + " " + "</center>");
 		
-		$player_3_stats.html("<center>" + $char_3.speedScale[$char_3.speed - 1] + " " +
-				$char_3.mightScale[$char_3.might - 1] + " " + 
-				$char_3.knowledgeScale[$char_3.knowledge - 1] + " " +
-				$char_3.sanityScale[$char_3.sanity - 1] + " " + "</center>");
+		$player_3_stats.html("<center>" + $char_3.speedScale[$char_3.speed] + " " +
+				$char_3.mightScale[$char_3.might] + " " + 
+				$char_3.sanityScale[$char_3.sanity] + " " + 
+				$char_3.knowledgeScale[$char_3.knowledge] + " " + "</center>");
 		
-		$player_4_stats.html("<center>" + $char_4.speedScale[$char_4.speed - 1] + " " +
-				$char_4.mightScale[$char_4.might - 1] + " " + 
-				$char_4.knowledgeScale[$char_4.knowledge - 1] + " " +
-				$char_4.sanityScale[$char_4.sanity - 1] + " " + "</center>");
+		$player_4_stats.html("<center>" + $char_4.speedScale[$char_4.speed] + " " +
+				$char_4.mightScale[$char_4.might] + " " + 
+				$char_4.sanityScale[$char_4.sanity] + " " + 
+				$char_4.knowledgeScale[$char_4.knowledge] + " " +"</center>");
 		
-		$player_5_stats.html("<center>" + $char_5.speedScale[$char_5.speed - 1] + " " +
-				$char_5.mightScale[$char_5.might - 1] + " " + 
-				$char_5.knowledgeScale[$char_5.knowledge - 1] + " " +
-				$char_5.sanityScale[$char_5.sanity - 1] + " " + "</center>");
+		$player_5_stats.html("<center>" + $char_5.speedScale[$char_5.speed] + " " +
+				$char_5.mightScale[$char_5.might] + " " + 
+				$char_5.sanityScale[$char_5.sanity] + " " + 
+				$char_5.knowledgeScale[$char_5.knowledge] + " " + "</center>");
 		
-		$player_6_stats.html("<center>" + $char_6.speedScale[$char_6.speed - 1] + " " +
-				$char_6.mightScale[$char_6.might - 1] + " " + 
-				$char_6.knowledgeScale[$char_6.knowledge - 1] + " " +
-				$char_6.sanityScale[$char_6.sanity - 1] + " " + "</center>");
+		$player_6_stats.html("<center>" + $char_6.speedScale[$char_6.speed] + " " +
+				$char_6.mightScale[$char_6.might] + " " + 
+				$char_6.sanityScale[$char_6.sanity] + " " + 
+				$char_6.knowledgeScale[$char_6.knowledge] + " " + "</center>");
 	
 	    
 	    moves = $char_1.speedScale[$char_1.speed - 1];

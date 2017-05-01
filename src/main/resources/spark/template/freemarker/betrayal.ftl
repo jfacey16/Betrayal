@@ -560,9 +560,9 @@
       
       <center><div id="might_1" class="stat"><center> X </center></div></center>
       
-      <center><div id="knowledge_1" class="stat"><center> X </center></div></center>
-      
       <center><div id="sanity_1" class="stat"><center> X </center></div></center>
+      
+      <center><div id="knowledge_1" class="stat"><center> X </center></div></center>
        
     </div>
     
