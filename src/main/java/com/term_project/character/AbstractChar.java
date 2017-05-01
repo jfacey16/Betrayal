@@ -205,20 +205,21 @@ public abstract class AbstractChar implements GameChar {
   @Override
   public int getStatByName(String name) {
     switch (name) {
-    case "might":
+    case "MIGHT":
       return getMight();
 
-    case "speed":
+    case "SPEED":
       return getSpeed();
 
-    case "sanity":
+    case "SANITY":
       return getSanity();
 
-    case "knowlege":
+    case "KNOWLEDGE":
       return getKnowlege();
 
     default:
-      throw new NullPointerException("Given stat " + name + " doesn't exist.");
+      throw new NullPointerException(
+          "Given stat " + name + " doesn't exist.");
     }
   }
 

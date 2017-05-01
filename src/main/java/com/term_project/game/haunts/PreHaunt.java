@@ -53,7 +53,7 @@ public class PreHaunt implements GamePhase {
     if(remaining.get("move") > 0) {
       actions.add("move");
     }
-    
+
     variables.put("actions", actions);
   }
 
@@ -117,6 +117,9 @@ public class PreHaunt implements GamePhase {
             addActions(character, variables);
 	          return;
 	        }
+
+          //variables.put("tile", a tile from top of deck);
+          return;
 	      }
 
 	      if (phase == 1) {
@@ -142,22 +145,24 @@ public class PreHaunt implements GamePhase {
 						//force character to pick up items/omens/events
 	          for (int i = 0; i < character.getTile().getItemCount(); i++) {
 	            memory.getItems().poll().add(character, variables);
+              //variable ("items -> list omens")
 	          }
 
             for (int i = 0; i < character.getTile().getEventCount(); i++) {
               // TODO: do event things
               toResolve.add("event");
+              //variable ("events -> list Tile")
+              mode = "event";
+  	          phase = 1;
             }
 
 	          for (int i = 0; i < character.getTile().getOmenCount(); i++) {
 	            memory.getOmens().poll().add(character, variables);
-
+              //variable ("omens -> list omens")
               toResolve.add("omen");
 	          }
             variables.put("toResolve", toResolve);
 
-	          mode = "event";
-	          phase = 1;
 	        } catch (RuntimeException e) {
 	          variables.put("Error", e.getMessage());
 	          return;

@@ -136,10 +136,10 @@ public class Lobby implements GamePhase {
       for (int i = 0; i < ids.size(); i++) {
         String id = ids.get(i);
         // GameChar character = CharacterGen.getCharactersByName(qm.value(id));
-        //playersCharacters.put(id, character);
-        //character.setTile(frontDoor);
+        // playersCharacters.put(id, character);
+        // character.setTile(frontDoor);
       }
-      //set turn order
+      //set playersCharacters
       memory.getGameState().setPlayersCharacters(playersCharacters);
 
       //send frontend tiles and characters

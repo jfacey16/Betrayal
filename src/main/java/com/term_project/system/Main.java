@@ -28,7 +28,7 @@ import joptsimple.OptionSet;
 public class Main
 {
 	private static final int DEFAULT_PORT = 4567;
-	
+
 	public static void main(String[] args) {
 	    new Main(args).run();
 	}
@@ -44,7 +44,7 @@ public class Main
         parser.accepts("port").withRequiredArg().ofType(Integer.class)
             .defaultsTo(DEFAULT_PORT);
         OptionSet options = parser.parse(args);
-    	
+
         if (options.has("gui")) {
             runSparkServer((int) options.valueOf("port"));
         } else {
@@ -57,10 +57,10 @@ public class Main
             }
     	}
     }
-    
+
     /*
      * Some Spark methods/classes are currently residing in Main. We've discussed moving them if they get too over-bearing.
-     * 
+     *
      */
     private static FreeMarkerEngine createEngine() {
         Configuration config = new Configuration();
@@ -83,11 +83,11 @@ public class Main
         FreeMarkerEngine freeMarker = createEngine();
 
         // Setup Spark Routes
-        Spark.get("/betrayal_menu", new MenuHandler(), freeMarker); 
+        Spark.get("/betrayal_menu", new MenuHandler(), freeMarker);
         Spark.post("/create_game", new LobbyHandler(), freeMarker);
-        Spark.get("/betrayal", new BetrayalHandler(), freeMarker); 
+        Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
       }
-      
+
       private static class MenuHandler implements TemplateViewRoute {
 
     	    @Override
@@ -100,12 +100,12 @@ public class Main
     	      return new ModelAndView(variables, "menu.ftl");
     	    }
       }
-      
+
       private static class LobbyHandler implements TemplateViewRoute {
 
     	    @Override
     	    public ModelAndView handle(Request req, Response res) {
-    	      
+
     	      QueryParamsMap qm = req.queryMap();
   	          String game_name = qm.value("name");
     	      String player_number = qm.value("players");
@@ -118,7 +118,7 @@ public class Main
     	      return new ModelAndView(variables, "lobby.ftl");
     	    }
       }
-      
+
       private static class BetrayalHandler implements TemplateViewRoute {
 
   	    @Override
@@ -126,10 +126,10 @@ public class Main
 
   	      Map<String, Object> variables = ImmutableMap.of("title",
   	          "Betrayal at House on the Hill");
-  	      return new ModelAndView(variables, "betrayal_testing.ftl");
+  	      return new ModelAndView(variables, "betrayal.ftl");
   	    }
     }
-      
+
       private static class ExceptionPrinter implements ExceptionHandler {
     	    @Override
     	    public void handle(Exception e, Request req, Response res) {
@@ -143,5 +143,5 @@ public class Main
     	      res.body(stacktrace.toString());
     	    }
       }
-    
+
 }
