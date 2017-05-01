@@ -52,7 +52,6 @@ public class Lobby implements GamePhase {
       List<List<GameChar>> characters = charGen.build().subList(0, numPlayers);
       variables.put("characterChoices", characters);
       phase = 1;
-      System.out.println("PHASE 0 DONE");
       return;
     }
 
@@ -68,6 +67,7 @@ public class Lobby implements GamePhase {
                                        frontDoorAvailable,
                                        memory);
       frontDoor.setPos(new Pos(0, 0, Floor.GROUND));
+      frontDoor.setName("Front Door");
 
       //between door and stairs
       List<Direction> midConnected = new ArrayList<>();
@@ -75,6 +75,7 @@ public class Lobby implements GamePhase {
       midAvailable.add(Floor.GROUND);
       Tile mid = new GenericTile(midConnected, 0, 0, 0, midAvailable, memory);
       mid.setPos(new Pos(-1, 0, Floor.GROUND));
+      mid.setName("Foyer");
 
       //stairs
       List<Direction> stairsConnected = new ArrayList<>();
@@ -82,6 +83,7 @@ public class Lobby implements GamePhase {
       stairsAvailable.add(Floor.GROUND);
       Tile stairs = new GenericTile(stairsConnected, 0, 0, 0, stairsAvailable, memory);
       stairs.setPos(new Pos(-2, 0, Floor.GROUND));
+      stairs.setName("Grand Staircase");
 
       //upper landing
       List<Direction>  upperConnected = new ArrayList<>();
@@ -89,6 +91,7 @@ public class Lobby implements GamePhase {
       upperAvailable.add(Floor.ATTIC);
       Tile upper = new GenericTile(upperConnected, 0, 0, 0, upperAvailable, memory);
       upper.setPos(new Pos(-2, 0, Floor.ATTIC));
+      upper.setName("Upper Landing");
 
       //basement
       List<Direction> basementConnected = new ArrayList<>();
@@ -96,6 +99,7 @@ public class Lobby implements GamePhase {
       basementAvailable.add(Floor.BASEMENT);
       Tile basement = new GenericTile(basementConnected, 0, 0, 0, basementAvailable, memory);
       basement.setPos(new Pos(0, 0, Floor.BASEMENT));
+      basement.setName("Basement Landing");
 
       //connect front door
       frontDoorConnected.add(Direction.NORTH);
@@ -167,8 +171,8 @@ public class Lobby implements GamePhase {
       variables.put("characters", charBeans);
 
       //switch game phases
+      System.out.println("phase being set");
       memory.getGameState().setPhase(new PreHaunt(memory));
-      System.out.println("PHASE 1 DONE");
     }
   }
 

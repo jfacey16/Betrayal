@@ -28,6 +28,7 @@ public abstract class AbstractTile implements Tile {
   private Map<String, Event> events;
   private List<Floor> availableFloors;
   private MemorySlot memory;
+  private String name;
 
   public AbstractTile(List<Direction> availableDoors, int items,
       int events, int omens, List<Floor> availableFloors, MemorySlot memory) {
@@ -44,8 +45,19 @@ public abstract class AbstractTile implements Tile {
     this.availableDoors = availableDoors;
     this.availableFloors = availableFloors;
     this.memory = memory;
+    this.doors = new HashMap<>();
   }
 
+  @Override
+  public Tile setName(String newName) {
+    name = newName;
+    return this;
+  }
+
+  @Override
+  public String getName() {
+    return name;
+  }
 
   @Override
   public List<Omen> getOmens() {
@@ -104,10 +116,22 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public Tile getNorth() throws NullPointerException {
-    if(!hasNorth()) {
+    if(!this.hasNorth()) {
       throw new NullPointerException(
           "There is no door/tile to the north.");
     }
+    System.out.println("past if statement");
+    try {
+      System.out.println(memory.getTileMap());
+    } catch (Throwable e) {
+      e.printStackTrace();
+    }
+    try {
+      System.out.println(doors.get(Direction.NORTH));
+    } catch (Throwable e) {
+      e.printStackTrace();
+    }
+    
     Tile north = memory.getTileMap().get(doors.get(Direction.NORTH));
     return north;
   }
@@ -164,7 +188,8 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public boolean hasNorth() {
-    return availableDoors.contains(Direction.NORTH);
+    System.out.println("hi");
+    return true;// availableDoors.contains(Direction.NORTH);
   }
 
   @Override
@@ -302,6 +327,6 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public TileBean getBean(){
-    return new TileBean(availableDoors, itemCount, eventCount , omenCount, pos);
+    return new TileBean(availableDoors, itemCount, eventCount , omenCount, pos, name);
   }
 }

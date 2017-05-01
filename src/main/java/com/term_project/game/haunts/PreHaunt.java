@@ -107,6 +107,9 @@ public class PreHaunt implements GamePhase {
       return;
     }
 
+    System.out.println(name);
+    System.out.println(character.getName());
+
     switch (name) {
     case "move":
       if (phase == 0) {
@@ -126,7 +129,7 @@ public class PreHaunt implements GamePhase {
         } catch (NullPointerException e) {
           mode = "idle";
           phase = 0;
-          variables.put("Error", "No door in given direction.");
+          variables.put("Error", e.getMessage());
           return;
         }
 

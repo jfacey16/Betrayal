@@ -937,21 +937,28 @@
             ctxm.strokeRect((positions[turn].posx + offsets[turn].posx) / S, 
               (positions[turn].posy - T + offsets[turn].posy) / S, P / S, P / S);
             if (temp == -1) {
-              const ntile = new Tile(positions[turn].posx, positions[turn].posy - T, r1, r2, true, r3);
-              flo.push(ntile);
-              ctx.strokeRect(positions[turn].posx, positions[turn].posy - T, T, T);
-              ctxm.strokeRect(positions[turn].posx / S, (positions[turn].posy - T) / S, P, P);
-              if (r1 == true) 
-                ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - T, D, X);
-              if (r2 == true)
-                ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy - T + D, X, D);
-              if (r3 == true) 
-                ctx.strokeRect(positions[turn].posx, positions[turn].posy - T + D, X, D);
-              ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
-              positions[turn].north = r1;
-              positions[turn].east = r2;
-              positions[turn].south = true;
-              positions[turn].west = r3;
+//              const ntile = new Tile(positions[turn].posx, positions[turn].posy - T, r1, r2, true, r3);
+//              flo.push(ntile);
+             ctx.strokeRect(positions[turn].posx, positions[turn].posy - T, T, T);
+             ctxm.strokeRect(positions[turn].posx / S, (positions[turn].posy - T) / S, P, P);
+//              if (r1 == true) 
+//                ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - T, D, X);
+//              if (r2 == true)
+//                ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy - T + D, X, D);
+//              if (r3 == true) 
+//                ctx.strokeRect(positions[turn].posx, positions[turn].posy - T + D, X, D);
+//             ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
+//              positions[turn].north = r1;
+//              positions[turn].east = r2;
+//              positions[turn].south = true;
+//              positions[turn].west = r3;
+                const postParameters = {name: "move", direction: "NORTH"};
+
+                $.post("/requestTile", postParameters, responseJSON => {
+                  const responseObject = JSON.parse(responseJSON);
+                  console.log(responseObject);
+                });  
+			
             } else {
               positions[turn].north = flo[temp].north;
               positions[turn].east = flo[temp].east;
@@ -985,21 +992,27 @@
             ctxm.strokeRect((positions[turn].posx + T + offsets[turn].posx) / S, 
               (positions[turn].posy + offsets[turn].posy) / S, P / S, P / S);
             if (temp == -1) {
-              const ntile = new Tile(positions[turn].posx + T, positions[turn].posy, r1, r2, r3, true);
-              flo.push(ntile);
+              // const ntile = new Tile(positions[turn].posx + T, positions[turn].posy, r1, r2, r3, true);
+              // flo.push(ntile);
               ctx.strokeRect(positions[turn].posx + T, positions[turn].posy, T, T);
               ctxm.strokeRect((positions[turn].posx + T) / S, positions[turn].posy / S, P, P);
-              if (r1 == true) 
-                ctx.strokeRect(positions[turn].posx + T + D, positions[turn].posy, D, X);
-              if (r2 == true)
-                ctx.strokeRect(positions[turn].posx + T + T - X, positions[turn].posy + D, X, D);
-              if (r3 == true) 
-                ctx.strokeRect(positions[turn].posx + T + D, positions[turn].posy + T - X, D, X);
-              ctx.strokeRect(positions[turn].posx + T, positions[turn].posy + D, X, D);
-              positions[turn].north = r1;
-              positions[turn].east = r2;
-              positions[turn].south = r3;
-              positions[turn].west = true;
+              // if (r1 == true) 
+              //   ctx.strokeRect(positions[turn].posx + T + D, positions[turn].posy, D, X);
+              // if (r2 == true)
+              //   ctx.strokeRect(positions[turn].posx + T + T - X, positions[turn].posy + D, X, D);
+              // if (r3 == true) 
+              //   ctx.strokeRect(positions[turn].posx + T + D, positions[turn].posy + T - X, D, X);
+              // ctx.strokeRect(positions[turn].posx + T, positions[turn].posy + D, X, D);
+              // positions[turn].north = r1;
+              // positions[turn].east = r2;
+              // positions[turn].south = r3;
+              // positions[turn].west = true;
+              const postParameters = {name: "move", direction: "EAST"};
+
+                $.post("/requestTile", postParameters, responseJSON => {
+                  const responseObject = JSON.parse(responseJSON);
+                  console.log(responseObject);
+                }); 
             } else {
               positions[turn].north = flo[temp].north;
               positions[turn].east = flo[temp].east;
@@ -1033,21 +1046,27 @@
             ctxm.strokeRect((positions[turn].posx + offsets[turn].posx) / S, 
               (positions[turn].posy + T + offsets[turn].posy) / S, P / S, P / S);
             if (temp == -1) {
-              const ntile = new Tile(positions[turn].posx, positions[turn].posy + T, true, r1, r2, r3);
-              flo.push(ntile);
+              // const ntile = new Tile(positions[turn].posx, positions[turn].posy + T, true, r1, r2, r3);
+              // flo.push(ntile);
               ctx.strokeRect(positions[turn].posx, positions[turn].posy + T, T, T);
               ctxm.strokeRect(positions[turn].posx / S, (positions[turn].posy + T) / S, P, P);
-              if (r1 == true) 
-                ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + T + D, X, D);
-              if (r2 == true)
-                ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T + T - X, D, X);
-              if (r3 == true) 
-                ctx.strokeRect(positions[turn].posx, positions[turn].posy + T + D, X, D);
-              ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T, D, X);
-              positions[turn].north = true;
-              positions[turn].east = r1;
-              positions[turn].south = r2;
-              positions[turn].west = r3;
+              // if (r1 == true) 
+              //   ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + T + D, X, D);
+              // if (r2 == true)
+              //   ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T + T - X, D, X);
+              // if (r3 == true) 
+              //   ctx.strokeRect(positions[turn].posx, positions[turn].posy + T + D, X, D);
+              // ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T, D, X);
+              // positions[turn].north = true;
+              // positions[turn].east = r1;
+              // positions[turn].south = r2;
+              // positions[turn].west = r3;
+              const postParameters = {name: "move", direction: "SOUTH"};
+
+                $.post("/requestTile", postParameters, responseJSON => {
+                  const responseObject = JSON.parse(responseJSON);
+                  console.log(responseObject);
+                }); 
             } else {
               positions[turn].north = flo[temp].north;
               positions[turn].east = flo[temp].east;
@@ -1082,21 +1101,27 @@
             ctxm.strokeRect((positions[turn].posx  - T + offsets[turn].posx) / S, 
               (positions[turn].posy + offsets[turn].posy) / S, P / S, P / S);
             if (temp == -1) {
-              const ntile = new Tile(positions[turn].posx - T, positions[turn].posy, r1, true, r2, r3);
-              flo.push(ntile);
+              // const ntile = new Tile(positions[turn].posx - T, positions[turn].posy, r1, true, r2, r3);
+              // flo.push(ntile);
               ctx.strokeRect(positions[turn].posx - T, positions[turn].posy, T, T);
               ctxm.strokeRect((positions[turn].posx - T) / S, positions[turn].posy / S, P, P);
-              if (r1 == true) 
-                ctx.strokeRect(positions[turn].posx - T + D, positions[turn].posy, D, X);
-              if (r2 == true)
-                ctx.strokeRect(positions[turn].posx - T + D, positions[turn].posy + T - X, D, X);
-              if (r3 == true) 
-                ctx.strokeRect(positions[turn].posx - T, positions[turn].posy + D, X, D);
-              ctx.strokeRect(positions[turn].posx - X, positions[turn].posy + D, X, D);
-              positions[turn].north = r1;
-              positions[turn].east = true;
-              positions[turn].south = r2;
-              positions[turn].west = r3;
+              // if (r1 == true) 
+              //   ctx.strokeRect(positions[turn].posx - T + D, positions[turn].posy, D, X);
+              // if (r2 == true)
+              //   ctx.strokeRect(positions[turn].posx - T + D, positions[turn].posy + T - X, D, X);
+              // if (r3 == true) 
+              //   ctx.strokeRect(positions[turn].posx - T, positions[turn].posy + D, X, D);
+              // ctx.strokeRect(positions[turn].posx - X, positions[turn].posy + D, X, D);
+              // positions[turn].north = r1;
+              // positions[turn].east = true;
+              // positions[turn].south = r2;
+              // positions[turn].west = r3;
+              const postParameters = {name: "move", direction: "WEST"};
+
+                $.post("/requestTile", postParameters, responseJSON => {
+                  const responseObject = JSON.parse(responseJSON);
+                  console.log(responseObject);
+                }); 
             } else {
               positions[turn].north = flo[temp].north;
               positions[turn].east = flo[temp].east;

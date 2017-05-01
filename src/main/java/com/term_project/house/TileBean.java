@@ -16,14 +16,16 @@ public class TileBean {
   private int itemCount;
   private int omenCount;
   private int eventCount;
+  private String name;
 
   public TileBean(List<Direction> availableDoors, int items, int events,
-      int omens, Pos pos) {
+      int omens, Pos pos, String name) {
     this.itemCount = items;
     this.omenCount = omens;
     this.eventCount = events;
 
     this.availableDoors = availableDoors;
     this.pos = pos;
+    this.name = name;
   }
 }

@@ -61,7 +61,6 @@ public class Main {
 	  if (options.has("gui")) {
 			runSparkServer((int) options.valueOf("port"));
 	  } else {
-			System.out.println("Starting REPL");
 			Environment env = new Environment();
 			try {
 			  env.startRepl();
@@ -102,6 +101,7 @@ public class Main {
 	  Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
 		Spark.post("/betrayal", new UpdateHandler());
 		Spark.post("/tileStart", new TileStart());
+		Spark.post("/requestTile", new RequestTile());
 	}
 
 	private static class MenuHandler implements TemplateViewRoute {
@@ -142,7 +142,7 @@ public class Main {
 	private static class LobbyStart implements Route {
 	    @Override
 	    public String handle(Request req, Response res) {
-				System.out.println("LobbyHandler");
+	    	System.out.println("start is starting");
 	      QueryParamsMap qm = req.queryMap();
 	      String game_name = qm.value("name");
 				//setup ids
@@ -159,7 +159,6 @@ public class Main {
 				variables.putAll(gameState.start());
 				variables = ImmutableMap.copyOf(variables);
 
-				//System.out.println(variables);
 			  return GSON.toJson(variables);
 	    }
 	}
@@ -185,10 +184,10 @@ public class Main {
 		      
 		      //the querymap sent back is basically just whatever action has just taken place
 		      //variables will have all information concerning the current player whose turn it is 
-					variables.putAll(gameState.update(qm));
-					variables = ImmutableMap.copyOf(variables);
 
-					//System.out.println(variables);
+					// variables.putAll(gameState.update(qm));
+					// variables = ImmutableMap.copyOf(variables);
+
 				  return GSON.toJson(variables);
 	  }
 	}
@@ -196,16 +195,23 @@ public class Main {
 	private static class TileStart implements Route {
 	  @Override
 	  public String handle(Request req, Response res) {
-			System.out.println("TILE START");
 			QueryParamsMap qm = req.queryMap();
 
 			Map<String, Object> variables = gameState.buildMap(qm);
 
 			variables = ImmutableMap.copyOf(variables);
 
+			return GSON.toJson(variables);
+	  }
+	}
+	
+	private static class RequestTile implements Route {
+	@Override
+	  public String handle(Request req, Response res) {
+			QueryParamsMap qm = req.queryMap();
+
+			Map<String, Object> variables = gameState.update(qm);
 			System.out.println(variables);
-			//System.out.println(variables);
-			String parsed = GSON.toJson(variables).toString();
 			return GSON.toJson(variables);
 	  }
 	}

@@ -38,6 +38,7 @@ public class Mover {
     case "NORTH":
       try {
         Tile newTile = currentTile.getNorth();
+        System.out.println(newTile);
         moveTileHandler(newTile, character, variables);
       } catch (NullPointerException e) {
         throw new NullPointerException("No available tile to the north.");
@@ -78,6 +79,7 @@ public class Mover {
     // if its a empty tile, we need to generate a new tile for the frontend to
     // position.
     if (newTile == null) {
+
       // We "prep" it to add bc player still needs to choose rotation
       prepTileToAdd(newTile, character, variables);
     } else {

@@ -13,7 +13,6 @@ import com.term_project.system.MemorySlot;
  */
 
 public class GenericTile extends AbstractTile implements Tile {
-  private String name;
   private String description;
 
   public GenericTile(List<Direction> doors, int items,
@@ -23,20 +22,9 @@ public class GenericTile extends AbstractTile implements Tile {
   }
 
   @Override
-  public Tile setName(String newName) {
-    name = newName;
-    return this;
-  }
-
-  @Override
   public Tile setDescription(String newDescription) {
     description = newDescription;
     return this;
-  }
-
-  @Override
-  public String getName() {
-    return name;
   }
 
   @Override
