@@ -122,6 +122,7 @@ public class Main {
 	private static class LobbyHandler implements TemplateViewRoute {
 	    @Override
 	    public ModelAndView handle(Request req, Response res) {
+				System.out.println("LobbyHandler");
 	      QueryParamsMap qm = req.queryMap();
 	      String game_name = qm.value("name");
 				String player_number = qm.value("players");
@@ -165,16 +166,6 @@ public class Main {
 	private static class BetrayalHandler implements TemplateViewRoute {
 	  @Override
 	  public ModelAndView handle(Request req, Response res) {
-			QueryParamsMap qm = req.queryMap();
-			List<String> ids = new ArrayList<>();
-			ids.add("0");
-			ids.add("1");
-			ids.add("2");
-			ids.add("3");
-			ids.add("4");
-			ids.add("5");
-			gameState = new GameState(ids, new MemorySlot());
-			gameState.cheatStart();
 	    Map<String, Object> variables = ImmutableMap.of(
 					"title",
 	        "Betrayal at House on the Hill"
@@ -188,7 +179,7 @@ public class Main {
 	  public String handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
 
-			Map<String, Object> variables = gameState.run(qm);
+			Map<String, Object> variables = gameState.update(qm);
 
 			variables = ImmutableMap.copyOf(variables);
 
