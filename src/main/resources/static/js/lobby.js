@@ -1,6 +1,9 @@
 $(document).ready(() => {
 	
-	const postParameters = {};
+	const postParameters = {players:"6"};
+	
+	
+    console.log("hi");
 
     $.post("/create_game", postParameters, responseJSON => {
 
@@ -8,7 +11,8 @@ $(document).ready(() => {
         const responseObject = JSON.parse(responseJSON);
         
         
-        console.log(responseObject);
+        console.log(responseObject.characterChoices);
+        
         
     });
 });  
