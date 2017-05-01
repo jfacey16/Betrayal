@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Betrayal Board</title>
+  <title>Betrayal at House on the Hill</title>
   <style>
   #first, #second, #basement {position: relative; top:-425px; left:-375px;}
   #second, #basement {display: none;}
@@ -411,7 +411,7 @@
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 2" style="width:75px;height:75px;"></center>
         </div>
         
-        <div id="stats_2" class="stats"></div>    
+        <div id="stats_2" class="stats"><center> X </center></div>    
       </div>
       
       <div class="info">
@@ -427,11 +427,11 @@
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 3" style="width:75px;height:75px;"></center>
         </div>
         
-        <div id="stats_3" class="stats"></div> 
+        <div id="stats_3" class="stats"><center> X </center></div> 
       </div>
       
       <div class="info">
-          <div id="name_3" class="name"> </div>
+          <div id="name_3" class="name"></div>
           
           <div id="items_3" class="items"></div>
         </div>
@@ -443,7 +443,7 @@
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 4" style="width:75px;height:75px;"></center>
         </div>
         
-        <div id="stats_4" class="stats"></div> 
+        <div id="stats_4" class="stats"><center> X </center></div> 
       </div>
       
       <div class="info">
@@ -459,7 +459,7 @@
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 5" style="width:75px;height:75px;"></center>
         </div>
         
-        <div id="stats_5" class="stats"></div> 
+        <div id="stats_5" class="stats"><center> X </center></div> 
       </div>
       
       <div class="info">
@@ -475,7 +475,7 @@
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 6" style="width:75px;height:75px;"></center>
         </div>
         
-        <div id="stats_6" class="stats"></div> 
+        <div id="stats_6" class="stats"><center> X </center></div> 
       </div>
       
       <div class="info">
@@ -549,19 +549,19 @@
   <div class="main_game">
     <div id="player_1" class="player_1">
     
-      <div id="name_1" class="name"> </div>
+      <div id="name_1" class="name"><center> X </center></div>
     
       <div class="icon_1">
           <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 1" style="width:100px;height:100px;border-style:solid;border-width:2px;"></center>
       </div>
         
-      <center><div id="speed_1" class="stat"></div></center>
+      <center><div id="speed_1" class="stat"><center> X </center></div></center>
       
-      <center><div id="might_1" class="stat"></div></center>
+      <center><div id="might_1" class="stat"><center> X </center></div></center>
       
-      <center><div id="knowledge_1" class="stat"></div></center>
+      <center><div id="knowledge_1" class="stat"><center> X </center></div></center>
       
-      <center><div id="sanity_1" class="stat"></div></center>
+      <center><div id="sanity_1" class="stat"><center> X </center></div></center>
        
     </div>
     
@@ -752,7 +752,8 @@
 .game{
   display:flex; 
   flex-direction:column;
-  width:100%;
+      border-style:solid;
+      border-width:2px;
   background-color:#727272;}
 </style>
 
@@ -781,36 +782,36 @@
         basement.style.display = 'block';
      }
   });
-  let b1 = false;
-  $("#first").mousedown(function(){b1=false;}).mousemove(function(){b1=true;}).mouseup(function(event){
-    if(!b1){
-        const x = event.pageX - first.offsetLeft - 336;
-        const y = event.pageY - first.offsetTop - 204;
-        const xpos = x - (x % T) + edgex[1];
-        const ypos = y - (y % T) + edgex[1];
-        descr.innerHTML = xpos + " " + ypos;
-     }
-  });
-  let b2 = false;
-  $("#second").mousedown(function(){b2=false;}).mousemove(function(){b2=true;}).mouseup(function(event){
-    if(!b2){
-        const x = event.pageX - second.offsetLeft - 336;
-        const y = event.pageY - second.offsetTop - 204;
-        const xpos = x - (x % T) + edgex[2];
-        const ypos = y - (y % T) + edgey[2];
-        descr.innerHTML = xpos + " " + ypos;
-     }
-  });
-  let b3 = false;
-  $("#basement").mousedown(function(){b3=false;}).mousemove(function(){b3=true;}).mouseup(function(event){
-    if(!b3){
-        const x = event.pageX - basement.offsetLeft - 336;
-        const y = event.pageY - basement.offsetTop - 204;
-        const xpos = x - (x % T) + edgex[0];
-        const ypos = y - (y % T) + edgey[0];
-        descr.innerHTML = xpos + " " + ypos;
-     }
-  });
+//  let b1 = false;
+//  $("#first").mousedown(function(){b1=false;}).mousemove(function(){b1=true;}).mouseup(function(event){
+//    if(!b1){
+//        const x = event.pageX - first.offsetLeft - 336;
+//        const y = event.pageY - first.offsetTop - 204;
+//        const xpos = x - (x % T) + edgex[1];
+//        const ypos = y - (y % T) + edgex[1];
+//        descr.innerHTML = xpos + " " + ypos;
+//     }
+//  });
+//  let b2 = false;
+//  $("#second").mousedown(function(){b2=false;}).mousemove(function(){b2=true;}).mouseup(function(event){
+//    if(!b2){
+//        const x = event.pageX - second.offsetLeft - 336;
+//        const y = event.pageY - second.offsetTop - 204;
+//        const xpos = x - (x % T) + edgex[2];
+//        const ypos = y - (y % T) + edgey[2];
+//        descr.innerHTML = xpos + " " + ypos;
+//     }
+//  });
+//  let b3 = false;
+//  $("#basement").mousedown(function(){b3=false;}).mousemove(function(){b3=true;}).mouseup(function(event){
+//    if(!b3){
+//        const x = event.pageX - basement.offsetLeft - 336;
+//        const y = event.pageY - basement.offsetTop - 204;
+//        const xpos = x - (x % T) + edgex[0];
+//        const ypos = y - (y % T) + edgey[0];
+//        descr.innerHTML = xpos + " " + ypos;
+//     }
+//  });
     let moves = 10;
     const first = document.getElementById("first");
     const second = document.getElementById("second");

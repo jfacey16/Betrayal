@@ -100,7 +100,7 @@ public class Main {
 	  Spark.get("/create_game", new LobbyHandler(), freeMarker);
 		Spark.post("/create_game", new LobbyStart());
 	  Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
-		Spark.post("/betrayal", new PlayBetrayalHandler());
+		Spark.post("/betrayal", new UpdateHandler());
 		Spark.post("/tileStart", new TileStart());
 	}
 
@@ -146,7 +146,7 @@ public class Main {
 	      QueryParamsMap qm = req.queryMap();
 	      String game_name = qm.value("name");
 				//setup ids
-	      Integer player_number = Integer.parseInt(qm.value("players"));
+	      int player_number = Integer.parseInt(qm.value("players"));
 				List<String> ids =  new ArrayList();
 				for (int i = 0; i < player_number; i++) {
 					ids.add(Integer.toString(i));
@@ -175,23 +175,21 @@ public class Main {
 	  }
 	}
 
-	private static class PlayBetrayalHandler implements Route {
+	private static class UpdateHandler implements Route {
 	  @Override
 	  public String handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
+			
+		      Map<String, Object> variables = new HashMap<>();
 
-	    Map<String, Object> variables = ImmutableMap.of(
-					"title",
-	        "Betrayal at House on the Hill"
-			);
-	    return GSON.toJson(variables);
+		      
+		      //the querymap sent back is basically just whatever action has just taken place
+		      //variables will have all information concerning the current player whose turn it is 
+					variables.putAll(gameState.update(qm));
+					variables = ImmutableMap.copyOf(variables);
 
-//			Map<String, Object> variables = gameState.update(qm);
-//
-//			variables = ImmutableMap.copyOf(variables);
-//
-//			//System.out.println(variables);
-//			return GSON.toJson(variables);
+					//System.out.println(variables);
+				  return GSON.toJson(variables);
 	  }
 	}
 
