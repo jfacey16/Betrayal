@@ -68,6 +68,12 @@ public class GameState {
 		return variables;
 	}
 
+	public Map<String, Object> cheatStart() {
+		Map<String, Object> variables = new HashMap<>();
+		phase.run(null, null, null, variables);
+		return variables;
+	}
+
 	public Map<String, Object> update(QueryParamsMap qm) {
 		Map<String, Object> variables = new HashMap<>();
 
