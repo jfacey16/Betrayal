@@ -53,6 +53,8 @@ $(document).ready(() => {
     
     $create.on('click', function(e) {
     	
+    	document.getElementById("player_1").style.borderColor = "yellow";
+    	
     	e.preventDefault();
 
     	console.log("yay!");
@@ -248,22 +250,14 @@ const setStartingState = () => {
 			$char_6.mightScale[$char_6.might - 1] + " " + 
 			$char_6.knowledgeScale[$char_6.knowledge - 1] + " " +
 			$char_6.sanityScale[$char_6.sanity - 1] + " " + "</center>");
-	
+
+    
+    moves = $char_1.speedScale[$char_1.speed - 1];
+    movesp.innerHTML = $char_1.speedScale[$char_1.speed - 1];
 	const $objective_description = $("#objective_description");
-	$objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>")
-	
-	
-//	const $player_2_items = $("#items_2");
-//	const $player_3_items = $("#items_3");
-//	const $player_4_items = $("#items_4");
-//	const $player_5_items = $("#items_5");
-//	const $player_6_items = $("#items_6");
-//	
-//	$player_2_items.html("<center>" + "Sarah" + "</center>");
-//	$player_3_items.html("<center>" + "Sarah" + "</center>");
-//	$player_4_items.html("<center>" + "Sarah" + "</center>");
-//	$player_5_items.html("<center>" + "Sarah" + "</center>");
-//	$player_6_items.html("<center>" + "Sarah" + "</center>");
+	$objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>");
 	
     });
 }
+
+
