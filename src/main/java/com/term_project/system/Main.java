@@ -155,6 +155,8 @@ public class Main {
 
 				variables.putAll(gameState.start());
 				variables = ImmutableMap.copyOf(variables);
+
+				//System.out.println(variables);
 			  return GSON.toJson(variables);
 	    }
 	}

@@ -55,24 +55,24 @@ public class CharacterGen {
     red.add(new Darrin());
 
     List<GameChar> blue = new ArrayList<>();
-    red.add(new Zostra());
-    red.add(new Vivian());
+    blue.add(new Zostra());
+    blue.add(new Vivian());
 
     List<GameChar> green = new ArrayList<>();
-    red.add(new Brandon());
-    red.add(new Peter());
+    green.add(new Brandon());
+    green.add(new Peter());
 
     List<GameChar> yellow = new ArrayList<>();
-    red.add(new Missy());
-    red.add(new Zoe());
+    yellow.add(new Missy());
+    yellow.add(new Zoe());
 
     List<GameChar> white = new ArrayList<>();
-    red.add(new Longfellow());
-    red.add(new Rhinehardt());
+    white.add(new Longfellow());
+    white.add(new Rhinehardt());
 
     List<GameChar> purple = new ArrayList<>();
-    red.add(new Jenny());
-    red.add(new Heather());
+    purple.add(new Jenny());
+    purple.add(new Heather());
 
     characters.add(red);
     characters.add(blue);
