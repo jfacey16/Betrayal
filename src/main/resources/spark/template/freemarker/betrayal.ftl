@@ -259,39 +259,39 @@
 			  <p>Game Name: <input type="text" id="name" name="name" placeholder="Enter Game Name"></p>
 			  
 			  <p>Player 1: 
-			  <select id="player_1">
+			  <select id="player_1_select">
 			    <option value="1"> <p id="opt_1"></p> </option>
 			    <option value="2"> <p id="opt_2"></p> </option>
 			  </select></p>
 			  
 			  <p>Player 2: 
-			  <select id="player_2">
+			  <select id="player_2_select">
 			    <option value="3"> <p id="opt_3"></p> </option>
 			    <option value="4"> <p id="opt_4"></p> </option>
 			  </select></p>
 			  
 			  <p>Player 3: 
-			  <select id="player_3">
+			  <select id="player_3_select">
 			    <option value="5"> <p id="opt_5"></p> </option>
 			    <option value="6"> <p id="opt_6"></p> </option>
 			  </select></p>
 			  
 			  <p>Player 4: 
-			  <select id="player_4">
+			  <select id="player_4_select">
 			    <option value="7"> <p id="opt_7"></p> </option>
 			    <option value="8"> <p id="opt_8"></p> </option>
 			    <option value="4_none">No 4th player.</option>
 			  </select></p>
 			  
 			  <p>Player 5: 
-			  <select id="player_5">
+			  <select id="player_5_select">
 			    <option value="9"> <p id="opt_9"></p> </option>
 			    <option value="10"> <p id="opt_10"></p> </option>
 			    <option value="5_none">No 5th player.</option>
 			  </select></p>
 			  
 			  <p>Player 6: 
-			  <select id="player_6">
+			  <select id="player_6_select">
 			    <option value="11"> <p id="opt_12"></p> </option>
 			    <option value="12"> <p id="opt_11"></p> </option>
 			    <option value="6_none">No 6th player.</option>
