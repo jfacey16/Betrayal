@@ -87,4 +87,14 @@ public class CharacterGen {
   public GameChar getCharactersByName(String name) {
     return charMap.get(name);
   }
+
+  public Map<String, GameChar> autoCharMap() {
+    Map<String, GameChar> theMap = new HashMap<>();
+    List<List<GameChar>> chars = build();
+
+    for(int i = 0; i < chars.size(); i++) {
+      theMap.put(Integer.toString(i), chars.get(i).get(i));
+    }
+    return theMap;
+  }
 }
