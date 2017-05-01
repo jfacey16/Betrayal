@@ -291,6 +291,7 @@ public class PreHaunt implements GamePhase {
       useItem.use(character, variables);
       variables.put("character", character.getCharBean());
       variables.put("item", useItem);
+      mode = "idle";
       break;
 
     case "use omen":
@@ -299,6 +300,7 @@ public class PreHaunt implements GamePhase {
       useOmen.use(character, variables);
       variables.put("character", character.getCharBean());
       variables.put("omen", useOmen);
+      mode = "idle";
       break;
 
     case "pickup item":
@@ -307,6 +309,7 @@ public class PreHaunt implements GamePhase {
       pickupItem.add(character);
       variables.put("character", character.getCharBean());
       variables.put("item", pickupItem);
+      mode = "idle";
       break;
 
     case "drop item":
@@ -315,6 +318,7 @@ public class PreHaunt implements GamePhase {
       dropItem.loss(character);
       variables.put("character", character.getCharBean());
       variables.put("item", dropItem);
+      mode = "idle";
       break;
 
     case "pickup omen":
@@ -323,6 +327,7 @@ public class PreHaunt implements GamePhase {
       pickupOmen.add(character);
       variables.put("character", character.getCharBean());
       variables.put("omen", pickupOmen);
+      mode = "idle";
       break;
 
     case "drop omen":
@@ -331,6 +336,7 @@ public class PreHaunt implements GamePhase {
       dropOmen.loss(character);
       variables.put("character", character.getCharBean());
       variables.put("omen", dropOmen);
+      mode = "idle";
       break;
 
     case "end":
