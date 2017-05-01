@@ -1,9 +1,9 @@
 package com.term_project.house;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 import com.term_project.events.Event;
 import com.term_project.items.Item;
@@ -26,11 +26,8 @@ public abstract class AbstractTile implements Tile {
   private Map<String, Event> events;
   private List<Floor> availableFloors;
 
-  public AbstractTile(Map<Direction, Tile> connectedTiles,
-                      int items,
-                      int events,
-                      int omens,
-                      List<Floor> availableFloors) {
+  public AbstractTile(Map<Direction, Tile> connectedTiles, int items,
+      int events, int omens, List<Floor> availableFloors) {
 
     this.items = new ArrayList<>();
     this.omens = new ArrayList<>();
@@ -68,7 +65,7 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public void addEvent(String name, Event event) {
-	  events.put(name, event);
+    events.put(name, event);
   }
 
   @Override
@@ -242,5 +239,21 @@ public abstract class AbstractTile implements Tile {
   @Override
   public void addOmen(Omen omen) {
     omens.add(omen);
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == this)
+      return true;
+    if (!(object instanceof Tile)) {
+      return false;
+    }
+
+    return this.getName().equals(((Tile) object).getName());
+  }
+
+  @Override
+  public int hashCode() {
+    return this.getName().hashCode();
   }
 }

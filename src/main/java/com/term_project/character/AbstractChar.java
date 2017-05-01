@@ -203,22 +203,38 @@ public abstract class AbstractChar implements GameChar {
   }
 
   @Override
-	public int getStatByName(String name) {
-		switch (name) {
-			case "might":
-				return getMight();
+  public int getStatByName(String name) {
+    switch (name) {
+    case "might":
+      return getMight();
 
-			case "speed":
-        return getSpeed();
+    case "speed":
+      return getSpeed();
 
-			case "sanity":
-        return getSanity();
+    case "sanity":
+      return getSanity();
 
-			case "knowlege":
-        return getKnowlege();
+    case "knowlege":
+      return getKnowlege();
 
-			default:
-				throw new NullPointerException("Given stat " + name + " doesn't exist.");
-		}
-	}
+    default:
+      throw new NullPointerException("Given stat " + name + " doesn't exist.");
+    }
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == this)
+      return true;
+    if (!(object instanceof GameChar)) {
+      return false;
+    }
+
+    return this.getName().equals(((GameChar) object).getName());
+  }
+
+  @Override
+  public int hashCode() {
+    return this.getName().hashCode();
+  }
 }

@@ -1,7 +1,6 @@
 package com.term_project.items;
 
 import java.util.List;
-import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.game.Dice;
@@ -9,29 +8,37 @@ import com.term_project.system.MemorySlot;
 
 public class MysticCoin implements Item {
 
-  public MysticCoin() {
+  private String name;
+  private String description;
+  private String function;
 
+  public MysticCoin() {
+    name = "Mystic Coin";
+    description = "Heads or Tails?";
+    function = "Once during your turn, you can roll 1 die to flip the "
+        + "coin:\n2 It's heads. Gain 1 point in Might.\n1 It's tails. "
+        + "Gain 1 point in Knowledge.\n0 It landed on its edge! Lose "
+        + "1 point in Might and 1 in Knowledge.";
   }
 
   @Override
   public String getDescription() {
-    return "Heads or Tails?";
+    return description;
   }
 
   @Override
-  public void add(GameChar character, Map<String, Object> variables) {
+  public String getFunction() {
+    return function;
+
+  }
+
+  @Override
+  public void add(GameChar character) {
     character.addItem(this);
-    variables.put("item", "mystic coin");
-    variables.put("description", this.getDescription());
-    variables.put("knowledge", character.getKnowlege());
-    variables.put("might", character.getMight());
-    variables.put("sanity", character.getSanity());
-    variables.put("speed", character.getSpeed());
   }
 
   @Override
-  public void use(GameChar character, MemorySlot memory,
-      Map<String, Object> variables) {
+  public void use(GameChar character, MemorySlot memory) {
     List<Integer> rolls = Dice.roll(1);
 
     int roll = rolls.get(0);
@@ -49,27 +56,17 @@ public class MysticCoin implements Item {
       character.modMight(-1);
       character.modKnowlege(-1);
     }
-
-    variables.put("roll", roll);
-    variables.put("might", character.getMight());
-    variables.put("knowlege", character.getKnowlege());
   }
 
   @Override
-  public void loss(GameChar character, Map<String, Object> variables) {
+  public void loss(GameChar character) {
     character.removeItem(this);
     character.getTile().addItem(this);
-    variables.put("item", "mystic coin");
-    variables.put("description", this.getDescription());
-    variables.put("knowledge", character.getKnowlege());
-    variables.put("might", character.getMight());
-    variables.put("sanity", character.getSanity());
-    variables.put("speed", character.getSpeed());
   }
 
   @Override
   public String getName() {
-    return "Mystic Coin";
+    return name;
   }
 
   @Override

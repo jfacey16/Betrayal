@@ -1,55 +1,52 @@
 package com.term_project.items;
 
-import java.util.Map;
-
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
 public class Rock implements Item {
 
-  public Rock() {
+  private String name;
+  private String description;
+  private String function;
 
+  public Rock() {
+    name = "Rock";
+    description = "Its a pretty nice rock.";
+    function = "Gain 2 Knowledge now.\nLose 2 Knowledge when you lose the Rock.";
   }
 
   @Override
   public String getDescription() {
-    return "Its a pretty nice rock";
+    return description;
   }
 
   @Override
-  public void add(GameChar character, Map<String, Object> variables) {
+  public String getFunction() {
+    return function;
+
+  }
+
+  @Override
+  public void add(GameChar character) {
     character.modKnowlege(2);
     character.addItem(this);
-    variables.put("item", "rock");
-    variables.put("description", this.getDescription());
-    variables.put("knowledge", character.getKnowlege());
-    variables.put("might", character.getMight());
-    variables.put("sanity", character.getSanity());
-    variables.put("speed", character.getSpeed());
   }
 
   @Override
-  public void use(GameChar character, MemorySlot memory,
-      Map<String, Object> variables) {
+  public void use(GameChar character, MemorySlot memory) {
     return;
   }
 
   @Override
-  public void loss(GameChar character, Map<String, Object> variables) {
+  public void loss(GameChar character) {
     character.modKnowlege(-2);
     character.removeItem(this);
     character.getTile().addItem(this);
-    variables.put("item", "rock");
-    variables.put("description", this.getDescription());
-    variables.put("knowledge", character.getKnowlege());
-    variables.put("might", character.getMight());
-    variables.put("sanity", character.getSanity());
-    variables.put("speed", character.getSpeed());
   }
 
   @Override
   public String getName() {
-    return "Rock";
+    return name;
   }
 
   @Override

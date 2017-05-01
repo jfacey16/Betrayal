@@ -1,55 +1,53 @@
 package com.term_project.items;
 
-import java.util.Map;
-
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
 public class Cat implements Item {
 
-  public Cat() {
+  private String name;
+  private String description;
+  private String function;
 
+  public Cat() {
+    name = "Cat";
+    description = "The Cat meows. Why is it here?";
+    function = "Gain 2 Sanity now.\nLose 2 Sanity when you lose the Cat.";
   }
 
   @Override
   public String getDescription() {
-    return "The cat meows. Why is it here?";
+    return description;
   }
 
   @Override
-  public void add(GameChar character, Map<String, Object> variables) {
+  public String getFunction() {
+    return function;
+
+  }
+
+  @Override
+  public void add(GameChar character) {
     character.modSanity(2);
     character.addItem(this);
-    variables.put("item", "cat");
-    variables.put("description", this.getDescription());
-    variables.put("knowledge", character.getKnowlege());
-    variables.put("might", character.getMight());
-    variables.put("sanity", character.getSanity());
-    variables.put("speed", character.getSpeed());
+
   }
 
   @Override
-  public void use(GameChar character, MemorySlot memory,
-      Map<String, Object> variables) {
+  public void use(GameChar character, MemorySlot memory) {
     return;
   }
 
   @Override
-  public void loss(GameChar character, Map<String, Object> variables) {
+  public void loss(GameChar character) {
     character.modSanity(-2);
     character.removeItem(this);
     character.getTile().addItem(this);
-    variables.put("item", "cat");
-    variables.put("description", this.getDescription());
-    variables.put("knowledge", character.getKnowlege());
-    variables.put("might", character.getMight());
-    variables.put("sanity", character.getSanity());
-    variables.put("speed", character.getSpeed());
   }
 
   @Override
   public String getName() {
-    return "Cat";
+    return name;
   }
 
   @Override

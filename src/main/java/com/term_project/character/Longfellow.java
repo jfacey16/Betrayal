@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class Longfellow extends AbstractChar implements GameChar {
 
+  private String name;
+
   /**
    *
    */
@@ -23,6 +25,8 @@ public class Longfellow extends AbstractChar implements GameChar {
     this.setSpeedScale(buildSpeedScale());
     this.setKnowledgeScale(buildKnowledgeScale());
     this.setSanityScale(buildSanityScale());
+
+    name = "Professor Longfellow";
   }
 
   private List<Integer> buildMightScale() {
@@ -79,7 +83,7 @@ public class Longfellow extends AbstractChar implements GameChar {
 
   @Override
   public String getName() {
-    return "Professor Longfellow";
+    return name;
   }
 
   @Override

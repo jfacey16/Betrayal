@@ -1,14 +1,13 @@
 package com.term_project.house;
 
 import java.util.List;
+import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.events.Event;
 import com.term_project.items.Item;
 import com.term_project.omens.Omen;
 
-import java.util.List;
-import java.util.Map;
 /**
  * Interface that outlines what methods a tile needs.
  *
@@ -18,7 +17,7 @@ public interface Tile {
   /**
    * Returns the name of the tile.
    *
-   * @return A description of the tile.
+   * @return The name of the tile.
    *
    */
   String getName();
@@ -56,7 +55,8 @@ public interface Tile {
    */
   void apply(GameChar affected);
 
-  /** Returns a list of omens on this tile.
+  /**
+   * Returns a list of omens on this tile.
    *
    * @return A list of Omen.
    */
@@ -69,30 +69,36 @@ public interface Tile {
    */
   List<Item> getItems();
 
-  /** Returns a map of events on this tile.
+  /**
+   * Returns a map of events on this tile.
    *
    * @return A map of Events.
-  */
+   */
   Map<String, Event> getEvents();
 
-  /** Returns the event mapped to by the given name.
+  /**
+   * Returns the event mapped to by the given name.
+   *
    * @return The event mapped to by the given name
    */
   Event getEvent(String name);
 
-  /** Sets a list of events on this tile.
-  *
-  */
+  /**
+   * Sets a list of events on this tile.
+   *
+   */
   void setOmens(List<Omen> omens);
 
- /** Sets a list of items on this tile.
-  *
-  */
+  /**
+   * Sets a list of items on this tile.
+   *
+   */
   void setItems(List<Item> items);
 
- /** Adds an event.
-  *
-  */
+  /**
+   * Adds an event.
+   *
+   */
   void addEvent(String name, Event event);
 
   /**
@@ -152,25 +158,29 @@ public interface Tile {
    */
   Tile getWest() throws NullPointerException;
 
-  /** Returns if the tile has a door to the north
+  /**
+   * Returns if the tile has a door to the north
    *
    * @return the boolean of if a door exists
    */
   boolean hasNorth();
 
-  /** Returns if the tile has a door to the south
+  /**
+   * Returns if the tile has a door to the south
    *
    * @return the boolean of if a door exists
    */
   boolean hasSouth();
 
-  /** Returns if the tile has a door to the east
+  /**
+   * Returns if the tile has a door to the east
    *
    * @return the boolean of if a door exists
    */
   boolean hasEast();
 
-  /** Returns if the tile has a door to the west
+  /**
+   * Returns if the tile has a door to the west
    *
    * @return the boolean of if a door exists
    */
