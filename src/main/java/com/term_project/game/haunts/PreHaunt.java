@@ -206,7 +206,7 @@ public class PreHaunt implements GamePhase {
           variables.put("item", itemList);
           variables.put("omen", omenList);
           variables.put("event", eventList);
-          variables.put("character", character);
+          variables.put("character", character.getCharBean());
           addActions(character, variables);
         } catch (RuntimeException e) {
           variables.put("Error", e.getMessage());
@@ -289,7 +289,7 @@ public class PreHaunt implements GamePhase {
       String useItemS = qm.value("item");
       Item useItem = character.getItem(useItemS);
       useItem.use(character, variables);
-      variables.put("character", character);
+      variables.put("character", character.getCharBean());
       variables.put("item", useItem);
       break;
 
@@ -297,7 +297,7 @@ public class PreHaunt implements GamePhase {
       String useOmenS = qm.value("omen");
       Omen useOmen = character.getOmen(useOmenS);
       useOmen.use(character, variables);
-      variables.put("character", character);
+      variables.put("character", character.getCharBean());
       variables.put("omen", useOmen);
       break;
 
@@ -305,7 +305,7 @@ public class PreHaunt implements GamePhase {
       String pickupItemS = qm.value("item");
       Item pickupItem = character.getItem(pickupItemS);
       pickupItem.add(character);
-      variables.put("character", character);
+      variables.put("character", character.getCharBean());
       variables.put("item", pickupItem);
       break;
 
@@ -313,7 +313,7 @@ public class PreHaunt implements GamePhase {
       String dropItemS = qm.value("item");
       Item dropItem = character.getItem(dropItemS);
       dropItem.loss(character);
-      variables.put("character", character);
+      variables.put("character", character.getCharBean());
       variables.put("item", dropItem);
       break;
 
@@ -321,7 +321,7 @@ public class PreHaunt implements GamePhase {
       String pickupOmenS = qm.value("omen");
       Omen pickupOmen = character.getOmen(pickupOmenS);
       pickupOmen.add(character);
-      variables.put("character", character);
+      variables.put("character", character.getCharBean());
       variables.put("omen", pickupOmen);
       break;
 
@@ -329,7 +329,7 @@ public class PreHaunt implements GamePhase {
       String dropOmenS = qm.value("omen");
       Omen dropOmen = character.getOmen(dropOmenS);
       dropOmen.loss(character);
-      variables.put("character", character);
+      variables.put("character", character.getCharBean());
       variables.put("omen", dropOmen);
       break;
 
