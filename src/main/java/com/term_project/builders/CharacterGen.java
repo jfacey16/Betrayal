@@ -22,10 +22,12 @@ import com.term_project.character.Zostra;
 public class CharacterGen {
 
   private List<List<GameChar>> characters;
+  private List<GameChar> charactersSimple;
   private Map<String, GameChar> charMap;
 
   public CharacterGen() {
     characters = new ArrayList<List<GameChar>>();
+    charactersSimple = new ArrayList<>();
     charMap = this.buildCharMap();
 
   }
@@ -55,24 +57,24 @@ public class CharacterGen {
     red.add(new Darrin());
 
     List<GameChar> blue = new ArrayList<>();
-    red.add(new Zostra());
-    red.add(new Vivian());
+    blue.add(new Zostra());
+    blue.add(new Vivian());
 
     List<GameChar> green = new ArrayList<>();
-    red.add(new Brandon());
-    red.add(new Peter());
+    green.add(new Brandon());
+    green.add(new Peter());
 
     List<GameChar> yellow = new ArrayList<>();
-    red.add(new Missy());
-    red.add(new Zoe());
+    yellow.add(new Missy());
+    yellow.add(new Zoe());
 
     List<GameChar> white = new ArrayList<>();
-    red.add(new Longfellow());
-    red.add(new Rhinehardt());
+    white.add(new Longfellow());
+    white.add(new Rhinehardt());
 
     List<GameChar> purple = new ArrayList<>();
-    red.add(new Jenny());
-    red.add(new Heather());
+    purple.add(new Jenny());
+    purple.add(new Heather());
 
     characters.add(red);
     characters.add(blue);
@@ -84,6 +86,18 @@ public class CharacterGen {
     return characters;
   }
 
+  public List<GameChar> buildSimple() {
+
+    charactersSimple.add(new Ox());
+    charactersSimple.add(new Zostra());
+    charactersSimple.add(new Brandon());
+    charactersSimple.add(new Missy());
+    charactersSimple.add(new Longfellow());
+    charactersSimple.add(new Jenny());
+
+    return charactersSimple;
+  }
+
   public GameChar getCharactersByName(String name) {
     return charMap.get(name);
   }
@@ -92,7 +106,7 @@ public class CharacterGen {
     Map<String, GameChar> theMap = new HashMap<>();
     List<List<GameChar>> chars = build();
 
-    for(int i = 0; i < chars.size(); i++) {
+    for (int i = 0; i < chars.size(); i++) {
       theMap.put(Integer.toString(i), chars.get(i).get(i));
     }
     return theMap;

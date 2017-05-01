@@ -1,22 +1,20 @@
-package com.term_project.omens;
+package com.term_project.items;
 
 import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
-public class Madman implements Omen {
+public class Bell implements Item {
 
   private String name;
   private String description;
   private String function;
 
-  public Madman() {
-    name = "Madman";
-    description = "Companian.\nA raving, frothing madman.";
-    function = "Gain 2 Might and lose 1 Sanity now.\nLose "
-        + "2 Might and gain 1 Sanity if you lose custody "
-        + "of the Madman.\nThis omen can't be dropped, traded, or stolen.";
+  public Bell() {
+    name = "Bell";
+    description = "A brass bell that makes a resonant clang.";
+    function = "Gain 1 Sanity now.\nLose 1 Sanity if you lose the Bell.";
   }
 
   @Override
@@ -36,9 +34,8 @@ public class Madman implements Omen {
 
   @Override
   public void add(GameChar character) {
-    character.addOmen(this);
-    character.modSanity(-1);
-    character.modMight(2);
+    character.addItem(this);
+    character.modSanity(1);
   }
 
   @Override
@@ -49,21 +46,20 @@ public class Madman implements Omen {
 
   @Override
   public void loss(GameChar character) {
-    character.modSanity(1);
-    character.modMight(-2);
-    character.removeOmen(this);
-    character.getTile().addOmen(this);
+    character.modSanity(-1);
+    character.removeItem(this);
+    character.getTile().addItem(this);
   }
 
   @Override
   public boolean equals(Object object) {
     if (object == this)
       return true;
-    if (!(object instanceof Madman)) {
+    if (!(object instanceof Bell)) {
       return false;
     }
 
-    return this.getName().equals(((Madman) object).getName());
+    return this.getName().equals(((Bell) object).getName());
   }
 
   @Override

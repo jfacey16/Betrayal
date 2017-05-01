@@ -1,4 +1,4 @@
-package com.term_project.omens;
+package com.term_project.items;
 
 import java.util.List;
 import java.util.Map;
@@ -7,20 +7,18 @@ import com.term_project.character.GameChar;
 import com.term_project.game.Dice;
 import com.term_project.system.MemorySlot;
 
-public class CrystalBall implements Omen {
+public class MedicalKit implements Item {
 
   private String name;
   private String description;
   private String function;
 
-  public CrystalBall() {
-    name = "Crystal Ball";
-    description = "Hazy images appear in the glass.";
-    function = "Once during your turn, you can attempt a "
-        + "Knowledge roll to peer into the Crystal Ball"
-        + ":\n4+ You see the truth. Gain 1 Sanity.\n1-3 "
-        + "You avert your eyes. Lose 1 Sanity.\n0 You "
-        + "stare into hell. Lose 2 Sanity.";
+  public MedicalKit() {
+    name = "Medical Kit";
+    description = "A doctor's bag, depleted in some critical resources.";
+    function = "Once during your turn, you can attempt a Knowledge roll "
+        + "to heal yourself.\n8+ Gain 1 Might and 1 Speed.\n6-7 Gain 1 "
+        + "Might.\n4-5 Gain 1 Speed.\n0-3 Nothing happens.";
   }
 
   @Override
@@ -29,18 +27,18 @@ public class CrystalBall implements Omen {
   }
 
   @Override
-  public String getName() {
-    return name;
-  }
-
-  @Override
   public String getFunction() {
     return function;
   }
 
   @Override
+  public String getName() {
+    return name;
+  }
+
+  @Override
   public void add(GameChar character) {
-    character.addOmen(this);
+    character.addItem(this);
   }
 
   @Override
@@ -50,31 +48,32 @@ public class CrystalBall implements Omen {
 
     int roll = Dice.sum(rolls);
 
-    if (roll >= 4) {
-      character.modSanity(1);
-    } else if (roll < 4 && roll > 0) {
-      character.modSanity(-1);
-    } else {
-      character.modSanity(-2);
+    if (roll >= 8) {
+      character.modMight(1);
+      character.modSpeed(1);
+    } else if (roll < 8 && roll > 5) {
+      character.modMight(1);
+    } else if (roll < 5 && roll > 3) {
+      character.modSpeed(1);
     }
     variables.put("rolls", rolls);
   }
 
   @Override
   public void loss(GameChar character) {
-    character.removeOmen(this);
-    character.getTile().addOmen(this);
+    character.removeItem(this);
+    character.getTile().addItem(this);
   }
 
   @Override
   public boolean equals(Object object) {
     if (object == this)
       return true;
-    if (!(object instanceof CrystalBall)) {
+    if (!(object instanceof MedicalKit)) {
       return false;
     }
 
-    return this.getName().equals(((CrystalBall) object).getName());
+    return this.getName().equals(((MedicalKit) object).getName());
   }
 
   @Override

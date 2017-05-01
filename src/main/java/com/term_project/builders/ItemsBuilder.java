@@ -7,11 +7,15 @@ import java.util.List;
 import java.util.Queue;
 
 import com.term_project.items.Amulet;
+import com.term_project.items.Bell;
 import com.term_project.items.Bottle;
 import com.term_project.items.Cat;
+import com.term_project.items.HealingSalve;
 import com.term_project.items.Item;
+import com.term_project.items.MedicalKit;
 import com.term_project.items.MysticCoin;
 import com.term_project.items.Rock;
+import com.term_project.items.SmellingSalts;
 
 public class ItemsBuilder implements Builder<Item> {
 
@@ -24,6 +28,10 @@ public class ItemsBuilder implements Builder<Item> {
     itemList.add(new Rock());
     itemList.add(new Amulet());
     itemList.add(new Bottle());
+    itemList.add(new Bell());
+    itemList.add(new MedicalKit());
+    itemList.add(new HealingSalve());
+    itemList.add(new SmellingSalts());
 
     Collections.shuffle(itemList);
     Queue<Item> itemDeck = new LinkedList<>(itemList);
