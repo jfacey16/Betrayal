@@ -7,6 +7,8 @@ import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.events.Event;
+import com.term_project.items.Item;
+import com.term_project.omens.Omen;
 import com.term_project.game.actions.Mover;
 import com.term_project.house.Tile;
 import com.term_project.omens.Omen;
@@ -142,26 +144,35 @@ public class PreHaunt implements GamePhase {
 						item take in the variable map*/
 						/*furthermore aren't we adding the item to the character -> character
 						should have an additem method not the other way round.*/
+            List<Event> eventList = new ArrayList<>();
+            List<Item> itemList = new ArrayList<>();
+            List<Omen> omenList = new ArrayList<>();
 						//force character to pick up items/omens/events
 	          for (int i = 0; i < character.getTile().getItemCount(); i++) {
-	            memory.getItems().poll().add(character);
-              //variable ("items -> list omens")
+              Item item = memory.getItems().poll();
+              item.add(character);
+              itemList.add(item);
 	          }
 
             for (int i = 0; i < character.getTile().getEventCount(); i++) {
               // TODO: do event things
+              Event event = memory.getEvents().poll();
               toResolve.add("event");
-              //variable ("events -> list Tile")
-              mode = "event";
   	          phase = 1;
+              eventList.add(event);
             }
 
 	          for (int i = 0; i < character.getTile().getOmenCount(); i++) {
-	            memory.getOmens().poll().add(character, variables);
-              //variable ("omens -> list omens")
+              Omen omen = memory.getOmens().poll();
+	            omen.add(character, variables);
               toResolve.add("omen");
+              omenList.add(omen);
 	          }
+            //push to front end
             variables.put("toResolve", toResolve);
+            variables.put("item", itemList);
+            variables.put("omen", omenList);
+            variables.put("event", eventList);
 
 	        } catch (RuntimeException e) {
 	          variables.put("Error", e.getMessage());
