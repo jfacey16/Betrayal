@@ -23,12 +23,26 @@ public interface Tile {
   String getName();
 
   /**
+   * Sets the tiles name.
+   * 
+   * @return The tile object that the function is being called on.
+   */
+  Tile setName(String newName);
+
+  /**
    * Returns the description of the tile.
    *
    * @return A description of the tile.
    *
    */
   String getDescription();
+
+  /**
+   * Sets the tiles description.
+   * 
+   * @return The tile object that the function is being called on.
+   */
+  Tile setDescription(String newDescription);
 
   /**
    * Produces the effect described in the description on a character on entry.

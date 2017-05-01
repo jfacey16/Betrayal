@@ -33,6 +33,10 @@ public abstract class AbstractTile implements Tile {
     this.omens = new ArrayList<>();
     this.events = new HashMap<>();
 
+    this.itemCount = items;
+    this.omenCount = omens;
+    this.eventCount = events;
+
     this.pos = null;
     this.connectedTiles = connectedTiles;
     this.availableFloors = availableFloors;
@@ -99,7 +103,8 @@ public abstract class AbstractTile implements Tile {
     if (north != null) {
       return north;
     } else {
-      throw new NullPointerException("There is no door/tile to the north.");
+      throw new NullPointerException(
+          "There is no door/tile to the north.");
     }
   }
 
@@ -109,7 +114,8 @@ public abstract class AbstractTile implements Tile {
     if (south != null) {
       return south;
     } else {
-      throw new NullPointerException("There is no door/tile to the south.");
+      throw new NullPointerException(
+          "There is no door/tile to the south.");
     }
   }
 
@@ -195,7 +201,8 @@ public abstract class AbstractTile implements Tile {
 
     // make east value the northern value
     holderOne = connectedTiles.get(Direction.EAST);
-    connectedTiles.put(Direction.EAST, connectedTiles.get(Direction.NORTH));
+    connectedTiles.put(Direction.EAST,
+        connectedTiles.get(Direction.NORTH));
 
     // make south value the eastern value
     holderTwo = connectedTiles.get(Direction.SOUTH);
@@ -217,7 +224,8 @@ public abstract class AbstractTile implements Tile {
 
     // make east value the southern value
     holderOne = connectedTiles.get(Direction.EAST);
-    connectedTiles.put(Direction.EAST, connectedTiles.get(Direction.SOUTH));
+    connectedTiles.put(Direction.EAST,
+        connectedTiles.get(Direction.SOUTH));
 
     // make north value the eastern value
     holderTwo = connectedTiles.get(Direction.NORTH);
