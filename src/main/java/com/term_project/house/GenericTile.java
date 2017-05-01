@@ -1,11 +1,10 @@
 package com.term_project.house;
-import com.term_project.character.GameChar;
-import com.term_project.events.Event;
-import com.term_project.items.Item;
-import com.term_project.omens.Omen;
 
 import java.util.List;
 import java.util.Map;
+
+import com.term_project.character.GameChar;
+
 /**
  * Generic tile with no entry and exit events
  *
@@ -16,30 +15,20 @@ public class GenericTile extends AbstractTile implements Tile {
   private String name;
   private String description;
 
-  public GenericTile(
-    Map<Direction, Tile> connectedTiles,
-    int items,
-    int events,
-    int omens,
-    List<Floor> availableFloors) {
+  public GenericTile(Map<Direction, Tile> connectedTiles, int items,
+      int events, int omens, List<Floor> availableFloors) {
 
     super(connectedTiles, items, events, omens, availableFloors);
   }
 
-  /**
-   * Sets the tiles name.
-   * @return The tile object that the function is being called on.
-   */
-  public GenericTile setName(String newName) {
+  @Override
+  public Tile setName(String newName) {
     name = newName;
     return this;
   }
 
-  /**
-   * Sets the tiles description.
-   * @return The tile object that the function is being called on.
-   */
-  public GenericTile setDescription(String newDescription) {
+  @Override
+  public Tile setDescription(String newDescription) {
     description = newDescription;
     return this;
   }

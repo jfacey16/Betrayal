@@ -16,6 +16,7 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="js/betrayal_testing.js"></script>
+  <script src="js/tilegen.js"></script>
   <script type="text/javascript">
   class Tile {
     constructor(posx, posy, north, east, south, west) {

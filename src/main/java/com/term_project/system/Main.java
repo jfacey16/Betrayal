@@ -101,6 +101,7 @@ public class Main {
 		Spark.post("/create_game", new LobbyStart());
 	  Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
 		Spark.post("/betrayal", new PlayBetrayalHandler());
+//		Spark.post("/tileStart", new TileStart());
 	}
 
 	private static class MenuHandler implements TemplateViewRoute {
@@ -121,6 +122,7 @@ public class Main {
 	private static class LobbyHandler implements TemplateViewRoute {
 	    @Override
 	    public ModelAndView handle(Request req, Response res) {
+				System.out.println("LobbyHandler");
 	      QueryParamsMap qm = req.queryMap();
 	      String game_name = qm.value("name");
 				String player_number = qm.value("players");
@@ -164,16 +166,6 @@ public class Main {
 	private static class BetrayalHandler implements TemplateViewRoute {
 	  @Override
 	  public ModelAndView handle(Request req, Response res) {
-			QueryParamsMap qm = req.queryMap();
-			List<String> ids = new ArrayList<>();
-			ids.add("0");
-			ids.add("1");
-			ids.add("2");
-			ids.add("3");
-			ids.add("4");
-			ids.add("5");
-			gameState = new GameState(ids, new MemorySlot());
-			gameState.cheatStart();
 	    Map<String, Object> variables = ImmutableMap.of(
 					"title",
 	        "Betrayal at House on the Hill"
@@ -192,8 +184,29 @@ public class Main {
 	        "Betrayal at House on the Hill"
 			);
 	    return GSON.toJson(variables);
+
+//			Map<String, Object> variables = gameState.update(qm);
+//
+//			variables = ImmutableMap.copyOf(variables);
+//
+//			//System.out.println(variables);
+//			return GSON.toJson(variables);
 	  }
 	}
+
+//	private static class TileStart implements Route {
+//	  @Override
+//	  public String handle(Request req, Response res) {
+//			QueryParamsMap qm = req.queryMap();
+//
+//			Map<String, Object> variables = gameState.buildMap(qm);
+//
+//			variables = ImmutableMap.copyOf(variables);
+//
+//			//System.out.println(variables);
+//			return GSON.toJson(variables);
+//	  }
+//	}
 
 	private static class ItemHandler implements TemplateViewRoute {
 

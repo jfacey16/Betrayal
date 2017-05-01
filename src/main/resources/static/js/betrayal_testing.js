@@ -30,16 +30,27 @@ $(document).ready(() => {
 	$item_card.hide();
 	$temp_lobby.show();
   
+
+$(document).ready(() => {
+
+
+	//setup for all players
+	setStartingState();
+
+	const $item_card = $("#item");
+	var x = 1;
+	$item_card.hide();
+
 	function revealCard() {
 		$item_card.show();
 		x = 0;
 	}
-  
+
     function hideCard() {
   	  $item_card.hide();
   	  x = 1;
     }
-	
+
     $(document).keypress(function(e) {
         if(e.which == 13) {
             if(x == 1) {
@@ -49,19 +60,21 @@ $(document).ready(() => {
             }
         }
     });
-    
+
     const $create = $("#create");
     
     $create.on('click', function(e) {
     	
     	e.preventDefault();
+
+    	console.log("yay!");
     	
     	$temp_lobby.hide();
-    	
+
     	setStartingState();
-    	
+
     });
-});  
+});
 
 const pickCharacters = () => {
 	const postParameters = {players:"6"};
@@ -96,12 +109,13 @@ const pickCharacters = () => {
     	$player_6_select.html("<option value=\"11\">" 
     			+ responseObject.characterChoices[5][0].name + "</option><option value=\"12\">" 
     			+ responseObject.characterChoices[5][1].name + "</option>");
+      const responseObject = JSON.parse(responseJSON);
 
     });
 }
-  
+
 const setStartingState = () => {
-	
+
 	const $player_1_name = $("#name_1");
 	const $player_2_name = $("#name_2");
 	const $player_3_name = $("#name_3");
@@ -166,6 +180,7 @@ const setStartingState = () => {
 	$player_5_name.html("<center>" + $char_5.name + "</center>");
 	$player_6_name.html("<center>" + $char_6.name + "</center>");
 	
+
 	const $player_1_speed = $("#speed_1");
 	var $speed = "<center>";
 	
@@ -215,6 +230,7 @@ const setStartingState = () => {
 	$player_1_knowledge.html($knowledge + "</center>");
 	$player_1_sanity.html($sanity + "</center>");
 	
+
 	const $player_2_stats = $("#stats_2");
 	const $player_3_stats = $("#stats_3");
 	const $player_4_stats = $("#stats_4");

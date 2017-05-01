@@ -49,6 +49,7 @@ public class Lobby implements GamePhase {
       List<List<GameChar>> characters = charGen.build().subList(0, numPlayers);
       variables.put("characterChoices", characters);
       phase = 1;
+      System.out.println("PHASE 0 DONE");
       return;
     }
 
@@ -153,6 +154,7 @@ public class Lobby implements GamePhase {
 
       //switch game phases
       memory.getGameState().setPhase(new PreHaunt(memory));
+      System.out.println("PHASE 1 DONE");
     }
   }
 
