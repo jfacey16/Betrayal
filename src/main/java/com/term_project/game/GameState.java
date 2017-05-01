@@ -8,6 +8,7 @@ import com.term_project.house.Pos;
 import com.term_project.game.actions.Action;
 import com.term_project.game.haunts.GamePhase;
 import com.term_project.game.haunts.PreHaunt;
+import com.term_project.game.haunts.Lobby;
 import com.term_project.builders.EventsBuilder;
 import com.term_project.builders.ItemsBuilder;
 import com.term_project.builders.OmensBuilder;
@@ -58,7 +59,13 @@ public class GameState {
 		memory.setStringList(ids);
 		memory.setTileMap(new HashMap<>());
 
-		phase = new PreHaunt(memory);
+		phase = new Lobby(memory);
+	}
+
+	public Map<String, Object> start() {
+		Map<String, Object> variables = new HashMap<>();
+		phase.run(null, null, null, variables);
+		return variables;
 	}
 
 	public Map<String, Object> update(QueryParamsMap qm) {
