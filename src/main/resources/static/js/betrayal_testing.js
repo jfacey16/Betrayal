@@ -12,6 +12,10 @@ let $char_4;
 let $char_5;
 let $char_6;
 
+let $item_window;
+let $omen_window;
+let $event_window;
+
 let current_char;
 
 $(document).ready(() => {
@@ -26,28 +30,37 @@ $(document).ready(() => {
 	pickCharacters();
 	
 	const $temp_lobby = $("#temp_lobby");
-	const $item_card = $("#item");
+	$item_window = $("#item");
+	$omen_window = $("#omen");
+	$event_window = $("#event");
+	
 	var x = 1;
-	$item_card.hide();
+	$item_window.hide();
+	$omen_window.hide();
+	$event_window.hide();
 	$temp_lobby.show();
-
-	function revealCard() {
-		$item_card.show();
-		x = 0;
-	}
-
-    function hideCard() {
-  	  $item_card.hide();
-  	  x = 1;
-    }
 
     $(document).keypress(function(e) {
         if(e.which == 13) {
             if(x == 1) {
             	revealCard();
+            	x= 0;
             } else {
             	hideCard();
+            	x = 1;
             }
+        }
+        
+        if(e.which == 49) {
+            itemDrawn();
+        }
+        
+        if(e.which == 50) {
+            omenDrawn();
+        }
+        
+        if(e.which == 51) {
+            eventDrawn();
         }
     });
 
@@ -197,10 +210,13 @@ const setStartingState = () => {
 		// 		$knowledge += $char_1.knowledgeScale[i] + " ";
 		// 	}
 	 //    }
+
 		
 		// const $player_1_sanity = $("#sanity_1");
 		// var $sanity = "<center>";
 		
+
+
 		// for (let i = 0, len = $char_1.sanityScale.length; i < len; i++) {
 		// 	if(i === $char_1.sanity) {
 		// 		$sanity += "<font color=\"red\">" + $char_1.sanityScale[i] + "</font> ";
@@ -208,6 +224,18 @@ const setStartingState = () => {
 		// 		$sanity += $char_1.sanityScale[i] + " ";
 		// 	}
 	 //    }
+	
+		// const $player_1_knowledge = $("#knowledge_1");
+		// var $knowledge = "<center>";
+		
+		// for (let i = 0, len = $char_1.knowledgeScale.length; i < len; i++) {
+		// 	if(i === $char_1.knowledge) {
+		// 		$knowledge += "<font color=\"red\">" + $char_1.knowledgeScale[i] + "</font> ";
+		// 	} else {
+		// 		$knowledge += $char_1.knowledgeScale[i] + " ";
+		// 	}
+	 //    }
+
 		
 		// $player_1_speed.html($speed + "</center>");
 		// $player_1_might.html($might + "</center>");
@@ -221,30 +249,32 @@ const setStartingState = () => {
 		// const $player_5_stats = $("#stats_5");
 		// const $player_6_stats = $("#stats_6");
 		
-		// $player_2_stats.html("<center>" + $char_2.speedScale[$char_2.speed - 1] + " " +
-		// 		$char_2.mightScale[$char_2.might - 1] + " " + 
-		// 		$char_2.knowledgeScale[$char_2.knowledge - 1] + " " +
-		// 		$char_2.sanityScale[$char_2.sanity - 1] + " " + "</center>");
+
+		// $player_2_stats.html("<center>" + $char_2.speedScale[$char_2.speed] + " " +
+		// 		$char_2.mightScale[$char_2.might] + " " + 
+		// 		$char_2.sanityScale[$char_2.sanity] + " " +
+		// 		$char_2.knowledgeScale[$char_2.knowledge] + " " + "</center>");
 		
-		// $player_3_stats.html("<center>" + $char_3.speedScale[$char_3.speed - 1] + " " +
-		// 		$char_3.mightScale[$char_3.might - 1] + " " + 
-		// 		$char_3.knowledgeScale[$char_3.knowledge - 1] + " " +
-		// 		$char_3.sanityScale[$char_3.sanity - 1] + " " + "</center>");
+		// $player_3_stats.html("<center>" + $char_3.speedScale[$char_3.speed] + " " +
+		// 		$char_3.mightScale[$char_3.might] + " " + 
+		// 		$char_3.sanityScale[$char_3.sanity] + " " + 
+		// 		$char_3.knowledgeScale[$char_3.knowledge] + " " + "</center>");
 		
-		// $player_4_stats.html("<center>" + $char_4.speedScale[$char_4.speed - 1] + " " +
-		// 		$char_4.mightScale[$char_4.might - 1] + " " + 
-		// 		$char_4.knowledgeScale[$char_4.knowledge - 1] + " " +
-		// 		$char_4.sanityScale[$char_4.sanity - 1] + " " + "</center>");
+		// $player_4_stats.html("<center>" + $char_4.speedScale[$char_4.speed] + " " +
+		// 		$char_4.mightScale[$char_4.might] + " " + 
+		// 		$char_4.sanityScale[$char_4.sanity] + " " + 
+		// 		$char_4.knowledgeScale[$char_4.knowledge] + " " +"</center>");
 		
-		// $player_5_stats.html("<center>" + $char_5.speedScale[$char_5.speed - 1] + " " +
-		// 		$char_5.mightScale[$char_5.might - 1] + " " + 
-		// 		$char_5.knowledgeScale[$char_5.knowledge - 1] + " " +
-		// 		$char_5.sanityScale[$char_5.sanity - 1] + " " + "</center>");
+		// $player_5_stats.html("<center>" + $char_5.speedScale[$char_5.speed] + " " +
+		// 		$char_5.mightScale[$char_5.might] + " " + 
+		// 		$char_5.sanityScale[$char_5.sanity] + " " + 
+		// 		$char_5.knowledgeScale[$char_5.knowledge] + " " + "</center>");
 		
-		// $player_6_stats.html("<center>" + $char_6.speedScale[$char_6.speed - 1] + " " +
-		// 		$char_6.mightScale[$char_6.might - 1] + " " + 
-		// 		$char_6.knowledgeScale[$char_6.knowledge - 1] + " " +
-		// 		$char_6.sanityScale[$char_6.sanity - 1] + " " + "</center>");
+		// $player_6_stats.html("<center>" + $char_6.speedScale[$char_6.speed] + " " +
+		// 		$char_6.mightScale[$char_6.might] + " " + 
+		// 		$char_6.sanityScale[$char_6.sanity] + " " + 
+		// 		$char_6.knowledgeScale[$char_6.knowledge] + " " + "</center>");
+
 	
 	    
 	 //    moves = $char_1.speedScale[$char_1.speed - 1];
@@ -258,7 +288,7 @@ const setStartingState = () => {
 
 const update = () => {
 	
-	curre_char = turn + 1;
+	current_char = turn + 1;
 	
 	//this is the action that just happened
 	const postParameters = {};
@@ -271,3 +301,66 @@ const update = () => {
 	
     });
 }
+
+const itemDrawn = () => {
+	
+	current_char = turn + 1;
+	
+	if(current_char === 1) name = $char_1.name;
+	if(current_char === 2) name = $char_2.name;
+	if(current_char === 3) name = $char_3.name;
+	if(current_char === 4) name = $char_4.name;
+	if(current_char === 5) name = $char_5.name;
+	if(current_char === 6) name = $char_6.name;
+
+	$item_window.show();
+	$("#item_name").html("NAME");
+	$("#item_description").html(name + " found an item! [ADD DESCRIPTION]");
+	
+	$("#end_turn").unbind().click(event => {
+
+		$item_window.hide();
+		
+		endturn();
+
+    });
+	
+}
+
+const omenDrawn = () => {
+	
+	current_char = turn + 1;
+	
+	$omen_window.show();
+	$("#omen_name").html("NAME");
+	$("#omen_description").html("You've got an omen! [ADD DESCRIPTION]");
+	
+	$("#roll_haunt").unbind().click(event => {
+
+		$omen_window.hide();
+		
+		//add omen to current player
+		
+    });
+	
+}
+
+const eventDrawn = () => {
+	
+	current_char = turn + 1;
+	
+	$event_window.show();
+	$("#event_name").html("NAME");
+	$("#event_description").html("You've got an event! [ADD DESCRIPTION]");
+	
+	$("#event_action").unbind().click(event => {
+		
+		$event_window.hide();
+		
+		//do event stuff
+
+    });
+	
+}
+
+

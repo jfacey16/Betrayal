@@ -63,10 +63,12 @@ public class PreHaunt implements GamePhase {
 
     if (character.getItems().size() > 0) {
       actions.add("drop item");
+      actions.add("use item");
     }
 
     if (character.getOmens().size() > 0) {
       actions.add("drop omen");
+      actions.add("use omen");
     }
 
     if (remaining.get("move") > 0) {
@@ -207,6 +209,7 @@ public class PreHaunt implements GamePhase {
           variables.put("item", itemList);
           variables.put("omen", omenList);
           variables.put("event", eventList);
+          variables.put("character", character.getCharBean());
           addActions(character, variables);
         } catch (RuntimeException e) {
           variables.put("Error", e.getMessage());
@@ -279,23 +282,65 @@ public class PreHaunt implements GamePhase {
          * variables.put("explorers", haunt.getExplorersDescription());
          */
       }
-      toResolve.remove("omen");
+      toResolve.remove("haunt");
 
       mode = "idle";
       phase = 0;
       break;
 
     case "use item":
+      String useItemS = qm.value("item");
+      Item useItem = character.getItem(useItemS);
+      useItem.use(character, variables);
+      variables.put("character", character.getCharBean());
+      variables.put("item", useItem);
+      mode = "idle";
+      break;
 
     case "use omen":
+      String useOmenS = qm.value("omen");
+      Omen useOmen = character.getOmen(useOmenS);
+      useOmen.use(character, variables);
+      variables.put("character", character.getCharBean());
+      variables.put("omen", useOmen);
+      mode = "idle";
+      break;
 
     case "pickup item":
+      String pickupItemS = qm.value("item");
+      Item pickupItem = character.getItem(pickupItemS);
+      pickupItem.add(character);
+      variables.put("character", character.getCharBean());
+      variables.put("item", pickupItem);
+      mode = "idle";
+      break;
 
     case "drop item":
+      String dropItemS = qm.value("item");
+      Item dropItem = character.getItem(dropItemS);
+      dropItem.loss(character);
+      variables.put("character", character.getCharBean());
+      variables.put("item", dropItem);
+      mode = "idle";
+      break;
 
     case "pickup omen":
+      String pickupOmenS = qm.value("omen");
+      Omen pickupOmen = character.getOmen(pickupOmenS);
+      pickupOmen.add(character);
+      variables.put("character", character.getCharBean());
+      variables.put("omen", pickupOmen);
+      mode = "idle";
+      break;
 
     case "drop omen":
+      String dropOmenS = qm.value("omen");
+      Omen dropOmen = character.getOmen(dropOmenS);
+      dropOmen.loss(character);
+      variables.put("character", character.getCharBean());
+      variables.put("omen", dropOmen);
+      mode = "idle";
+      break;
 
     case "end":
       mode = "start";

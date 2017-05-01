@@ -119,6 +119,7 @@
     $( "#mbasement" ).draggable();
   } );
   function endturn() {
+  
       if (turn >= 5)
         turn = 0;
       else 
@@ -541,7 +542,7 @@
     margin:5px;
     display:flex; 
     flex-direction:row;
-    height:100%;
+    height:100%;1
     background-color:#707070;}
   </style>
   
@@ -559,9 +560,9 @@
       
       <center><div id="might_1" class="stat"><center> X </center></div></center>
       
-      <center><div id="knowledge_1" class="stat"><center> X </center></div></center>
-      
       <center><div id="sanity_1" class="stat"><center> X </center></div></center>
+      
+      <center><div id="knowledge_1" class="stat"><center> X </center></div></center>
        
     </div>
     
@@ -596,16 +597,35 @@
     
     <div class="board">
     
-    <div id="item" class="card_draw">
+    <div id="item" class="card">
     
-      <div class="card_name">
-        <center><font size="4pt">NAME</font></center>
-      </div> 
+      <center><div id="item_name" class="card_name"></div></center>
   
-    <center><div class="card_description">
-        HERE IS WHERE WE DO CARD STUFF
-      </div></center>
-` </div>
+	  <center><div id="item_description" class="card_description"></div></center>
+	  
+	  <p><center><button type="button" id="end_turn">End Turn</button></center></p>
+	    
+	</div>
+
+	<div id="omen" class="card">
+	    
+	    <center><div id="omen_name" class="card_name"></div></center>
+	  
+	    <center><div id="omen_description" class="card_description"></div></center>
+	    
+	    <p><center><button type="button" id="roll_haunt">Roll for Haunt</button></center></p>
+	    
+	</div>
+	
+	<div id="event" class="card">
+	    
+	    <center><div id="event_name" class="card_name"></div></center>
+	  
+	    <center><div id="event_description" class="card_description"></div></center>
+	  
+	  	<p><center><button type="button" id="event_action">ACTION BUTTON</button></center></p>
+	    
+	</div>
   
   <style type="text/css">
   .card_name{
@@ -626,7 +646,7 @@
      </style>
 
   <style type="text/css">
-  .card_draw{
+  .card{
       display:flex; 
       flex-direction:column;
     position:absolute;
@@ -655,7 +675,7 @@
     <div id="descr">
     <!-- <div> Player <span id="player">1</span>'s turn</div> -->
     <center><div> Speed Left: <span id="moves">10</span></div></center>
-    <center><button onclick="endturn();">End Turn</button></center>
+    <center><button id="end" onclick="endturn();">End Turn</button></center>
     <center><button disabled>Attack</button></center>
     <center><button disabled>Pick up Items</button></center>
     <center><button disabled>Interact w/Room</button></center>

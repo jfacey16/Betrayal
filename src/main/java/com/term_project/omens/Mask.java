@@ -69,6 +69,8 @@ public class Mask implements Omen {
         variables.put("result",
             "4+ You take off the Mask. Gain 2 Sanity and lose 2 Knowledge.");
       }
+    } else {
+      variables.put("result", "0-3 You can't use the Mask this turn.");
     }
     variables.put("rolls", rolls);
   }
