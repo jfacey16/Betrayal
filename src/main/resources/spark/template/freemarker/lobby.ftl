@@ -1,5 +1,7 @@
 <#assign content>
 
+<script src="js/lobby.js"></script>
+
 <h1>Betrayal at House on the Hill!</h1>
 
 ${message}

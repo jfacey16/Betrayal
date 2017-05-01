@@ -23,7 +23,7 @@
 		<div class="option">
 			<center><p><h2>Create a game:</h2>
 
-			<form method="POST" action="/create_game"> 
+			<form method="GET" action="/create_game"> 
 			
 			  <p>Fill out and submit the following form to create a game:</p>
 			  

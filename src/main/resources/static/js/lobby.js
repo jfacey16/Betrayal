@@ -1,6 +1,9 @@
 $(document).ready(() => {
 	
 	const postParameters = {};
+	
+	
+    console.log("hi");
 
     $.post("/create_game", postParameters, responseJSON => {
 
