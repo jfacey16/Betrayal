@@ -20,8 +20,7 @@ $(document).ready(() => {
 	$player_4_select = $("#player_4_select");
 	$player_5_select = $("#player_5_select");
 	$player_6_select = $("#player_6_select");
-	
-	// setup for all players
+
 	pickCharacters();
 	
 	const $temp_lobby = $("#temp_lobby");
@@ -29,17 +28,6 @@ $(document).ready(() => {
 	var x = 1;
 	$item_card.hide();
 	$temp_lobby.show();
-  
-
-$(document).ready(() => {
-
-
-	//setup for all players
-	setStartingState();
-
-	const $item_card = $("#item");
-	var x = 1;
-	$item_card.hide();
 
 	function revealCard() {
 		$item_card.show();
@@ -109,7 +97,6 @@ const pickCharacters = () => {
     	$player_6_select.html("<option value=\"11\">" 
     			+ responseObject.characterChoices[5][0].name + "</option><option value=\"12\">" 
     			+ responseObject.characterChoices[5][1].name + "</option>");
-      const responseObject = JSON.parse(responseJSON);
 
     });
 }
