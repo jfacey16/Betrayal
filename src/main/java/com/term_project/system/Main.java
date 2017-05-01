@@ -187,11 +187,12 @@ public class Main {
 	  public String handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
 
-	    Map<String, Object> variables = ImmutableMap.of(
-					"title",
-	        "Betrayal at House on the Hill"
-			);
-	    return GSON.toJson(variables);
+			Map<String, Object> variables = gameState.run(qm);
+			
+			variables = ImmutableMap.copyOf(variables);
+
+			//System.out.println(variables);
+			return GSON.toJson(variables);
 	  }
 	}
 

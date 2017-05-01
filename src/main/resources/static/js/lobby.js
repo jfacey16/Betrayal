@@ -8,5 +8,6 @@ $(document).ready(() => {
         const responseObject = JSON.parse(responseJSON);
 
 				let choices = responseObject.characterChoices;
+				console.log(choices);
     });
 });
