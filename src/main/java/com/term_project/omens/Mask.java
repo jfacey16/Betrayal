@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.game.Dice;
-import com.term_project.system.MemorySlot;
 
 public class Mask implements Omen {
 
@@ -49,23 +48,29 @@ public class Mask implements Omen {
   }
 
   @Override
-  public void use(GameChar character, MemorySlot memory,
-      Map<String, Object> variables) {
+  public void use(GameChar character, Map<String, Object> variables) {
 
     List<Integer> rolls = Dice.roll(character.getSanity());
 
     int roll = Dice.sum(rolls);
 
     if (roll >= 4) {
+
       if (maskOff) {
         character.modKnowlege(2);
         character.modSanity(-2);
         maskOff = false;
+        variables.put("result",
+            "4+ You put on the Mask. Gain 2 Knowledge and lose 2 Sanity.");
       } else {
         character.modKnowlege(-2);
         character.modSanity(2);
         maskOff = true;
+        variables.put("result",
+            "4+ You take off the Mask. Gain 2 Sanity and lose 2 Knowledge.");
       }
+    } else {
+      variables.put("result", "0-3 You can't use the Mask this turn.");
     }
     variables.put("rolls", rolls);
   }

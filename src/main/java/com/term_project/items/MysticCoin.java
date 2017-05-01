@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.game.Dice;
-import com.term_project.system.MemorySlot;
 
 public class MysticCoin implements Item {
 
@@ -39,8 +38,7 @@ public class MysticCoin implements Item {
   }
 
   @Override
-  public void use(GameChar character, MemorySlot memory,
-      Map<String, Object> variables) {
+  public void use(GameChar character, Map<String, Object> variables) {
     List<Integer> rolls = Dice.roll(1);
 
     int roll = rolls.get(0);
@@ -48,17 +46,18 @@ public class MysticCoin implements Item {
     if (roll == 2) {
 
       character.modMight(1);
-
+      variables.put("result", "2 It's heads. Gain 1 point in Might.");
     } else if (roll == 1) {
 
       character.modKnowlege(1);
-
+      variables.put("result", "1 It's tails. Gain 1 point in Knowledge.");
     } else if (roll == 0) {
 
       character.modMight(-1);
       character.modKnowlege(-1);
+      variables.put("result",
+          "0 It landed on its edge! Lose 1 point in Might and 1 in Knowledge.");
     }
-
     variables.put("rolls", rolls);
   }
 

@@ -3,7 +3,6 @@ package com.term_project.omens;
 import java.util.Map;
 
 import com.term_project.character.GameChar;
-import com.term_project.system.MemorySlot;
 
 /**
  * Interface that outlines what methods an omen needs.
@@ -45,8 +44,7 @@ public interface Omen {
    * character/die amount/gamestate.
    *
    */
-  void use(GameChar character, MemorySlot memory,
-      Map<String, Object> variables);
+  void use(GameChar character, Map<String, Object> variables);
 
   /**
    * Called on loss of an omen, losing the effect of that omen

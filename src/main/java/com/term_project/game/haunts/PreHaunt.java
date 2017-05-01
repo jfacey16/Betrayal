@@ -10,6 +10,7 @@ import com.term_project.events.Event;
 import com.term_project.game.Dice;
 import com.term_project.game.actions.Mover;
 import com.term_project.house.Tile;
+import com.term_project.house.TileBean;
 import com.term_project.items.Item;
 import com.term_project.omens.Omen;
 import com.term_project.omens.Omen;
@@ -50,7 +51,24 @@ public class PreHaunt implements GamePhase {
 
     if (tile.getEvents().size() > 0) {
       actions.add("event");
-      variables.put("events", tile.getEvents());
+    }
+
+    if (tile.getItems().size() > 0) {
+      actions.add("pickup item");
+    }
+
+    if (tile.getOmens().size() > 0) {
+      actions.add("pickup omen");
+    }
+
+    if (character.getItems().size() > 0) {
+      actions.add("drop item");
+      actions.add("use item");
+    }
+
+    if (character.getOmens().size() > 0) {
+      actions.add("drop omen");
+      actions.add("use omen");
     }
 
     if (remaining.get("move") > 0) {
@@ -84,7 +102,7 @@ public class PreHaunt implements GamePhase {
     }
 
     // make sure player has enough actions
-    if (remaining.get(name) <= 0) {
+    if (remaining.containsKey(name) && remaining.get(name) <= 0) {
       variables.put("Error",
           "Cannot perform action as no more are remaining.");
       addActions(character, variables);
@@ -103,7 +121,7 @@ public class PreHaunt implements GamePhase {
         // try to move in given direction
         // fails if no door exists
         try {
-          move.run(direction, character);
+          move.run(direction, character, variables);
 
           // use up one movement
           remaining.put("move", remaining.get("move") - 1);
@@ -117,14 +135,19 @@ public class PreHaunt implements GamePhase {
         if (move.getFinished()) {
           mode = "idle";
           phase = 0;
-          variables.put("tiles",
-              new ArrayList<Tile>(memory.getTileMap().values()));
+
+          List<Tile> tiles = new ArrayList<Tile>(
+              memory.getTileMap().values());
+          List<TileBean> tileBeans = new ArrayList<>();
+          for (Tile tile : tiles) {
+            tileBeans.add(tile.getBean());
+          }
+          variables.put("tiles", tileBeans);
           variables.put("characters", memory.getGameCharacters());
           addActions(character, variables);
           return;
         }
 
-        // variables.put("tile", a tile from top of deck);
         return;
       }
 
@@ -169,13 +192,13 @@ public class PreHaunt implements GamePhase {
             phase = 1;
             eventList.add(event);
 
-            //ADD EVENTS TO TILE HASHMAP
+            // ADD EVENTS TO TILE HASHMAP
           }
 
           for (int i = 0; i < character.getTile().getOmenCount(); i++) {
             Omen omen = memory.getOmens().poll();
             omen.add(character);
-            toResolve.add("omen");
+            toResolve.add("haunt");
             omenList.add(omen);
           }
           // push to front end
@@ -183,7 +206,8 @@ public class PreHaunt implements GamePhase {
           variables.put("item", itemList);
           variables.put("omen", omenList);
           variables.put("event", eventList);
-
+          variables.put("character", character.getCharBean());
+          addActions(character, variables);
         } catch (RuntimeException e) {
           variables.put("Error", e.getMessage());
           return;
@@ -238,7 +262,7 @@ public class PreHaunt implements GamePhase {
       }
       break;
 
-    case "omen":
+    case "haunt":
       omenCount += 1;
       List<Integer> rolls = Dice.roll(6);
       variables.put("rolls", rolls);
@@ -255,10 +279,58 @@ public class PreHaunt implements GamePhase {
          * variables.put("explorers", haunt.getExplorersDescription());
          */
       }
-      toResolve.remove("omen");
+      toResolve.remove("haunt");
 
       mode = "idle";
       phase = 0;
+      break;
+
+    case "use item":
+      String useItemS = qm.value("item");
+      Item useItem = character.getItem(useItemS);
+      useItem.use(character, variables);
+      variables.put("character", character.getCharBean());
+      variables.put("item", useItem);
+      break;
+
+    case "use omen":
+      String useOmenS = qm.value("omen");
+      Omen useOmen = character.getOmen(useOmenS);
+      useOmen.use(character, variables);
+      variables.put("character", character.getCharBean());
+      variables.put("omen", useOmen);
+      break;
+
+    case "pickup item":
+      String pickupItemS = qm.value("item");
+      Item pickupItem = character.getItem(pickupItemS);
+      pickupItem.add(character);
+      variables.put("character", character.getCharBean());
+      variables.put("item", pickupItem);
+      break;
+
+    case "drop item":
+      String dropItemS = qm.value("item");
+      Item dropItem = character.getItem(dropItemS);
+      dropItem.loss(character);
+      variables.put("character", character.getCharBean());
+      variables.put("item", dropItem);
+      break;
+
+    case "pickup omen":
+      String pickupOmenS = qm.value("omen");
+      Omen pickupOmen = character.getOmen(pickupOmenS);
+      pickupOmen.add(character);
+      variables.put("character", character.getCharBean());
+      variables.put("omen", pickupOmen);
+      break;
+
+    case "drop omen":
+      String dropOmenS = qm.value("omen");
+      Omen dropOmen = character.getOmen(dropOmenS);
+      dropOmen.loss(character);
+      variables.put("character", character.getCharBean());
+      variables.put("omen", dropOmen);
       break;
 
     case "end":

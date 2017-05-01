@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.game.Dice;
-import com.term_project.system.MemorySlot;
 
 public class MedicalKit implements Item {
 
@@ -42,8 +41,7 @@ public class MedicalKit implements Item {
   }
 
   @Override
-  public void use(GameChar character, MemorySlot memory,
-      Map<String, Object> variables) {
+  public void use(GameChar character, Map<String, Object> variables) {
     List<Integer> rolls = Dice.roll(character.getKnowlege());
 
     int roll = Dice.sum(rolls);
@@ -51,10 +49,15 @@ public class MedicalKit implements Item {
     if (roll >= 8) {
       character.modMight(1);
       character.modSpeed(1);
+      variables.put("result", "8+ Gain 1 Might and 1 Speed.");
     } else if (roll < 8 && roll > 5) {
       character.modMight(1);
+      variables.put("result", "6-7 Gain 1 Might.");
     } else if (roll < 5 && roll > 3) {
       character.modSpeed(1);
+      variables.put("result", "4-5 Gain 1 Speed.");
+    } else {
+      variables.put("result", "0-3 Nothing happens.");
     }
     variables.put("rolls", rolls);
   }
