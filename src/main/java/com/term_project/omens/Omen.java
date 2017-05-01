@@ -28,12 +28,20 @@ public interface Omen {
   String getName();
 
   /**
-   * Called on the pickup of an omen, producing the effect of the omen
+   * Return's the logical description of the omen.
+   *
+   * @return The way the omen functions
+   *
    */
-  void add(GameChar character, Map<String, Object> variables);
+  String getFunction();
 
   /**
-   * Uses the item producing the effect described in the description on a
+   * Called on the pickup of an omen, producing the effect of the omen
+   */
+  void add(GameChar character);
+
+  /**
+   * Uses the omen producing the effect described in the description on a
    * character/die amount/gamestate.
    *
    */
@@ -44,5 +52,5 @@ public interface Omen {
    * Called on loss of an omen, losing the effect of that omen
    *
    */
-  void loss(GameChar character, Map<String, Object> variables);
+  void loss(GameChar character);
 }

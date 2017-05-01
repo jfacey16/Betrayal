@@ -1,5 +1,7 @@
 package com.term_project.items;
 
+import java.util.Map;
+
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
@@ -42,7 +44,8 @@ public interface Item {
    * character/die amount/gamestate.
    *
    */
-  void use(GameChar character, MemorySlot memory);
+  void use(GameChar character, MemorySlot memory,
+      Map<String, Object> variables);
 
   /**
    * Called on loss of an item, lossing the effect of that item

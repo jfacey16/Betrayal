@@ -6,12 +6,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import com.term_project.omens.ExampleOmen;
+import com.term_project.omens.Book;
+import com.term_project.omens.CrystalBall;
+import com.term_project.omens.Dog;
+import com.term_project.omens.Girl;
+import com.term_project.omens.HolySymbol;
+import com.term_project.omens.Madman;
+import com.term_project.omens.Mask;
 import com.term_project.omens.Omen;
-import com.term_project.omens.OmenFive;
-import com.term_project.omens.OmenFour;
-import com.term_project.omens.OmenThree;
-import com.term_project.omens.OmenTwo;
 
 public class OmensBuilder implements Builder<Omen> {
 
@@ -19,11 +21,13 @@ public class OmensBuilder implements Builder<Omen> {
   public Queue<Omen> build() {
     List<Omen> omenList = new ArrayList<>();
 
-    omenList.add(new ExampleOmen());
-    omenList.add(new OmenTwo());
-    omenList.add(new OmenThree());
-    omenList.add(new OmenFour());
-    omenList.add(new OmenFive());
+    omenList.add(new Book());
+    omenList.add(new CrystalBall());
+    omenList.add(new Dog());
+    omenList.add(new Girl());
+    omenList.add(new HolySymbol());
+    omenList.add(new Madman());
+    omenList.add(new Mask());
 
     Collections.shuffle(omenList);
     Queue<Omen> omenDeck = new LinkedList<>(omenList);
