@@ -53,11 +53,7 @@ $(document).ready(() => {
     
     $create.on('click', function(e) {
     	
-    	document.getElementById("player_1").style.borderColor = "yellow";
-    	
     	e.preventDefault();
-
-    	console.log("yay!");
     	
     	$temp_lobby.hide();
 
@@ -73,8 +69,6 @@ const pickCharacters = () => {
 
         // TODO: Parse the JSON response into a JavaScript object. DONE
         const responseObject = JSON.parse(responseJSON);
-    	
-    	console.log(responseObject.characterChoices[0][0].name);
     	
     	$player_1_select.html("<option value=\"1\">" 
     			+ responseObject.characterChoices[0][0].name + "</option><option value=\"2\">" 
@@ -126,138 +120,231 @@ const setStartingState = () => {
         // TODO: Parse the JSON response into a JavaScript object. DONE
         const responseObject = JSON.parse(responseJSON);
 	
-	if(val_1 === "1") {
-		$char_1 = responseObject.characterChoices[0][0];
-	} else {
-		$char_1 = responseObject.characterChoices[0][1];
-	}
-	
-	if(val_2 === "3") {
-		$char_2 = responseObject.characterChoices[1][0];
-	} else {
-		$char_2 = responseObject.characterChoices[1][1];
-	}
-
-	if(val_3 === "5") {
-		$char_3 = responseObject.characterChoices[2][0];
-	} else {
-		$char_3 = responseObject.characterChoices[2][1];
-	}
-	
-	if(val_4 === "7") {
-		$char_4 = responseObject.characterChoices[3][0];
-	} else {
-		$char_4 = responseObject.characterChoices[3][1];
-	}
-	
-	if(val_5 === "9") {
-		$char_5 = responseObject.characterChoices[4][0];
-	} else {
-		$char_5 = responseObject.characterChoices[4][1];
-	}
-	
-	if(val_6 === "11") {
-		$char_6 = responseObject.characterChoices[5][0];
-	} else {
-		$char_6 = responseObject.characterChoices[5][1];
-	}
-	
-	$player_1_name.html("<center>" + $char_1.name + "</center>");
-	$player_2_name.html("<center>" + $char_2.name + "</center>");
-	$player_3_name.html("<center>" + $char_3.name + "</center>");
-	$player_4_name.html("<center>" + $char_4.name + "</center>");
-	$player_5_name.html("<center>" + $char_5.name + "</center>");
-	$player_6_name.html("<center>" + $char_6.name + "</center>");
-	
-
-	const $player_1_speed = $("#speed_1");
-	var $speed = "<center>";
-	
-	for (let i = 0, len = $char_1.speedScale.length; i < len; i++) {
-		if(i === $char_1.speed) {
-			$speed += "<font color=\"red\">" + $char_1.speedScale[i] + "</font> ";
+		if(val_1 === "1") {
+			$char_1 = responseObject.characterChoices[0][0];
 		} else {
-			$speed += $char_1.speedScale[i] + " ";
+			$char_1 = responseObject.characterChoices[0][1];
 		}
-    }
-	
-	const $player_1_might = $("#might_1");
-	var $might = "<center>";
-	
-	for (let i = 0, len = $char_1.mightScale.length; i < len; i++) {
-		if(i === $char_1.might) {
-			$might += "<font color=\"red\">" + $char_1.mightScale[i] + "</font> ";
+		
+		if(val_2 === "3") {
+			$char_2 = responseObject.characterChoices[1][0];
 		} else {
-			$might += $char_1.mightScale[i] + " ";
+			$char_2 = responseObject.characterChoices[1][1];
 		}
-    }
-
-	const $player_1_knowledge = $("#knowledge_1");
-	var $knowledge = "<center>";
 	
-	for (let i = 0, len = $char_1.knowledgeScale.length; i < len; i++) {
-		if(i === $char_1.knowledge) {
-			$knowledge += "<font color=\"red\">" + $char_1.knowledgeScale[i] + "</font> ";
+		if(val_3 === "5") {
+			$char_3 = responseObject.characterChoices[2][0];
 		} else {
-			$knowledge += $char_1.knowledgeScale[i] + " ";
+			$char_3 = responseObject.characterChoices[2][1];
 		}
-    }
-	
-	const $player_1_sanity = $("#sanity_1");
-	var $sanity = "<center>";
-	
-	for (let i = 0, len = $char_1.sanityScale.length; i < len; i++) {
-		if(i === $char_1.sanity) {
-			$sanity += "<font color=\"red\">" + $char_1.sanityScale[i] + "</font> ";
+		
+		if(val_4 === "7") {
+			$char_4 = responseObject.characterChoices[3][0];
 		} else {
-			$sanity += $char_1.sanityScale[i] + " ";
+			$char_4 = responseObject.characterChoices[3][1];
 		}
-    }
+		
+		if(val_5 === "9") {
+			$char_5 = responseObject.characterChoices[4][0];
+		} else {
+			$char_5 = responseObject.characterChoices[4][1];
+		}
+		
+		if(val_6 === "11") {
+			$char_6 = responseObject.characterChoices[5][0];
+		} else {
+			$char_6 = responseObject.characterChoices[5][1];
+		}
+		
+		$player_1_name.html("<center>" + $char_1.name + "</center>");
+		$player_2_name.html("<center>" + $char_2.name + "</center>");
+		$player_3_name.html("<center>" + $char_3.name + "</center>");
+		$player_4_name.html("<center>" + $char_4.name + "</center>");
+		$player_5_name.html("<center>" + $char_5.name + "</center>");
+		$player_6_name.html("<center>" + $char_6.name + "</center>");
+		
 	
-	$player_1_speed.html($speed + "</center>");
-	$player_1_might.html($might + "</center>");
-	$player_1_knowledge.html($knowledge + "</center>");
-	$player_1_sanity.html($sanity + "</center>");
+		const $player_1_speed = $("#speed_1");
+		var $speed = "<center>";
+		
+		for (let i = 0, len = $char_1.speedScale.length; i < len; i++) {
+			if(i === $char_1.speed) {
+				$speed += "<font color=\"red\">" + $char_1.speedScale[i] + "</font> ";
+			} else {
+				$speed += $char_1.speedScale[i] + " ";
+			}
+	    }
+		
+		const $player_1_might = $("#might_1");
+		var $might = "<center>";
+		
+		for (let i = 0, len = $char_1.mightScale.length; i < len; i++) {
+			if(i === $char_1.might) {
+				$might += "<font color=\"red\">" + $char_1.mightScale[i] + "</font> ";
+			} else {
+				$might += $char_1.mightScale[i] + " ";
+			}
+	    }
 	
-
-	const $player_2_stats = $("#stats_2");
-	const $player_3_stats = $("#stats_3");
-	const $player_4_stats = $("#stats_4");
-	const $player_5_stats = $("#stats_5");
-	const $player_6_stats = $("#stats_6");
+		const $player_1_knowledge = $("#knowledge_1");
+		var $knowledge = "<center>";
+		
+		for (let i = 0, len = $char_1.knowledgeScale.length; i < len; i++) {
+			if(i === $char_1.knowledge) {
+				$knowledge += "<font color=\"red\">" + $char_1.knowledgeScale[i] + "</font> ";
+			} else {
+				$knowledge += $char_1.knowledgeScale[i] + " ";
+			}
+	    }
+		
+		const $player_1_sanity = $("#sanity_1");
+		var $sanity = "<center>";
+		
+		for (let i = 0, len = $char_1.sanityScale.length; i < len; i++) {
+			if(i === $char_1.sanity) {
+				$sanity += "<font color=\"red\">" + $char_1.sanityScale[i] + "</font> ";
+			} else {
+				$sanity += $char_1.sanityScale[i] + " ";
+			}
+	    }
+		
+		$player_1_speed.html($speed + "</center>");
+		$player_1_might.html($might + "</center>");
+		$player_1_knowledge.html($knowledge + "</center>");
+		$player_1_sanity.html($sanity + "</center>");
+		
 	
-	$player_2_stats.html("<center>" + $char_2.speedScale[$char_2.speed - 1] + " " +
-			$char_2.mightScale[$char_2.might - 1] + " " + 
-			$char_2.knowledgeScale[$char_2.knowledge - 1] + " " +
-			$char_2.sanityScale[$char_2.sanity - 1] + " " + "</center>");
+		const $player_2_stats = $("#stats_2");
+		const $player_3_stats = $("#stats_3");
+		const $player_4_stats = $("#stats_4");
+		const $player_5_stats = $("#stats_5");
+		const $player_6_stats = $("#stats_6");
+		
+		$player_2_stats.html("<center>" + $char_2.speedScale[$char_2.speed - 1] + " " +
+				$char_2.mightScale[$char_2.might - 1] + " " + 
+				$char_2.knowledgeScale[$char_2.knowledge - 1] + " " +
+				$char_2.sanityScale[$char_2.sanity - 1] + " " + "</center>");
+		
+		$player_3_stats.html("<center>" + $char_3.speedScale[$char_3.speed - 1] + " " +
+				$char_3.mightScale[$char_3.might - 1] + " " + 
+				$char_3.knowledgeScale[$char_3.knowledge - 1] + " " +
+				$char_3.sanityScale[$char_3.sanity - 1] + " " + "</center>");
+		
+		$player_4_stats.html("<center>" + $char_4.speedScale[$char_4.speed - 1] + " " +
+				$char_4.mightScale[$char_4.might - 1] + " " + 
+				$char_4.knowledgeScale[$char_4.knowledge - 1] + " " +
+				$char_4.sanityScale[$char_4.sanity - 1] + " " + "</center>");
+		
+		$player_5_stats.html("<center>" + $char_5.speedScale[$char_5.speed - 1] + " " +
+				$char_5.mightScale[$char_5.might - 1] + " " + 
+				$char_5.knowledgeScale[$char_5.knowledge - 1] + " " +
+				$char_5.sanityScale[$char_5.sanity - 1] + " " + "</center>");
+		
+		$player_6_stats.html("<center>" + $char_6.speedScale[$char_6.speed - 1] + " " +
+				$char_6.mightScale[$char_6.might - 1] + " " + 
+				$char_6.knowledgeScale[$char_6.knowledge - 1] + " " +
+				$char_6.sanityScale[$char_6.sanity - 1] + " " + "</center>");
 	
-	$player_3_stats.html("<center>" + $char_3.speedScale[$char_3.speed - 1] + " " +
-			$char_3.mightScale[$char_3.might - 1] + " " + 
-			$char_3.knowledgeScale[$char_3.knowledge - 1] + " " +
-			$char_3.sanityScale[$char_3.sanity - 1] + " " + "</center>");
-	
-	$player_4_stats.html("<center>" + $char_4.speedScale[$char_4.speed - 1] + " " +
-			$char_4.mightScale[$char_4.might - 1] + " " + 
-			$char_4.knowledgeScale[$char_4.knowledge - 1] + " " +
-			$char_4.sanityScale[$char_4.sanity - 1] + " " + "</center>");
-	
-	$player_5_stats.html("<center>" + $char_5.speedScale[$char_5.speed - 1] + " " +
-			$char_5.mightScale[$char_5.might - 1] + " " + 
-			$char_5.knowledgeScale[$char_5.knowledge - 1] + " " +
-			$char_5.sanityScale[$char_5.sanity - 1] + " " + "</center>");
-	
-	$player_6_stats.html("<center>" + $char_6.speedScale[$char_6.speed - 1] + " " +
-			$char_6.mightScale[$char_6.might - 1] + " " + 
-			$char_6.knowledgeScale[$char_6.knowledge - 1] + " " +
-			$char_6.sanityScale[$char_6.sanity - 1] + " " + "</center>");
-
-    
-    moves = $char_1.speedScale[$char_1.speed - 1];
-    movesp.innerHTML = $char_1.speedScale[$char_1.speed - 1];
-	const $objective_description = $("#objective_description");
-	$objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>");
+	    
+	    moves = $char_1.speedScale[$char_1.speed - 1];
+	    movesp.innerHTML = $char_1.speedScale[$char_1.speed - 1];
+		const $objective_description = $("#objective_description");
+		$objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>");
+    	document.getElementById("player_1").style.borderColor = "yellow";
 	
     });
 }
 
+const update = () => {
+	const postParameters = {players:"6"};
 
+    $.post("/create_game", postParameters, responseJSON => {
+
+        // TODO: Parse the JSON response into a JavaScript object. DONE
+        const responseObject = JSON.parse(responseJSON);
+
+		const $player_1_speed = $("#speed_1");
+		var $speed = "<center>";
+		
+		for (let i = 0, len = $char_1.speedScale.length; i < len; i++) {
+			if(i === $char_1.speed) {
+				$speed += "<font color=\"red\">" + $char_1.speedScale[i] + "</font> ";
+			} else {
+				$speed += $char_1.speedScale[i] + " ";
+			}
+	    }
+		
+		const $player_1_might = $("#might_1");
+		var $might = "<center>";
+		
+		for (let i = 0, len = $char_1.mightScale.length; i < len; i++) {
+			if(i === $char_1.might) {
+				$might += "<font color=\"red\">" + $char_1.mightScale[i] + "</font> ";
+			} else {
+				$might += $char_1.mightScale[i] + " ";
+			}
+	    }
+	
+		const $player_1_knowledge = $("#knowledge_1");
+		var $knowledge = "<center>";
+		
+		for (let i = 0, len = $char_1.knowledgeScale.length; i < len; i++) {
+			if(i === $char_1.knowledge) {
+				$knowledge += "<font color=\"red\">" + $char_1.knowledgeScale[i] + "</font> ";
+			} else {
+				$knowledge += $char_1.knowledgeScale[i] + " ";
+			}
+	    }
+		
+		const $player_1_sanity = $("#sanity_1");
+		var $sanity = "<center>";
+		
+		for (let i = 0, len = $char_1.sanityScale.length; i < len; i++) {
+			if(i === $char_1.sanity) {
+				$sanity += "<font color=\"red\">" + $char_1.sanityScale[i] + "</font> ";
+			} else {
+				$sanity += $char_1.sanityScale[i] + " ";
+			}
+	    }
+		
+		$player_1_speed.html($speed + "</center>");
+		$player_1_might.html($might + "</center>");
+		$player_1_knowledge.html($knowledge + "</center>");
+		$player_1_sanity.html($sanity + "</center>");
+	
+		const $player_2_stats = $("#stats_2");
+		const $player_3_stats = $("#stats_3");
+		const $player_4_stats = $("#stats_4");
+		const $player_5_stats = $("#stats_5");
+		const $player_6_stats = $("#stats_6");
+		
+		$player_2_stats.html("<center>" + $char_2.speedScale[$char_2.speed - 1] + " " +
+				$char_2.mightScale[$char_2.might - 1] + " " + 
+				$char_2.knowledgeScale[$char_2.knowledge - 1] + " " +
+				$char_2.sanityScale[$char_2.sanity - 1] + " " + "</center>");
+		
+		$player_3_stats.html("<center>" + $char_3.speedScale[$char_3.speed - 1] + " " +
+				$char_3.mightScale[$char_3.might - 1] + " " + 
+				$char_3.knowledgeScale[$char_3.knowledge - 1] + " " +
+				$char_3.sanityScale[$char_3.sanity - 1] + " " + "</center>");
+		
+		$player_4_stats.html("<center>" + $char_4.speedScale[$char_4.speed - 1] + " " +
+				$char_4.mightScale[$char_4.might - 1] + " " + 
+				$char_4.knowledgeScale[$char_4.knowledge - 1] + " " +
+				$char_4.sanityScale[$char_4.sanity - 1] + " " + "</center>");
+		
+		$player_5_stats.html("<center>" + $char_5.speedScale[$char_5.speed - 1] + " " +
+				$char_5.mightScale[$char_5.might - 1] + " " + 
+				$char_5.knowledgeScale[$char_5.knowledge - 1] + " " +
+				$char_5.sanityScale[$char_5.sanity - 1] + " " + "</center>");
+		
+		$player_6_stats.html("<center>" + $char_6.speedScale[$char_6.speed - 1] + " " +
+				$char_6.mightScale[$char_6.might - 1] + " " + 
+				$char_6.knowledgeScale[$char_6.knowledge - 1] + " " +
+				$char_6.sanityScale[$char_6.sanity - 1] + " " + "</center>");
+		
+		
+		
+	
+    });
+}
