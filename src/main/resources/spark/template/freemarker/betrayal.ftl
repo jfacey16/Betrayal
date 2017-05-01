@@ -781,36 +781,36 @@
         basement.style.display = 'block';
      }
   });
-  let b1 = false;
-  $("#first").mousedown(function(){b1=false;}).mousemove(function(){b1=true;}).mouseup(function(event){
-    if(!b1){
-        const x = event.pageX - first.offsetLeft - 336;
-        const y = event.pageY - first.offsetTop - 204;
-        const xpos = x - (x % T) + edgex[1];
-        const ypos = y - (y % T) + edgex[1];
-        descr.innerHTML = xpos + " " + ypos;
-     }
-  });
-  let b2 = false;
-  $("#second").mousedown(function(){b2=false;}).mousemove(function(){b2=true;}).mouseup(function(event){
-    if(!b2){
-        const x = event.pageX - second.offsetLeft - 336;
-        const y = event.pageY - second.offsetTop - 204;
-        const xpos = x - (x % T) + edgex[2];
-        const ypos = y - (y % T) + edgey[2];
-        descr.innerHTML = xpos + " " + ypos;
-     }
-  });
-  let b3 = false;
-  $("#basement").mousedown(function(){b3=false;}).mousemove(function(){b3=true;}).mouseup(function(event){
-    if(!b3){
-        const x = event.pageX - basement.offsetLeft - 336;
-        const y = event.pageY - basement.offsetTop - 204;
-        const xpos = x - (x % T) + edgex[0];
-        const ypos = y - (y % T) + edgey[0];
-        descr.innerHTML = xpos + " " + ypos;
-     }
-  });
+//  let b1 = false;
+//  $("#first").mousedown(function(){b1=false;}).mousemove(function(){b1=true;}).mouseup(function(event){
+//    if(!b1){
+//        const x = event.pageX - first.offsetLeft - 336;
+//        const y = event.pageY - first.offsetTop - 204;
+//        const xpos = x - (x % T) + edgex[1];
+//        const ypos = y - (y % T) + edgex[1];
+//        descr.innerHTML = xpos + " " + ypos;
+//     }
+//  });
+//  let b2 = false;
+//  $("#second").mousedown(function(){b2=false;}).mousemove(function(){b2=true;}).mouseup(function(event){
+//    if(!b2){
+//        const x = event.pageX - second.offsetLeft - 336;
+//        const y = event.pageY - second.offsetTop - 204;
+//        const xpos = x - (x % T) + edgex[2];
+//        const ypos = y - (y % T) + edgey[2];
+//        descr.innerHTML = xpos + " " + ypos;
+//     }
+//  });
+//  let b3 = false;
+//  $("#basement").mousedown(function(){b3=false;}).mousemove(function(){b3=true;}).mouseup(function(event){
+//    if(!b3){
+//        const x = event.pageX - basement.offsetLeft - 336;
+//        const y = event.pageY - basement.offsetTop - 204;
+//        const xpos = x - (x % T) + edgex[0];
+//        const ypos = y - (y % T) + edgey[0];
+//        descr.innerHTML = xpos + " " + ypos;
+//     }
+//  });
     let moves = 10;
     const first = document.getElementById("first");
     const second = document.getElementById("second");
