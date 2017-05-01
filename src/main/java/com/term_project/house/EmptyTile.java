@@ -1,8 +1,8 @@
 package com.term_project.house;
-import com.term_project.cards.Event;
-import com.term_project.cards.Item;
-import com.term_project.cards.Omen;
 import com.term_project.character.GameChar;
+import com.term_project.events.Event;
+import com.term_project.items.Item;
+import com.term_project.omens.Omen;
 
 import java.util.List;
 import java.util.ArrayList;

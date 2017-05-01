@@ -1,11 +1,11 @@
-package com.term_project.cards;
+package com.term_project.omens;
 
 import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
-public class OmenFour implements Omen {
+public class ExampleOmen implements Omen {
 
   @Override
   public String getDescription() {

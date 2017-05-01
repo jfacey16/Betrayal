@@ -1,26 +1,26 @@
-package com.term_project.cards;
+package com.term_project.items;
 
 import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
-public class Cat implements Item {
+public class Rock implements Item {
 
-  public Cat() {
+  public Rock() {
 
   }
 
   @Override
   public String getDescription() {
-    return "The cat meows. Why is it here?";
+    return "Its a pretty nice rock";
   }
 
   @Override
   public void add(GameChar character, Map<String, Object> variables) {
-    character.modSanity(2);
+    character.modKnowlege(2);
     character.addItem(this);
-    variables.put("item", "cat");
+    variables.put("item", "rock");
     variables.put("description", this.getDescription());
     variables.put("knowledge", character.getKnowlege());
     variables.put("might", character.getMight());
@@ -31,16 +31,15 @@ public class Cat implements Item {
   @Override
   public void use(GameChar character, MemorySlot memory,
       Map<String, Object> variables) {
-    // TODO Auto-generated method stub
-
+    return;
   }
 
   @Override
   public void loss(GameChar character, Map<String, Object> variables) {
-    character.modSanity(-2);
+    character.modKnowlege(-2);
     character.removeItem(this);
     character.getTile().addItem(this);
-    variables.put("item", "cat");
+    variables.put("item", "rock");
     variables.put("description", this.getDescription());
     variables.put("knowledge", character.getKnowlege());
     variables.put("might", character.getMight());
@@ -50,6 +49,22 @@ public class Cat implements Item {
 
   @Override
   public String getName() {
-    return "Cat";
+    return "Rock";
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == this)
+      return true;
+    if (!(object instanceof Rock)) {
+      return false;
+    }
+
+    return this.getName().equals(((Rock) object).getName());
+  }
+
+  @Override
+  public int hashCode() {
+    return this.getName().hashCode();
   }
 }

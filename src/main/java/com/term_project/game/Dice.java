@@ -16,7 +16,6 @@ public final class Dice {
    * Classes should have private constructors rather than no constructor.
    *
    */
-  // TODO: why is this not public so we can actually construct dice
   private Dice() {
   }
 
@@ -35,11 +34,11 @@ public final class Dice {
     return rolls;
   }
 
-  public static Integer sum(List<Integer> rolls){
+  public static Integer sum(List<Integer> rolls) {
     int sum = 0;
 
     for (Integer i : rolls) {
-        sum = sum + i;
+      sum = sum + i;
     }
 
     return sum;

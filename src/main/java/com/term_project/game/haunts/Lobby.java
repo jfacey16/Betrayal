@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.term_project.character.GameChar;
+import com.term_project.events.Event;
 import com.term_project.game.actions.Mover;
 import com.term_project.house.Tile;
+import com.term_project.omens.Omen;
 import com.term_project.system.MemorySlot;
-import com.term_project.cards.Event;
 import com.term_project.game.Dice;
-import com.term_project.cards.Omen;
 import com.term_project.house.Floor;
 import com.term_project.house.Direction;
 import com.term_project.house.EmptyTile;

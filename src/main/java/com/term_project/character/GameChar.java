@@ -2,9 +2,9 @@ package com.term_project.character;
 
 import java.util.List;
 
-import com.term_project.cards.Item;
-import com.term_project.cards.Omen;
 import com.term_project.house.Tile;
+import com.term_project.items.Item;
+import com.term_project.omens.Omen;
 
 /**
  * Interface that outlines what methods a character needs.

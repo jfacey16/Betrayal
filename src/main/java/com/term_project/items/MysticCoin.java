@@ -1,4 +1,4 @@
-package com.term_project.cards;
+package com.term_project.items;
 
 import java.util.List;
 import java.util.Map;
@@ -70,5 +70,21 @@ public class MysticCoin implements Item {
   @Override
   public String getName() {
     return "Mystic Coin";
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == this)
+      return true;
+    if (!(object instanceof MysticCoin)) {
+      return false;
+    }
+
+    return this.getName().equals(((MysticCoin) object).getName());
+  }
+
+  @Override
+  public int hashCode() {
+    return this.getName().hashCode();
   }
 }

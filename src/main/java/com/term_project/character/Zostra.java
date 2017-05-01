@@ -84,7 +84,6 @@ public class Zostra extends AbstractChar implements GameChar {
 
   @Override
   public String getDescription() {
-    // TODO Auto-generated method stub
-    return null;
+    return "Blue";
   }
 }

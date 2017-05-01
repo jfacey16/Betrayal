@@ -1,4 +1,4 @@
-package com.term_project.cards;
+package com.term_project.events;
 import com.term_project.character.GameChar;
 import com.term_project.game.Stats;
 

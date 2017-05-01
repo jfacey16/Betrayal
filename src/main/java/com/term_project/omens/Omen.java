@@ -1,4 +1,4 @@
-package com.term_project.cards;
+package com.term_project.omens;
 
 import java.util.Map;
 
@@ -6,28 +6,29 @@ import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
 /**
- * Interface that outlines what methods an item needs.
+ * Interface that outlines what methods an omen needs.
  *
  * @author Zachary Hoffman
+ *
  */
-public interface Item {
+public interface Omen {
   /**
-   * Return's the description of the item.
+   * Return's the description of the omen.
    *
-   * @return A description of the item.
+   * @return A description of the omen.
    *
    */
   String getDescription();
 
   /**
-   * Return's the name of the item.
+   * Return's the name of the omen.
    *
-   * @return the name of the item
+   * @return the name of the omen
    */
   String getName();
 
   /**
-   * Called on the pickup of an item, producing the effect of the item
+   * Called on the pickup of an omen, producing the effect of the omen
    */
   void add(GameChar character, Map<String, Object> variables);
 
@@ -40,7 +41,7 @@ public interface Item {
       Map<String, Object> variables);
 
   /**
-   * Called on loss of an item, lossing the effect of that item
+   * Called on loss of an omen, losing the effect of that omen
    *
    */
   void loss(GameChar character, Map<String, Object> variables);

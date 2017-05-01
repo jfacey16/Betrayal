@@ -2,18 +2,18 @@ package com.term_project.game;
 
 import com.term_project.system.MemorySlot;
 import com.term_project.house.Tile;
+import com.term_project.items.Item;
+import com.term_project.omens.Omen;
 import com.term_project.house.Pos;
 import com.term_project.game.actions.Action;
 import com.term_project.game.haunts.GamePhase;
 import com.term_project.game.haunts.PreHaunt;
-import com.term_project.cards.Event;
-import com.term_project.cards.EventsBuilder;
-import com.term_project.cards.Item;
-import com.term_project.cards.ItemsBuilder;
-import com.term_project.cards.Omen;
-import com.term_project.cards.OmensBuilder;
-import com.term_project.cards.TileBuilder;
+import com.term_project.builders.EventsBuilder;
+import com.term_project.builders.ItemsBuilder;
+import com.term_project.builders.OmensBuilder;
+import com.term_project.builders.TileBuilder;
 import com.term_project.character.GameChar;
+import com.term_project.events.Event;
 
 import java.util.Collections;
 import java.util.ArrayList;

@@ -84,7 +84,6 @@ public class Zoe extends AbstractChar implements GameChar {
 
   @Override
   public String getDescription() {
-    // TODO Auto-generated method stub
-    return null;
+    return "Yellow";
   }
 }

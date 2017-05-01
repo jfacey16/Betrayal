@@ -1,19 +1,16 @@
-package com.term_project.cards;
+package com.term_project.omens;
 
 import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
-public class ItemFour implements Item {
-
-  public ItemFour() {
-
-  }
+public class OmenThree implements Omen {
 
   @Override
   public String getDescription() {
-    return "this is an example item";
+    // TODO Auto-generated method stub
+    return null;
   }
 
   @Override
@@ -40,5 +37,4 @@ public class ItemFour implements Item {
     // TODO Auto-generated method stub
 
   }
-
 }

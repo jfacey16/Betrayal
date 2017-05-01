@@ -1,20 +1,17 @@
-package com.term_project.cards;
+package com.term_project.omens;
 
 import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
-/*PUT ITEM INSTANCES INTO THE ITEM FOLDER*/
-public class ItemFive implements Item {
-
-  public ItemFive() {
-
-  }
+/*PUT OMEN INSTANCES INTO THE ITEM FOLDER*/
+public class OmenFive implements Omen {
 
   @Override
   public String getDescription() {
-    return "this is an example item";
+    // TODO Auto-generated method stub
+    return null;
   }
 
   @Override

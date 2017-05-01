@@ -1,16 +1,19 @@
-package com.term_project.cards;
+package com.term_project.items;
 
 import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.system.MemorySlot;
 
-public class ExampleOmen implements Omen {
+public class ItemFour implements Item {
+
+  public ItemFour() {
+
+  }
 
   @Override
   public String getDescription() {
-    // TODO Auto-generated method stub
-    return null;
+    return "this is an example item";
   }
 
   @Override
@@ -37,4 +40,21 @@ public class ExampleOmen implements Omen {
     // TODO Auto-generated method stub
 
   }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == this)
+      return true;
+    if (!(object instanceof Bottle)) {
+      return false;
+    }
+
+    return this.getName().equals(((Bottle) object).getName());
+  }
+
+  @Override
+  public int hashCode() {
+    return this.getName().hashCode();
+  }
+
 }

@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-import com.term_project.cards.Event;
-import com.term_project.cards.Item;
-import com.term_project.cards.Omen;
+import com.term_project.events.Event;
+import com.term_project.items.Item;
+import com.term_project.omens.Omen;
 
 /**
  * Generic tile with no entry and exit events
