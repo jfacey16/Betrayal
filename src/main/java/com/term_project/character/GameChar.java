@@ -218,4 +218,6 @@ public interface GameChar {
    * @return The value of the given stat.
    */
   int getStatByName(String name);
+
+  CharBean getCharBean();
 }

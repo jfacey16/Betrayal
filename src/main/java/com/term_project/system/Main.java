@@ -122,7 +122,7 @@ public class Main {
 	private static class LobbyHandler implements TemplateViewRoute {
 	    @Override
 	    public ModelAndView handle(Request req, Response res) {
-				System.out.println("LobbyHandler");
+
 	      QueryParamsMap qm = req.queryMap();
 	      String game_name = qm.value("name");
 				String player_number = qm.value("players");
@@ -142,6 +142,7 @@ public class Main {
 	private static class LobbyStart implements Route {
 	    @Override
 	    public String handle(Request req, Response res) {
+				System.out.println("LobbyHandler");
 	      QueryParamsMap qm = req.queryMap();
 	      String game_name = qm.value("name");
 				//setup ids
@@ -179,25 +180,34 @@ public class Main {
 	  public String handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
 
-			Map<String, Object> variables = gameState.update(qm);
+	    Map<String, Object> variables = ImmutableMap.of(
+					"title",
+	        "Betrayal at House on the Hill"
+			);
+	    return GSON.toJson(variables);
 
-			variables = ImmutableMap.copyOf(variables);
-
-			//System.out.println(variables);
-			return GSON.toJson(variables);
+//			Map<String, Object> variables = gameState.update(qm);
+//
+//			variables = ImmutableMap.copyOf(variables);
+//
+//			//System.out.println(variables);
+//			return GSON.toJson(variables);
 	  }
 	}
 
 	private static class TileStart implements Route {
 	  @Override
 	  public String handle(Request req, Response res) {
+			System.out.println("TILE START");
 			QueryParamsMap qm = req.queryMap();
 
 			Map<String, Object> variables = gameState.buildMap(qm);
 
 			variables = ImmutableMap.copyOf(variables);
 
+			System.out.println(variables);
 			//System.out.println(variables);
+			String parsed = GSON.toJson(variables).toString();
 			return GSON.toJson(variables);
 	  }
 	}

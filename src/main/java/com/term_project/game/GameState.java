@@ -63,7 +63,7 @@ public class GameState {
 	}
 
 	public Map<String, Object> start() {
-		System.out.println("Start FINISHED STARTING");
+		System.out.println("INITIAL START");
 		Map<String, Object> variables = new HashMap<>();
 		phase.run(null, null, null, variables);
 		return variables;
@@ -71,7 +71,7 @@ public class GameState {
 
 	public Map<String, Object> buildMap(QueryParamsMap qm) {
 		Map<String, Object> variables = new HashMap<>();
-		System.out.println("PHASE STARTING");
+		System.out.println("MAP BUILDING");
 		phase.run(null, qm, null, variables);
 		return variables;
 	}

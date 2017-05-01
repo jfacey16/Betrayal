@@ -2,6 +2,7 @@ package com.term_project.character;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.term_project.house.Tile;
@@ -27,6 +28,18 @@ public abstract class AbstractChar implements GameChar {
     currentTile = null;
     items = new HashMap<>();
     omens = new HashMap<>();
+  }
+
+  @Override
+  public CharBean getCharBean() {
+    return new CharBean(getName(), might, speed, knowledge,
+                        sanity, mightScale,
+                        speedScale,
+                        knowledgeScale,
+                        sanityScale,
+                        currentTile.getBean(),
+                        new ArrayList(items.values()),
+                        new ArrayList(omens.values()));
   }
 
   @Override

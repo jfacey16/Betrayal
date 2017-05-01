@@ -54,7 +54,7 @@ public final class MemorySlot {
     items = new ItemsBuilder().build();
     omens = new OmensBuilder().build();
     events = new EventsBuilder().build();
-    tiles = new TileBuilder().build();
+    tiles = new TileBuilder(this).build();
   }
 
   /**
