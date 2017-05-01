@@ -97,10 +97,10 @@ public class Main {
 
 	  // Setup Spark Routes
 	  Spark.get("/betrayal_menu", new MenuHandler(), freeMarker);
-	  Spark.post("/create_game", new LobbyHandler(), freeMarker);
+	  Spark.get("/create_game", new LobbyHandler(), freeMarker);
+		Spark.post("/create_game", new LobbyStart());
 	  Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
-		Spark.post("/betrayal", new PlayBetrayalHandler(), freeMarker);
-		Spark.post("/cheatStart", new CheatStart(), freeMarker);
+		Spark.post("/betrayal", new PlayBetrayalHandler());
 	}
 
 	private static class MenuHandler implements TemplateViewRoute {
@@ -123,6 +123,25 @@ public class Main {
 	    public ModelAndView handle(Request req, Response res) {
 	      QueryParamsMap qm = req.queryMap();
 	      String game_name = qm.value("name");
+				String player_number = qm.value("players");
+
+	      String message = "<p><h4>You're currently in the lobby of Game \"" + game_name + "\".</h4></p>";
+	      message += "<p><h4>Waiting for X more players to join your lobby of " + player_number + ".</h4></p>";
+
+				 Map<String, Object> variables;
+				variables = ImmutableMap.of(
+					"title", "Betrayal at House on the Hill",
+					"message", message
+				);
+				return new ModelAndView(variables, "lobby.ftl");
+	    }
+	}
+
+	private static class LobbyStart implements Route {
+	    @Override
+	    public String handle(Request req, Response res) {
+	      QueryParamsMap qm = req.queryMap();
+	      String game_name = qm.value("name");
 				//setup ids
 	      Integer player_number = Integer.parseInt(qm.value("players"));
 				List<String> ids =  new ArrayList();
@@ -132,15 +151,11 @@ public class Main {
 
 				gameState = new GameState(ids, new MemorySlot());
 
-	      String message = "<p><h4>You're currently in the lobby of Game \"" + game_name + "\".</h4></p>";
-	      message += "<p><h4>Waiting for X more players to join your lobby of " + player_number + ".</h4></p>";
-
 	      Map<String, Object> variables = new HashMap<>();
-				variables.put("title", "Betrayal at House on the Hill");
-				variables.put("message", message);
 
 				variables.putAll(gameState.start());
-			  return new ModelAndView(GSON.toJson(variables), "lobby.ftl");
+				variables = ImmutableMap.copyOf(variables);
+			  return GSON.toJson(variables);
 	    }
 	}
 
@@ -148,7 +163,15 @@ public class Main {
 	  @Override
 	  public ModelAndView handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
-
+			List<String> ids = new ArrayList<>();
+			ids.add("0");
+			ids.add("1");
+			ids.add("2");
+			ids.add("3");
+			ids.add("4");
+			ids.add("5");
+			gameState = new GameState(ids, new MemorySlot());
+			gameState.cheatStart();
 	    Map<String, Object> variables = ImmutableMap.of(
 					"title",
 	        "Betrayal at House on the Hill"
@@ -157,61 +180,48 @@ public class Main {
 	  }
 	}
 
-	private static class PlayBetrayalHandler implements TemplateViewRoute {
+	private static class PlayBetrayalHandler implements Route {
 	  @Override
-	  public ModelAndView handle(Request req, Response res) {
+	  public String handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
 
 	    Map<String, Object> variables = ImmutableMap.of(
 					"title",
 	        "Betrayal at House on the Hill"
 			);
-	    return new ModelAndView(GSON.toJson(variables), "betrayal.ftl");
+	    return GSON.toJson(variables);
 	  }
 	}
 
-	private static class CheatStart implements TemplateViewRoute {
-	  @Override
-	  public ModelAndView handle(Request req, Response res) {
-			QueryParamsMap qm = req.queryMap();
-
-	    Map<String, Object> variables = ImmutableMap.of(
-					"title",
-	        "Betrayal at House on the Hill"
-			);
-	    return new ModelAndView(GSON.toJson(variables), "betrayal.ftl");
-	  }
-	}
-	
 	private static class ItemHandler implements TemplateViewRoute {
 
 		@Override
 		public ModelAndView handle(Request arg0, Response arg1)
 				throws Exception {
-			
-			
+
+
 			return null;
 		}
 	}
-	
+
 	private static class OmenHandler implements TemplateViewRoute {
 
 		@Override
 		public ModelAndView handle(Request arg0, Response arg1)
 				throws Exception {
-			
-			
+
+
 			return null;
 		}
 	}
-	
+
 	private static class EventHandler implements TemplateViewRoute {
 
 		@Override
 		public ModelAndView handle(Request arg0, Response arg1)
 				throws Exception {
-			
-			
+
+
 			return null;
 		}
 	}
