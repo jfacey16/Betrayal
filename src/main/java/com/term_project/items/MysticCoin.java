@@ -1,6 +1,7 @@
 package com.term_project.items;
 
 import java.util.List;
+import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.game.Dice;
@@ -38,7 +39,8 @@ public class MysticCoin implements Item {
   }
 
   @Override
-  public void use(GameChar character, MemorySlot memory) {
+  public void use(GameChar character, MemorySlot memory,
+      Map<String, Object> variables) {
     List<Integer> rolls = Dice.roll(1);
 
     int roll = rolls.get(0);
@@ -56,6 +58,8 @@ public class MysticCoin implements Item {
       character.modMight(-1);
       character.modKnowlege(-1);
     }
+
+    variables.put("rolls", rolls);
   }
 
   @Override

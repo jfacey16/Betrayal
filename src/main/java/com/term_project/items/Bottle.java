@@ -1,6 +1,7 @@
 package com.term_project.items;
 
 import java.util.List;
+import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.game.Dice;
@@ -45,7 +46,8 @@ public class Bottle implements Item {
   }
 
   @Override
-  public void use(GameChar character, MemorySlot memory) {
+  public void use(GameChar character, MemorySlot memory,
+      Map<String, Object> variables) {
 
     List<Integer> rolls = Dice.roll(3);
 
@@ -81,6 +83,7 @@ public class Bottle implements Item {
   @Override
   public void loss(GameChar character) {
     character.removeItem(this);
+    character.getTile().addItem(this);
   }
 
   @Override
