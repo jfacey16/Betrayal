@@ -3,7 +3,6 @@ package com.term_project.game.actions;
 import java.util.Map;
 
 import com.term_project.character.GameChar;
-import com.term_project.house.EmptyTile;
 import com.term_project.house.Floor;
 import com.term_project.house.Pos;
 import com.term_project.house.Tile;
@@ -77,7 +76,7 @@ public class Mover {
   private void moveTileHandler(Tile newTile, GameChar character) {
     // if its a empty tile, we need to generate a new tile for the frontend to
     // position.
-    if (newTile instanceof EmptyTile) {
+    if (newTile == null) {
       // We "prep" it to add bc player still needs to choose rotation
       prepTileToAdd(newTile, character);
     } else {
@@ -182,17 +181,9 @@ public class Mover {
         new Pos(toAddPos.getX(), toAddPos.getY() + 1, toAddPos.getFloor()));
     // make sure there is a tile to link and a door to link through
     if (northOfAdded != null && northOfAdded.hasSouth()) {
-      // it must be an empty tile to the south bc we are adding one there at
-      // the moment
-      assert(northOfAdded.getSouth() instanceof EmptyTile);
-
-      // if the tile we are adding also has a door to link with northOfAdded,
-      // link the two. Otherwise remove northOfAdded's door
       if (toAdd.hasNorth()) {
-        toAdd.setNorth(northOfAdded);
-        northOfAdded.setSouth(toAdd);
-      } else {
-        northOfAdded.setSouth(null);
+        toAdd.addNorth();
+        northOfAdded.addSouth();
       }
     }
 
@@ -200,15 +191,10 @@ public class Mover {
     Tile southOfAdded = tileMap.get(
         new Pos(toAddPos.getX(), toAddPos.getY() - 1, toAddPos.getFloor()));
     if (southOfAdded != null && southOfAdded.hasNorth()) {
-      // it must be an empty tile to the north bc we are adding one there at
-      // the moment
-      assert(southOfAdded.getNorth() instanceof EmptyTile);
 
       if (toAdd.hasSouth()) {
-        toAdd.setSouth(southOfAdded);
-        southOfAdded.setNorth(toAdd);
-      } else {
-        southOfAdded.setNorth(null);
+        toAdd.addSouth();
+        southOfAdded.addNorth();
       }
     }
 
@@ -216,15 +202,10 @@ public class Mover {
     Tile eastOfAdded = tileMap.get(
         new Pos(toAddPos.getX() + 1, toAddPos.getY(), toAddPos.getFloor()));
     if (eastOfAdded != null && eastOfAdded.hasWest()) {
-      // it must be an empty tile to the west bc we are adding one there at
-      // the moment
-      assert(eastOfAdded.getWest() instanceof EmptyTile);
 
       if (toAdd.hasEast()) {
-        toAdd.setEast(eastOfAdded);
-        eastOfAdded.setWest(toAdd);
-      } else {
-        eastOfAdded.setWest(null);
+        toAdd.addEast();
+        eastOfAdded.addWest();
       }
     }
 
@@ -232,15 +213,9 @@ public class Mover {
     Tile westOfAdded = tileMap.get(
         new Pos(toAddPos.getX() - 1, toAddPos.getY(), toAddPos.getFloor()));
     if (westOfAdded != null && westOfAdded.hasEast()) {
-      // it must be an empty tile to the east bc we are adding one there at
-      // the moment
-      assert(westOfAdded.getEast() instanceof EmptyTile);
-
       if (westOfAdded.hasEast()) {
-        toAdd.setEast(westOfAdded);
-        westOfAdded.setEast(toAdd);
-      } else {
-        westOfAdded.setEast(null);
+        toAdd.addEast();
+        westOfAdded.addEast();
       }
     }
 

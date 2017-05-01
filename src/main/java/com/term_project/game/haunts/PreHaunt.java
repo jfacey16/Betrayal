@@ -168,6 +168,8 @@ public class PreHaunt implements GamePhase {
             toResolve.add("event");
             phase = 1;
             eventList.add(event);
+
+            //ADD EVENTS TO TILE HASHMAP
           }
 
           for (int i = 0; i < character.getTile().getOmenCount(); i++) {

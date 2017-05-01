@@ -24,7 +24,7 @@ public interface Tile {
 
   /**
    * Sets the tiles name.
-   * 
+   *
    * @return The tile object that the function is being called on.
    */
   Tile setName(String newName);
@@ -39,7 +39,7 @@ public interface Tile {
 
   /**
    * Sets the tiles description.
-   * 
+   *
    * @return The tile object that the function is being called on.
    */
   Tile setDescription(String newDescription);
@@ -204,25 +204,25 @@ public interface Tile {
    * Sets the tile that is linked to this tile in the North.
    *
    */
-  void setNorth(Tile newTile);
+  void addNorth();
 
   /**
    * Sets the tile that is linked to this tile in the South.
    *
    */
-  void setSouth(Tile newTile);
+  void addSouth();
 
   /**
    * Sets the tile that is linked to this tile in the East.
    *
    */
-  void setEast(Tile newTile);
+  void addEast();
 
   /**
    * Sets the tile that is linked to this tile in the West.
    *
    */
-  void setWest(Tile newTile);
+  void addWest();
 
   /**
    * Sets the tile's position.
@@ -262,4 +262,13 @@ public interface Tile {
    *          the omen
    */
   void addOmen(Omen omen);
+
+
+  public boolean hasDown();
+
+  public boolean hasUp();
+
+  public Tile getUp() throws NullPointerException;
+
+  public Tile getDown() throws NullPointerException;
 }

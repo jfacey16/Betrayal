@@ -8,6 +8,7 @@ import java.util.Map;
 import com.term_project.events.Event;
 import com.term_project.items.Item;
 import com.term_project.omens.Omen;
+import com.term_project.system.MemorySlot;
 
 /**
  * Generic tile with no entry and exit events
@@ -17,7 +18,8 @@ import com.term_project.omens.Omen;
 
 public abstract class AbstractTile implements Tile {
   private Pos pos;
-  private Map<Direction, Tile> connectedTiles;
+  private Map<Direction, Pos> doors;
+  private List<Direction> availableDoors;
   private int itemCount;
   private int omenCount;
   private int eventCount;
@@ -25,10 +27,12 @@ public abstract class AbstractTile implements Tile {
   private List<Omen> omens;
   private Map<String, Event> events;
   private List<Floor> availableFloors;
+  private MemorySlot memory;
 
-  public AbstractTile(Map<Direction, Tile> connectedTiles, int items,
-      int events, int omens, List<Floor> availableFloors) {
+  public AbstractTile(List<Direction> availableDoors, int items,
+      int events, int omens, List<Floor> availableFloors, MemorySlot memory) {
 
+    this.availableDoors = availableDoors;
     this.items = new ArrayList<>();
     this.omens = new ArrayList<>();
     this.events = new HashMap<>();
@@ -38,9 +42,11 @@ public abstract class AbstractTile implements Tile {
     this.eventCount = events;
 
     this.pos = null;
-    this.connectedTiles = connectedTiles;
+    this.availableDoors = availableDoors;
     this.availableFloors = availableFloors;
+    this.memory = memory;
   }
+
 
   @Override
   public List<Omen> getOmens() {
@@ -99,88 +105,118 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public Tile getNorth() throws NullPointerException {
-    Tile north = connectedTiles.get(Direction.NORTH);
-    if (north != null) {
-      return north;
-    } else {
+    if(!hasNorth()) {
       throw new NullPointerException(
           "There is no door/tile to the north.");
     }
+    Tile north = memory.getTileMap().get(doors.get(Direction.NORTH));
+    return north;
   }
 
   @Override
   public Tile getSouth() throws NullPointerException {
-    Tile south = connectedTiles.get(Direction.SOUTH);
-    if (south != null) {
-      return south;
-    } else {
+    if(!hasSouth()) {
       throw new NullPointerException(
           "There is no door/tile to the south.");
     }
+    Tile south = memory.getTileMap().get(doors.get(Direction.SOUTH));
+    return south;
   }
 
   @Override
   public Tile getEast() throws NullPointerException {
-    Tile east = connectedTiles.get(Direction.EAST);
-    if (east != null) {
-      return east;
-    } else {
-      throw new NullPointerException("There is no door/tile to the east.");
+    if(!hasEast()) {
+      throw new NullPointerException(
+          "There is no door/tile to the south.");
     }
+    Tile east = memory.getTileMap().get(doors.get(Direction.EAST));
+    return east;
   }
 
   @Override
   public Tile getWest() throws NullPointerException {
-    Tile west = connectedTiles.get(Direction.WEST);
-    if (west != null) {
-      return west;
-    } else {
-      throw new NullPointerException("There is no door/tile to the west.");
+    if(!hasWest()) {
+      throw new NullPointerException(
+          "There is no door/tile to the south.");
     }
+    Tile west = memory.getTileMap().get(doors.get(Direction.WEST));
+    return west;
+  }
+
+  @Override
+  public Tile getUp() throws NullPointerException {
+    if(!hasUp()) {
+      throw new NullPointerException(
+          "There is no door/tile to above.");
+    }
+    Tile up = memory.getTileMap().get(doors.get(Direction.UP));
+    return up;
+  }
+
+  @Override
+  public Tile getDown() throws NullPointerException {
+    if(!hasDown()) {
+      throw new NullPointerException(
+          "There is no door/tile below.");
+    }
+    Tile down = memory.getTileMap().get(doors.get(Direction.DOWN));
+    return down;
   }
 
   @Override
   public boolean hasNorth() {
-    Tile north = connectedTiles.get(Direction.NORTH);
-    return north != null;
+    return availableDoors.contains(Direction.NORTH);
   }
 
   @Override
   public boolean hasSouth() {
-    Tile south = connectedTiles.get(Direction.SOUTH);
-    return south != null;
+    return availableDoors.contains(Direction.SOUTH);
   }
 
   @Override
   public boolean hasEast() {
-    Tile east = connectedTiles.get(Direction.EAST);
-    return east != null;
+    return availableDoors.contains(Direction.EAST);
   }
 
   @Override
   public boolean hasWest() {
-    Tile west = connectedTiles.get(Direction.WEST);
-    return west != null;
+    return availableDoors.contains(Direction.WEST);
   }
 
   @Override
-  public void setNorth(Tile newTile) {
-    connectedTiles.put(Direction.NORTH, newTile);
+  public boolean hasDown() {
+    return availableDoors.contains(Direction.DOWN);
+  }
+
+
+  @Override
+  public boolean hasUp() {
+    return availableDoors.contains(Direction.UP);
+  }
+
+
+  @Override
+  public void addNorth() {
+    assert(hasNorth());
+    doors.put(Direction.NORTH, new Pos(pos.getX(), pos.getY() + 1, pos.getFloor()));
   }
 
   @Override
-  public void setSouth(Tile newTile) {
-    connectedTiles.put(Direction.SOUTH, newTile);
+  public void addSouth() {
+    assert(hasSouth());
+    doors.put(Direction.NORTH, new Pos(pos.getX(), pos.getY() - 1, pos.getFloor()));
   }
 
   @Override
-  public void setEast(Tile newTile) {
-    connectedTiles.put(Direction.EAST, newTile);
+  public void addEast() {
+    assert(hasEast());
+    doors.put(Direction.NORTH, new Pos(pos.getX() + 1, pos.getY(), pos.getFloor()));
   }
 
   @Override
-  public void setWest(Tile newTile) {
-    connectedTiles.put(Direction.WEST, newTile);
+  public void addWest() {
+    assert(hasWest());
+    doors.put(Direction.NORTH, new Pos(pos.getX() - 1, pos.getY(), pos.getFloor()));
   }
 
   @Override
@@ -196,47 +232,47 @@ public abstract class AbstractTile implements Tile {
   @Override
   public void rotateClockwise() {
     // will be placement will switching tiles
-    Tile holderOne;
-    Tile holderTwo;
+    Pos holderOne;
+    Pos holderTwo;
 
     // make east value the northern value
-    holderOne = connectedTiles.get(Direction.EAST);
-    connectedTiles.put(Direction.EAST,
-        connectedTiles.get(Direction.NORTH));
+    holderOne = doors.get(Direction.EAST);
+    doors.put(Direction.EAST,
+        doors.get(Direction.NORTH));
 
     // make south value the eastern value
-    holderTwo = connectedTiles.get(Direction.SOUTH);
-    connectedTiles.put(Direction.SOUTH, holderOne);
+    holderTwo = doors.get(Direction.SOUTH);
+    doors.put(Direction.SOUTH, holderOne);
 
     // Make west value the south value
-    holderOne = connectedTiles.get(Direction.WEST);
-    connectedTiles.put(Direction.WEST, holderTwo);
+    holderOne = doors.get(Direction.WEST);
+    doors.put(Direction.WEST, holderTwo);
 
     // Make north value the west value
-    connectedTiles.put(Direction.NORTH, holderOne);
+    doors.put(Direction.NORTH, holderOne);
   }
 
   @Override
   public void rotateCounterClockwise() {
     // will be placement will switching tiles
-    Tile holderOne;
-    Tile holderTwo;
+    Pos holderOne;
+    Pos holderTwo;
 
     // make east value the southern value
-    holderOne = connectedTiles.get(Direction.EAST);
-    connectedTiles.put(Direction.EAST,
-        connectedTiles.get(Direction.SOUTH));
+    holderOne = doors.get(Direction.EAST);
+    doors.put(Direction.EAST,
+        doors.get(Direction.SOUTH));
 
     // make north value the eastern value
-    holderTwo = connectedTiles.get(Direction.NORTH);
-    connectedTiles.put(Direction.NORTH, holderOne);
+    holderTwo = doors.get(Direction.NORTH);
+    doors.put(Direction.NORTH, holderOne);
 
     // Make west value the north value
-    holderOne = connectedTiles.get(Direction.WEST);
-    connectedTiles.put(Direction.WEST, holderTwo);
+    holderOne = doors.get(Direction.WEST);
+    doors.put(Direction.WEST, holderTwo);
 
     // Make north value the west value
-    connectedTiles.put(Direction.SOUTH, holderOne);
+    doors.put(Direction.SOUTH, holderOne);
   }
 
   @Override

@@ -15,7 +15,6 @@ import com.term_project.system.MemorySlot;
 import com.term_project.game.Dice;
 import com.term_project.house.Floor;
 import com.term_project.house.Direction;
-import com.term_project.house.EmptyTile;
 import com.term_project.house.Pos;
 import com.term_project.house.GenericTile;
 
@@ -57,68 +56,69 @@ public class Lobby implements GamePhase {
     if(phase == 1) {
       //set starting tiles
       //tile where players start
-      Map<Direction, Tile> frontDoorConnected = new HashMap<>();
+      List<Direction> frontDoorConnected = new ArrayList<>();
       List<Floor> frontDoorAvailable = new ArrayList<>();
       frontDoorAvailable.add(Floor.GROUND);
       Tile frontDoor = new GenericTile(frontDoorConnected,
                                        0, 0, 0,
-                                       frontDoorAvailable);
+                                       frontDoorAvailable,
+                                       memory);
       frontDoor.setPos(new Pos(0, 0, Floor.GROUND));
 
       //between door and stairs
-      Map<Direction, Tile> midConnected = new HashMap<>();
+      List<Direction> midConnected = new ArrayList<>();
       List<Floor> midAvailable = new ArrayList<>();
       midAvailable.add(Floor.GROUND);
-      Tile mid = new GenericTile(midConnected, 0, 0, 0, midAvailable);
+      Tile mid = new GenericTile(midConnected, 0, 0, 0, midAvailable, memory);
       mid.setPos(new Pos(-1, 0, Floor.GROUND));
 
       //stairs
-      Map<Direction, Tile> stairsConnected = new HashMap<>();
+      List<Direction> stairsConnected = new ArrayList<>();
       List<Floor> stairsAvailable = new ArrayList<>();
       stairsAvailable.add(Floor.GROUND);
-      Tile stairs = new GenericTile(stairsConnected, 0, 0, 0, stairsAvailable);
+      Tile stairs = new GenericTile(stairsConnected, 0, 0, 0, stairsAvailable, memory);
       stairs.setPos(new Pos(-2, 0, Floor.GROUND));
 
       //upper landing
-      Map<Direction, Tile> upperConnected = new HashMap<>();
+      List<Direction>  upperConnected = new ArrayList<>();
       List<Floor> upperAvailable = new ArrayList<>();
       upperAvailable.add(Floor.ATTIC);
-      Tile upper = new GenericTile(upperConnected, 0, 0, 0, upperAvailable);
+      Tile upper = new GenericTile(upperConnected, 0, 0, 0, upperAvailable, memory);
       upper.setPos(new Pos(-2, 0, Floor.ATTIC));
 
       //basement
-      Map<Direction, Tile> basementConnected = new HashMap<>();
+      List<Direction> basementConnected = new ArrayList<>();
       List<Floor> basementAvailable = new ArrayList<>();
       basementAvailable.add(Floor.BASEMENT);
-      Tile basement = new GenericTile(basementConnected, 0, 0, 0, basementAvailable);
+      Tile basement = new GenericTile(basementConnected, 0, 0, 0, basementAvailable, memory);
       basement.setPos(new Pos(0, 0, Floor.BASEMENT));
 
       //connect front door
-      frontDoorConnected.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-      frontDoorConnected.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-      frontDoorConnected.put(Direction.WEST, mid);
+      frontDoorConnected.add(Direction.NORTH);
+      frontDoorConnected.add(Direction.SOUTH);
+      frontDoorConnected.add(Direction.WEST);
 
       //connect mid door
-      midConnected.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-      midConnected.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-      midConnected.put(Direction.EAST, frontDoor);
+      midConnected.add(Direction.NORTH);
+      midConnected.add(Direction.SOUTH);
+      midConnected.add(Direction.EAST);
 
       //connect stairs
-      stairsConnected.put(Direction.EAST, mid);
-      stairsConnected.put(Direction.UP, upper);
+      stairsConnected.add(Direction.EAST);
+      stairsConnected.add(Direction.UP);
 
       //connect upper
-      upperConnected.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-      upperConnected.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-      upperConnected.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-      upperConnected.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-      upperConnected.put(Direction.DOWN, stairs);
+      upperConnected.add(Direction.NORTH);
+      upperConnected.add(Direction.SOUTH);
+      upperConnected.add(Direction.EAST);
+      upperConnected.add(Direction.WEST);
+      upperConnected.add(Direction.DOWN);
 
       //connect basment
-      basementConnected.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-      basementConnected.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-      basementConnected.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-      basementConnected.put(Direction.WEST, new EmptyTile(new HashMap<>()));
+      basementConnected.add(Direction.NORTH);
+      basementConnected.add(Direction.SOUTH);
+      basementConnected.add(Direction.EAST);
+      basementConnected.add(Direction.WEST);
 
 
       //add tiles to tileMap

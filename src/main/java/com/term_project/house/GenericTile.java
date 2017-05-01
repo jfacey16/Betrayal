@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.term_project.character.GameChar;
+import com.term_project.system.MemorySlot;
 
 /**
  * Generic tile with no entry and exit events
@@ -15,10 +16,10 @@ public class GenericTile extends AbstractTile implements Tile {
   private String name;
   private String description;
 
-  public GenericTile(Map<Direction, Tile> connectedTiles, int items,
-      int events, int omens, List<Floor> availableFloors) {
+  public GenericTile(List<Direction> doors, int items,
+      int events, int omens, List<Floor> availableFloors, MemorySlot memory) {
 
-    super(connectedTiles, items, events, omens, availableFloors);
+    super(doors, items, events, omens, availableFloors, memory);
   }
 
   @Override
