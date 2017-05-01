@@ -50,4 +50,20 @@ public class Book implements Omen {
     character.removeOmen(this);
     character.getTile().addOmen(this);
   }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == this)
+      return true;
+    if (!(object instanceof Book)) {
+      return false;
+    }
+
+    return this.getName().equals(((Book) object).getName());
+  }
+
+  @Override
+  public int hashCode() {
+    return this.getName().hashCode();
+  }
 }
