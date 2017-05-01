@@ -186,7 +186,7 @@ public class Main {
 	  @Override
 	  public String handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
-
+			
 	    Map<String, Object> variables = ImmutableMap.of(
 					"title",
 	        "Betrayal at House on the Hill"

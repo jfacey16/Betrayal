@@ -6,6 +6,8 @@ $(document).ready(() => {
 
         // TODO: Parse the JSON response into a JavaScript object. DONE
         const responseObject = JSON.parse(responseJSON);
+        
+        console.log(responseObject);
 
 				let choices = responseObject.characterChoices;
     });
