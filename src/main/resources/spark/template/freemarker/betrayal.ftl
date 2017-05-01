@@ -45,6 +45,14 @@
       this.posy = posy;
     }
   }
+  
+  let $player_1_turn;
+  let $player_2_turn;
+  let $player_3_turn;
+  let $player_4_turn;
+  let $player_5_turn;
+  let $player_6_turn;
+  
   const T = 150;
   const P = 20;
   const D = 50;
@@ -116,8 +124,79 @@
       else 
         turn++;
       // player.innerHTML = turn + 1;
-      moves = 10;
-      movesp.innerHTML = 10;
+      
+      if(turn === 0) {
+      
+	      moves = $char_1.speedScale[$char_1.speed - 1];
+	      movesp.innerHTML = $char_1.speedScale[$char_1.speed - 1];
+	      document.getElementById("player_1").style.borderColor = "yellow";
+	      document.getElementById("player_2").style.borderColor = "black";
+	      document.getElementById("player_3").style.borderColor = "black";
+	      document.getElementById("player_4").style.borderColor = "black";
+	      document.getElementById("player_5").style.borderColor = "black";
+	      document.getElementById("player_6").style.borderColor = "black";
+      }
+      
+      if(turn === 1) {
+      
+	      moves = $char_2.speedScale[$char_2.speed - 1];
+	      movesp.innerHTML = $char_2.speedScale[$char_2.speed - 1];
+	      document.getElementById("player_1").style.borderColor = "black";
+	      document.getElementById("player_2").style.borderColor = "yellow";
+	      document.getElementById("player_3").style.borderColor = "black";
+	      document.getElementById("player_4").style.borderColor = "black";
+	      document.getElementById("player_5").style.borderColor = "black";
+	      document.getElementById("player_6").style.borderColor = "black";
+      }
+      
+      if(turn === 2) {
+      
+	      moves = $char_3.speedScale[$char_3.speed - 1];
+	      movesp.innerHTML = $char_3.speedScale[$char_3.speed - 1];
+	      document.getElementById("player_1").style.borderColor = "black";
+	      document.getElementById("player_2").style.borderColor = "black";
+	      document.getElementById("player_3").style.borderColor = "yellow";
+	      document.getElementById("player_4").style.borderColor = "black";
+	      document.getElementById("player_5").style.borderColor = "black";
+	      document.getElementById("player_6").style.borderColor = "black";
+      }
+      
+      if(turn === 3) {
+      
+	      moves = $char_4.speedScale[$char_4.speed - 1];
+	      movesp.innerHTML = $char_4.speedScale[$char_4.speed - 1];
+	      document.getElementById("player_1").style.borderColor = "black";
+	      document.getElementById("player_2").style.borderColor = "black";
+	      document.getElementById("player_3").style.borderColor = "black";
+	      document.getElementById("player_4").style.borderColor = "yellow";
+	      document.getElementById("player_5").style.borderColor = "black";
+	      document.getElementById("player_6").style.borderColor = "black";
+      }
+      
+      if(turn === 4) {
+      
+	      moves = $char_5.speedScale[$char_5.speed - 1];
+	      movesp.innerHTML = $char_5.speedScale[$char_5.speed - 1];
+	      document.getElementById("player_1").style.borderColor = "black";
+	      document.getElementById("player_2").style.borderColor = "black";
+	      document.getElementById("player_3").style.borderColor = "black";
+	      document.getElementById("player_4").style.borderColor = "black";
+	      document.getElementById("player_5").style.borderColor = "yellow";
+	      document.getElementById("player_6").style.borderColor = "black";
+      }
+      
+      if(turn === 5) {
+      
+	      moves = $char_6.speedScale[$char_6.speed - 1];
+	      movesp.innerHTML = $char_6.speedScale[$char_6.speed - 1];
+	      document.getElementById("player_1").style.borderColor = "black";
+	      document.getElementById("player_2").style.borderColor = "black";
+	      document.getElementById("player_3").style.borderColor = "black";
+	      document.getElementById("player_4").style.borderColor = "black";
+	      document.getElementById("player_5").style.borderColor = "black";
+	      document.getElementById("player_6").style.borderColor = "yellow";
+      }
+      
       if (positions[turn].floor == 0) {
         first.style.display = 'none';
         second.style.display = 'none';
@@ -326,7 +405,7 @@
   
   <div class="player_row">
   
-    <div class="player_2">
+    <div id="player_2" class="player">
        <div class="image">
           <div class="icon">
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 2" style="width:75px;height:75px;"></center>
@@ -342,7 +421,7 @@
         </div>
     </div>
     
-    <div class="player_3">
+    <div id="player_3" class="player">
         <div class="image">
           <div class="icon">
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 3" style="width:75px;height:75px;"></center>
@@ -358,7 +437,7 @@
         </div>
     </div>
     
-    <div class="player_4">
+    <div id="player_4" class="player">
        <div class="image">
           <div class="icon">
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 4" style="width:75px;height:75px;"></center>
@@ -374,7 +453,7 @@
         </div>
     </div>
     
-    <div class="player_5">
+    <div id="player_5" class="player">
        <div class="image">
           <div class="icon">
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 5" style="width:75px;height:75px;"></center>
@@ -390,7 +469,7 @@
         </div>
     </div>
     
-    <div class="player_6">
+    <div id="player_6" class="player">
        <div class="image">
           <div class="icon">
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 6" style="width:75px;height:75px;"></center>
@@ -441,56 +520,13 @@
       margin:5px;
       background-color:#eeeeee;}
     </style>
-    
+
     <style type="text/css">
-    .player_2{
+    .player{
       display:flex; 
       flex-direction:row;
       width:20%;
-      border-style:solid;
-      border-width:2px;
-      margin:5px;
-      background-color:#eeeeee;}
-    </style>
-    
-    <style type="text/css">
-    .player_3{
-      display:flex; 
-      flex-direction:row;
-      width:20%;
-      border-style:solid;
-      border-width:2px;
-      margin:5px;
-      background-color:#eeeeee;}
-    </style>
-    
-    <style type="text/css">
-    .player_4{
-      display:flex; 
-      flex-direction:row;
-      width:20%;
-      border-style:solid;
-      border-width:2px;
-      margin:5px;
-      background-color:#eeeeee;}
-    </style>
-    
-    <style type="text/css">
-    .player_5{
-      display:flex; 
-      flex-direction:row;
-      width:20%;
-      border-style:solid;
-      border-width:2px;
-      margin:5px;
-      background-color:#eeeeee;}
-    </style>
-    
-    <style type="text/css">
-    .player_6{
-      display:flex; 
-      flex-direction:row;
-      width:20%;
+      height:20%;
       border-style:solid;
       border-width:2px;
       margin:5px;
@@ -511,7 +547,7 @@
   
   
   <div class="main_game">
-    <div class="player_1">
+    <div id="player_1" class="player_1">
     
       <div id="name_1" class="name"> </div>
     
