@@ -27,7 +27,6 @@
       this.west = west;
     }
   }
-
   class Player {
     constructor(posx, posy, floor, north, east, south, west) {
       this.posx = posx;
@@ -39,14 +38,12 @@
       this.west = west;
     }
   }
-
   class Position {
     constructor(posx, posy) {
       this.posx = posx;
       this.posy = posy;
     }
   }
-
   const T = 150;
   const P = 20;
   const D = 50;
@@ -68,15 +65,18 @@
   let posp2 = new Player(600,600,1,true,true,true,false);
   let posp3 = new Player(600,600,1,true,true,true,false);
   let posp4 = new Player(600,600,1,true,true,true,false);
-  const positions = [posp1, posp2, posp3, posp4];
+  let posp5 = new Player(600,600,1,true,true,true,false);
+  let posp6 = new Player(600,600,1,true,true,true,false);
+  const positions = [posp1, posp2, posp3, posp4, posp5, posp6];
   const offset1 = new Position(25,30);
   const offset2 = new Position(105,30);
   const offset3 = new Position(25,90);
   const offset4 = new Position(105,90);
-  const offsets = [offset1, offset2, offset3, offset4];
+  const offset5 = new Position(65,25);
+  const offset6 = new Position(65,95);
+  const offsets = [offset1, offset2, offset3, offset4, offset5, offset6];
   const v = new Position(50,10);
   const h = new Position(10,50);
-
   function tileExists(posx, posy, floor) {
     let temp;
     if (floor == 0)
@@ -91,7 +91,6 @@
     }
     return -1;
   }
-
   $( function() {
     $( "#first" ).draggable();
   } );
@@ -110,9 +109,8 @@
   $( function() {
     $( "#mbasement" ).draggable();
   } );
-
   function endturn() {
-      if (turn >= 3)
+      if (turn >= 5)
         turn = 0;
       else 
         turn++;
@@ -146,7 +144,6 @@
       }
       
   }
-
   function paintBoard(floor) {
     if (floor == 0 || floor == -1) {
       ctxb.strokeRect(600,600,T,T);
@@ -521,61 +518,61 @@
     
     <div id="item" class="card_draw">
     
-    	<div class="card_name">
-    		<center><font size="4pt">NAME</font></center>
-    	</div> 
-	
-		<center><div class="card_description">
-    		HERE IS WHERE WE DO CARD STUFF
-    	</div></center>
-`	</div>
-	
-	<style type="text/css">
-	.card_name{
-		width:100%;
-		height:10%;
-      	margin-bottom:5px;
-      	background-color:#ffffff;}
+      <div class="card_name">
+        <center><font size="4pt">NAME</font></center>
+      </div> 
+  
+    <center><div class="card_description">
+        HERE IS WHERE WE DO CARD STUFF
+      </div></center>
+` </div>
+  
+  <style type="text/css">
+  .card_name{
+    width:100%;
+    height:10%;
+        margin-bottom:5px;
+        background-color:#ffffff;}
      </style>
      
      <style type="text/css">
-	.card_description{
-		width:95%;
-		height:80%;
+  .card_description{
+    width:95%;
+    height:80%;
         border-style:solid;
         border-width:2px;
-      	margin-bottom:5px;
-      	background-color:#eeeeee;}
+        margin-bottom:5px;
+        background-color:#eeeeee;}
      </style>
 
-	<style type="text/css">
-	.card_draw{
+  <style type="text/css">
+  .card_draw{
       display:flex; 
       flex-direction:column;
-		position:absolute;
-		top:35%;
-		left:37%;
-		float:left;
-		z-index:20;
-		height:350px;
-		width:250px;
-      	border-style:solid;
-      	border-width:2px;
-      	margin-bottom:5px;
-      	background-color:#ffffff;}
+    position:absolute;
+    top:35%;
+    left:37%;
+    float:left;
+    z-index:20;
+    height:350px;
+    width:250px;
+        border-style:solid;
+        border-width:2px;
+        margin-bottom:5px;
+        background-color:#ffffff;}
      </style>
     
 <div id="container">
-	<div id="map">
+  <div id="map">
     <div id="mapf"><canvas id="mfirst"></canvas></div>
-		<div id="maps"><canvas id="msecond"></canvas></div>
-		<div id="mapb"><canvas id="mbasement"></canvas></div>
-	</div>
-	<div id="box">
-		<canvas id="first"></canvas>
-		<canvas id="second"></canvas>
-		<canvas id="basement"></canvas>
-		<div id="descr">
+    <div id="maps"><canvas id="msecond"></canvas></div>
+    <div id="mapb"><canvas id="mbasement"></canvas></div>
+  </div>
+  <div id="box">
+    <canvas id="first"></canvas>
+    <canvas id="second"></canvas>
+    <canvas id="basement"></canvas>
+    <div id="descr">
     <!-- <div> Player <span id="player">1</span>'s turn</div> -->
     <center><div> Speed Left: <span id="moves">10</span></div></center>
     <center><button onclick="endturn();">End Turn</button></center>
@@ -584,7 +581,7 @@
     <center><button disabled>Interact w/Room</button></center>
     <div id="scription"></div>
     </div>
-	</div>
+  </div>
 </div>
 </div>
     
@@ -691,7 +688,6 @@
         basement.style.display = 'none';
      }
   });
-
   let m2 = false;
   $("#msecond").mousedown(function(){m2=false;}).mousemove(function(){m2=true;}).mouseup(function(event){
     if(!m2){
@@ -700,7 +696,6 @@
         basement.style.display = 'none';
      }
   });
-
   let m3 = false;
   $("#mbasement").mousedown(function(){m3=false;}).mousemove(function(){m3=true;}).mouseup(function(event){
     if(!m3){
@@ -709,7 +704,6 @@
         basement.style.display = 'block';
      }
   });
-
   let b1 = false;
   $("#first").mousedown(function(){b1=false;}).mousemove(function(){b1=true;}).mouseup(function(event){
     if(!b1){
@@ -720,7 +714,6 @@
         descr.innerHTML = xpos + " " + ypos;
      }
   });
-
   let b2 = false;
   $("#second").mousedown(function(){b2=false;}).mousemove(function(){b2=true;}).mouseup(function(event){
     if(!b2){
@@ -731,7 +724,6 @@
         descr.innerHTML = xpos + " " + ypos;
      }
   });
-
   let b3 = false;
   $("#basement").mousedown(function(){b3=false;}).mousemove(function(){b3=true;}).mouseup(function(event){
     if(!b3){
@@ -742,7 +734,6 @@
         descr.innerHTML = xpos + " " + ypos;
      }
   });
-
     let moves = 10;
     const first = document.getElementById("first");
     const second = document.getElementById("second");
@@ -775,7 +766,6 @@
     let edgey = [0, 0, 0];
   $(document).ready(() => {
     paintBoard(-1);
-
     $(document).keyup(event => {
       if (moves > 0) {
         let r1 = Math.random() >= 0.5;
