@@ -144,7 +144,7 @@ public class PreHaunt implements GamePhase {
 						should have an additem method not the other way round.*/
 						//force character to pick up items/omens/events
 	          for (int i = 0; i < character.getTile().getItemCount(); i++) {
-	            memory.getItems().poll().add(character, variables);
+	            memory.getItems().poll().add(character);
               //variable ("items -> list omens")
 	          }
 
