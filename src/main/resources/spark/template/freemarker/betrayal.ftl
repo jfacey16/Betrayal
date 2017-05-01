@@ -251,6 +251,38 @@
 <body>
 <div class="game">
 
+	<div class="temp_lobby">
+		<center><p><h2>Create a game:</h2>
+
+			<form method="POST" action="/create_game"> 
+			
+			  <p>Fill out and submit the following form to create a game:</p>
+			  
+			  <p>Game Name: <input type="text" id="name" name="name" placeholder="Enter Game Name"></p>
+			  
+			  <p>Game Size: 
+			  <select name="players" id="players">
+			    <option value="3">3 Players</option>
+			    <option value="4">4 Players</option>
+			    <option value="5">5 Players</option>
+			    <option value="6">6 Players</option>
+			  </select></p>
+			  
+			  <input type="submit" value="Create Game"></center>
+			</form>
+	</div>
+
+	<style type="text/css">
+    .title{
+      float:left;
+      width:100%;
+      border-style:solid;
+      border-width:2px;
+      margin:5px;
+      background-color:#eeeeee;}
+    </style>
+
+
   <div class="title_row">
     <div class="title">
        <center><font size="5">Betrayal at House on the Hill</font></center>
