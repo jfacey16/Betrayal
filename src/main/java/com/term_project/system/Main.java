@@ -1,25 +1,35 @@
 package com.term_project.system;
 
+import com.term_project.game.GameState;
+import com.term_project.system.MemorySlot;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
 
-import com.google.common.collect.ImmutableMap;
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
 
 import spark.ExceptionHandler;
 import spark.ModelAndView;
 import spark.QueryParamsMap;
 import spark.Request;
 import spark.Response;
+import spark.Route;
 import spark.Spark;
 import spark.TemplateViewRoute;
 import spark.template.freemarker.FreeMarkerEngine;
+
+
+import com.google.common.collect.ImmutableMap;
+import com.google.gson.Gson;
+
 import freemarker.template.Configuration;
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
 
 /**
  * Hello world!
@@ -27,6 +37,8 @@ import joptsimple.OptionSet;
  */
 public class Main {
 	private static final int DEFAULT_PORT = 4567;
+	private static GameState gameState = null;
+	private static final Gson GSON = new Gson();
 
 	public static void main(String[] args) {
 		new Main(args).run();
@@ -100,40 +112,46 @@ public class Main {
 					"message",
 					message
 			);
-		  return new ModelAndView(variables, "menu.ftl");
+		  return new ModelAndView(GSON.toJson(variables), "menu.ftl");
 		}
 	}
 
 	private static class LobbyHandler implements TemplateViewRoute {
-
 	    @Override
 	    public ModelAndView handle(Request req, Response res) {
 	      QueryParamsMap qm = req.queryMap();
 	      String game_name = qm.value("name");
-	      String player_number = qm.value("players");
+				//setup ids
+	      Integer player_number = Integer.parseInt(qm.value("players"));
+				List<String> ids =  new ArrayList();
+				for (int i = 0; i < player_number; i++) {
+					ids.add(Integer.toString(i));
+				}
+
+				gameState = new GameState(ids, new MemorySlot());
 
 	      String message = "<p><h4>You're currently in the lobby of Game \"" + game_name + "\".</h4></p>";
 	      message += "<p><h4>Waiting for X more players to join your lobby of " + player_number + ".</h4></p>";
 
-	      Map<String, Object> variables = ImmutableMap.of(
-						"title",
-	          "Betrayal at House on the Hill",
-						"message",
-						message
-				);
-	      return new ModelAndView(variables, "lobby.ftl");
+	      Map<String, Object> variables = new HashMap<>();
+				variables.put("title", "Betrayal at House on the Hill");
+				variables.put("message", message);
+
+				variables.putAll(gameState.start());
+			  return new ModelAndView(GSON.toJson(variables), "lobby.ftl");
 	    }
 	}
 
 	private static class BetrayalHandler implements TemplateViewRoute {
 	  @Override
 	  public ModelAndView handle(Request req, Response res) {
+			QueryParamsMap qm = req.queryMap();
 
 	    Map<String, Object> variables = ImmutableMap.of(
 					"title",
 	        "Betrayal at House on the Hill"
 			);
-	    return new ModelAndView(variables, "betrayal.ftl");
+	    return new ModelAndView(GSON.toJson(variables), "betrayal.ftl");
 	  }
 	}
 

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.term_project.character.GameChar;
+import com.term_project.builders.CharacterGen;
 import com.term_project.events.Event;
 import com.term_project.game.actions.Mover;
 import com.term_project.house.Tile;
@@ -24,10 +25,12 @@ public class Lobby implements GamePhase {
   private MemorySlot memory;
 
   private int phase;
+  CharacterGen charGen;
 
   public Lobby(MemorySlot memory) {
     this.memory = memory;
     phase = 0;
+    charGen = new CharacterGen();
   }
 
   @Override
@@ -43,10 +46,9 @@ public class Lobby implements GamePhase {
     // in this phase we send frontend character choices
     if(phase == 0) {
       /*we want a character generator that generates a list of pairs of characters. */
-      /*
-      List<List<GameChar>> characters = CharacterGen.genList(numplayers);
+      List<List<GameChar>> characters = charGen.build().subList(0, numPlayers - 1);
       variables.put("characterChoices", characters);
-      */
+      phase = 1;
       return;
     }
 
@@ -135,12 +137,14 @@ public class Lobby implements GamePhase {
       //loops through and sets characters
       for (int i = 0; i < ids.size(); i++) {
         String id = ids.get(i);
-        // GameChar character = CharacterGen.getCharactersByName(qm.value(id));
-        // playersCharacters.put(id, character);
-        // character.setTile(frontDoor);
+        GameChar namedCharacter = charGen.getCharactersByName(qm.value(id));
+        playersCharacters.put(id, namedCharacter);
+        namedCharacter.setTile(frontDoor);
       }
       //set playersCharacters
       memory.getGameState().setPlayersCharacters(playersCharacters);
+      memory.setGameCharacters(new ArrayList<>(playersCharacters.values()));
+
 
       //send frontend tiles and characters
       variables.put("tiles",
