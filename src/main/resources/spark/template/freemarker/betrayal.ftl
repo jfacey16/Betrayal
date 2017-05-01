@@ -252,34 +252,69 @@
 <div class="game">
 
 	<div class="temp_lobby">
-		<center><p><h2>Create a game:</h2>
+		<center><p><h2>Let's play Betrayal!</h2>
 
-			<form method="POST" action="/create_game"> 
-			
-			  <p>Fill out and submit the following form to create a game:</p>
+			  <p>Select characters for each player, then start the game:</p>
 			  
 			  <p>Game Name: <input type="text" id="name" name="name" placeholder="Enter Game Name"></p>
 			  
-			  <p>Game Size: 
-			  <select name="players" id="players">
-			    <option value="3">3 Players</option>
-			    <option value="4">4 Players</option>
-			    <option value="5">5 Players</option>
-			    <option value="6">6 Players</option>
+			  <p>Player 1: 
+			  <select id="player_1">
+			    <option value="1"> <p id="opt_1"></p> </option>
+			    <option value="2"> <p id="opt_2"></p> </option>
 			  </select></p>
 			  
-			  <input type="submit" value="Create Game"></center>
-			</form>
+			  <p>Player 2: 
+			  <select id="player_2">
+			    <option value="3"> <p id="opt_3"></p> </option>
+			    <option value="4"> <p id="opt_4"></p> </option>
+			  </select></p>
+			  
+			  <p>Player 3: 
+			  <select id="player_3">
+			    <option value="5"> <p id="opt_5"></p> </option>
+			    <option value="6"> <p id="opt_6"></p> </option>
+			  </select></p>
+			  
+			  <p>Player 4: 
+			  <select id="player_4">
+			    <option value="7"> <p id="opt_7"></p> </option>
+			    <option value="8"> <p id="opt_8"></p> </option>
+			    <option value="4_none">No 4th player.</option>
+			  </select></p>
+			  
+			  <p>Player 5: 
+			  <select id="player_5">
+			    <option value="9"> <p id="opt_9"></p> </option>
+			    <option value="10"> <p id="opt_10"></p> </option>
+			    <option value="5_none">No 5th player.</option>
+			  </select></p>
+			  
+			  <p>Player 6: 
+			  <select id="player_6">
+			    <option value="11"> <p id="opt_12"></p> </option>
+			    <option value="12"> <p id="opt_11"></p> </option>
+			    <option value="6_none">No 6th player.</option>
+			  </select></p>
+			  
+			  <p><button type="button" id="create">Create Game</button> 
 	</div>
 
 	<style type="text/css">
-    .title{
-      float:left;
-      width:100%;
-      border-style:solid;
-      border-width:2px;
-      margin:5px;
-      background-color:#eeeeee;}
+    .temp_lobby{
+      display:flex; 
+      flex-direction:column;
+    position:absolute;
+    top:10%;
+    left:10%;
+    float:left;
+    z-index:20;
+    height:500px;
+    width:1000px;
+        border-style:solid;
+        border-width:2px;
+        margin-bottom:5px;
+        background-color:#ffffff;}
     </style>
 
 
@@ -631,10 +666,7 @@
       <div class="objective">
         <center>Objectives</center>
         
-        <div class="obj_info">
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."      
-          <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>      
-        </div>
+        <div id="objective_description" class="obj_info"></div>
         
         <style type="text/css">
         .obj_info{
