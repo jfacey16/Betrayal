@@ -99,6 +99,8 @@ public class Main {
 	  Spark.get("/betrayal_menu", new MenuHandler(), freeMarker);
 	  Spark.post("/create_game", new LobbyHandler(), freeMarker);
 	  Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
+		Spark.post("/betrayal", new PlayBetrayalHandler(), freeMarker);
+		Spark.post("/cheatStart", new CheatStart(), freeMarker);
 	}
 
 	private static class MenuHandler implements TemplateViewRoute {
@@ -112,7 +114,7 @@ public class Main {
 					"message",
 					message
 			);
-		  return new ModelAndView(GSON.toJson(variables), "menu.ftl");
+		  return new ModelAndView(variables, "menu.ftl");
 		}
 	}
 
@@ -143,6 +145,32 @@ public class Main {
 	}
 
 	private static class BetrayalHandler implements TemplateViewRoute {
+	  @Override
+	  public ModelAndView handle(Request req, Response res) {
+			QueryParamsMap qm = req.queryMap();
+
+	    Map<String, Object> variables = ImmutableMap.of(
+					"title",
+	        "Betrayal at House on the Hill"
+			);
+	    return new ModelAndView(variables, "betrayal.ftl");
+	  }
+	}
+
+	private static class PlayBetrayalHandler implements TemplateViewRoute {
+	  @Override
+	  public ModelAndView handle(Request req, Response res) {
+			QueryParamsMap qm = req.queryMap();
+
+	    Map<String, Object> variables = ImmutableMap.of(
+					"title",
+	        "Betrayal at House on the Hill"
+			);
+	    return new ModelAndView(GSON.toJson(variables), "betrayal.ftl");
+	  }
+	}
+
+	private static class CheatStart implements TemplateViewRoute {
 	  @Override
 	  public ModelAndView handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
