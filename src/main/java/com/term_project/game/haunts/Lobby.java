@@ -46,7 +46,7 @@ public class Lobby implements GamePhase {
     // in this phase we send frontend character choices
     if(phase == 0) {
       /*we want a character generator that generates a list of pairs of characters. */
-      List<List<GameChar>> characters = charGen.build().subList(0, numPlayers - 1);
+      List<List<GameChar>> characters = charGen.build().subList(0, numPlayers);
       variables.put("characterChoices", characters);
       phase = 1;
       return;
