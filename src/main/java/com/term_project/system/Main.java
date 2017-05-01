@@ -100,7 +100,7 @@ public class Main {
 	  Spark.get("/create_game", new LobbyHandler(), freeMarker);
 		Spark.post("/create_game", new LobbyStart());
 	  Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
-		Spark.post("/betrayal", new PlayBetrayalHandler());
+		Spark.post("/betrayal", new UpdateHandler());
 		Spark.post("/tileStart", new TileStart());
 	}
 
@@ -175,7 +175,7 @@ public class Main {
 	  }
 	}
 
-	private static class PlayBetrayalHandler implements Route {
+	private static class UpdateHandler implements Route {
 	  @Override
 	  public String handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
@@ -185,13 +185,6 @@ public class Main {
 	        "Betrayal at House on the Hill"
 			);
 	    return GSON.toJson(variables);
-
-//			Map<String, Object> variables = gameState.update(qm);
-//
-//			variables = ImmutableMap.copyOf(variables);
-//
-//			//System.out.println(variables);
-//			return GSON.toJson(variables);
 	  }
 	}
 
