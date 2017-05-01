@@ -101,7 +101,7 @@ public class Main {
 		Spark.post("/create_game", new LobbyStart());
 	  Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
 		Spark.post("/betrayal", new PlayBetrayalHandler());
-		Spark.post("/tileStart", new TileStart());
+//		Spark.post("/tileStart", new TileStart());
 	}
 
 	private static class MenuHandler implements TemplateViewRoute {
@@ -180,12 +180,18 @@ public class Main {
 	  public String handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
 
-			Map<String, Object> variables = gameState.update(qm);
+	    Map<String, Object> variables = ImmutableMap.of(
+					"title",
+	        "Betrayal at House on the Hill"
+			);
+	    return GSON.toJson(variables);
 
-			variables = ImmutableMap.copyOf(variables);
-
-			//System.out.println(variables);
-			return GSON.toJson(variables);
+//			Map<String, Object> variables = gameState.update(qm);
+//
+//			variables = ImmutableMap.copyOf(variables);
+//
+//			//System.out.println(variables);
+//			return GSON.toJson(variables);
 	  }
 	}
 
