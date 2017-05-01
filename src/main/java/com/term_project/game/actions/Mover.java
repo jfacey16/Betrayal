@@ -24,8 +24,8 @@ public class Mover {
     return finished;
   }
 
-  public void run(String direction, GameChar character)
-      throws NullPointerException {
+  public void run(String direction, GameChar character,
+      Map<String, Object> variables) throws NullPointerException {
     finished = false;
     dir = direction;
 
@@ -38,7 +38,7 @@ public class Mover {
     case "NORTH":
       try {
         Tile newTile = currentTile.getNorth();
-        moveTileHandler(newTile, character);
+        moveTileHandler(newTile, character, variables);
       } catch (NullPointerException e) {
         throw new NullPointerException("No available tile to the north.");
       }
@@ -47,7 +47,7 @@ public class Mover {
     case "SOUTH":
       try {
         Tile newTile = currentTile.getSouth();
-        moveTileHandler(newTile, character);
+        moveTileHandler(newTile, character, variables);
       } catch (NullPointerException e) {
         throw new NullPointerException("No available tile to the south.");
       }
@@ -56,7 +56,7 @@ public class Mover {
     case "EAST":
       try {
         Tile newTile = currentTile.getEast();
-        moveTileHandler(newTile, character);
+        moveTileHandler(newTile, character, variables);
       } catch (NullPointerException e) {
         throw new NullPointerException("No available tile to the east.");
       }
@@ -65,7 +65,7 @@ public class Mover {
     case "WEST":
       try {
         Tile newTile = currentTile.getWest();
-        moveTileHandler(newTile, character);
+        moveTileHandler(newTile, character, variables);
       } catch (NullPointerException e) {
         throw new NullPointerException("No available tile to the west.");
       }
@@ -73,12 +73,13 @@ public class Mover {
     }
   }
 
-  private void moveTileHandler(Tile newTile, GameChar character) {
+  private void moveTileHandler(Tile newTile, GameChar character,
+      Map<String, Object> variables) {
     // if its a empty tile, we need to generate a new tile for the frontend to
     // position.
     if (newTile == null) {
       // We "prep" it to add bc player still needs to choose rotation
-      prepTileToAdd(newTile, character);
+      prepTileToAdd(newTile, character, variables);
     } else {
       // otherwise the tile already exists and we simply end this action
       // and move the character.
@@ -88,7 +89,8 @@ public class Mover {
     }
   }
 
-  private void prepTileToAdd(Tile newTile, GameChar character) {
+  private void prepTileToAdd(Tile newTile, GameChar character,
+      Map<String, Object> variables) {
     // pull a tile from the top of the deck
     toAdd = memory.getTiles().poll();
 
@@ -136,6 +138,8 @@ public class Mover {
       toAdd.setPos(newPos);
       break;
     }
+
+    variables.put("new tile", toAdd.getBean());
   }
 
   public void addTile(GameChar character, Integer numClockwiseRotations,
@@ -177,8 +181,8 @@ public class Mover {
     Pos toAddPos = toAdd.getPos();
 
     // link tile north of added tile to the tile if a door exists.
-    Tile northOfAdded = tileMap.get(
-        new Pos(toAddPos.getX(), toAddPos.getY() + 1, toAddPos.getFloor()));
+    Tile northOfAdded = tileMap.get(new Pos(toAddPos.getX(),
+        toAddPos.getY() + 1, toAddPos.getFloor()));
     // make sure there is a tile to link and a door to link through
     if (northOfAdded != null && northOfAdded.hasSouth()) {
       if (toAdd.hasNorth()) {
@@ -188,8 +192,8 @@ public class Mover {
     }
 
     // link tile south of added tile to the tile if a door exists.
-    Tile southOfAdded = tileMap.get(
-        new Pos(toAddPos.getX(), toAddPos.getY() - 1, toAddPos.getFloor()));
+    Tile southOfAdded = tileMap.get(new Pos(toAddPos.getX(),
+        toAddPos.getY() - 1, toAddPos.getFloor()));
     if (southOfAdded != null && southOfAdded.hasNorth()) {
 
       if (toAdd.hasSouth()) {
@@ -199,8 +203,8 @@ public class Mover {
     }
 
     // link tiles north of added tile to the tile if a door exists.
-    Tile eastOfAdded = tileMap.get(
-        new Pos(toAddPos.getX() + 1, toAddPos.getY(), toAddPos.getFloor()));
+    Tile eastOfAdded = tileMap.get(new Pos(toAddPos.getX() + 1,
+        toAddPos.getY(), toAddPos.getFloor()));
     if (eastOfAdded != null && eastOfAdded.hasWest()) {
 
       if (toAdd.hasEast()) {
@@ -210,8 +214,8 @@ public class Mover {
     }
 
     // link tiles north of added tile to the tile if a door exists.
-    Tile westOfAdded = tileMap.get(
-        new Pos(toAddPos.getX() - 1, toAddPos.getY(), toAddPos.getFloor()));
+    Tile westOfAdded = tileMap.get(new Pos(toAddPos.getX() - 1,
+        toAddPos.getY(), toAddPos.getFloor()));
     if (westOfAdded != null && westOfAdded.hasEast()) {
       if (westOfAdded.hasEast()) {
         toAdd.addEast();

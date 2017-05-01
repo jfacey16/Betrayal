@@ -1,6 +1,7 @@
 package com.term_project.character;
 
 import java.util.List;
+import java.util.Map;
 
 import com.term_project.house.Tile;
 import com.term_project.items.Item;
@@ -213,11 +214,18 @@ public interface GameChar {
    */
   void setSanityScale(List<Integer> sanityScale);
 
-  /** Gets value of character's stat by name.
-   * @param name The name of a stat: speed, might, knowlege, sanity.
+  /**
+   * Gets value of character's stat by name.
+   *
+   * @param name
+   *          The name of a stat: speed, might, knowlege, sanity.
    * @return The value of the given stat.
    */
   int getStatByName(String name);
 
   CharBean getCharBean();
+
+  Map<String, Item> getItems();
+
+  Map<String, Omen> getOmens();
 }
