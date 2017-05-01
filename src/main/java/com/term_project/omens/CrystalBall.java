@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.game.Dice;
-import com.term_project.system.MemorySlot;
 
 public class CrystalBall implements Omen {
 
@@ -44,18 +43,20 @@ public class CrystalBall implements Omen {
   }
 
   @Override
-  public void use(GameChar character, MemorySlot memory,
-      Map<String, Object> variables) {
+  public void use(GameChar character, Map<String, Object> variables) {
     List<Integer> rolls = Dice.roll(character.getKnowlege());
 
     int roll = Dice.sum(rolls);
 
     if (roll >= 4) {
       character.modSanity(1);
+      variables.put("result", "4+ You see the truth. Gain 1 Sanity.");
     } else if (roll < 4 && roll > 0) {
       character.modSanity(-1);
+      variables.put("result", "1-3 You avert your eyes. Lose 1 Sanity.");
     } else {
       character.modSanity(-2);
+      variables.put("result", "0 You stare into hell. Lose 2 Sanity.");
     }
     variables.put("rolls", rolls);
   }

@@ -1,8 +1,8 @@
 package com.term_project.character;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
 
 import com.term_project.house.Tile;
@@ -32,14 +32,10 @@ public abstract class AbstractChar implements GameChar {
 
   @Override
   public CharBean getCharBean() {
-    return new CharBean(getName(), might, speed, knowledge,
-                        sanity, mightScale,
-                        speedScale,
-                        knowledgeScale,
-                        sanityScale,
-                        currentTile.getBean(),
-                        new ArrayList(items.values()),
-                        new ArrayList(omens.values()));
+    return new CharBean(getName(), might, speed, knowledge, sanity,
+        mightScale, speedScale, knowledgeScale, sanityScale,
+        currentTile.getBean(), new ArrayList(items.values()),
+        new ArrayList(omens.values()));
   }
 
   @Override
@@ -234,6 +230,16 @@ public abstract class AbstractChar implements GameChar {
       throw new NullPointerException(
           "Given stat " + name + " doesn't exist.");
     }
+  }
+
+  @Override
+  public Map<String, Item> getItems() {
+    return items;
+  }
+
+  @Override
+  public Map<String, Omen> getOmens() {
+    return omens;
   }
 
   @Override

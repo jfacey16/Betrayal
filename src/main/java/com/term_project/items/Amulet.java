@@ -3,7 +3,6 @@ package com.term_project.items;
 import java.util.Map;
 
 import com.term_project.character.GameChar;
-import com.term_project.system.MemorySlot;
 
 public class Amulet implements Item {
 
@@ -44,8 +43,7 @@ public class Amulet implements Item {
   }
 
   @Override
-  public void use(GameChar character, MemorySlot memory,
-      Map<String, Object> variables) {
+  public void use(GameChar character, Map<String, Object> variables) {
     return;
   }
 

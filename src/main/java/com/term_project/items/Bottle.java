@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.term_project.character.GameChar;
 import com.term_project.game.Dice;
-import com.term_project.system.MemorySlot;
 
 public class Bottle implements Item {
 
@@ -46,8 +45,7 @@ public class Bottle implements Item {
   }
 
   @Override
-  public void use(GameChar character, MemorySlot memory,
-      Map<String, Object> variables) {
+  public void use(GameChar character, Map<String, Object> variables) {
 
     List<Integer> rolls = Dice.roll(3);
 
