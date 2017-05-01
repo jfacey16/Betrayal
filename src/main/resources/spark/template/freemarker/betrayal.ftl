@@ -542,7 +542,7 @@
     margin:5px;
     display:flex; 
     flex-direction:row;
-    height:100%;
+    height:100%;1
     background-color:#707070;}
   </style>
   
