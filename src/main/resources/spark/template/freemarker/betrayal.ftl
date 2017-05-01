@@ -285,19 +285,13 @@
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 2" style="width:75px;height:75px;"></center>
         </div>
         
-        <div class="stats">
-          <center>S M K S</center>
-        </div>    
+        <div id="stats_2" class="stats"></div>    
       </div>
       
       <div class="info">
-          <div class="name">
-            <center>Player 2</center>
-          </div>
+          <div id="name_2" class="name"></div>
           
-          <div class="items">
-            <center>Player 2's items</center>
-          </div>
+          <div id="items_2" class="items"></div>
         </div>
     </div>
     
@@ -307,19 +301,13 @@
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 3" style="width:75px;height:75px;"></center>
         </div>
         
-        <div class="stats">
-          <center>S M K S</center>
-        </div>
+        <div id="stats_3" class="stats"></div> 
       </div>
       
       <div class="info">
-          <div class="name">
-            <center>Player 3</center>
-          </div>
+          <div id="name_3" class="name"> </div>
           
-          <div class="items">
-            <center>Player 3's items</center>
-          </div>
+          <div id="items_3" class="items"></div>
         </div>
     </div>
     
@@ -329,19 +317,13 @@
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 4" style="width:75px;height:75px;"></center>
         </div>
         
-        <div class="stats">
-          <center>S M K S</center>
-        </div>
+        <div id="stats_4" class="stats"></div> 
       </div>
       
       <div class="info">
-          <div class="name">
-            <center>Player 4</center>
-          </div>
+          <div id="name_4" class="name"> </div>
           
-          <div class="items">
-            <center>Player 4's items</center>
-          </div>
+          <div id="items_4" class="items"></div>
         </div>
     </div>
     
@@ -351,19 +333,13 @@
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 5" style="width:75px;height:75px;"></center>
         </div>
         
-        <div class="stats">
-          <center>S M K S</center>
-        </div>
+        <div id="stats_5" class="stats"></div> 
       </div>
       
       <div class="info">
-          <div class="name">
-            <center>Player 5</center>
-          </div>
+          <div id="name_5" class="name"> </div>
           
-          <div class="items">
-            <center>Player 5's items</center>
-          </div>
+          <div id="items_5" class="items"></div>
         </div>
     </div>
     
@@ -373,19 +349,13 @@
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 6" style="width:75px;height:75px;"></center>
         </div>
         
-        <div class="stats">
-          <center>S M K S</center>
-        </div>
+        <div id="stats_6" class="stats"></div> 
       </div>
       
       <div class="info">
-          <div class="name">
-            <center>Player 6</center>
-          </div>
+          <div id="name_6" class="name"> </div>
           
-          <div class="items">
-            <center>Player 6's items</center>
-          </div>
+          <div id="items_6" class="items"></div>
         </div>
     </div>
     
@@ -496,27 +466,19 @@
   <div class="main_game">
     <div class="player_1">
     
-      <center>Player 1</center>
+      <div id="name_1" class="name"> </div>
     
       <div class="icon_1">
           <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 1" style="width:100px;height:100px;border-style:solid;border-width:2px;"></center>
       </div>
         
-      <div class="stat">
-        <center>S P E E D</center>
-      </div>
+      <center><div id="speed_1" class="stat"></div></center>
       
-      <div class="stat">
-        <center>M I G H T</center>
-      </div>
+      <center><div id="might_1" class="stat"></div></center>
       
-      <div class="stat">
-        <center>K N O WLEDGE</center>
-      </div>
+      <center><div id="knowledge_1" class="stat"></div></center>
       
-      <div class="stat">
-        <center>S A N I T Y</center>
-      </div>
+      <center><div id="sanity_1" class="stat"></div></center>
       
       <p><center>Player 1's Items</center></p>
       
@@ -534,7 +496,7 @@
     
     <style type="text/css">
     .stat{
-      width:92.5%;
+      width:88%;
       border-style:solid;
       border-width:2px;
       margin:2px;
@@ -557,14 +519,42 @@
     
     <div class="board">
     
-    <div id="item" class="card_draw"> This is a card! </div>
+    <div id="item" class="card_draw">
+    
+    	<div class="card_name">
+    		<center><font size="4pt">NAME</font></center>
+    	</div> 
+	
+		<center><div class="card_description">
+    		HERE IS WHERE WE DO CARD STUFF
+    	</div></center>
+`	</div>
+	
+	<style type="text/css">
+	.card_name{
+		width:100%;
+		height:10%;
+      	margin-bottom:5px;
+      	background-color:#ffffff;}
+     </style>
+     
+     <style type="text/css">
+	.card_description{
+		width:95%;
+		height:80%;
+        border-style:solid;
+        border-width:2px;
+      	margin-bottom:5px;
+      	background-color:#eeeeee;}
+     </style>
 
 	<style type="text/css">
 	.card_draw{
-		display:block;
+      display:flex; 
+      flex-direction:column;
 		position:absolute;
-		top:36%;
-		left:38%;
+		top:35%;
+		left:37%;
 		float:left;
 		z-index:20;
 		height:350px;
