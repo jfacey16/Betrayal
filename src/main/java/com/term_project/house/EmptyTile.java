@@ -1,12 +1,11 @@
 package com.term_project.house;
-import com.term_project.character.GameChar;
-import com.term_project.events.Event;
-import com.term_project.items.Item;
-import com.term_project.omens.Omen;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+
+import com.term_project.character.GameChar;
+import com.term_project.events.Event;
+
 /**
  * Tile representing open slot for a tile to be placed.
  *
@@ -14,22 +13,36 @@ import java.util.Map;
  */
 
 public class EmptyTile extends AbstractTile implements Tile {
+
+  private String name;
+  private String description;
+
   public EmptyTile(Map<Direction, Tile> connectedTiles) {
-    super(connectedTiles,
-    	  0,
-    	  0,
-    	  0,
-          new ArrayList<>());
+    super(connectedTiles, 0, 0, 0, new ArrayList<>());
+    name = "Empty";
+    description = "Nothing here yet";
   }
 
   @Override
   public String getName() {
-    return "Empty";
+    return name;
   }
 
   @Override
   public String getDescription() {
-    return "Nothing here yet";
+    return description;
+  }
+
+  @Override
+  public Tile setName(String newName) {
+    name = newName;
+    return this;
+  }
+
+  @Override
+  public Tile setDescription(String newDescription) {
+    description = newDescription;
+    return this;
   }
 
   @Override

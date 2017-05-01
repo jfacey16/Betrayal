@@ -19,7 +19,7 @@ public class TileBuilder implements Builder<Tile> {
   @Override
   public Queue<Tile> build() {
     List<Tile> tileList = new ArrayList<>();
-
+    // start of all floors
     Map<Direction, Tile> connectedTiles = new HashMap<>();
     connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
     connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
@@ -31,780 +31,294 @@ public class TileBuilder implements Builder<Tile> {
     availableFloors.add(Floor.BASEMENT);
     availableFloors.add(Floor.GROUND);
 
-    tileList.add(new GenericTile(connectedTiles, 2, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 2, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 2, availableFloors));
+    Tile junkRoom = new GenericTile(connectedTiles, 0, 0, 1,
+        availableFloors);
+    junkRoom.setName("Junk Room");
+    tileList.add(junkRoom);
 
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
+    connectedTiles.remove(Direction.WEST);
+    Tile gameRoom = new GenericTile(connectedTiles, 0, 1, 0,
+        availableFloors);
+    gameRoom.setName("Game Room");
+    tileList.add(gameRoom);
 
-    tileList.add(new GenericTile(connectedTiles, 2, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 2, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
     connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
+    connectedTiles.remove(Direction.NORTH);
+    connectedTiles.remove(Direction.EAST);
+    Tile organRoom = new GenericTile(connectedTiles, 0, 1, 0,
+        availableFloors);
+    organRoom.setName("Organ Room");
+    tileList.add(organRoom);
 
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 2, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 2, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 2, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 2, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
     connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
+    connectedTiles.remove(Direction.WEST);
+    Tile statuaryCorridor = new GenericTile(connectedTiles, 0, 1, 0,
+        availableFloors);
+    statuaryCorridor.setName("Statuary Corridor");
+    tileList.add(statuaryCorridor);
 
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 2, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.NORTH, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
     connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
     connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
+    Tile creakyHallway = new GenericTile(connectedTiles, 0, 0, 0,
+        availableFloors);
+    creakyHallway.setName("Creaky Hallway");
+    tileList.add(creakyHallway);
 
+    Tile dustyHallway = new GenericTile(connectedTiles, 0, 0, 0,
+        availableFloors);
+    dustyHallway.setName("Dusty Hallway");
+    tileList.add(dustyHallway);
+    // start of upper
     availableFloors = new ArrayList<>();
     availableFloors.add(Floor.ATTIC);
-    availableFloors.add(Floor.BASEMENT);
 
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
+    connectedTiles.remove(Direction.WEST);
+    connectedTiles.remove(Direction.EAST);
+    Tile balcony = new GenericTile(connectedTiles, 0, 0, 1,
+        availableFloors);
+    balcony.setName("Balcony");
+    tileList.add(balcony);
 
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
+    connectedTiles.remove(Direction.NORTH);
+    Tile gallery = new GenericTile(connectedTiles, 1, 0, 0,
+        availableFloors);
+    gallery.setName("Gallery");
+    tileList.add(gallery);
 
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 2, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 2, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
+    Tile attic = new GenericTile(connectedTiles, 0, 1, 0, availableFloors);
+    attic.setName("Attic");
+    tileList.add(attic);
 
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
+    connectedTiles.remove(Direction.SOUTH);
     connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 2, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
     connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
+    Tile masterBedroom = new GenericTile(connectedTiles, 0, 0, 0,
+        availableFloors);
+    masterBedroom.setName("Master Bedroom");
+    tileList.add(masterBedroom);
+
+    connectedTiles.remove(Direction.NORTH);
     connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, null);
+    Tile bedroom = new GenericTile(connectedTiles, 0, 1, 0,
+        availableFloors);
+    bedroom.setName("Bedroom");
+    tileList.add(bedroom);
 
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 2, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
+    Tile tower = new GenericTile(connectedTiles, 0, 1, 0, availableFloors);
+    tower.setName("Tower");
+    tileList.add(tower);
 
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 2, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.NORTH, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-
+    // start of ground
     availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.ATTIC);
     availableFloors.add(Floor.GROUND);
 
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 2, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
+    connectedTiles.remove(Direction.WEST);
     connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
+    Tile diningRoom = new GenericTile(connectedTiles, 0, 0, 1,
+        availableFloors);
+    diningRoom.setName("Dining Room");
+    tileList.add(diningRoom);
+
+    connectedTiles.remove(Direction.EAST);
+    Tile coalChute = new GenericTile(connectedTiles, 0, 0, 0,
+        availableFloors);
+    coalChute.setName("Coal Chute");
+    tileList.add(coalChute);
+
+    connectedTiles.remove(Direction.NORTH);
     connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, null);
+    Tile graveyard = new GenericTile(connectedTiles, 0, 1, 0,
+        availableFloors);
+    graveyard.setName("Graveyard");
+    tileList.add(graveyard);
 
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
     connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
+    Tile gardens = new GenericTile(connectedTiles, 0, 1, 0,
+        availableFloors);
+    gardens.setName("Gardens");
+    tileList.add(gardens);
+
     connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
+    Tile patio = new GenericTile(connectedTiles, 0, 1, 0, availableFloors);
+    patio.setName("Patio");
+    tileList.add(patio);
 
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
     connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, null);
+    Tile ballroom = new GenericTile(connectedTiles, 0, 1, 0,
+        availableFloors);
+    ballroom.setName("Ballroom");
+    tileList.add(ballroom);
 
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
+    // start of basement
+    availableFloors = new ArrayList<>();
+    availableFloors.add(Floor.BASEMENT);
 
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
+    connectedTiles.remove(Direction.WEST);
+    connectedTiles.remove(Direction.EAST);
+    Tile stairsFromBasement = new GenericTile(connectedTiles, 0, 0, 0,
+        availableFloors);
+    stairsFromBasement.setName("Stairs From Basement");
+    tileList.add(stairsFromBasement);
+
+    connectedTiles.remove(Direction.SOUTH);
+    connectedTiles.remove(Direction.NORTH);
     connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
+    Tile pentagramChamber = new GenericTile(connectedTiles, 0, 0, 1,
+        availableFloors);
+    pentagramChamber.setName("Pentagram Chamber");
+    tileList.add(pentagramChamber);
 
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
+    connectedTiles.remove(Direction.EAST);
     connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
     connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
+    Tile larder = new GenericTile(connectedTiles, 1, 0, 0,
+        availableFloors);
+    larder.setName("Larder");
+    tileList.add(larder);
 
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.NORTH, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
+    connectedTiles.remove(Direction.NORTH);
+    connectedTiles.remove(Direction.SOUTH);
     connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
     connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
+    Tile chasm = new GenericTile(connectedTiles, 0, 0, 0, availableFloors);
+    chasm.setName("Chasm");
+    tileList.add(chasm);
 
+    connectedTiles.remove(Direction.WEST);
+    connectedTiles.remove(Direction.EAST);
+    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
+    Tile crypt = new GenericTile(connectedTiles, 0, 1, 0, availableFloors);
+    crypt.setName("Crypt");
+    tileList.add(crypt);
+
+    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
+    Tile catacombs = new GenericTile(connectedTiles, 0, 0, 1,
+        availableFloors);
+    catacombs.setName("Catacombs");
+    tileList.add(catacombs);
+
+    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
+    Tile furnaceRoom = new GenericTile(connectedTiles, 0, 0, 1,
+        availableFloors);
+    furnaceRoom.setName("Furnace Room");
+    tileList.add(furnaceRoom);
+
+    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
+    connectedTiles.remove(Direction.WEST);
+    connectedTiles.remove(Direction.SOUTH);
+    Tile undergroundLake = new GenericTile(connectedTiles, 0, 1, 0,
+        availableFloors);
+    undergroundLake.setName("Underground Lake");
+    tileList.add(undergroundLake);
+
+    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
+    connectedTiles.remove(Direction.EAST);
+    Tile wineCellar = new GenericTile(connectedTiles, 1, 0, 0,
+        availableFloors);
+    wineCellar.setName("Wine Cellar");
+    tileList.add(wineCellar);
+
+    // start of upper/basement
+    availableFloors = new ArrayList<>();
+    availableFloors.add(Floor.BASEMENT);
+    availableFloors.add(Floor.ATTIC);
+
+    Tile researchLabratory = new GenericTile(connectedTiles, 0, 0, 0,
+        availableFloors);
+    researchLabratory.setName("Research Labratory");
+    tileList.add(researchLabratory);
+
+    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
+    connectedTiles.remove(Direction.NORTH);
+    Tile operatingLabratory = new GenericTile(connectedTiles, 0, 0, 0,
+        availableFloors);
+    operatingLabratory.setName("Operating Labratory");
+    tileList.add(operatingLabratory);
+
+    Tile gymnasium = new GenericTile(connectedTiles, 0, 0, 1,
+        availableFloors);
+    gymnasium.setName("Gymnasium");
+    tileList.add(gymnasium);
+
+    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
+    connectedTiles.remove(Direction.EAST);
+    connectedTiles.remove(Direction.SOUTH);
+    Tile vault = new GenericTile(connectedTiles, 0, 1, 0, availableFloors);
+    vault.setName("Vault");
+    tileList.add(vault);
+
+    Tile storeroom = new GenericTile(connectedTiles, 1, 0, 0,
+        availableFloors);
+    storeroom.setName("Storeroom");
+    tileList.add(storeroom);
+
+    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
+    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
+    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
+    Tile serventsQuarters = new GenericTile(connectedTiles, 0, 0, 1,
+        availableFloors);
+    serventsQuarters.setName("Servents Quarters");
+    tileList.add(serventsQuarters);
+
+    // start of upper/ground
+    availableFloors = new ArrayList<>();
+    availableFloors.add(Floor.GROUND);
+    availableFloors.add(Floor.ATTIC);
+
+    connectedTiles.remove(Direction.EAST);
+    connectedTiles.remove(Direction.NORTH);
+    Tile library = new GenericTile(connectedTiles, 0, 1, 0,
+        availableFloors);
+    library.setName("Library");
+    tileList.add(library);
+
+    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
+    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
+    Tile collapsedRoom = new GenericTile(connectedTiles, 0, 0, 0,
+        availableFloors);
+    collapsedRoom.setName("Collapsed Room");
+    tileList.add(collapsedRoom);
+
+    Tile charredRoom = new GenericTile(connectedTiles, 1, 0, 0,
+        availableFloors);
+    charredRoom.setName("Charred Room");
+    tileList.add(charredRoom);
+
+    Tile bloodyRoom = new GenericTile(connectedTiles, 1, 0, 0,
+        availableFloors);
+    bloodyRoom.setName("Bloody Room");
+    tileList.add(bloodyRoom);
+
+    connectedTiles.remove(Direction.EAST);
+    connectedTiles.remove(Direction.SOUTH);
+    connectedTiles.remove(Direction.WEST);
+    Tile conservatory = new GenericTile(connectedTiles, 0, 1, 0,
+        availableFloors);
+    conservatory.setName("Conservatory");
+    tileList.add(conservatory);
+
+    Tile chapel = new GenericTile(connectedTiles, 0, 1, 0,
+        availableFloors);
+    chapel.setName("Chapel");
+    tileList.add(chapel);
+
+    // start of ground/basement
     availableFloors = new ArrayList<>();
     availableFloors.add(Floor.GROUND);
     availableFloors.add(Floor.BASEMENT);
 
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
+    Tile kitchen = new GenericTile(connectedTiles, 0, 0, 0,
+        availableFloors);
+    kitchen.setName("Kitchen");
+    tileList.add(kitchen);
 
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
     connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
     connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
     connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.NORTH, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 1, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-
-    availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.BASEMENT);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 1, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 1, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-
-    availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.GROUND);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 1, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 1, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-
-    availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.ATTIC);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 1, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.EAST, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.NORTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 0, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.EAST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.SOUTH, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.WEST, null);
-    connectedTiles.put(Direction.NORTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 1, 1, 0, availableFloors));
-
-    connectedTiles = new HashMap<>();
-    connectedTiles.put(Direction.WEST, new EmptyTile(new HashMap<>()));
-    connectedTiles.put(Direction.NORTH, null);
-    connectedTiles.put(Direction.EAST, null);
-    connectedTiles.put(Direction.SOUTH, null);
-
-    tileList.add(new GenericTile(connectedTiles, 0, 0, 0, availableFloors));
+    Tile abandonedRoom = new GenericTile(connectedTiles, 0, 0, 1,
+        availableFloors);
+    abandonedRoom.setName("Abandoned Room");
+    tileList.add(abandonedRoom);
 
     Collections.shuffle(tileList);
     Queue<Tile> tileDeck = new LinkedList<>(tileList);
