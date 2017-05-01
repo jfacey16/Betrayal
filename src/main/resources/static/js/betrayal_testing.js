@@ -12,6 +12,8 @@ let $char_4;
 let $char_5;
 let $char_6;
 
+let current_char;
+
 $(document).ready(() => {
 	
 	$player_1_select = $("#player_1_select");
@@ -117,7 +119,6 @@ const setStartingState = () => {
 
     $.post("/create_game", postParameters, responseJSON => {
 
-        // TODO: Parse the JSON response into a JavaScript object. DONE
         const responseObject = JSON.parse(responseJSON);
 	
 		if(val_1 === "1") {
@@ -256,95 +257,17 @@ const setStartingState = () => {
 }
 
 const update = () => {
-	const postParameters = {players:"6"};
+	
+	curre_char = turn + 1;
+	
+	//this is the action that just happened
+	const postParameters = {};
 
-    $.post("/create_game", postParameters, responseJSON => {
+    $.post("/betrayal", postParameters, responseJSON => {
 
-        // TODO: Parse the JSON response into a JavaScript object. DONE
         const responseObject = JSON.parse(responseJSON);
 
-		const $player_1_speed = $("#speed_1");
-		var $speed = "<center>";
-		
-		for (let i = 0, len = $char_1.speedScale.length; i < len; i++) {
-			if(i === $char_1.speed) {
-				$speed += "<font color=\"red\">" + $char_1.speedScale[i] + "</font> ";
-			} else {
-				$speed += $char_1.speedScale[i] + " ";
-			}
-	    }
-		
-		const $player_1_might = $("#might_1");
-		var $might = "<center>";
-		
-		for (let i = 0, len = $char_1.mightScale.length; i < len; i++) {
-			if(i === $char_1.might) {
-				$might += "<font color=\"red\">" + $char_1.mightScale[i] + "</font> ";
-			} else {
-				$might += $char_1.mightScale[i] + " ";
-			}
-	    }
-	
-		const $player_1_knowledge = $("#knowledge_1");
-		var $knowledge = "<center>";
-		
-		for (let i = 0, len = $char_1.knowledgeScale.length; i < len; i++) {
-			if(i === $char_1.knowledge) {
-				$knowledge += "<font color=\"red\">" + $char_1.knowledgeScale[i] + "</font> ";
-			} else {
-				$knowledge += $char_1.knowledgeScale[i] + " ";
-			}
-	    }
-		
-		const $player_1_sanity = $("#sanity_1");
-		var $sanity = "<center>";
-		
-		for (let i = 0, len = $char_1.sanityScale.length; i < len; i++) {
-			if(i === $char_1.sanity) {
-				$sanity += "<font color=\"red\">" + $char_1.sanityScale[i] + "</font> ";
-			} else {
-				$sanity += $char_1.sanityScale[i] + " ";
-			}
-	    }
-		
-		$player_1_speed.html($speed + "</center>");
-		$player_1_might.html($might + "</center>");
-		$player_1_knowledge.html($knowledge + "</center>");
-		$player_1_sanity.html($sanity + "</center>");
-	
-		const $player_2_stats = $("#stats_2");
-		const $player_3_stats = $("#stats_3");
-		const $player_4_stats = $("#stats_4");
-		const $player_5_stats = $("#stats_5");
-		const $player_6_stats = $("#stats_6");
-		
-		$player_2_stats.html("<center>" + $char_2.speedScale[$char_2.speed - 1] + " " +
-				$char_2.mightScale[$char_2.might - 1] + " " + 
-				$char_2.knowledgeScale[$char_2.knowledge - 1] + " " +
-				$char_2.sanityScale[$char_2.sanity - 1] + " " + "</center>");
-		
-		$player_3_stats.html("<center>" + $char_3.speedScale[$char_3.speed - 1] + " " +
-				$char_3.mightScale[$char_3.might - 1] + " " + 
-				$char_3.knowledgeScale[$char_3.knowledge - 1] + " " +
-				$char_3.sanityScale[$char_3.sanity - 1] + " " + "</center>");
-		
-		$player_4_stats.html("<center>" + $char_4.speedScale[$char_4.speed - 1] + " " +
-				$char_4.mightScale[$char_4.might - 1] + " " + 
-				$char_4.knowledgeScale[$char_4.knowledge - 1] + " " +
-				$char_4.sanityScale[$char_4.sanity - 1] + " " + "</center>");
-		
-		$player_5_stats.html("<center>" + $char_5.speedScale[$char_5.speed - 1] + " " +
-				$char_5.mightScale[$char_5.might - 1] + " " + 
-				$char_5.knowledgeScale[$char_5.knowledge - 1] + " " +
-				$char_5.sanityScale[$char_5.sanity - 1] + " " + "</center>");
-		
-		$player_6_stats.html("<center>" + $char_6.speedScale[$char_6.speed - 1] + " " +
-				$char_6.mightScale[$char_6.might - 1] + " " + 
-				$char_6.knowledgeScale[$char_6.knowledge - 1] + " " +
-				$char_6.sanityScale[$char_6.sanity - 1] + " " + "</center>");
-		
-		
-		
+        //updates everything for the one character whose turn it is currently
 	
     });
 }
