@@ -136,6 +136,39 @@ public class Main {
 	    return new ModelAndView(variables, "betrayal.ftl");
 	  }
 	}
+	
+	private static class ItemHandler implements TemplateViewRoute {
+
+		@Override
+		public ModelAndView handle(Request arg0, Response arg1)
+				throws Exception {
+			
+			
+			return null;
+		}
+	}
+	
+	private static class OmenHandler implements TemplateViewRoute {
+
+		@Override
+		public ModelAndView handle(Request arg0, Response arg1)
+				throws Exception {
+			
+			
+			return null;
+		}
+	}
+	
+	private static class EventHandler implements TemplateViewRoute {
+
+		@Override
+		public ModelAndView handle(Request arg0, Response arg1)
+				throws Exception {
+			
+			
+			return null;
+		}
+	}
 
 	private static class ExceptionPrinter implements ExceptionHandler {
     @Override
