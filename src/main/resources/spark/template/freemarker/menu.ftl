@@ -1,6 +1,5 @@
 <#assign content>
 
-
 <div class="game">
 
 	<div class="title_row">
