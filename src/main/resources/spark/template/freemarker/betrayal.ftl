@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Betrayal Board</title>
+  <title>Betrayal at House on the Hill</title>
   <style>
   #first, #second, #basement {position: relative; top:-425px; left:-375px;}
   #second, #basement {display: none;}

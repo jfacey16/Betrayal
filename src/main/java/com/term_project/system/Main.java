@@ -146,7 +146,7 @@ public class Main {
 	      QueryParamsMap qm = req.queryMap();
 	      String game_name = qm.value("name");
 				//setup ids
-	      Integer player_number = Integer.parseInt(qm.value("players"));
+	      int player_number = Integer.parseInt(qm.value("players"));
 				List<String> ids =  new ArrayList();
 				for (int i = 0; i < player_number; i++) {
 					ids.add(Integer.toString(i));
@@ -179,12 +179,14 @@ public class Main {
 	  @Override
 	  public String handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
+			
+		      Map<String, Object> variables = new HashMap<>();
 
-	    Map<String, Object> variables = ImmutableMap.of(
-					"title",
-	        "Betrayal at House on the Hill"
-			);
-	    return GSON.toJson(variables);
+					variables.putAll(gameState.update(qm));
+					variables = ImmutableMap.copyOf(variables);
+
+					//System.out.println(variables);
+				  return GSON.toJson(variables);
 	  }
 	}
 
