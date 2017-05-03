@@ -16,6 +16,7 @@ let $item_window;
 let $omen_window;
 let $event_window;
 
+let responseOject;
 let current_char;
 
 $(document).ready(() => {
@@ -73,6 +74,13 @@ $(document).ready(() => {
     	$temp_lobby.hide();
 
     	setStartingState();
+    	
+
+    	$.post("/tileStart", {"0": $char_1.name, "1": $char_2.name, "2": $char_3.name, "3": $char_4.name,
+    	     "4": $char_5.name, "5": $char_6.name}, rj2 => {
+
+    	     	setStartingState();
+    	     });
 
     });
 });
@@ -83,7 +91,7 @@ const pickCharacters = () => {
      $.post("/create_game", postParameters, responseJSON => {
 
          // TODO: Parse the JSON response into a JavaScript object. DONE
-         const responseObject = JSON.parse(responseJSON);
+        responseObject = JSON.parse(responseJSON);
     	
      	$player_1_select.html("<option value=\"1\">" 
      			+ responseObject.characterChoices[0][0].name + "</option><option value=\"2\">" 
@@ -127,12 +135,6 @@ const setStartingState = () => {
 	var val_4 = $player_4_select.val();
 	var val_5 = $player_5_select.val();
 	var val_6 = $player_6_select.val();
-
-	const postParameters = {players:"6"};
-
-     $.post("/create_game", postParameters, responseJSON => {
-
-         const responseObject = JSON.parse(responseJSON);
 	
 		 if(val_1 === "1") {
 		 	$char_1 = responseObject.characterChoices[0][0];
@@ -260,16 +262,12 @@ const setStartingState = () => {
 		 		$char_6.mightScale[$char_6.might] + " " + 
 		 		$char_6.sanityScale[$char_6.sanity] + " " + 
 		 		$char_6.knowledgeScale[$char_6.knowledge] + " " + "</center>");
-
-	
 	    
 	     moves = $char_1.speedScale[$char_1.speed - 1];
 	     movesp.innerHTML = $char_1.speedScale[$char_1.speed - 1];
 		 const $objective_description = $("#objective_description");
 		 $objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>");
      	document.getElementById("player_1").style.borderColor = "yellow";
-	
-     });
 }
 
 const update = () => {
