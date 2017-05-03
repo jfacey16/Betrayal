@@ -82,15 +82,15 @@ public class PreHaunt implements GamePhase {
   public void run(String name, QueryParamsMap qm, GameChar character,
       Map<String, Object> variables) {
     // if person is starting turn reset available actions
-    if (mode == "start") {
+    if (mode.equals("start")) {
       remaining.put("move", character.getSpeed());
       mode = "idle";
       phase = 0;
     }
 
     // make sure backend matches frontend
-    if (mode != "idle") {
-      if (name != mode) {
+    if (!mode.equals("idle")) {
+      if (!name.equals(mode)) {
         System.out.println(
             "NAME DOESN'T EQUAL MODE. NAME:" + name + " MODE:" + mode);
         return;

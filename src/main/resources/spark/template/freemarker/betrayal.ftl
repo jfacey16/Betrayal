@@ -15,8 +15,8 @@
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <!-- <script src="js/betrayal_testing.js"></script> -->
-  <script src="js/tilegen.js"></script>
+  <script src="js/betrayal_testing.js"></script>
+<!--   <script src="js/tilegen.js"></script> -->
   <script type="text/javascript">
   class Tile {
     constructor(posx, posy, north, east, south, west) {
@@ -61,9 +61,9 @@
   const offx = -375;
   const offy = -425;
   let turn = 0;
+  // let user = false;
   const textOff = new Position(5, 130);
-  const symbOff = new Position(125, 125);
-  const symbSize = new Position(25, 25);
+  const symbOff = new Position(130, 143);
   const outside = new Tile(450,600,false,false,false,false); 
   const ehall = new Tile(600,600,true,true,true,false);
   const foyer = new Tile(750,600,true,true,true,true);
@@ -228,6 +228,14 @@
       }
       
   }
+  // function wait() {
+  //   if (user == true) {
+  //     setTimeout(wait(), 10000);
+  //   }
+  // }
+  // function testing() {
+  //   user = false;
+  // }
   function paintBoard(floor) {
     if (floor == 0 || floor == -1) {
       ctxb.strokeRect(600,600,T,T);
@@ -682,6 +690,7 @@
     <center><button disabled>Attack</button></center>
     <center><button disabled>Pick up Items</button></center>
     <center><button disabled>Interact w/Room</button></center>
+    <center><button onclick="testing();">Testing</button></center>
     <div id="scription"></div>
     </div>
   </div>
@@ -979,21 +988,51 @@
                 $.post("/requestTile", postParameters, responseJSON => {
                   const responseObject = JSON.parse(responseJSON);
                   console.log(responseObject);
-                  // console.log(responseObject.newtile.availableDoors);
                   if (responseObject.newtile.availableDoors.length == 4) {
+                    // user = true;
+                    // wait();
+                    // console.log("out!");
                     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - T, D, X);
                     ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy - T + D, X, D);
                     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
                     ctx.strokeRect(positions[turn].posx, positions[turn].posy - T + D, X, D);
+                    $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
+                      console.log(rj2);
+                    });
+                    positions[turn].north = true;
+                    positions[turn].east = true;
+                    positions[turn].south = true;
+                    positions[turn].west = true;
+                    const ntile = new Tile(positions[turn].posx, positions[turn].posy - T, true, true, true, true);
+                    flo.push(ntile);
+                  } else if (responseObject.newtile.availableDoors.length == 3) {
+
+                  } else if (responseObject.newtile.availableDoors.length == 2) {
+
+                  } else if (responseObject.newtile.availableDoors.length == 1) {
+                    ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
+                    $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
+                      console.log(rj2);
+                    });
+                    positions[turn].north = false;
+                    positions[turn].east = false;
+                    positions[turn].south = true;
+                    positions[turn].west = false;
+                    const ntile = new Tile(positions[turn].posx, positions[turn].posy - T, false, false, true, false);
+                    flo.push(ntile);
                   }
 
                   ctx.font = "17px Times New Roman";
                   ctx.fillText(responseObject.newtile.name, positions[turn].posx + textOff.posx, positions[turn].posy - T + textOff.posy);
                   console.log(responseObject.newtile.name);
+                  ctx.font = "25px Times New Roman";
+                  if (responseObject.newtile.eventCount > 0) 
+                    ctx.fillText("E", positions[turn].posx + symbOff.posx, positions[turn].posy - T + symbOff.posy);
+                  else if (responseObject.newtile.itemCount > 0)
+                    ctx.fillText("I", positions[turn].posx + symbOff.posx + 6, positions[turn].posy - T + symbOff.posy);
+                  else if (responseObject.newtile.omenCount > 0) 
+                    ctx.fillText("O", positions[turn].posx + symbOff.posx - 2, positions[turn].posy - T + symbOff.posy);
 
-                  $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
-                    console.log(rj2);
-                  });
                   positions[turn].posy = positions[turn].posy - T;
                   moves--;
                   const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
