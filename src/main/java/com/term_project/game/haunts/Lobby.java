@@ -74,7 +74,7 @@ public class Lobby implements GamePhase {
       List<Floor> midAvailable = new ArrayList<>();
       midAvailable.add(Floor.GROUND);
       Tile mid = new GenericTile(midConnected, 0, 0, 0, midAvailable, memory);
-      mid.setPos(new Pos(-1, 0, Floor.GROUND));
+      mid.setPos(new Pos(1, 0, Floor.GROUND));
       mid.setName("Foyer");
 
       //stairs
@@ -82,7 +82,7 @@ public class Lobby implements GamePhase {
       List<Floor> stairsAvailable = new ArrayList<>();
       stairsAvailable.add(Floor.GROUND);
       Tile stairs = new GenericTile(stairsConnected, 0, 0, 0, stairsAvailable, memory);
-      stairs.setPos(new Pos(-2, 0, Floor.GROUND));
+      stairs.setPos(new Pos(2, 0, Floor.GROUND));
       stairs.setName("Grand Staircase");
 
       //upper landing
@@ -90,7 +90,7 @@ public class Lobby implements GamePhase {
       List<Floor> upperAvailable = new ArrayList<>();
       upperAvailable.add(Floor.ATTIC);
       Tile upper = new GenericTile(upperConnected, 0, 0, 0, upperAvailable, memory);
-      upper.setPos(new Pos(-2, 0, Floor.ATTIC));
+      upper.setPos(new Pos(0, 0, Floor.ATTIC));
       upper.setName("Upper Landing");
 
       //basement
@@ -104,15 +104,16 @@ public class Lobby implements GamePhase {
       //connect front door
       frontDoorConnected.add(Direction.NORTH);
       frontDoorConnected.add(Direction.SOUTH);
-      frontDoorConnected.add(Direction.WEST);
+      frontDoorConnected.add(Direction.EAST);
 
       //connect mid door
       midConnected.add(Direction.NORTH);
       midConnected.add(Direction.SOUTH);
       midConnected.add(Direction.EAST);
+      midConnected.add(Direction.WEST);
 
       //connect stairs
-      stairsConnected.add(Direction.EAST);
+      stairsConnected.add(Direction.WEST);
       stairsConnected.add(Direction.UP);
 
       //connect upper
@@ -122,7 +123,7 @@ public class Lobby implements GamePhase {
       upperConnected.add(Direction.WEST);
       upperConnected.add(Direction.DOWN);
 
-      //connect basment
+      //connect basement
       basementConnected.add(Direction.NORTH);
       basementConnected.add(Direction.SOUTH);
       basementConnected.add(Direction.EAST);

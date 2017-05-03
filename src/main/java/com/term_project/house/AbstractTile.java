@@ -120,18 +120,6 @@ public abstract class AbstractTile implements Tile {
       throw new NullPointerException(
           "There is no door/tile to the north.");
     }
-    System.out.println("past if statement");
-    try {
-      System.out.println(memory.getTileMap());
-    } catch (Throwable e) {
-      e.printStackTrace();
-    }
-    try {
-      System.out.println(doors.get(Direction.NORTH));
-    } catch (Throwable e) {
-      e.printStackTrace();
-    }
-    
     Tile north = memory.getTileMap().get(doors.get(Direction.NORTH));
     return north;
   }
@@ -189,7 +177,7 @@ public abstract class AbstractTile implements Tile {
   @Override
   public boolean hasNorth() {
     System.out.println("hi");
-    return true;// availableDoors.contains(Direction.NORTH);
+    return availableDoors.contains(Direction.NORTH);
   }
 
   @Override

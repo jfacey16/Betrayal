@@ -15,7 +15,7 @@
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="js/betrayal_testing.js"></script>
+  <!-- <script src="js/betrayal_testing.js"></script> -->
   <script src="js/tilegen.js"></script>
   <script type="text/javascript">
   class Tile {
@@ -61,6 +61,9 @@
   const offx = -375;
   const offy = -425;
   let turn = 0;
+  const textOff = new Position(5, 130);
+  const symbOff = new Position(125, 125);
+  const symbSize = new Position(25, 25);
   const outside = new Tile(450,600,false,false,false,false); 
   const ehall = new Tile(600,600,true,true,true,false);
   const foyer = new Tile(750,600,true,true,true,true);
@@ -973,10 +976,30 @@
 //              positions[turn].south = true;
 //              positions[turn].west = r3;
                 const postParameters = {name: "move", direction: "NORTH"};
-
                 $.post("/requestTile", postParameters, responseJSON => {
                   const responseObject = JSON.parse(responseJSON);
                   console.log(responseObject);
+                  // console.log(responseObject.newtile.availableDoors);
+                  if (responseObject.newtile.availableDoors.length == 4) {
+                    ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - T, D, X);
+                    ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy - T + D, X, D);
+                    ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
+                    ctx.strokeRect(positions[turn].posx, positions[turn].posy - T + D, X, D);
+                  }
+
+                  ctx.font = "17px Times New Roman";
+                  ctx.fillText(responseObject.newtile.name, positions[turn].posx + textOff.posx, positions[turn].posy - T + textOff.posy);
+                  console.log(responseObject.newtile.name);
+
+                  $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
+                    console.log(rj2);
+                  });
+                  positions[turn].posy = positions[turn].posy - T;
+                  moves--;
+                  const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
+                  const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
+                  lev.style.top = ypos + 'px';
+                  lev.style.left = xpos + 'px';
                 });  
 			
             } else {
@@ -984,13 +1007,13 @@
               positions[turn].east = flo[temp].east;
               positions[turn].south = flo[temp].south;
               positions[turn].west = flo[temp].west;
+              positions[turn].posy = positions[turn].posy - T;
+              moves--;
+              const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
+              const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
+              lev.style.top = ypos + 'px';
+              lev.style.left = xpos + 'px';
             }
-            positions[turn].posy = positions[turn].posy - T;
-            moves--;
-            const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
-            const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
-            lev.style.top = ypos + 'px';
-            lev.style.left = xpos + 'px';
           } 
         } else if (event.which == 68) {
           if (positions[turn].posx + T >= lev.width + edgex[positions[turn].floor]) {

@@ -141,7 +141,7 @@ public class Mover {
       break;
     }
 
-    variables.put("new tile", toAdd.getBean());
+    variables.put("newtile", toAdd.getBean());
   }
 
   public void addTile(GameChar character, Integer numClockwiseRotations,

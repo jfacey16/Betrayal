@@ -1,6 +1,20 @@
 let characters = [];
+let $item_window;
+let $omen_window;
+let $event_window;
+
 $(document).ready(() => {
  $.post("/create_game", {players : "6"}, responseJSON => {
+
+ 	const $temp_lobby = $("#temp_lobby");
+	$item_window = $("#item");
+	$omen_window = $("#omen");
+	$event_window = $("#event");
+
+	$item_window.hide();
+	$omen_window.hide();
+	$event_window.hide();
+	$temp_lobby.hide();
    const responseObject = JSON.parse(responseJSON);
    let choices = responseObject.characterChoices;
      // TODO: Parse the JSON response into a JavaScript object. DONE
