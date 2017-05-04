@@ -178,11 +178,11 @@ public class Main {
 	  @Override
 	  public String handle(Request req, Response res) {
 			QueryParamsMap qm = req.queryMap();
-			
+
 		      Map<String, Object> variables = new HashMap<>();
-		      
+
 		      //the querymap sent back is basically just whatever action has just taken place
-		      //variables will have all information concerning the current player whose turn it is 
+		      //variables will have all information concerning the current player whose turn it is
 
 					// variables.putAll(gameState.update(qm));
 					// variables = ImmutableMap.copyOf(variables);
@@ -203,7 +203,7 @@ public class Main {
 			return GSON.toJson(variables);
 	  }
 	}
-	
+
 	private static class RequestTile implements Route {
 	@Override
 	  public String handle(Request req, Response res) {
