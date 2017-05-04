@@ -55,27 +55,35 @@ public class Bottle implements Item {
       // changing for ease of use
       character.modSpeed(3);
       character.modMight(2);
+      variables.put("result", "6 Gain 2 Might and 3 Speed.");
     } else if (sum == 5) {
       character.modSpeed(2);
       character.modMight(2);
+      variables.put("result", "5 Gain 2 Might and 2 Speed.");
     } else if (sum == 4) {
       character.modKnowlege(2);
       character.modSanity(2);
+      variables.put("result", "4 Gain 2 Knowledge and 2 Sanity.");
     } else if (sum == 3) {
       character.modKnowlege(1);
       character.modMight(-1);
+      variables.put("result", "3 Gain 1 Knowledge and lose 1 Might.");
     } else if (sum == 2) {
       character.modKnowlege(-2);
       character.modSanity(-2);
+      variables.put("result", "2 Lose 2 Knowledge and 2 Sanity.");
     } else if (sum == 1) {
       character.modSpeed(-2);
       character.modMight(-2);
+      variables.put("result", "1 Lose 2 Might and 2 Speed.");
     } else {
       character.modSpeed(-2);
       character.modMight(-2);
       character.modKnowlege(-2);
       character.modSanity(-2);
+      variables.put("result", "0 Lose 2 from each trait.");
     }
+    variables.put("rolls", rolls);
   }
 
   @Override
