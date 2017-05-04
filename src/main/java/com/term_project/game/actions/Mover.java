@@ -121,12 +121,12 @@ public class Mover {
     // set the tile's position
     switch (dir) {
     case "NORTH":
-      newPos = new Pos(curPos.getX(), curPos.getY() + 1, currentFloor);
+      newPos = new Pos(curPos.getX(), curPos.getY() - 1, currentFloor);
       toAdd.setPos(newPos);
       break;
 
     case "SOUTH":
-      newPos = new Pos(curPos.getX(), curPos.getY() - 1, currentFloor);
+      newPos = new Pos(curPos.getX(), curPos.getY() + 1, currentFloor);
       toAdd.setPos(newPos);
       break;
 
@@ -136,7 +136,7 @@ public class Mover {
       break;
 
     case "WEST":
-      newPos = new Pos(curPos.getX(), curPos.getY() - 1, currentFloor);
+      newPos = new Pos(curPos.getX() - 1, curPos.getY(), currentFloor);
       toAdd.setPos(newPos);
       break;
     }

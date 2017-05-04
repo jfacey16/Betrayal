@@ -1011,9 +1011,9 @@
 
                   } else if (responseObject.newtile.availableDoors.length == 1) {
                     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
-                    $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
-                      console.log(rj2);
-                    });
+                    // $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
+                    //   console.log(rj2);
+                    // });
                     positions[turn].north = false;
                     positions[turn].east = false;
                     positions[turn].south = true;

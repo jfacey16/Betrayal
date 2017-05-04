@@ -86,7 +86,7 @@ public class GameState {
 		System.out.println(playersCharacters.get(currentId).getTile().getPos().getX());
 		System.out.println(playersCharacters.get(currentId).getTile().getPos().getY());
 		System.out.println(phase.getDescription());
-		assert(phase instanceof PreHaunt);
+		// assert(phase instanceof PreHaunt);
 		phase.run(qm.value("name"), qm, playersCharacters.get(currentId), variables);
 
 		if(qm.value("name").equals("end")){
