@@ -147,7 +147,7 @@ public class PreHaunt implements GamePhase {
             tileBeans.add(tile.getBean());
           }
           variables.put("tiles", tileBeans);
-          variables.put("characters", memory.getGameCharacters());
+          variables.put("characters", memory.getCharBeans());
           addActions(character, variables);
           return;
         }
@@ -169,6 +169,8 @@ public class PreHaunt implements GamePhase {
 
           // send frontend newly added tile
           variables.put("newTile", character.getTile().getBean());
+
+          phase = 0;
 
           /* This adding method doesn't really make a ton of sense to me. */
           /*

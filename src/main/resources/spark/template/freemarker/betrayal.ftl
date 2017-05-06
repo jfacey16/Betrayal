@@ -16,7 +16,6 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="js/betrayal_testing.js"></script>
-<!--   <script src="js/tilegen.js"></script> -->
   <script type="text/javascript">
   class Tile {
     constructor(posx, posy, north, east, south, west) {
@@ -61,7 +60,6 @@
   const offx = -375;
   const offy = -425;
   let turn = 0;
-  // let user = false;
   const textOff = new Position(5, 130);
   const symbOff = new Position(130, 143);
   const outside = new Tile(450,600,false,false,false,false); 
@@ -127,7 +125,6 @@
         turn = 0;
       else 
         turn++;
-      // player.innerHTML = turn + 1;
       
       if(turn === 0) {
       
@@ -228,14 +225,7 @@
       }
       
   }
-  // function wait() {
-  //   if (user == true) {
-  //     setTimeout(wait(), 10000);
-  //   }
-  // }
-  // function testing() {
-  //   user = false;
-  // }
+
   function paintBoard(floor) {
     if (floor == 0 || floor == -1) {
       ctxb.strokeRect(600,600,T,T);
@@ -684,13 +674,13 @@
     <canvas id="second"></canvas>
     <canvas id="basement"></canvas>
     <div id="descr">
-    <!-- <div> Player <span id="player">1</span>'s turn</div> -->
     <center><div> Speed Left: <span id="moves">10</span></div></center>
     <center><button id="end" onclick="endturn();">End Turn</button></center>
     <center><button disabled>Attack</button></center>
     <center><button disabled>Pick up Items</button></center>
-    <center><button disabled>Interact w/Room</button></center>
-    <center><button onclick="testing();">Testing</button></center>
+    <!-- <center><button disabled>Interact w/Room</button></center> -->
+    <center><button disabled>Place Tile</button></center>
+    <center><button id="rot" disabled>Rotate Clockwise</button></center>
     <div id="scription"></div>
     </div>
   </div>
@@ -849,11 +839,11 @@
     const second = document.getElementById("second");
     const basement = document.getElementById("basement");
     const descr = document.getElementById("scription");
-    // const player = document.getElementById("player");
     const movesp = document.getElementById("moves");
     const mfirst = document.getElementById("mfirst");
     const msecond = document.getElementById("msecond");
     const mbasement = document.getElementById("mbasement");
+    const rotate = document.getElementById("rot");
     first.width = 1350;
     first.height = 1350;
     second.width = 1350;
@@ -989,9 +979,6 @@
                   const responseObject = JSON.parse(responseJSON);
                   console.log(responseObject);
                   if (responseObject.newtile.availableDoors.length == 4) {
-                    // user = true;
-                    // wait();
-                    // console.log("out!");
                     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - T, D, X);
                     ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy - T + D, X, D);
                     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
@@ -1006,14 +993,43 @@
                     const ntile = new Tile(positions[turn].posx, positions[turn].posy - T, true, true, true, true);
                     flo.push(ntile);
                   } else if (responseObject.newtile.availableDoors.length == 3) {
-
+                    ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - T, D, X);
+                    ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy - T + D, X, D);
+                    ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
+                    positions[turn].north = true;
+                    positions[turn].east = true;
+                    positions[turn].south = true;
+                    positions[turn].west = false;
+                    rotate.disabled = false;
                   } else if (responseObject.newtile.availableDoors.length == 2) {
+                    if ((responseObject.newtile.availableDoors.indexOf("NORTH") != -1 && 
+                      responseObject.newtile.availableDoors.indexOf("SOUTH") != -1) || 
+                      (responseObject.newtile.availableDoors.indexOf("EAST") != -1 && 
+                      responseObject.newtile.availableDoors.indexOf("WEST") != -1)) {
+                      ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - T, D, X);
+                      ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
+                      $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
+                        console.log(rj2);
+                      });
+                      positions[turn].north = true;
+                      positions[turn].east = false;
+                      positions[turn].south = true;
+                      positions[turn].west = false;    
+                    } else {
+                      ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy - T + D, X, D);
+                      ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
+                      positions[turn].north = false;
+                      positions[turn].east = true;
+                      positions[turn].south = true;
+                      positions[turn].west = false;
+                      rotate.disabled = false;
+                    }
 
                   } else if (responseObject.newtile.availableDoors.length == 1) {
                     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
-                    // $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
-                    //   console.log(rj2);
-                    // });
+                    $.post("/requestTile", {name: "move", rotations: "2"}, rj2 => {
+                      console.log(rj2);
+                    });
                     positions[turn].north = false;
                     positions[turn].east = false;
                     positions[turn].south = true;
