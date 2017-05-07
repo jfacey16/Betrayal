@@ -546,7 +546,7 @@
         </div>
         
         <div id="stats_2" class="stats"><center> X </center></div> 
-        <div id="stats_2_popup" style="display:none;"></div>   
+        <div id="stats_2_popup" class="popup_stats"></div>   
       </div>
       
       <div class="info">
@@ -563,7 +563,7 @@
         </div>
         
         <div id="stats_3" class="stats"><center> X </center></div> 
-        <div id="stats_3_popup" style="display:none;"></div>
+        <div id="stats_3_popup" class="popup_stats"></div>
       </div>
       
       <div class="info">
@@ -580,7 +580,7 @@
         </div>
         
         <div id="stats_4" class="stats"><center> X </center></div> 
-        <div id="stats_4_popup" style="display:none;"></div>
+        <div id="stats_4_popup" class="popup_stats"></div>
       </div>
       
       <div class="info">
@@ -597,7 +597,7 @@
         </div>
         
         <div id="stats_5" class="stats"><center> X </center></div> 
-        <div id="stats_5_popup" style="display:none;"></div>
+        <div id="stats_5_popup" class="popup_stats"></div>
       </div>
       
       <div class="info">
@@ -614,7 +614,7 @@
         </div>
         
         <div id="stats_6" class="stats"><center> X </center></div> 
-        <div id="stats_6_popup" style="display:none;"></div>
+        <div id="stats_6_popup" class="popup_stats"></div>
       </div>
       
       <div class="info">
@@ -637,6 +637,18 @@
     .stats{
       width:100%;
       border-style:solid;
+      border-width:2px;
+      background-color:#eeeeee;}
+    </style>
+    
+    <style type="text/css">
+    .popup_stats{
+      z-index: 20;
+      top:184px;
+      display:none;
+      position:absolute;
+      border-style:solid;
+      border-color:#eeeeee;
       border-width:2px;
       background-color:#eeeeee;}
     </style>
