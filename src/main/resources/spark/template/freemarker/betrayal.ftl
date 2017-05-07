@@ -15,8 +15,8 @@
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="js/betrayal_testing.js"></script>
-  <script src="js/allfunctions.js"></script>
+  <script src="js/begin_game.js"></script>
+  <script src="js/all_functions.js"></script>
   <script src="js/card_draw.js"></script>
 </head>
 <body>
