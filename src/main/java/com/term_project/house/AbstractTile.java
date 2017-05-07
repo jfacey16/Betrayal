@@ -261,28 +261,85 @@ public abstract class AbstractTile implements Tile {
 
     // Make north value the west value
     doors.put(Direction.NORTH, holderOne);
-    int rem = availableDoors.size();
+    // int rem = availableDoors.size();
 
-    if (availableDoors.contains(Direction.NORTH)) {
-      availableDoors.remove(Direction.NORTH);
-      availableDoors.add(Direction.EAST);
-      rem--;
+    // if (availableDoors.contains(Direction.NORTH) && rem > 0) {
+    //   availableDoors.remove(Direction.NORTH);
+    //   availableDoors.add(Direction.EAST);
+    //   rem--;
+    // }
+    // if (availableDoors.contains(Direction.EAST) && rem > 0) {
+    //   availableDoors.remove(Direction.EAST);
+    //   availableDoors.add(Direction.SOUTH);
+    //   rem--;
+    // }
+    // if (availableDoors.contains(Direction.SOUTH) && rem > 0) {
+    //   availableDoors.remove(Direction.SOUTH);
+    //   availableDoors.add(Direction.WEST);
+    //   rem--;
+    // } 
+    // if (availableDoors.contains(Direction.WEST) && rem > 0) {
+    //   availableDoors.remove(Direction.WEST);
+    //   availableDoors.add(Direction.NORTH);
+    //   rem--;
+    // }
+    int rem = 0;
+    int av = availableDoors.size();
+    while (true) {
+      if (availableDoors.contains(Direction.NORTH)) {
+        rem++;
+        if (rem == av) {
+          availableDoors.clear();
+          if (av == 3) 
+            availableDoors.add(Direction.WEST);
+          availableDoors.add(Direction.EAST);
+          availableDoors.add(Direction.NORTH);
+          break;
+        }
+      } else 
+        rem = 0;
+      if (availableDoors.contains(Direction.EAST)) {
+        rem++;
+        if (rem == av) {
+          availableDoors.clear();
+          if (av == 3) 
+            availableDoors.add(Direction.NORTH);
+          availableDoors.add(Direction.SOUTH);
+          availableDoors.add(Direction.EAST);
+          break;
+        }
+      } else 
+        rem = 0;
+      if (availableDoors.contains(Direction.SOUTH)) {
+        rem++;
+        if (rem == av) {
+          availableDoors.clear();
+          if (av == 3) 
+            availableDoors.add(Direction.EAST);
+          availableDoors.add(Direction.WEST);
+          availableDoors.add(Direction.SOUTH);
+          break;
+        }
+      } else
+        rem = 0;
+      if (availableDoors.contains(Direction.WEST)) {
+        rem++;
+        if (rem == av) {
+          availableDoors.clear();
+          if (av == 3) 
+            availableDoors.add(Direction.SOUTH);
+          availableDoors.add(Direction.NORTH);
+          availableDoors.add(Direction.WEST);
+          break;
+        }
+      } else 
+        rem = 0;
     }
-    if (availableDoors.contains(Direction.EAST) && rem > 0) {
-      availableDoors.remove(Direction.EAST);
-      availableDoors.add(Direction.SOUTH);
-      rem--;
-    }
-    if (availableDoors.contains(Direction.SOUTH) && rem > 0) {
-      availableDoors.remove(Direction.SOUTH);
-      availableDoors.add(Direction.WEST);
-      rem--;
-    } 
-    if (availableDoors.contains(Direction.WEST) && rem > 0) {
-      availableDoors.remove(Direction.WEST);
-      availableDoors.add(Direction.NORTH);
-      rem--;
-    }
+
+    System.out.println("n:" + this.hasNorth());
+    System.out.println("s:" + this.hasSouth());
+    System.out.println("e:" + this.hasEast());
+    System.out.println("w:" + this.hasWest());
   }
 
   @Override
