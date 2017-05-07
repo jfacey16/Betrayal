@@ -27,7 +27,7 @@
 			
 			  <p>Fill out and submit the following form to create a game:</p>
 			  
-			  <p>Game Name: <input type="text" id="name" name="name" placeholder="Enter Game Name"></p>
+			  <p>Username: <input type="text" id="username_create" name="name" placeholder="Enter Your Username"></p>
 			  
 			  <p>Game Size: 
 			  <select name="players" id="players">
@@ -43,6 +43,10 @@
 	
 		<div class="option">
 			<center><p><h2>Join a lobby:</h2></p>
+			
+			<p>Fill out your username and select a lobby in order to join a game:</p>
+			
+			<p>Username: <input type="text" id="username_join" name="name" placeholder="Enter Your Username"></p>
 
 			<p>Game "X": 4/6 players ready.</p>
 			
