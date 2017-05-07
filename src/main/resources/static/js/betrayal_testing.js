@@ -12,10 +12,6 @@ let $char_4;
 let $char_5;
 let $char_6;
 
-let $item_window;
-let $omen_window;
-let $event_window;
-
 let responseOject;
 let current_char;
 
@@ -31,14 +27,8 @@ $(document).ready(() => {
 	pickCharacters();
 	
 	const $temp_lobby = $("#temp_lobby");
-	$item_window = $("#item");
-	$omen_window = $("#omen");
-	$event_window = $("#event");
 	
 	var x = 1;
-	$item_window.hide();
-	$omen_window.hide();
-	$event_window.hide();
 	$temp_lobby.show();
 
     $(document).keypress(function(e) {
@@ -51,18 +41,6 @@ $(document).ready(() => {
             	x = 1;
             }
         }
-        
-        if(e.which == 49) {
-            itemDrawn();
-        }
-        
-        if(e.which == 50) {
-            omenDrawn();
-        }
-        
-        if(e.which == 51) {
-            eventDrawn();
-        }
     });
 
     const $create = $("#create");
@@ -74,16 +52,69 @@ $(document).ready(() => {
     	$temp_lobby.hide();
 
     	setStartingState();
-    	
 
     	$.post("/tileStart", {"0": $char_1.name, "1": $char_2.name, "2": $char_3.name, "3": $char_4.name,
     	     "4": $char_5.name, "5": $char_6.name}, rj2 => {
+	    });
+    	
+    	const stats_2 = document.getElementById("stats_2");
+    	const stats_3 = document.getElementById("stats_3");
+    	const stats_4 = document.getElementById("stats_4");
+    	const stats_5 = document.getElementById("stats_5");
+    	const stats_6 = document.getElementById("stats_6");
 
-    	     	setStartingState();
-    	     });
+		stats_2.onmouseover = function() {
+			$("#stats_2_popup").html("PLAYER 2 STATS");
+			document.getElementById('stats_2_popup').style.display = 'block';
+		};
+		
+		stats_2.onmouseout = function() {
+			document.getElementById('stats_2_popup').style.display = 'none';
+		};
+
+		stats_3.onmouseover = function() {
+			$("#stats_3_popup").html("PLAYER 3 STATS");
+			document.getElementById('stats_3_popup').style.display = 'block';
+		};
+
+		stats_3.onmouseout = function() {
+			document.getElementById('stats_3_popup').style.display = 'none';
+		};
+
+		stats_4.onmouseover = function() {
+			$("#stats_4_popup").html("PLAYER 4 STATS");
+			document.getElementById('stats_4_popup').style.display = 'block';
+		};
+
+		stats_4.onmouseout = function() {
+			document.getElementById('stats_4_popup').style.display = 'none';
+		};
+
+		stats_5.onmouseover = function() {
+			$("#stats_5_popup").html("PLAYER 5 STATS");
+			document.getElementById('stats_5_popup').style.display = 'block';
+		};
+
+		stats_5.onmouseout = function() {
+			document.getElementById('stats_5_popup').style.display = 'none';
+		};
+
+		stats_6.onmouseover = function() {
+			$("#stats_6_popup").html("PLAYER 6 STATS");
+			document.getElementById('stats_6_popup').style.display = 'block';
+		};
+
+		stats_6.onmouseout = function() {
+			document.getElementById('stats_6_popup').style.display = 'none';
+		};
 
     });
 });
+
+
+
+
+
 
 const pickCharacters = () => {
 	 const postParameters = {players:"6"};
@@ -284,67 +315,6 @@ const update = () => {
         //updates everything for the one character whose turn it is currently
 	
     });
-}
-
-const itemDrawn = () => {
-	
-	current_char = turn + 1;
-	
-	if(current_char === 1) name = $char_1.name;
-	if(current_char === 2) name = $char_2.name;
-	if(current_char === 3) name = $char_3.name;
-	if(current_char === 4) name = $char_4.name;
-	if(current_char === 5) name = $char_5.name;
-	if(current_char === 6) name = $char_6.name;
-
-	$item_window.show();
-	$("#item_name").html("NAME");
-	$("#item_description").html(name + " found an item! [ADD DESCRIPTION]");
-	
-	$("#end_turn").unbind().click(event => {
-
-		$item_window.hide();
-		
-		endturn();
-
-    });
-	
-}
-
-const omenDrawn = () => {
-	
-	current_char = turn + 1;
-	
-	$omen_window.show();
-	$("#omen_name").html("NAME");
-	$("#omen_description").html("You've got an omen! [ADD DESCRIPTION]");
-	
-	$("#roll_haunt").unbind().click(event => {
-
-		$omen_window.hide();
-		
-		//add omen to current player
-		
-    });
-	
-}
-
-const eventDrawn = () => {
-	
-	current_char = turn + 1;
-	
-	$event_window.show();
-	$("#event_name").html("NAME");
-	$("#event_description").html("You've got an event! [ADD DESCRIPTION]");
-	
-	$("#event_action").unbind().click(event => {
-		
-		$event_window.hide();
-		
-		//do event stuff
-
-    });
-	
 }
 
 
