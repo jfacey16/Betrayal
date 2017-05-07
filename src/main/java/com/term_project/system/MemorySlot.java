@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Map.Entry;
 
 import com.term_project.builders.EventsBuilder;
 import com.term_project.builders.ItemsBuilder;
@@ -17,6 +18,8 @@ import com.term_project.house.Pos;
 import com.term_project.house.Tile;
 import com.term_project.items.Item;
 import com.term_project.omens.Omen;
+import com.term_project.character.CharBean;
+import com.term_project.house.TileBean;
 
 /**
  * This is a class that will be used to hold a peice of information. It is used
@@ -279,6 +282,19 @@ public final class MemorySlot {
   }
 
   /**
+   * Gets the tileMap being stored in memory as tileBeans.
+   * 
+   * @return A list of tileBeans from the tileMap.
+   */
+  public List<TileBean> getTileBeans() {
+    List<TileBean> tb = new ArrayList<>();
+    for (Entry<Pos, Tile> e: tileMap.entrySet()) {
+      tb.add(e.getValue().getBean());
+    }
+    return tb;
+  }
+
+  /**
    * Gets the gamestate this MemorySlot manages.
    *
    * @return The gamestate this MemorySlot manages.
@@ -294,5 +310,18 @@ public final class MemorySlot {
    */
   public List<GameChar> getGameCharacters() {
     return gameCharacters;
+  }
+
+  /**
+   * Gets the list of characters as charBeans.
+   *
+   * @return A list of characters as charBeans.
+   */
+  public List<CharBean> getCharBeans() {
+    List<CharBean> cb = new ArrayList<>();
+    for (GameChar gc: gameCharacters) {
+      cb.add(gc.getCharBean());
+    }
+    return cb;
   }
 }

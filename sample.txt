@@ -1,0 +1,48 @@
+May 04, 2017 4:51:10 PM spark.staticfiles.StaticFilesConfiguration configureExternal
+INFO: External StaticResourceHandler configured with folder = src/main/resources/static
+May 04, 2017 4:51:10 PM spark.staticfiles.StaticFilesFolder externalConfiguredTo
+WARNING: Registering external static files folder [src/main/resources/static] as [/gpfs/main/home/tmiyamot/course/cs032/term-project-ahellma1-jfacey-tmiyamot-zhoffman/src/main/resources/static].
+May 04, 2017 4:51:10 PM org.eclipse.jetty.util.log.Log initialized
+INFO: Logging initialized @1191ms to org.eclipse.jetty.util.log.Slf4jLog
+May 04, 2017 4:51:10 PM spark.embeddedserver.jetty.EmbeddedJettyServer ignite
+INFO: == Spark has ignited ...
+May 04, 2017 4:51:10 PM spark.embeddedserver.jetty.EmbeddedJettyServer ignite
+INFO: >> Listening on 0.0.0.0:4567
+May 04, 2017 4:51:10 PM org.eclipse.jetty.server.Server doStart
+INFO: jetty-9.4.0.v20161208
+May 04, 2017 4:51:10 PM org.eclipse.jetty.server.session.DefaultSessionIdManager doStart
+INFO: DefaultSessionIdManager workerName=node0
+May 04, 2017 4:51:10 PM org.eclipse.jetty.server.session.DefaultSessionIdManager doStart
+INFO: No SessionScavenger set, using defaults
+May 04, 2017 4:51:10 PM org.eclipse.jetty.server.session.HouseKeeper startScavenging
+INFO: Scavenging every 600000ms
+May 04, 2017 4:51:10 PM org.eclipse.jetty.server.AbstractConnector doStart
+INFO: Started ServerConnector@6b056796{HTTP/1.1,[http/1.1]}{0.0.0.0:4567}
+May 04, 2017 4:51:10 PM org.eclipse.jetty.server.Server doStart
+INFO: Started @1261ms
+start is starting
+Choose your character.
+start is happening
+MAP BUILDING
+phase being set
+Explore the house, search for items, and find omens!
+name: move
+0
+0
+Explore the house, search for items, and find omens!
+move
+Madame Zostra
+hi
+null
+phase now 1
+{newtile=com.term_project.house.TileBean@485d4749}
+name: move
+0
+0
+Explore the house, search for items, and find omens!
+move
+Madame Zostra
+why am i here?
+hi
+hi
+{tiles=[com.term_project.house.TileBean@76f52fcd, com.term_project.house.TileBean@64cd1048, com.term_project.house.TileBean@6c7ba369, com.term_project.house.TileBean@25ded121, com.term_project.house.TileBean@7a0a1910, com.term_project.house.TileBean@76490949], characters=[com.term_project.character.CharBean@47188c02, com.term_project.character.CharBean@149c0a19, com.term_project.character.CharBean@3e744303, com.term_project.character.CharBean@4916c5, com.term_project.character.CharBean@3b2e252, com.term_project.character.CharBean@770aecff], item=[], character=com.term_project.character.CharBean@6b7ad546, omen=[com.term_project.omens.Mask@247b0c], toResolve=[haunt], newTile=com.term_project.house.TileBean@234d19d2, event=[], actions=[drop omen, use omen, move]}

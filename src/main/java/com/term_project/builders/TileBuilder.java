@@ -22,304 +22,262 @@ public class TileBuilder implements Builder<Tile> {
   @Override
   public Queue<Tile> build() {
     List<Tile> tileList = new ArrayList<>();
+    // tiles with all 4 doors
+    List<Direction> d4 = new ArrayList<>();
+    d4.add(Direction.NORTH);
+    d4.add(Direction.SOUTH);
+    d4.add(Direction.EAST);
+    d4.add(Direction.WEST);
+
+    // tiles with 3 doors
+    List<Direction> d3 = new ArrayList<>();
+    d3.add(Direction.NORTH);
+    d3.add(Direction.SOUTH);
+    d3.add(Direction.EAST);
+
+    // tiles with 2 doors, across
+    List<Direction> d2a = new ArrayList<>();
+    d2a.add(Direction.NORTH);
+    d2a.add(Direction.SOUTH);
+
+    // tiles with 2 doors, next to each other
+    List<Direction> d2s = new ArrayList<>();
+    d2s.add(Direction.NORTH);
+    d2s.add(Direction.EAST);
+
+    // tiles with 1 door
+    List<Direction> d1 = new ArrayList<>();
+    d1.add(Direction.NORTH);
+
     // start of all floors
-    List<Direction> connectedTiles = new ArrayList<>();
-    connectedTiles.add(Direction.NORTH);
-    connectedTiles.add(Direction.SOUTH);
-    connectedTiles.add(Direction.EAST);
-    connectedTiles.add(Direction.WEST);
+    List<Floor> bga = new ArrayList<>();
+    bga.add(Floor.ATTIC);
+    bga.add(Floor.BASEMENT);
+    bga.add(Floor.GROUND);
 
-    List<Floor> availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.ATTIC);
-    availableFloors.add(Floor.BASEMENT);
-    availableFloors.add(Floor.GROUND);
-
-    Tile junkRoom = new GenericTile(connectedTiles, 0, 0, 1,
-        availableFloors, memory);
+    Tile junkRoom = new GenericTile(d4, 0, 0, 1,
+        bga, memory);
     junkRoom.setName("Junk Room");
     tileList.add(junkRoom);
 
-    connectedTiles.remove(Direction.WEST);
-    Tile gameRoom = new GenericTile(connectedTiles, 0, 1, 0,
-        availableFloors, memory);
+    Tile gameRoom = new GenericTile(d3, 0, 1, 0,
+        bga, memory);
     gameRoom.setName("Game Room");
     tileList.add(gameRoom);
 
-    connectedTiles.add(Direction.WEST);
-    connectedTiles.remove(Direction.NORTH);
-    connectedTiles.remove(Direction.EAST);
-    Tile organRoom = new GenericTile(connectedTiles, 0, 1, 0,
-        availableFloors, memory);
+    Tile organRoom = new GenericTile(d2s, 0, 1, 0,
+        bga, memory);
     organRoom.setName("Organ Room");
     tileList.add(organRoom);
 
-    connectedTiles.add(Direction.NORTH);
-    connectedTiles.remove(Direction.WEST);
-    Tile statuaryCorridor = new GenericTile(connectedTiles, 0, 1, 0,
-        availableFloors, memory);
+    Tile statuaryCorridor = new GenericTile(d2a, 0, 1, 0,
+        bga, memory);
     statuaryCorridor.setName("Statuary Corridor");
     tileList.add(statuaryCorridor);
 
-    connectedTiles.add(Direction.WEST);
-    connectedTiles.add(Direction.EAST);
-    Tile creakyHallway = new GenericTile(connectedTiles, 0, 0, 0,
-        availableFloors, memory);
+    Tile creakyHallway = new GenericTile(d4, 0, 0, 0,
+        bga, memory);
     creakyHallway.setName("Creaky Hallway");
     tileList.add(creakyHallway);
 
-    Tile dustyHallway = new GenericTile(connectedTiles, 0, 0, 0,
-        availableFloors, memory);
+    Tile dustyHallway = new GenericTile(d4, 0, 0, 0,
+        bga, memory);
     dustyHallway.setName("Dusty Hallway");
     tileList.add(dustyHallway);
-    // start of upper
-    availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.ATTIC);
 
-    connectedTiles.remove(Direction.WEST);
-    connectedTiles.remove(Direction.EAST);
-    Tile balcony = new GenericTile(connectedTiles, 0, 0, 1,
-        availableFloors, memory);
+    // start of upper
+    List<Floor> a = new ArrayList<>();
+    a.add(Floor.ATTIC);
+
+    Tile balcony = new GenericTile(d2a, 0, 0, 1,
+        a, memory);
     balcony.setName("Balcony");
     tileList.add(balcony);
 
-    connectedTiles.remove(Direction.NORTH);
-    Tile gallery = new GenericTile(connectedTiles, 1, 0, 0,
-        availableFloors, memory);
+    Tile gallery = new GenericTile(d1, 1, 0, 0,
+        a, memory);
     gallery.setName("Gallery");
     tileList.add(gallery);
 
-    Tile attic = new GenericTile(connectedTiles, 0, 1, 0, availableFloors, memory);
+    Tile attic = new GenericTile(d1, 0, 1, 0, a, memory);
     attic.setName("Attic");
     tileList.add(attic);
 
-    connectedTiles.remove(Direction.SOUTH);
-    connectedTiles.add(Direction.WEST);
-    connectedTiles.add(Direction.NORTH);
-    Tile masterBedroom = new GenericTile(connectedTiles, 0, 0, 0,
-        availableFloors, memory);
+    Tile masterBedroom = new GenericTile(d2s, 0, 0, 0,
+        a, memory);
     masterBedroom.setName("Master Bedroom");
     tileList.add(masterBedroom);
 
-    connectedTiles.remove(Direction.NORTH);
-    connectedTiles.add(Direction.EAST);
-    Tile bedroom = new GenericTile(connectedTiles, 0, 1, 0,
-        availableFloors, memory);
+    Tile bedroom = new GenericTile(d2a, 0, 1, 0,
+        a, memory);
     bedroom.setName("Bedroom");
     tileList.add(bedroom);
 
-    Tile tower = new GenericTile(connectedTiles, 0, 1, 0, availableFloors, memory);
+    Tile tower = new GenericTile(d2a, 0, 1, 0, a, memory);
     tower.setName("Tower");
     tileList.add(tower);
 
     // start of ground
-    availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.GROUND);
+    List<Floor> g = new ArrayList<>();
+    g.add(Floor.GROUND);
 
-    connectedTiles.remove(Direction.WEST);
-    connectedTiles.add(Direction.NORTH);
-    Tile diningRoom = new GenericTile(connectedTiles, 0, 0, 1,
-        availableFloors, memory);
+    Tile diningRoom = new GenericTile(d2s, 0, 0, 1,
+        g, memory);
     diningRoom.setName("Dining Room");
     tileList.add(diningRoom);
 
-    connectedTiles.remove(Direction.EAST);
-    Tile coalChute = new GenericTile(connectedTiles, 0, 0, 0,
-        availableFloors, memory);
+    Tile coalChute = new GenericTile(d1, 0, 0, 0,
+        g, memory);
     coalChute.setName("Coal Chute");
     tileList.add(coalChute);
 
-    connectedTiles.remove(Direction.NORTH);
-    connectedTiles.add(Direction.SOUTH);
-    Tile graveyard = new GenericTile(connectedTiles, 0, 1, 0,
-        availableFloors, memory);
+    Tile graveyard = new GenericTile(d1, 0, 1, 0,
+        g, memory);
     graveyard.setName("Graveyard");
     tileList.add(graveyard);
 
-    connectedTiles.add(Direction.NORTH);
-    Tile gardens = new GenericTile(connectedTiles, 0, 1, 0,
-        availableFloors, memory);
+    Tile gardens = new GenericTile(d2a, 0, 1, 0,
+        g, memory);
     gardens.setName("Gardens");
     tileList.add(gardens);
 
-    connectedTiles.add(Direction.WEST);
-    Tile patio = new GenericTile(connectedTiles, 0, 1, 0, availableFloors, memory);
+    Tile patio = new GenericTile(d3, 0, 1, 0, g, memory);
     patio.setName("Patio");
     tileList.add(patio);
 
-    connectedTiles.add(Direction.EAST);
-    Tile ballroom = new GenericTile(connectedTiles, 0, 1, 0,
-        availableFloors, memory);
+    Tile ballroom = new GenericTile(d4, 0, 1, 0,
+        g, memory);
     ballroom.setName("Ballroom");
     tileList.add(ballroom);
 
     // start of basement
-    availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.BASEMENT);
+    List<Floor> b = new ArrayList<>();
+    b.add(Floor.BASEMENT);
 
-    connectedTiles.remove(Direction.WEST);
-    connectedTiles.remove(Direction.EAST);
-    Tile stairsFromBasement = new GenericTile(connectedTiles, 0, 0, 0,
-        availableFloors, memory);
+    Tile stairsFromBasement = new GenericTile(d2a, 0, 0, 0,
+        b, memory);
     stairsFromBasement.setName("Stairs From Basement");
     tileList.add(stairsFromBasement);
 
-    connectedTiles.remove(Direction.SOUTH);
-    connectedTiles.remove(Direction.NORTH);
-    connectedTiles.add(Direction.EAST);
-    Tile pentagramChamber = new GenericTile(connectedTiles, 0, 0, 1,
-        availableFloors, memory);
+    Tile pentagramChamber = new GenericTile(d1, 0, 0, 1,
+        b, memory);
     pentagramChamber.setName("Pentagram Chamber");
     tileList.add(pentagramChamber);
 
-    connectedTiles.remove(Direction.EAST);
-    connectedTiles.add(Direction.NORTH);
-    connectedTiles.add(Direction.SOUTH);
-    Tile larder = new GenericTile(connectedTiles, 1, 0, 0,
-        availableFloors, memory);
+    Tile larder = new GenericTile(d2a, 1, 0, 0,
+        b, memory);
     larder.setName("Larder");
     tileList.add(larder);
 
-    connectedTiles.remove(Direction.NORTH);
-    connectedTiles.remove(Direction.SOUTH);
-    connectedTiles.add(Direction.EAST);
-    connectedTiles.add(Direction.WEST);
-    Tile chasm = new GenericTile(connectedTiles, 0, 0, 0, availableFloors, memory);
+    Tile chasm = new GenericTile(d2a, 0, 0, 0, b, memory);
     chasm.setName("Chasm");
     tileList.add(chasm);
 
-    connectedTiles.remove(Direction.WEST);
-    connectedTiles.remove(Direction.EAST);
-    connectedTiles.add(Direction.NORTH);
-    Tile crypt = new GenericTile(connectedTiles, 0, 1, 0, availableFloors, memory);
+    Tile crypt = new GenericTile(d1, 0, 1, 0, b, memory);
     crypt.setName("Crypt");
     tileList.add(crypt);
 
-    connectedTiles.add(Direction.SOUTH);
-    Tile catacombs = new GenericTile(connectedTiles, 0, 0, 1,
-        availableFloors, memory);
+    Tile catacombs = new GenericTile(d2a, 0, 0, 1,
+        b, memory);
     catacombs.setName("Catacombs");
     tileList.add(catacombs);
 
-    connectedTiles.add(Direction.WEST);
-    Tile furnaceRoom = new GenericTile(connectedTiles, 0, 0, 1,
-        availableFloors, memory);
+    Tile furnaceRoom = new GenericTile(d3, 0, 0, 1,
+        b, memory);
     furnaceRoom.setName("Furnace Room");
     tileList.add(furnaceRoom);
 
-    connectedTiles.add(Direction.EAST);
-    connectedTiles.remove(Direction.WEST);
-    connectedTiles.remove(Direction.SOUTH);
-    Tile undergroundLake = new GenericTile(connectedTiles, 0, 1, 0,
-        availableFloors, memory);
+    Tile undergroundLake = new GenericTile(d2s, 0, 1, 0,
+        b, memory);
     undergroundLake.setName("Underground Lake");
     tileList.add(undergroundLake);
 
-    connectedTiles.add(Direction.SOUTH);
-    connectedTiles.remove(Direction.EAST);
-    Tile wineCellar = new GenericTile(connectedTiles, 1, 0, 0,
-        availableFloors, memory);
+    Tile wineCellar = new GenericTile(d2a, 1, 0, 0,
+        b, memory);
     wineCellar.setName("Wine Cellar");
     tileList.add(wineCellar);
 
     // start of upper/basement
-    availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.BASEMENT);
-    availableFloors.add(Floor.ATTIC);
+    List<Floor> ba = new ArrayList<>();
+    ba.add(Floor.BASEMENT);
+    ba.add(Floor.ATTIC);
 
-    Tile researchLabratory = new GenericTile(connectedTiles, 0, 0, 0,
-        availableFloors, memory);
-    researchLabratory.setName("Research Labratory");
+    Tile researchLabratory = new GenericTile(d2a, 0, 0, 0,
+        ba, memory);
+    researchLabratory.setName("Research Laboratory");
     tileList.add(researchLabratory);
 
-    connectedTiles.add(Direction.EAST);
-    connectedTiles.remove(Direction.NORTH);
-    Tile operatingLabratory = new GenericTile(connectedTiles, 0, 0, 0,
-        availableFloors, memory);
-    operatingLabratory.setName("Operating Labratory");
+    Tile operatingLabratory = new GenericTile(d2s, 0, 0, 0,
+        ba, memory);
+    operatingLabratory.setName("Operating Laboratory");
     tileList.add(operatingLabratory);
 
-    Tile gymnasium = new GenericTile(connectedTiles, 0, 0, 1,
-        availableFloors, memory);
+    Tile gymnasium = new GenericTile(d2s, 0, 0, 1,
+        ba, memory);
     gymnasium.setName("Gymnasium");
     tileList.add(gymnasium);
 
-    connectedTiles.add(Direction.NORTH);
-    connectedTiles.remove(Direction.EAST);
-    connectedTiles.remove(Direction.SOUTH);
-    Tile vault = new GenericTile(connectedTiles, 0, 1, 0, availableFloors, memory);
+    Tile vault = new GenericTile(d1, 0, 1, 0, ba, memory);
     vault.setName("Vault");
     tileList.add(vault);
 
-    Tile storeroom = new GenericTile(connectedTiles, 1, 0, 0,
-        availableFloors, memory);
+    Tile storeroom = new GenericTile(d1, 1, 0, 0,
+        ba, memory);
     storeroom.setName("Storeroom");
     tileList.add(storeroom);
 
-    connectedTiles.add(Direction.WEST);
-    connectedTiles.add(Direction.EAST);
-    connectedTiles.add(Direction.SOUTH);
-    Tile serventsQuarters = new GenericTile(connectedTiles, 0, 0, 1,
-        availableFloors, memory);
-    serventsQuarters.setName("Servents Quarters");
+    Tile serventsQuarters = new GenericTile(d4, 0, 0, 1,
+        ba, memory);
+    serventsQuarters.setName("Servants Quarters");
     tileList.add(serventsQuarters);
 
     // start of upper/ground
-    availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.GROUND);
-    availableFloors.add(Floor.ATTIC);
+    List<Floor> ga = new ArrayList<>();
+    ga.add(Floor.GROUND);
+    ga.add(Floor.ATTIC);
 
-    connectedTiles.remove(Direction.EAST);
-    connectedTiles.remove(Direction.NORTH);
-    Tile library = new GenericTile(connectedTiles, 0, 1, 0,
-        availableFloors, memory);
+    Tile library = new GenericTile(d2s, 0, 1, 0,
+        ga, memory);
     library.setName("Library");
     tileList.add(library);
 
-    connectedTiles.add(Direction.EAST);
-    connectedTiles.add(Direction.NORTH);
-    Tile collapsedRoom = new GenericTile(connectedTiles, 0, 0, 0,
-        availableFloors, memory);
+    Tile collapsedRoom = new GenericTile(d4, 0, 0, 0,
+        ga, memory);
     collapsedRoom.setName("Collapsed Room");
     tileList.add(collapsedRoom);
 
-    Tile charredRoom = new GenericTile(connectedTiles, 1, 0, 0,
-        availableFloors, memory);
+    Tile charredRoom = new GenericTile(d4, 1, 0, 0,
+        ga, memory);
     charredRoom.setName("Charred Room");
     tileList.add(charredRoom);
 
-    Tile bloodyRoom = new GenericTile(connectedTiles, 1, 0, 0,
-        availableFloors, memory);
+    Tile bloodyRoom = new GenericTile(d4, 1, 0, 0,
+        ga, memory);
     bloodyRoom.setName("Bloody Room");
     tileList.add(bloodyRoom);
 
-    connectedTiles.remove(Direction.EAST);
-    connectedTiles.remove(Direction.SOUTH);
-    connectedTiles.remove(Direction.WEST);
-    Tile conservatory = new GenericTile(connectedTiles, 0, 1, 0,
-        availableFloors, memory);
+    Tile conservatory = new GenericTile(d1, 0, 1, 0,
+        ga, memory);
     conservatory.setName("Conservatory");
     tileList.add(conservatory);
 
-    Tile chapel = new GenericTile(connectedTiles, 0, 1, 0,
-        availableFloors, memory);
+    Tile chapel = new GenericTile(d1, 0, 1, 0,
+        ga, memory);
     chapel.setName("Chapel");
     tileList.add(chapel);
 
     // start of ground/basement
-    availableFloors = new ArrayList<>();
-    availableFloors.add(Floor.GROUND);
-    availableFloors.add(Floor.BASEMENT);
+    List<Floor> bg = new ArrayList<>();
+    bg.add(Floor.GROUND);
+    bg.add(Floor.BASEMENT);
 
-    Tile kitchen = new GenericTile(connectedTiles, 0, 0, 0,
-        availableFloors, memory);
+    Tile kitchen = new GenericTile(d1, 0, 0, 0,
+        bg, memory);
     kitchen.setName("Kitchen");
     tileList.add(kitchen);
 
-    connectedTiles.add(Direction.WEST);
-    connectedTiles.add(Direction.SOUTH);
-    connectedTiles.add(Direction.EAST);
-    Tile abandonedRoom = new GenericTile(connectedTiles, 0, 0, 1,
-        availableFloors, memory);
+    Tile abandonedRoom = new GenericTile(d4, 0, 0, 1,
+        bg, memory);
     abandonedRoom.setName("Abandoned Room");
     tileList.add(abandonedRoom);
 

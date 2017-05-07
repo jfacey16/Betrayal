@@ -134,8 +134,9 @@ public class PreHaunt implements GamePhase {
           variables.put("Error", e.getMessage());
           return;
         }
-
+        System.out.println("phase now " + phase);
         if (move.getFinished()) {
+          System.out.println("move finished");
           mode = "idle";
           phase = 0;
 
@@ -146,7 +147,7 @@ public class PreHaunt implements GamePhase {
             tileBeans.add(tile.getBean());
           }
           variables.put("tiles", tileBeans);
-          variables.put("characters", memory.getGameCharacters());
+          variables.put("characters", memory.getCharBeans());
           addActions(character, variables);
           return;
         }
@@ -156,18 +157,20 @@ public class PreHaunt implements GamePhase {
 
       if (phase == 1) {
         try {
+          System.out.println("why am i here?");
           move.addTile(character, Integer.parseInt(qm.value("rotations")),
               memory.getTileMap());
 
           // send frontend tile map
-          variables.put("tiles",
-              new ArrayList<Tile>(memory.getTileMap().values()));
+          variables.put("tiles",memory.getTileBeans());
 
           // send frontend character
-          variables.put("characters", memory.getGameCharacters());
+          variables.put("characters", memory.getCharBeans());
 
           // send frontend newly added tile
-          variables.put("newTile", character.getTile());
+          variables.put("newTile", character.getTile().getBean());
+
+          phase = 0;
 
           /* This adding method doesn't really make a ton of sense to me. */
           /*

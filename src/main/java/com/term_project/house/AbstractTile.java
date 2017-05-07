@@ -176,7 +176,6 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public boolean hasNorth() {
-    System.out.println("hi");
     return availableDoors.contains(Direction.NORTH);
   }
 
@@ -262,6 +261,28 @@ public abstract class AbstractTile implements Tile {
 
     // Make north value the west value
     doors.put(Direction.NORTH, holderOne);
+    int rem = availableDoors.size();
+
+    if (availableDoors.contains(Direction.NORTH)) {
+      availableDoors.remove(Direction.NORTH);
+      availableDoors.add(Direction.EAST);
+      rem--;
+    }
+    if (availableDoors.contains(Direction.EAST) && rem > 0) {
+      availableDoors.remove(Direction.EAST);
+      availableDoors.add(Direction.SOUTH);
+      rem--;
+    }
+    if (availableDoors.contains(Direction.SOUTH) && rem > 0) {
+      availableDoors.remove(Direction.SOUTH);
+      availableDoors.add(Direction.WEST);
+      rem--;
+    } 
+    if (availableDoors.contains(Direction.WEST) && rem > 0) {
+      availableDoors.remove(Direction.WEST);
+      availableDoors.add(Direction.NORTH);
+      rem--;
+    }
   }
 
   @Override

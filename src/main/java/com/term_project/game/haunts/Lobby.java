@@ -67,7 +67,7 @@ public class Lobby implements GamePhase {
                                        frontDoorAvailable,
                                        memory);
       frontDoor.setPos(new Pos(0, 0, Floor.GROUND));
-      frontDoor.setName("Front Door");
+      frontDoor.setName("Entrance Hall");
 
       //between door and stairs
       List<Direction> midConnected = new ArrayList<>();

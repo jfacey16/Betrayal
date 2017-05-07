@@ -1,0 +1,52 @@
+package com.term_project.items;
+
+import java.util.Map;
+
+import com.term_project.character.GameChar;
+
+public class Armor implements Item {
+
+  private String name;
+  private String description;
+  private String function;
+
+  public Armor() {
+
+    name = "Armor";
+    description = "It's just prop armor from a Renaissance fair, but it's still metal.";
+    function = "Any time you take physical damage, take 1 point less of damage.";
+
+  }
+
+  @Override
+  public String getDescription() {
+    return description;
+  }
+
+  @Override
+  public String getName() {
+    return name;
+  }
+
+  @Override
+  public String getFunction() {
+    return function;
+  }
+
+  @Override
+  public void add(GameChar character) {
+    character.addItem(this);
+  }
+
+  @Override
+  public void use(GameChar character, Map<String, Object> variables) {
+    return;
+  }
+
+  @Override
+  public void loss(GameChar character) {
+    character.removeItem(this);
+    character.getTile().addItem(this);
+  }
+
+}
