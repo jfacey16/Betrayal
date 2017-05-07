@@ -22,29 +22,29 @@
 	
 		<div class="option">
 			<center><p><h2>Create a game:</h2>
-
-			<form method="GET" action="/create_game"> 
 			
 			  <p>Fill out and submit the following form to create a game:</p>
 			  
+			  <div id="create_error" class="message"></div>
+			  
 			  <p>Username: <input type="text" id="username_create" name="name" placeholder="Enter Your Username"></p>
 			  
-			  <p>Game Size: 
-			  <select name="players" id="players">
-			    <option value="3">3 Players</option>
-			    <option value="4">4 Players</option>
-			    <option value="5">5 Players</option>
-			    <option value="6">6 Players</option>
-			  </select></p>
+			  </p><form>
+				  <input type="radio" name="players" value="3" checked> 3 players
+				  <input type="radio" name="players" value="4"> 4 players
+				  <input type="radio" name="players" value="5"> 5 players
+				  <input type="radio" name="players" value="6"> 6 players
+			  </form><p>
 			  
-			  <input type="submit" value="Create Game"></center>
-			</form>
+			  <button type="button" id="create_game">Create Game</button></center>
 		</div>
 	
 		<div class="option">
 			<center><p><h2>Join a lobby:</h2></p>
 			
 			<p>Fill out your username and select a lobby in order to join a game:</p>
+			
+			<div id="join_error" class="message"></div>
 			
 			<p>Username: <input type="text" id="username_join" name="name" placeholder="Enter Your Username"></p>
 
@@ -54,7 +54,7 @@
 			
 			<p>Game "Z": 5/6 players ready.</p>
 			
-			<button type="button" id="join">Join Lobby</button></p></center>
+			<button type="button" id="join_game">Join Lobby</button></center>
 		</div>
 		
 		<style type="text/css">
