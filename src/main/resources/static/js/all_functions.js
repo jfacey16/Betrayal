@@ -435,6 +435,10 @@
     positions[turn].west = rottile.west;
     $.post("/requestTile", {name: "move", rotations: "" + rot}, rj2 => {
       console.log(rj2);
+      
+      //add check fror event/item/omen
+      
+      
     });
     rotation.disabled = true;
     placet.disabled = true;

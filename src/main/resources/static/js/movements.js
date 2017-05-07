@@ -208,6 +208,10 @@
                     ctx.strokeRect(positions[turn].posx, positions[turn].posy - T + D, X, D);
                     $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
                       console.log(rj2);
+                      
+                      //add check fror event/item/omen
+                      
+                      
                     });
                     positions[turn].north = true;
                     positions[turn].east = true;
@@ -238,6 +242,10 @@
                       ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
                       $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
                         console.log(rj2);
+                        
+                        //add check fror event/item/omen
+                        
+                        
                       });
                       positions[turn].north = true;
                       positions[turn].east = false;
@@ -262,6 +270,10 @@
                     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
                     $.post("/requestTile", {name: "move", rotations: "2"}, rj2 => {
                       console.log(rj2);
+                      
+                      //add check fror event/item/omen
+                      
+                      
                     });
                     positions[turn].north = false;
                     positions[turn].east = false;
