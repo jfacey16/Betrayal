@@ -60,6 +60,10 @@
   const offx = -375;
   const offy = -425;
   let turn = 0;
+  let rot = 0;
+  let rottile = null;
+  let avdoor = 0;
+  let tempdir = 0;
   const textOff = new Position(5, 130);
   const symbOff = new Position(130, 143);
   const outside = new Tile(450,600,false,false,false,false); 
@@ -327,6 +331,133 @@
         }
       }
     }
+  }
+
+  function rotate() {
+    let ctx;
+    if (positions[turn].floor == 0)
+      ctx = ctxb;
+    else if (positions[turn].floor == 1)
+      ctx = ctxf;
+    else if (positions[turn].floor == 2)
+      ctx = ctxs;
+    let rem = 0;
+    let befn = rottile.north;
+    let befe = rottile.east;
+    let befs = rottile.south;
+    let befw = rottile.west;
+    while (true) {
+      if (rottile.north) {
+        rem++;
+        if (rem == avdoor) {
+          if (avdoor == 3) 
+            rottile.west = true;
+          else if (avdoor == 2) 
+            rottile.west = false; 
+          rottile.east = true;
+          rottile.north = true;
+          rottile.south = false;
+          break;
+        }
+      } else 
+        rem = 0;
+      if (rottile.east) {
+        rem++;
+        if (rem == avdoor) {
+          if (avdoor == 3) 
+            rottile.north = true;
+          else if (avdoor == 2) 
+            rottile.north = false; 
+          rottile.south = true;
+          rottile.east = true;
+          rottile.west = false;
+          break;
+        }
+      } else 
+        rem = 0;
+      if (rottile.south) {
+        rem++;
+        if (rem == avdoor) {
+          if (avdoor == 3) 
+            rottile.east = true;
+          else if (avdoor == 2) 
+            rottile.east = false;
+          rottile.west = true;
+          rottile.south = true;
+          rottile.north = false;
+          break;
+        }
+      } else
+        rem = 0;
+      if (rottile.west) {
+        rem++;
+        if (rem == avdoor) {
+          if (avdoor == 3) 
+            rottile.south = true;
+          else if (avdoor == 2) 
+            rottile.south = false;
+          rottile.north = true;
+          rottile.west = true;
+          rottile.east = false;
+          break;
+        }
+      } else 
+        rem = 0;
+    }
+    if (rottile.north && !befn)
+      ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X); 
+    if (!rottile.north && befn) 
+      ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + 1, D + 2, X);
+    if (rottile.east && !befe)
+      ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
+    if (!rottile.east && befe) 
+      ctx.clearRect(positions[turn].posx + T - X - 1, positions[turn].posy + D - 1, X, D + 2);
+    if (rottile.south && !befs)
+      ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
+    if (!rottile.south && befs) 
+      ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + T - X - 1, D + 2, X);
+    if (rottile.west && !befw)
+      ctx.strokeRect(positions[turn].posx, positions[turn].posy + D, X, D); 
+    if (!rottile.west && befw) 
+      ctx.clearRect(positions[turn].posx + 1, positions[turn].posy + D - 1, X, D + 2);
+    rot++;
+  }
+
+  function placeTile() {
+    if (tempdir == 0) {
+      if (!rottile.south) 
+        return;
+    }
+    if (tempdir == 1) {
+      if (!rottile.west) 
+        return;
+    }
+    if (tempdir == 2) {
+      if (!rottile.north) 
+        return;
+    }
+    if (tempdir == 3) {
+      if (!rottile.east) 
+        return;
+    }
+    let flo;
+    if (positions[turn].floor == 0)
+      flo = btiles;
+    else if (positions[turn].floor == 1) 
+      flo = ftiles;
+    else if (positions[turn].floor == 2) 
+      flo = stiles;
+    flo.push(rottile);
+    positions[turn].north = rottile.north;
+    positions[turn].east = rottile.east;
+    positions[turn].south = rottile.south;
+    positions[turn].west = rottile.west;
+    $.post("/requestTile", {name: "move", rotations: "" + rot}, rj2 => {
+      console.log(rj2);
+    });
+    rotation.disabled = true;
+    placet.disabled = true;
+    rot = 0;
   }
   </script>
 </head>
@@ -679,8 +810,8 @@
     <center><button disabled>Attack</button></center>
     <center><button disabled>Pick up Items</button></center>
     <!-- <center><button disabled>Interact w/Room</button></center> -->
-    <center><button disabled>Place Tile</button></center>
-    <center><button id="rot" disabled>Rotate Clockwise</button></center>
+    <center><button id="plat" onclick="placeTile();" disabled>Place Tile</button></center>
+    <center><button id="rot" onclick="rotate();" disabled>Rotate Clockwise</button></center>
     <div id="scription"></div>
     </div>
   </div>
@@ -843,7 +974,9 @@
     const mfirst = document.getElementById("mfirst");
     const msecond = document.getElementById("msecond");
     const mbasement = document.getElementById("mbasement");
-    const rotate = document.getElementById("rot");
+    const rotation = document.getElementById("rot");
+    const placet = document.getElementById("plat");
+
     first.width = 1350;
     first.height = 1350;
     second.width = 1350;
@@ -996,11 +1129,16 @@
                     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - T, D, X);
                     ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy - T + D, X, D);
                     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
+                    rotation.disabled = false;
+                    placet.disabled = false;
+                    rot = 0;
+                    avdoor = 3;
+                    tempdir = 0;
+                    rottile = new Tile(positions[turn].posx, positions[turn].posy - T, true, true, true, false);
                     positions[turn].north = true;
                     positions[turn].east = true;
                     positions[turn].south = true;
                     positions[turn].west = false;
-                    rotate.disabled = false;
                   } else if (responseObject.newtile.availableDoors.length == 2) {
                     if ((responseObject.newtile.availableDoors.indexOf("NORTH") != -1 && 
                       responseObject.newtile.availableDoors.indexOf("SOUTH") != -1) || 
@@ -1018,11 +1156,16 @@
                     } else {
                       ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy - T + D, X, D);
                       ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
+                      rotation.disabled = false;
+                      placet.disabled = false;
+                      rot = 1;
+                      avdoor = 2;
+                      tempdir = 0;
+                      rottile = new Tile(positions[turn].posx, positions[turn].posy - T, false, true, true, false);
                       positions[turn].north = false;
                       positions[turn].east = true;
                       positions[turn].south = true;
                       positions[turn].west = false;
-                      rotate.disabled = false;
                     }
 
                   } else if (responseObject.newtile.availableDoors.length == 1) {

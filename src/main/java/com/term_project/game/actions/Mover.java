@@ -154,11 +154,6 @@ public class Mover {
       toAdd.rotateClockwise();
     }
 
-    System.out.println("n:" + toAdd.hasNorth());
-    System.out.println("s:" + toAdd.hasSouth());
-    System.out.println("e:" + toAdd.hasEast());
-    System.out.println("w:" + toAdd.hasWest());
-
     // make sure door links to room we came from, otherwise throw an error
     switch (dir) {
     case "NORTH":
