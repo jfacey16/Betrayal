@@ -88,6 +88,9 @@ public class Main {
 	}
 
 	private void runSparkServer(int port) {
+		//starts webSocket
+    Spark.webSocket("/gameConnection", ChatWebSocket.class);
+
 	  Spark.port(port);
 	  Spark.externalStaticFileLocation("src/main/resources/static");
 	  Spark.exception(Exception.class, new ExceptionPrinter());

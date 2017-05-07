@@ -42,7 +42,7 @@ public class Lobby implements GamePhase {
   }
 
   @Override
-  public void run(String name, QueryParamsMap qm, GameChar character,
+  public void run(String name, Map<String, String> qm, GameChar character,
       Map<String, Object> variables) {
     int numPlayers = memory.getGameState().getNumPlayers();
 

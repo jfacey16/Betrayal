@@ -79,7 +79,7 @@ public class PreHaunt implements GamePhase {
   }
 
   @Override
-  public void run(String name, QueryParamsMap qm, GameChar character,
+  public void run(String name, Map<String, String> qm, GameChar character,
       Map<String, Object> variables) {
     // if person is starting turn reset available actions
     if (mode.equals("start")) {
@@ -245,7 +245,7 @@ public class PreHaunt implements GamePhase {
           return;
         }
 
-        // roll for that stat and add to QueryParamsMap
+        // roll for that stat and add to qm
         List<Integer> rolls = Dice.roll(statVal);
         variables.put("rolls", rolls);
 
