@@ -16,6 +16,7 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="js/betrayal_testing.js"></script>
+  <script src="js/card_draw.js"></script>
   <script type="text/javascript">
   class Tile {
     constructor(posx, posy, north, east, south, west) {
@@ -413,7 +414,8 @@
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 2" style="width:75px;height:75px;"></center>
         </div>
         
-        <div id="stats_2" class="stats"><center> X </center></div>    
+        <div id="stats_2" class="stats"><center> X </center></div> 
+        <div id="stats_2_popup" style="display:none;"></div>   
       </div>
       
       <div class="info">
@@ -430,6 +432,7 @@
         </div>
         
         <div id="stats_3" class="stats"><center> X </center></div> 
+        <div id="stats_3_popup" style="display:none;"></div>
       </div>
       
       <div class="info">
@@ -446,6 +449,7 @@
         </div>
         
         <div id="stats_4" class="stats"><center> X </center></div> 
+        <div id="stats_4_popup" style="display:none;"></div>
       </div>
       
       <div class="info">
@@ -462,6 +466,7 @@
         </div>
         
         <div id="stats_5" class="stats"><center> X </center></div> 
+        <div id="stats_5_popup" style="display:none;"></div>
       </div>
       
       <div class="info">
@@ -478,6 +483,7 @@
         </div>
         
         <div id="stats_6" class="stats"><center> X </center></div> 
+        <div id="stats_6_popup" style="display:none;"></div>
       </div>
       
       <div class="info">

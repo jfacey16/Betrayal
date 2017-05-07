@@ -96,8 +96,9 @@ public class Main {
 
 	  // Setup Spark Routes
 	  Spark.get("/betrayal_menu", new MenuHandler(), freeMarker);
-	  Spark.get("/create_game", new LobbyHandler(), freeMarker);
-		Spark.post("/create_game", new LobbyStart());
+	  	Spark.post("/betrayal_create", new CreateLobbyHandler());
+	  	Spark.post("/betrayal_join", new JoinLobbyHandler());
+		Spark.post("/create_game", new TempStart());
 	  Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
 		Spark.post("/betrayal", new UpdateHandler());
 		Spark.post("/tileStart", new TileStart());
@@ -119,27 +120,49 @@ public class Main {
 		}
 	}
 
-	private static class LobbyHandler implements TemplateViewRoute {
+	private static class CreateLobbyHandler implements Route {
 	    @Override
-	    public ModelAndView handle(Request req, Response res) {
+	    public String handle(Request req, Response res) {
 
 	      QueryParamsMap qm = req.queryMap();
-	      String game_name = qm.value("name");
-				String player_number = qm.value("players");
+	      String game_name = qm.value("username");
+		  String player_number = qm.value("players");
 
-	      String message = "<p><h4>You're currently in the lobby of Game \"" + game_name + "\".</h4></p>";
-	      message += "<p><h4>Waiting for X more players to join your lobby of " + player_number + ".</h4></p>";
+	      String message = "Your username is \"" + game_name + "\". ";
+	      message += "Waiting for more players to join your lobby of " + player_number + ".";
+	      
+	      System.out.println(message);
 
-				 Map<String, Object> variables;
-				variables = ImmutableMap.of(
-					"title", "Betrayal at House on the Hill",
-					"message", message
-				);
-				return new ModelAndView(variables, "lobby.ftl");
+	      Map<String, Object> variables = new HashMap<>();
+
+			variables.put("", "");
+			variables = ImmutableMap.copyOf(variables);
+				
+				return GSON.toJson(variables);
+	    }
+	}
+	
+	private static class JoinLobbyHandler implements Route {
+	    @Override
+	    public String handle(Request req, Response res) {
+
+	      QueryParamsMap qm = req.queryMap();
+	      String game_name = qm.value("username");
+
+	      String message = "Your username is \"" + game_name + "\".";
+	      
+	      System.out.println(message);
+
+	      Map<String, Object> variables = new HashMap<>();
+
+			variables.put("", "");
+			variables = ImmutableMap.copyOf(variables);
+				
+				return GSON.toJson(variables);
 	    }
 	}
 
-	private static class LobbyStart implements Route {
+	private static class TempStart implements Route {
 	    @Override
 	    public String handle(Request req, Response res) {
 	    	System.out.println("start is starting");
