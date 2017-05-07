@@ -1,13 +1,20 @@
-package edu.brown.cs.zacharyhoffman.boggle;
+package com.term_project.system;
 
 import java.io.IOException;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import com.term_project.game.GameState;
+import com.term_project.system.MemorySlot;
+import com.term_project.character.GameChar;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -26,18 +33,26 @@ public class GameWebSocket {
   //private static final Queue<Session> sessions = new ConcurrentLinkedQueue<>();
 
   //my multiplayer maps
+  private static List<String> availableLobbies = new CopyOnWriteArrayList<>();
   private static Map<String, String> idToLobby = new ConcurrentHashMap<>();
   private static Map<Session, String> sessionToId = new ConcurrentHashMap<>();
   private static Map<String, Queue<Session>> lobbyToSessions = new ConcurrentHashMap<>();
   private static Map<String, String> idToName = new ConcurrentHashMap<>();
+  private static Map<String, GameState> lobbyToGameState = new ConcurrentHashMap<>();
 
   private static enum MESSAGE_TYPE {
     CONNECT,
     CHATUPDATE,
-    GETLOBBIES,
+    UPDATELOBBIES,
     SETNAME,
     CREATELOBBY,
-    JOINLOBBY
+    JOINLOBBY,
+    UPDATELOBBY,
+    STARTGAME,
+    GAMEMOVE,
+    CHOOSECHARACTER,
+    GAMERADY,
+    ERROR
   }
 
   @OnWebSocketConnect
@@ -61,14 +76,47 @@ public class GameWebSocket {
   @OnWebSocketClose
   public void closed(Session session, int statusCode, String reason) {
     String id = sessionToId.get(session);
-    String lobby = idToLobby.get(id);
+
+    if(idToLobby.get(id) != null) {
+      String lobby = idToLobby.get(id);
+
+      Queue<Session> sessionsToUpdate = lobbyToSessions.get(lobby);
+      sessionsToUpdate.remove(session);
+
+      if(sessionsToUpdate.size() == 0) {
+        lobbyToSessions.remove(lobby);
+        availableLobbies.remove(lobby);
+      }
+
+      if(lobbyToGameState.get(lobby) != null) {
+        lobbyToGameState.remove(lobby);
+        lobbyToSessions.remove(lobby);
+        availableLobbies.remove(lobby);
+
+        JsonObject update =  new JsonObject();
+        update.addProperty("type", MESSAGE_TYPE.ERROR.ordinal());
+        update.addProperty("ERROR", "Player has left the game. Game has been ended");
+
+        for(Session sess : sessionsToUpdate) {
+          try {
+            sess.getRemote().sendString(update.toString());
+          } catch(IOException e) {
+              System.out.println("closing game failed");
+          }
+        }
+      } else {
+        try {
+          updateLobbies();;
+        } catch(IOException e) {
+          System.out.println("closing lobby update failed");
+        }
+      }
+    }
 
     //remove it from all 4 lists
-    lobbyToSessions.get(lobby).remove(session);
     idToLobby.remove(id);
     sessionToId.remove(session);
     idToName.remove(id);
-
   }
 
   @OnWebSocketMessage
@@ -80,9 +128,6 @@ public class GameWebSocket {
       case CHATUPDATE:
         chatUpdate(received, session);
         break;
-      case GETLOBBIES:
-        getLobbies(received, session);
-        break;
       case SETNAME:
         setName(received, session);
         break;
@@ -91,6 +136,12 @@ public class GameWebSocket {
         break;
       case JOINLOBBY:
         joinLobby(received, session);
+        break;
+      case STARTGAME:
+        startGame(received, session);
+        break;
+      case GAMEMOVE:
+        gameMove(received, session);
         break;
       default:
         assert false;
@@ -119,23 +170,29 @@ public class GameWebSocket {
     }
   }
 
-  private synchronized void getLobbies(JsonObject received, Session session) throws IOException {
-    JsonObject payload = received.get("payload").getAsJsonObject();
-    String id = payload.get("id").getAsString();
-    assert id.equals(sessionToId.get(session));
-
+  private synchronized void updateLobbies() throws IOException {
     // TODO Send an UPDATE message to all users
     JsonObject update =  new JsonObject();
-    update.addProperty("type", MESSAGE_TYPE.GETLOBBIES.ordinal());
-    update.addProperty("lobbies", GSON.toJson(lobbyToSessions.keySet()));
+    update.addProperty("type", MESSAGE_TYPE.UPDATELOBBIES.ordinal());
+    update.addProperty("lobbies", GSON.toJson(availableLobbies));
 
-    session.getRemote().sendString(update.toString());
+    for(Session ses : sessionToId.keySet()) {
+      ses.getRemote().sendString(update.toString());
+    }
   }
 
   private synchronized void setName(JsonObject received, Session session) throws IOException {
     JsonObject payload = received.get("payload").getAsJsonObject();
     String id = payload.get("id").getAsString();
     assert id.equals(sessionToId.get(session));
+
+    if(idToName.values().contains("name")) {
+      JsonObject update =  new JsonObject();
+      update.addProperty("type", MESSAGE_TYPE.ERROR.ordinal());
+      update.addProperty("ERROR", "Name already in use by another.");
+      session.getRemote().sendString(update.toString());
+      return;
+    }
 
     idToName.put(id, payload.get("name").getAsString());
   }
@@ -147,13 +204,18 @@ public class GameWebSocket {
     assert id.equals(sessionToId.get(session));
 
     if (lobbyToSessions.keySet().contains(lobbyName)) {
-      System.out.println("lobby already exists");
-      //throw new IOException("Lobby allready exists.");
+      JsonObject update =  new JsonObject();
+      update.addProperty("type", MESSAGE_TYPE.ERROR.ordinal());
+      update.addProperty("ERROR", "Lobby with given name already exists. Please use a different name.");
+      session.getRemote().sendString(update.toString());
+      return;
     }
 
     idToLobby.put(id, lobbyName);
     lobbyToSessions.put(lobbyName, new ConcurrentLinkedQueue<>());
     lobbyToSessions.get(lobbyName).add(session);
+
+    availableLobbies.add(lobbyName);
   }
 
   private synchronized void joinLobby(JsonObject received, Session session) throws IOException {
@@ -162,11 +224,128 @@ public class GameWebSocket {
     String lobbyName = payload.get("lobbyName").getAsString();
     assert id.equals(sessionToId.get(session));
 
-    if (!lobbyToSessions.keySet().contains(lobbyName)) {
-      throw new IOException("Lobby doesn't exist.");
+    if (!availableLobbies.contains(lobbyName)) {
+      JsonObject update =  new JsonObject();
+      update.addProperty("type", MESSAGE_TYPE.ERROR.ordinal());
+      update.addProperty("ERROR", "Lobby isn't available. Choose another.");
+      session.getRemote().sendString(update.toString());
+      return;
     }
 
-    lobbyToSessions.get(lobbyName).add(session);
+    Queue<Session> lobbyMembers = lobbyToSessions.get(lobbyName);
+    lobbyMembers.add(session);
     idToLobby.put(id, lobbyName);
+    updateLobby(lobbyMembers);
+
+    if(lobbyMembers.size() > 5) {
+      startGame(received, session);
+      updateLobbies();
+    }
+  }
+
+  private synchronized void updateLobby(Queue<Session> lobbyMembers) throws IOException {
+    List<String> members = new ArrayList<>();
+    for(Session sess : lobbyMembers) {
+      String memId = sessionToId.get(sess);
+      members.add(idToName.get(memId));
+    }
+
+    JsonObject memberUpdate =  new JsonObject();
+    memberUpdate.addProperty("type", MESSAGE_TYPE.UPDATELOBBY.ordinal());
+    memberUpdate.addProperty("members", GSON.toJson(members));
+
+    for(Session sess : lobbyMembers) {
+      sess.getRemote().sendString(memberUpdate.toString());
+    }
+  }
+
+  private synchronized void startGame(JsonObject received, Session session) throws IOException {
+    JsonObject payload = received.get("payload").getAsJsonObject();
+    String id = payload.get("id").getAsString();
+    String lobbyName = payload.get("lobbyName").getAsString();
+    assert id.equals(sessionToId.get(session));
+    assert id.equals(availableLobbies.contains(lobbyName));
+
+    //game is starting so no longer an available lobbyName
+    availableLobbies.remove(lobbyName);
+
+    //gamestate init needs list of ids
+    Queue<Session> lobbyMembers = lobbyToSessions.get(lobbyName);
+    List<String> ids = new ArrayList<>();
+    for(Session sess : lobbyMembers) {
+      String memId = sessionToId.get(sess);
+      ids.add(memId);
+    }
+
+    lobbyToGameState.put(lobbyName, new GameState(ids, new MemorySlot()));
+
+    for(Session sess : lobbyMembers) {
+      JsonObject update =  new JsonObject();
+      update.addProperty("type", MESSAGE_TYPE.CHOOSECHARACTER.ordinal());
+      update.addProperty("choices", GSON.toJson(lobbyToGameState.get(lobbyName).getCharacterChoice()));
+
+      sess.getRemote().sendString(update.toString());
+    }
+  }
+
+  private synchronized void gameMove(JsonObject received, Session session) throws IOException {
+    JsonObject payload = received.get("payload").getAsJsonObject();
+    String id = payload.get("id").getAsString();
+    assert id.equals(sessionToId.get(session));
+
+    HashMap<String,String> queryMap = GSON.fromJson(
+        payload.get("query").getAsString(),
+        new TypeToken<HashMap<String, String>>(){}.getType()
+    );
+
+    String lobby = idToLobby.get(id);
+    GameState game = lobbyToGameState.get(lobby);
+    Map<String, Object> toReturn = game.update(queryMap);
+
+    // TODO Send an UPDATE message to all users
+    JsonObject update =  new JsonObject();
+    update.addProperty("type", MESSAGE_TYPE.GAMEMOVE.ordinal());
+    update.addProperty("player", idToName.get(id));
+    update.addProperty("currentTurn", game.getCurrentTurn());
+    update.addProperty("payload", GSON.toJson(toReturn));
+
+    Queue<Session> sessions = lobbyToSessions.get(lobby);
+    for (Session ses : sessions) {
+      ses.getRemote().sendString(update.toString());
+    }
+  }
+
+  private synchronized void chooseCharacter(JsonObject received, Session session) throws IOException {
+    JsonObject payload = received.get("payload").getAsJsonObject();
+    String id = payload.get("id").getAsString();
+    assert id.equals(sessionToId.get(session));
+
+    String lobby = idToLobby.get(id);
+    GameState game = lobbyToGameState.get(lobby);
+
+    //if final character has chosen load in map
+    if(game.setPlayersCharacter(id, payload.get("choice").getAsString())) {
+      //get the turn order
+      List<String> idTurnOrder = game.getTurnOrder();
+      List<String> nameTurnOrder = new ArrayList<>();
+      for(String aId : idTurnOrder) {
+        nameTurnOrder.add(idToName.get(aId));
+      }
+
+      //build the starting map and exit lobby phase
+      Map<String, Object> init = game.buildMap(null);
+
+      JsonObject update =  new JsonObject();
+      update.addProperty("type", MESSAGE_TYPE.GAMERADY.ordinal());
+      update.addProperty("turnOrder", GSON.toJson(nameTurnOrder));
+      update.addProperty("currentTurn", game.getCurrentTurn());
+      update.addProperty("payload", GSON.toJson(init));
+
+      //get the sessions to send the message to
+      Queue<Session> sessions = lobbyToSessions.get(lobby);
+      for (Session ses : sessions) {
+        ses.getRemote().sendString(update.toString());
+      }
+    }
   }
 }
