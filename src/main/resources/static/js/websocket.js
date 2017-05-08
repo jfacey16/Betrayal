@@ -16,13 +16,14 @@ const MESSAGE_TYPE = {
 let conn;
 let userId;
 let username;
+let current_lobby_name;
 
 $(document).ready(() => {
 	setup_betrayal();
 });
 
 const setup_betrayal = () => {
-	conn = new Websocket("ws://localhost:4567/betrayal_connection");
+	conn = new WebSocket("ws://localhost:4567/betrayal_connection");
 	
 	conn.onerror = err => {
 		console.log('Connection error:', err);
@@ -64,11 +65,12 @@ const create_name = user => {
 }
 
 const create_lobby = () => {
+	console.log("create"); 
 	var message = {
 		type: MESSAGE_TYPE.CREATELOBBY,
-		playload: {
-			id : userID,
-			lobbyName : user + "'s Game",
+		payload: {
+			id : userId,
+			lobbyName : username + "'s Game",
 		}
 	}
 
@@ -77,9 +79,29 @@ const create_lobby = () => {
 }
 
 function update_lobbies(data) {
+	
+	const lobbies = JSON.parse(data.lobbies);
+	
 	if(!game_started) {
-		console.log(data.lobbies[0]);
+		console.log(lobbies);
 	}
+	
+	var lobby_text = "<p>";
+	
+	for(index in lobbies) {
+		lobby_text += "<div class=\"lobby_name\">" + lobbies[index] + "</div>";
+	}
+	
+	lobby_text += "</p>";
+	
+	$("#lobbies").html(lobby_text);
+	
+	$(".lobby_name").click(function(e) {
+		const current_lobby = $(e.target);
+		current_lobby_name = current_lobby.text();
+		
+		console.log(current_lobby_name);
+	});
 }
 
 
