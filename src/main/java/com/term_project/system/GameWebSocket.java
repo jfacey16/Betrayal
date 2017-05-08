@@ -70,7 +70,7 @@ public class GameWebSocket {
 
     // TODO Send the CONNECT message
     session.getRemote().sendString(connect.toString());
-    
+
     // Update everyone's lobbies
     JsonObject updateLobbies =  new JsonObject();
     updateLobbies.addProperty("type", MESSAGE_TYPE.UPDATELOBBIES.ordinal());
@@ -82,54 +82,61 @@ public class GameWebSocket {
   //called on leave
   @OnWebSocketClose
   public void closed(Session session, int statusCode, String reason) {
-	synchronized (sessionToId) {
-	    String id = sessionToId.get(session);
-	    
-		sessionToId.remove(session);
+  	synchronized (sessionToId) {
+  	    String id = sessionToId.get(session);
 
-	    //if person who left was in lobby
-	    if(idToLobby.get(id) != null) {
-	      String lobby = idToLobby.get(id);
+  		  sessionToId.remove(session);
 
-	      Queue<Session> sessionsToUpdate = lobbyToSessions.get(lobby);
-	      sessionsToUpdate.remove(session);
+  	    //if person who left was in lobby
+  	    if(idToLobby.get(id) != null) {
+  	      String lobby = idToLobby.get(id);
 
-	      //lobby is now empty remove it
-	      if(sessionsToUpdate.size() == 0) {
-	        lobbyToSessions.remove(lobby);
-	        availableLobbies.remove(lobby);
-	      }
+  	      Queue<Session> sessionsToUpdate = lobbyToSessions.get(lobby);
+  	      sessionsToUpdate.remove(session);
 
-	      //if the lobby was actually a game throw errors to all members
-	      if(lobbyToGameState.get(lobby) != null) {
-	        lobbyToGameState.remove(lobby);
-	        lobbyToSessions.remove(lobby);
-	        availableLobbies.remove(lobby);
+  	      //lobby is now empty remove it
+  	      if(sessionsToUpdate.size() == 0) {
+  	        lobbyToSessions.remove(lobby);
+  	        availableLobbies.remove(lobby);
+  	      } else {
+            try {
+              updateLobby(sessionsToUpdate);
+            } catch(IOException e) {
+              System.out.println("failed to update lobbies.");
+              e.printStackTrace();
+            }
+          }
 
-	        JsonObject update =  new JsonObject();
-	        update.addProperty("type", MESSAGE_TYPE.ERROR.ordinal());
-	        update.addProperty("ERROR", "Player has left the game. Game has been ended");
+  	      //if the lobby was actually a game throw errors to all members
+  	      if(lobbyToGameState.get(lobby) != null) {
+  	        lobbyToGameState.remove(lobby);
+  	        lobbyToSessions.remove(lobby);
+  	        availableLobbies.remove(lobby);
 
-	        for(Session sess : sessionsToUpdate) {
-	          try {
-	            sess.getRemote().sendString(update.toString());
-	          } catch(IOException e) {
-	              System.out.println("closing game failed");
-	          }
-	        }
-	      } else {
-	        try {
-	          updateLobbies();;
-	        } catch(IOException e) {
-	          System.out.println("closing lobby update failed");
-	        }
-	      }
-	    }
+  	        JsonObject update =  new JsonObject();
+  	        update.addProperty("type", MESSAGE_TYPE.ERROR.ordinal());
+  	        update.addProperty("ERROR", "Player has left the game. Game has been ended");
 
-	    //remove it from all 3 lists
-	    idToLobby.remove(id);
-	    idToName.remove(id);
-	}
+  	        for(Session sess : sessionsToUpdate) {
+  	          try {
+  	            sess.getRemote().sendString(update.toString());
+  	          } catch(IOException e) {
+  	              System.out.println("closing game failed");
+  	          }
+  	        }
+  	      } else {
+  	        try {
+  	          updateLobbies();;
+  	        } catch(IOException e) {
+  	          System.out.println("closing lobby update failed");
+  	        }
+  	      }
+  	    }
+
+  	    //remove it from all 3 lists
+  	    idToLobby.remove(id);
+  	    idToName.remove(id);
+  	}
   }
 
   @OnWebSocketMessage
@@ -264,6 +271,7 @@ public class GameWebSocket {
   //message all members in given lobby who is in it
   private synchronized void updateLobby(Queue<Session> lobbyMembers) throws IOException {
     List<String> members = new ArrayList<>();
+    //loops through members
     for(Session sess : lobbyMembers) {
       String memId = sessionToId.get(sess);
       members.add(idToName.get(memId));

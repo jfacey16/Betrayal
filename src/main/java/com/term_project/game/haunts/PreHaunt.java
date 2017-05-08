@@ -16,8 +16,6 @@ import com.term_project.omens.Omen;
 import com.term_project.omens.Omen;
 import com.term_project.system.MemorySlot;
 
-import spark.QueryParamsMap;
-
 public class PreHaunt implements GamePhase {
   private MemorySlot memory;
 
@@ -162,7 +160,7 @@ public class PreHaunt implements GamePhase {
               memory.getTileMap());
 
           // send frontend tile map
-          variables.put("tiles",memory.getTileBeans());
+          variables.put("tiles", memory.getTileBeans());
 
           // send frontend character
           variables.put("characters", memory.getCharBeans());
@@ -278,12 +276,11 @@ public class PreHaunt implements GamePhase {
 
       if (rollSum > omenCount) {
         // generate a random haunt
-        /*
-         * Gamphase haunt = ? memory.getGameState().setPhase(haunt);
-         * variables.put("description", haunt.getDescription());
-         * variables.put("traitor", haunt.getTraitorDescription());
-         * variables.put("explorers", haunt.getExplorersDescription());
-         */
+        GamePhase haunt = new HauntOne(memory);
+        variables.put("description", haunt.getDescription());
+        variables.put("traitor", haunt.getTraitorDescription());
+        variables.put("explorers", haunt.getExplorersDescription());
+        memory.getGameState().setPhase(haunt);
       }
       toResolve.remove("haunt");
 
@@ -358,12 +355,16 @@ public class PreHaunt implements GamePhase {
   }
 
   @Override
-  public String getTraitorDescription() {
-    return "Nothing in this phase.";
+  public List<String> getTraitorDescription() {
+    List<String> stringsTraitor = new ArrayList<>();
+    stringsTraitor.add("Nothing in this phase.");
+    return stringsTraitor;
   }
 
   @Override
-  public String getExplorersDescription() {
-    return "Nothing in this phase.";
+  public List<String> getExplorersDescription() {
+    List<String> stringsExplorer = new ArrayList<>();
+    stringsExplorer.add("Nothing in this phase.");
+    return stringsExplorer;
   }
 }

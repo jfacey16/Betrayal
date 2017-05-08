@@ -2,26 +2,18 @@ package com.term_project.game.haunts;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.HashMap;
 import java.util.Map;
 
-import com.term_project.character.GameChar;
+import com.google.gson.Gson;
 import com.term_project.character.CharBean;
-import com.term_project.builders.CharacterGen;
-import com.term_project.events.Event;
-import com.term_project.game.actions.Mover;
+import com.term_project.character.GameChar;
+import com.term_project.house.Direction;
+import com.term_project.house.Floor;
+import com.term_project.house.GenericTile;
+import com.term_project.house.Pos;
 import com.term_project.house.Tile;
 import com.term_project.house.TileBean;
-import com.term_project.omens.Omen;
 import com.term_project.system.MemorySlot;
-import com.term_project.game.Dice;
-import com.term_project.house.Floor;
-import com.term_project.house.Direction;
-import com.term_project.house.Pos;
-import com.term_project.house.GenericTile;
-
-import spark.QueryParamsMap;
-import com.google.gson.Gson;
 
 public class Lobby implements GamePhase {
   private MemorySlot memory;
@@ -36,7 +28,8 @@ public class Lobby implements GamePhase {
   }
 
   @Override
-  public void addActions(GameChar character, Map<String, Object> variables) {
+  public void addActions(GameChar character,
+      Map<String, Object> variables) {
     return;
   }
 
@@ -44,80 +37,81 @@ public class Lobby implements GamePhase {
   public void run(String name, Map<String, String> qm, GameChar character,
       Map<String, Object> variables) {
 
-    //set starting tiles
-    //tile where players start
+    // set starting tiles
+    // tile where players start
     List<Direction> frontDoorConnected = new ArrayList<>();
     List<Floor> frontDoorAvailable = new ArrayList<>();
     frontDoorAvailable.add(Floor.GROUND);
-    Tile frontDoor = new GenericTile(frontDoorConnected,
-                                     0, 0, 0,
-                                     frontDoorAvailable,
-                                     memory);
+    Tile frontDoor = new GenericTile(frontDoorConnected, 0, 0, 0,
+        frontDoorAvailable, memory);
     frontDoor.setPos(new Pos(0, 0, Floor.GROUND));
     frontDoor.setName("Entrance Hall");
 
-    //between door and stairs
+    // between door and stairs
     List<Direction> midConnected = new ArrayList<>();
     List<Floor> midAvailable = new ArrayList<>();
     midAvailable.add(Floor.GROUND);
-    Tile mid = new GenericTile(midConnected, 0, 0, 0, midAvailable, memory);
+    Tile mid = new GenericTile(midConnected, 0, 0, 0, midAvailable,
+        memory);
     mid.setPos(new Pos(1, 0, Floor.GROUND));
     mid.setName("Foyer");
 
-    //stairs
+    // stairs
     List<Direction> stairsConnected = new ArrayList<>();
     List<Floor> stairsAvailable = new ArrayList<>();
     stairsAvailable.add(Floor.GROUND);
-    Tile stairs = new GenericTile(stairsConnected, 0, 0, 0, stairsAvailable, memory);
+    Tile stairs = new GenericTile(stairsConnected, 0, 0, 0,
+        stairsAvailable, memory);
     stairs.setPos(new Pos(2, 0, Floor.GROUND));
     stairs.setName("Grand Staircase");
 
-    //upper landing
-    List<Direction>  upperConnected = new ArrayList<>();
+    // upper landing
+    List<Direction> upperConnected = new ArrayList<>();
     List<Floor> upperAvailable = new ArrayList<>();
     upperAvailable.add(Floor.ATTIC);
-    Tile upper = new GenericTile(upperConnected, 0, 0, 0, upperAvailable, memory);
+    Tile upper = new GenericTile(upperConnected, 0, 0, 0, upperAvailable,
+        memory);
     upper.setPos(new Pos(0, 0, Floor.ATTIC));
     upper.setName("Upper Landing");
 
-    //basement
+    // basement
     List<Direction> basementConnected = new ArrayList<>();
     List<Floor> basementAvailable = new ArrayList<>();
     basementAvailable.add(Floor.BASEMENT);
-    Tile basement = new GenericTile(basementConnected, 0, 0, 0, basementAvailable, memory);
+    Tile basement = new GenericTile(basementConnected, 0, 0, 0,
+        basementAvailable, memory);
     basement.setPos(new Pos(0, 0, Floor.BASEMENT));
     basement.setName("Basement Landing");
 
-    //connect front door
+    // connect front door
     frontDoorConnected.add(Direction.NORTH);
     frontDoorConnected.add(Direction.SOUTH);
     frontDoorConnected.add(Direction.EAST);
 
-    //connect mid door
+    // connect mid door
     midConnected.add(Direction.NORTH);
     midConnected.add(Direction.SOUTH);
     midConnected.add(Direction.EAST);
     midConnected.add(Direction.WEST);
 
-    //connect stairs
+    // connect stairs
     stairsConnected.add(Direction.WEST);
     stairsConnected.add(Direction.UP);
 
-    //connect upper
+    // connect upper
     upperConnected.add(Direction.NORTH);
     upperConnected.add(Direction.SOUTH);
     upperConnected.add(Direction.EAST);
     upperConnected.add(Direction.WEST);
     upperConnected.add(Direction.DOWN);
 
-    //connect basement
+    // connect basement
     basementConnected.add(Direction.NORTH);
     basementConnected.add(Direction.SOUTH);
     basementConnected.add(Direction.EAST);
     basementConnected.add(Direction.WEST);
 
-
-    //add tiles to tileMap
+    // add tiles to tileMap
     Map<Pos, Tile> tileMap = memory.getTileMap();
     tileMap.put(frontDoor.getPos(), frontDoor);
     tileMap.put(mid.getPos(), mid);
@@ -125,31 +119,31 @@ public class Lobby implements GamePhase {
     tileMap.put(upper.getPos(), upper);
     tileMap.put(basement.getPos(), basement);
 
-    //gets list of id from memory
+    // gets list of id from memory
     List<GameChar> gameCharacters = memory.getGameCharacters();
 
-    //loops through and sets characters
+    // loops through and sets characters
     for (GameChar aCharacter : gameCharacters) {
       aCharacter.setTile(frontDoor);
     }
 
-
-    //send frontend tiles and characters
+    // send frontend tiles and characters
     List<TileBean> guiAble = new ArrayList<>();
-    List<Tile> theTiles =  new ArrayList<Tile>(memory.getTileMap().values());
-    for(Tile tile : theTiles) {
+    List<Tile> theTiles = new ArrayList<Tile>(
+        memory.getTileMap().values());
+    for (Tile tile : theTiles) {
       guiAble.add(tile.getBean());
     }
 
     List<CharBean> charBeans = new ArrayList<>();
     List<GameChar> memChar = memory.getGameCharacters();
-    for(int i = 0; i < memChar.size(); i++) {
+    for (int i = 0; i < memChar.size(); i++) {
       charBeans.add(memChar.get(i).getCharBean());
     }
     variables.put("tiles", guiAble);
     variables.put("characters", charBeans);
 
-    //switch game phases
+    // switch game phases
     System.out.println("phase being set");
     memory.getGameState().setPhase(new PreHaunt(memory));
 
@@ -161,12 +155,16 @@ public class Lobby implements GamePhase {
   }
 
   @Override
-  public String getTraitorDescription() {
-    return "Nothing in this phase.";
+  public List<String> getTraitorDescription() {
+    List<String> stringsTraitor = new ArrayList<>();
+    stringsTraitor.add("Nothing in this phase.");
+    return stringsTraitor;
   }
 
   @Override
-  public String getExplorersDescription() {
-    return "Nothing in this phase.";
+  public List<String> getExplorersDescription() {
+    List<String> stringsExplorer = new ArrayList<>();
+    stringsExplorer.add("Nothing in this phase.");
+    return stringsExplorer;
   }
 }
