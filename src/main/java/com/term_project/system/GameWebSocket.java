@@ -70,56 +70,66 @@ public class GameWebSocket {
 
     // TODO Send the CONNECT message
     session.getRemote().sendString(connect.toString());
+    
+    // Update everyone's lobbies
+    JsonObject updateLobbies =  new JsonObject();
+    updateLobbies.addProperty("type", MESSAGE_TYPE.UPDATELOBBIES.ordinal());
+    updateLobbies.addProperty("lobbies", GSON.toJson(availableLobbies));
+
+    session.getRemote().sendString(updateLobbies.toString());
   }
 
   //called on leave
   @OnWebSocketClose
   public void closed(Session session, int statusCode, String reason) {
-    String id = sessionToId.get(session);
+	synchronized (sessionToId) {
+	    String id = sessionToId.get(session);
+	    
+		sessionToId.remove(session);
 
-    //if person who left was in lobby
-    if(idToLobby.get(id) != null) {
-      String lobby = idToLobby.get(id);
+	    //if person who left was in lobby
+	    if(idToLobby.get(id) != null) {
+	      String lobby = idToLobby.get(id);
 
-      Queue<Session> sessionsToUpdate = lobbyToSessions.get(lobby);
-      sessionsToUpdate.remove(session);
+	      Queue<Session> sessionsToUpdate = lobbyToSessions.get(lobby);
+	      sessionsToUpdate.remove(session);
 
-      //lobby is now empty remove it
-      if(sessionsToUpdate.size() == 0) {
-        lobbyToSessions.remove(lobby);
-        availableLobbies.remove(lobby);
-      }
+	      //lobby is now empty remove it
+	      if(sessionsToUpdate.size() == 0) {
+	        lobbyToSessions.remove(lobby);
+	        availableLobbies.remove(lobby);
+	      }
 
-      //if the lobby was actually a game throw errors to all members
-      if(lobbyToGameState.get(lobby) != null) {
-        lobbyToGameState.remove(lobby);
-        lobbyToSessions.remove(lobby);
-        availableLobbies.remove(lobby);
+	      //if the lobby was actually a game throw errors to all members
+	      if(lobbyToGameState.get(lobby) != null) {
+	        lobbyToGameState.remove(lobby);
+	        lobbyToSessions.remove(lobby);
+	        availableLobbies.remove(lobby);
 
-        JsonObject update =  new JsonObject();
-        update.addProperty("type", MESSAGE_TYPE.ERROR.ordinal());
-        update.addProperty("ERROR", "Player has left the game. Game has been ended");
+	        JsonObject update =  new JsonObject();
+	        update.addProperty("type", MESSAGE_TYPE.ERROR.ordinal());
+	        update.addProperty("ERROR", "Player has left the game. Game has been ended");
 
-        for(Session sess : sessionsToUpdate) {
-          try {
-            sess.getRemote().sendString(update.toString());
-          } catch(IOException e) {
-              System.out.println("closing game failed");
-          }
-        }
-      } else {
-        try {
-          updateLobbies();;
-        } catch(IOException e) {
-          System.out.println("closing lobby update failed");
-        }
-      }
-    }
+	        for(Session sess : sessionsToUpdate) {
+	          try {
+	            sess.getRemote().sendString(update.toString());
+	          } catch(IOException e) {
+	              System.out.println("closing game failed");
+	          }
+	        }
+	      } else {
+	        try {
+	          updateLobbies();;
+	        } catch(IOException e) {
+	          System.out.println("closing lobby update failed");
+	        }
+	      }
+	    }
 
-    //remove it from all 4 lists
-    idToLobby.remove(id);
-    sessionToId.remove(session);
-    idToName.remove(id);
+	    //remove it from all 3 lists
+	    idToLobby.remove(id);
+	    idToName.remove(id);
+	}
   }
 
   @OnWebSocketMessage
