@@ -13,8 +13,8 @@
     background: #eeeeee; border: solid black 1px; border-width: 1px 0 0 2px; z-index: 1;}
   button {padding:5px; margin:5px; background:#eeeeee; font-size:14px; width:130px; height:40px;}
   </style>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script src="js/jquery-3.1.1.js"></script>
   <script src="js/websocket.js"></script>
   <script src="js/begin_game.js"></script>
   <script src="js/all_functions.js"></script>
