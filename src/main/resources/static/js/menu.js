@@ -38,7 +38,6 @@ $(document).ready(() => {
 		}
 		
 	});
-
 });
 
 function display_lobby() {
@@ -52,7 +51,19 @@ function display_lobby() {
 	lobby_text += "<div class=\"option\" style=\"width:100%\">";
 	lobby_text += "<center><h2>You've entered the lobby of " + current_lobby_name + "</h2></center>";
 	lobby_text += "<center><div id=\"members\"></div></center>";
+	
+	if(game_host) {
+		lobby_text += "<center><button type=\"button\" id=\"start_game\">Start Game</button></center>";
+	}
+	
 	lobby_text += "</div>";
 	
 	$("#temp_lobby").html(lobby_text);
+	
+	$("#start_game").click(event => {
+		
+		console.log("start clicked");
+		
+		start_game();
+	});
 }

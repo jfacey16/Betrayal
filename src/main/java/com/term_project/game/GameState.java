@@ -52,7 +52,8 @@ public class GameState {
 					MemorySlot memory){
 		//Randomize turn order
 		playersCharacters = new HashMap<>();
-
+		idTurnOrder = new ArrayList<>(ids);
+		
 		Collections.shuffle(idTurnOrder);
 
 		currentTurn = 0;

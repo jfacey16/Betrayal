@@ -9,7 +9,7 @@ const MESSAGE_TYPE = {
     STARTGAME: 7,
     GAMEMOVE: 8,
     CHOOSECHARACTER: 9,
-    GAMERADY: 10,
+    GAMEREADY: 10,
     ERROR: 11
 }
 
@@ -17,6 +17,7 @@ let conn;
 let userId;
 let username;
 let current_lobby_name = "";
+let game_host = false;
 
 $(document).ready(() => {
 	setup_betrayal();
@@ -43,6 +44,10 @@ const setup_betrayal = () => {
 				break;
 			case MESSAGE_TYPE.UPDATELOBBY:
 				update_lobby(data);
+				break;
+			case MESSAGE_TYPE.CHOOSECHARACTER:
+				console.log("character!");
+				choose_character(data);
 				break;
 		
 		
@@ -78,6 +83,7 @@ const create_lobby = () => {
 	}
 	
 	current_lobby_name = username + "'s Game";
+	game_host = true;
 
 	const json = JSON.stringify(message);
 	conn.send(json);
@@ -144,6 +150,66 @@ function join_lobby() {
 
 	const json = JSON.stringify(message);
 	conn.send(json);
+}
+
+function start_game() {
+	
+	console.log("starting"); 
+	var message = {
+		type: MESSAGE_TYPE.STARTGAME,
+		payload: {
+			id : userId,
+			lobbyName : current_lobby_name,
+		}
+	}
+
+	const json = JSON.stringify(message);
+	conn.send(json);
+}
+
+function choose_character(data) {
+	
+	const choices = JSON.parse(data.choices);
+	var current_choice = "";
+	console.log(choices);
+	
+	$("#temp_lobby").html("");
+	
+	var choices_text = "";
+	
+	choices_text += "<div class=\"option\" style=\"width:100%\">";
+	choices_text += "<center><h2>Choose your character and begin the Betrayal!</h2></center>";
+	
+	for(index in choices) {
+		choices_text += "<center><div class=\"char_choice\">" + choices[index].name + "</div></center>";
+	}
+	
+	choices_text += "<center><button type=\"button\" id=\"choose_character\">Choose Character</button></center>";
+	choices_text += "</div>";
+	
+	$("#temp_lobby").html(choices_text);
+	
+	$(".char_choice").click(function(e) {
+		const choice = $(e.target);
+		current_choice = choice.text();
+		
+		console.log(current_choice);
+	});
+	
+	$("#choose_character").click(event => {
+		var message = {
+			type: MESSAGE_TYPE.CHOOSECHARACTER,
+			payload: {
+				id : userId,
+				choice : current_choice,
+			}
+		}
+		
+		console.log("sending " + current_choice);
+
+		const json = JSON.stringify(message);
+		conn.send(json);
+	});
 	
 }
 
