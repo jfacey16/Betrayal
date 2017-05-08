@@ -1,4 +1,4 @@
-  class Tile {
+class Tile {
     constructor(posx, posy, north, east, south, west) {
       this.posx = posx;
       this.posy = posy;
@@ -25,14 +25,14 @@
       this.posy = posy;
     }
   }
-  
+ 
   let $player_1_turn;
   let $player_2_turn;
   let $player_3_turn;
   let $player_4_turn;
   let $player_5_turn;
   let $player_6_turn;
-  
+ 
   const T = 150;
   const P = 20;
   const D = 50;
@@ -47,7 +47,7 @@
   let tempdir = 0;
   const textOff = new Position(5, 135);
   const symbOff = new Position(130, 143);
-  const outside = new Tile(450,600,false,false,false,false); 
+  const outside = new Tile(450,600,false,false,false,false);
   const ehall = new Tile(600,600,true,true,true,false);
   const foyer = new Tile(750,600,true,true,true,true);
   const toupper = new Tile(900,600,false,false,false,true);
@@ -105,84 +105,78 @@
     $( "#mbasement" ).draggable();
   } );
   function endturn() {
-  
+ 
       if (turn >= 5)
         turn = 0;
-      else 
+      else
         turn++;
-      
+     
       if(turn === 0) {
-      
-	      moves = $char_1.speedScale[$char_1.speed];
-	      movesp.innerHTML = $char_1.speedScale[$char_1.speed];
-	      document.getElementById("player_1").style.borderColor = "yellow";
-	      document.getElementById("player_2").style.borderColor = "black";
-	      document.getElementById("player_3").style.borderColor = "black";
-	      document.getElementById("player_4").style.borderColor = "black";
-	      document.getElementById("player_5").style.borderColor = "black";
-	      document.getElementById("player_6").style.borderColor = "black";
+          moves = $char_1.speedScale[$char_1.speed];
+          movesp.innerHTML = $char_1.speedScale[$char_1.speed];
+          document.getElementById("player_1").style.borderColor = "yellow";
+          document.getElementById("player_2").style.borderColor = "black";
+          document.getElementById("player_3").style.borderColor = "black";
+          document.getElementById("player_4").style.borderColor = "black";
+          document.getElementById("player_5").style.borderColor = "black";
+          document.getElementById("player_6").style.borderColor = "black";
       }
-      
+     
       if(turn === 1) {
-      
-	      moves = $char_2.speedScale[$char_2.speed];
-	      movesp.innerHTML = $char_2.speedScale[$char_2.speed];
-	      document.getElementById("player_1").style.borderColor = "black";
-	      document.getElementById("player_2").style.borderColor = "yellow";
-	      document.getElementById("player_3").style.borderColor = "black";
-	      document.getElementById("player_4").style.borderColor = "black";
-	      document.getElementById("player_5").style.borderColor = "black";
-	      document.getElementById("player_6").style.borderColor = "black";
+          moves = $char_2.speedScale[$char_2.speed];
+          movesp.innerHTML = $char_2.speedScale[$char_2.speed];
+          document.getElementById("player_1").style.borderColor = "black";
+          document.getElementById("player_2").style.borderColor = "yellow";
+          document.getElementById("player_3").style.borderColor = "black";
+          document.getElementById("player_4").style.borderColor = "black";
+          document.getElementById("player_5").style.borderColor = "black";
+          document.getElementById("player_6").style.borderColor = "black";
       }
-      
+     
       if(turn === 2) {
-      
-	      moves = $char_3.speedScale[$char_3.speed];
-	      movesp.innerHTML = $char_3.speedScale[$char_3.speed];
-	      document.getElementById("player_1").style.borderColor = "black";
-	      document.getElementById("player_2").style.borderColor = "black";
-	      document.getElementById("player_3").style.borderColor = "yellow";
-	      document.getElementById("player_4").style.borderColor = "black";
-	      document.getElementById("player_5").style.borderColor = "black";
-	      document.getElementById("player_6").style.borderColor = "black";
+          moves = $char_3.speedScale[$char_3.speed];
+          movesp.innerHTML = $char_3.speedScale[$char_3.speed];
+          document.getElementById("player_1").style.borderColor = "black";
+          document.getElementById("player_2").style.borderColor = "black";
+          document.getElementById("player_3").style.borderColor = "yellow";
+          document.getElementById("player_4").style.borderColor = "black";
+          document.getElementById("player_5").style.borderColor = "black";
+          document.getElementById("player_6").style.borderColor = "black";
       }
-      
+     
       if(turn === 3) {
-      
-	      moves = $char_4.speedScale[$char_4.speed];
-	      movesp.innerHTML = $char_4.speedScale[$char_4.speed];
-	      document.getElementById("player_1").style.borderColor = "black";
-	      document.getElementById("player_2").style.borderColor = "black";
-	      document.getElementById("player_3").style.borderColor = "black";
-	      document.getElementById("player_4").style.borderColor = "yellow";
-	      document.getElementById("player_5").style.borderColor = "black";
-	      document.getElementById("player_6").style.borderColor = "black";
+          moves = $char_4.speedScale[$char_4.speed];
+          movesp.innerHTML = $char_4.speedScale[$char_4.speed];
+          document.getElementById("player_1").style.borderColor = "black";
+          document.getElementById("player_2").style.borderColor = "black";
+          document.getElementById("player_3").style.borderColor = "black";
+          document.getElementById("player_4").style.borderColor = "yellow";
+          document.getElementById("player_5").style.borderColor = "black";
+          document.getElementById("player_6").style.borderColor = "black";
       }
-      
+     
       if(turn === 4) {
-      
-	      moves = $char_5.speedScale[$char_5.speed];
-	      movesp.innerHTML = $char_5.speedScale[$char_5.speed];
-	      document.getElementById("player_1").style.borderColor = "black";
-	      document.getElementById("player_2").style.borderColor = "black";
-	      document.getElementById("player_3").style.borderColor = "black";
-	      document.getElementById("player_4").style.borderColor = "black";
-	      document.getElementById("player_5").style.borderColor = "yellow";
-	      document.getElementById("player_6").style.borderColor = "black";
+          moves = $char_5.speedScale[$char_5.speed];
+          movesp.innerHTML = $char_5.speedScale[$char_5.speed];
+          document.getElementById("player_1").style.borderColor = "black";
+          document.getElementById("player_2").style.borderColor = "black";
+          document.getElementById("player_3").style.borderColor = "black";
+          document.getElementById("player_4").style.borderColor = "black";
+          document.getElementById("player_5").style.borderColor = "yellow";
+          document.getElementById("player_6").style.borderColor = "black";
       }
-      
+     
       if(turn === 5) {
-      
-	      moves = $char_6.speedScale[$char_6.speed];
-	      movesp.innerHTML = $char_6.speedScale[$char_6.speed];
-	      document.getElementById("player_1").style.borderColor = "black";
-	      document.getElementById("player_2").style.borderColor = "black";
-	      document.getElementById("player_3").style.borderColor = "black";
-	      document.getElementById("player_4").style.borderColor = "black";
-	      document.getElementById("player_5").style.borderColor = "black";
-	      document.getElementById("player_6").style.borderColor = "yellow";
+          moves = $char_6.speedScale[$char_6.speed];
+          movesp.innerHTML = $char_6.speedScale[$char_6.speed];
+          document.getElementById("player_1").style.borderColor = "black";
+          document.getElementById("player_2").style.borderColor = "black";
+          document.getElementById("player_3").style.borderColor = "black";
+          document.getElementById("player_4").style.borderColor = "black";
+          document.getElementById("player_5").style.borderColor = "black";
+          document.getElementById("player_6").style.borderColor = "yellow";
       }
-      
+     
       if (positions[turn].floor == 0) {
         first.style.display = 'none';
         second.style.display = 'none';
@@ -210,7 +204,7 @@
       }
       ending.disabled = false;
   }
-
+ 
   function paintBoard(floor) {
     if (floor == 0 || floor == -1) {
       ctxb.strokeRect(600,600,T,T);
@@ -225,17 +219,17 @@
         for (let i = 1; i < btiles.length; i++) {
           ctxb.strokeRect(btiles[i].posx, btiles[i].posy, T, T);
           ctxmb.strokeRect(btiles[i].posx / S, btiles[i].posy / S, P, P);
-          if (btiles[i].north) 
+          if (btiles[i].north)
             ctxb.strokeRect(btiles[i].posx + D, btiles[i].posy, D, X);
-          if (btiles[i].east) 
+          if (btiles[i].east)
             ctxb.strokeRect(btiles[i].posx + T - X, btiles[i].posy + D, X, D);
           if (btiles[i].south)
             ctxb.strokeRect(btiles[i].posx + D, btiles[i].posy + T - X, D, X);
-          if (btiles[i].west) 
+          if (btiles[i].west)
             ctxb.strokeRect(btiles[i].posx, btiles[i].posy + D, X, D);
         }
       }
-    } 
+    }
     if (floor == 1 || floor == -1) {
       ctxf.strokeRect(600,600,T*3,T);
       ctxf.font = "17px Times New Roman";
@@ -260,17 +254,17 @@
         for (let i = 4; i < ftiles.length; i++) {
           ctxf.strokeRect(ftiles[i].posx, ftiles[i].posy, T, T);
           ctxmf.strokeRect(ftiles[i].posx / S, ftiles[i].posy / S, P, P);
-          if (ftiles[i].north) 
+          if (ftiles[i].north)
             ctxf.strokeRect(ftiles[i].posx + D, ftiles[i].posy, D, X);
-          if (ftiles[i].east) 
+          if (ftiles[i].east)
             ctxf.strokeRect(ftiles[i].posx + T - X, ftiles[i].posy + D, X, D);
           if (ftiles[i].south)
             ctxf.strokeRect(ftiles[i].posx + D, ftiles[i].posy + T - X, D, X);
-          if (ftiles[i].west) 
+          if (ftiles[i].west)
             ctxf.strokeRect(ftiles[i].posx, ftiles[i].posy + D, X, D);
         }
       }
-    } 
+    }
     if (floor == 2 || floor == -1) {
       ctxs.strokeRect(600,600,T,T);
       ctxs.font = "17px Times New Roman";
@@ -290,13 +284,13 @@
         for (let i = 1; i < stiles.length; i++) {
           ctxs.strokeRect(stiles[i].posx, stiles[i].posy, T, T);
           ctxms.strokeRect(stiles[i].posx / S, stiles[i].posy / S, P, P);
-          if (stiles[i].north) 
+          if (stiles[i].north)
             ctxs.strokeRect(stiles[i].posx + D, stiles[i].posy, D, X);
-          if (stiles[i].east) 
+          if (stiles[i].east)
             ctxs.strokeRect(stiles[i].posx + T - X, stiles[i].posy + D, X, D);
           if (stiles[i].south)
             ctxs.strokeRect(stiles[i].posx + D, stiles[i].posy + T - X, D, X);
-          if (stiles[i].west) 
+          if (stiles[i].west)
             ctxs.strokeRect(stiles[i].posx, stiles[i].posy + D, X, D);
         }
       }
@@ -305,23 +299,23 @@
       if (floor == positions[i].floor || floor == -1) {
         if (positions[i].floor == 0) {
           ctxb.strokeRect(positions[i].posx + offsets[i].posx, positions[i].posy + offsets[i].posy, P, P);
-          ctxmb.strokeRect((positions[i].posx + offsets[i].posx) / S, 
+          ctxmb.strokeRect((positions[i].posx + offsets[i].posx) / S,
             (positions[i].posy + offsets[i].posy) / S, P / S, P / S);
         }
         else if (positions[i].floor == 1) {
           ctxf.strokeRect(positions[i].posx + offsets[i].posx, positions[i].posy + offsets[i].posy, P, P);
-          ctxmf.strokeRect((positions[i].posx + offsets[i].posx) / S, 
+          ctxmf.strokeRect((positions[i].posx + offsets[i].posx) / S,
             (positions[i].posy + offsets[i].posy) / S, P / S, P / S);
         }
         else if (positions[i].floor == 2) {
           ctxs.strokeRect(positions[i].posx + offsets[i].posx, positions[i].posy + offsets[i].posy, P, P);
-          ctxms.strokeRect((positions[i].posx + offsets[i].posx) / S, 
+          ctxms.strokeRect((positions[i].posx + offsets[i].posx) / S,
             (positions[i].posy + offsets[i].posy) / S, P / S, P / S);
         }
       }
     }
   }
-
+ 
   function rotate() {
     let ctx;
     if (positions[turn].floor == 0)
@@ -339,37 +333,37 @@
       if (rottile.north) {
         rem++;
         if (rem == avdoor) {
-          if (avdoor == 3) 
+          if (avdoor == 3)
             rottile.west = true;
-          else if (avdoor == 2) 
-            rottile.west = false; 
+          else if (avdoor == 2)
+            rottile.west = false;
           rottile.east = true;
           rottile.north = true;
           rottile.south = false;
           break;
         }
-      } else 
+      } else
         rem = 0;
       if (rottile.east) {
         rem++;
         if (rem == avdoor) {
-          if (avdoor == 3) 
+          if (avdoor == 3)
             rottile.north = true;
-          else if (avdoor == 2) 
-            rottile.north = false; 
+          else if (avdoor == 2)
+            rottile.north = false;
           rottile.south = true;
           rottile.east = true;
           rottile.west = false;
           break;
         }
-      } else 
+      } else
         rem = 0;
       if (rottile.south) {
         rem++;
         if (rem == avdoor) {
-          if (avdoor == 3) 
+          if (avdoor == 3)
             rottile.east = true;
-          else if (avdoor == 2) 
+          else if (avdoor == 2)
             rottile.east = false;
           rottile.west = true;
           rottile.south = true;
@@ -381,60 +375,60 @@
       if (rottile.west) {
         rem++;
         if (rem == avdoor) {
-          if (avdoor == 3) 
+          if (avdoor == 3)
             rottile.south = true;
-          else if (avdoor == 2) 
+          else if (avdoor == 2)
             rottile.south = false;
           rottile.north = true;
           rottile.west = true;
           rottile.east = false;
           break;
         }
-      } else 
+      } else
         rem = 0;
     }
     if (rottile.north && !befn)
-      ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X); 
-    if (!rottile.north && befn) 
+      ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
+    if (!rottile.north && befn)
       ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + 1, D + 2, X);
     if (rottile.east && !befe)
       ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
-    if (!rottile.east && befe) 
+    if (!rottile.east && befe)
       ctx.clearRect(positions[turn].posx + T - X - 1, positions[turn].posy + D - 1, X, D + 2);
     if (rottile.south && !befs)
       ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
-    if (!rottile.south && befs) 
+    if (!rottile.south && befs)
       ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + T - X - 1, D + 2, X);
     if (rottile.west && !befw)
-      ctx.strokeRect(positions[turn].posx, positions[turn].posy + D, X, D); 
-    if (!rottile.west && befw) 
+      ctx.strokeRect(positions[turn].posx, positions[turn].posy + D, X, D);
+    if (!rottile.west && befw)
       ctx.clearRect(positions[turn].posx + 1, positions[turn].posy + D - 1, X, D + 2);
     rot++;
   }
-
+ 
   function placeTile() {
     if (tempdir == 0) {
-      if (!rottile.south) 
+      if (!rottile.south)
         return;
     }
     if (tempdir == 1) {
-      if (!rottile.west) 
+      if (!rottile.west)
         return;
     }
     if (tempdir == 2) {
-      if (!rottile.north) 
+      if (!rottile.north)
         return;
     }
     if (tempdir == 3) {
-      if (!rottile.east) 
+      if (!rottile.east)
         return;
     }
     let flo;
     if (positions[turn].floor == 0)
       flo = btiles;
-    else if (positions[turn].floor == 1) 
+    else if (positions[turn].floor == 1)
       flo = ftiles;
-    else if (positions[turn].floor == 2) 
+    else if (positions[turn].floor == 2)
       flo = stiles;
     flo.push(rottile);
     positions[turn].north = rottile.north;
@@ -449,10 +443,10 @@
     placet.disabled = true;
     rot = 0;
   }
-
+ 
   function receiveTile(ro) {
     if (ro.item.length > 0 || ro.omen.length > 0 || ro.event.length > 0) {
-      if (ro.item.length > 0) 
+      if (ro.item.length > 0)
         itemDrawn(ro.item[0].name, ro.item[0].description, "", ro.newTile.name);
       else if (ro.omen.length > 0)
         omenDrawn(ro.omen[0].name, ro.omen[0].description, "", ro.newTile.name);
@@ -463,3 +457,4 @@
       movesp.innerHTML = 0;
     }
   }
+
