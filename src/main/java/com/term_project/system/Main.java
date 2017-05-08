@@ -88,6 +88,9 @@ public class Main {
 	}
 
 	private void runSparkServer(int port) {
+		//starts webSocket
+    Spark.webSocket("/gameConnection", GameWebSocket.class);
+
 	  Spark.port(port);
 	  Spark.externalStaticFileLocation("src/main/resources/static");
 	  Spark.exception(Exception.class, new ExceptionPrinter());
@@ -96,13 +99,8 @@ public class Main {
 
 	  // Setup Spark Routes
 	  Spark.get("/betrayal_menu", new MenuHandler(), freeMarker);
-	  	Spark.post("/betrayal_create", new CreateLobbyHandler());
-	  	Spark.post("/betrayal_join", new JoinLobbyHandler());
-		Spark.post("/create_game", new TempStart());
 	  Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
 		Spark.post("/betrayal", new UpdateHandler());
-		Spark.post("/tileStart", new TileStart());
-		Spark.post("/requestTile", new RequestTile());
 	}
 
 	private static class MenuHandler implements TemplateViewRoute {
@@ -130,18 +128,18 @@ public class Main {
 
 	      String message = "Your username is \"" + game_name + "\". ";
 	      message += "Waiting for more players to join your lobby of " + player_number + ".";
-	      
+
 	      System.out.println(message);
 
 	      Map<String, Object> variables = new HashMap<>();
 
 			variables.put("", "");
 			variables = ImmutableMap.copyOf(variables);
-				
+
 				return GSON.toJson(variables);
 	    }
 	}
-	
+
 	private static class JoinLobbyHandler implements Route {
 	    @Override
 	    public String handle(Request req, Response res) {
@@ -150,42 +148,17 @@ public class Main {
 	      String game_name = qm.value("username");
 
 	      String message = "Your username is \"" + game_name + "\".";
-	      
+
 	      System.out.println(message);
 
 	      Map<String, Object> variables = new HashMap<>();
 
 			variables.put("", "");
 			variables = ImmutableMap.copyOf(variables);
-				
+
 				return GSON.toJson(variables);
 	    }
 	}
-
-	private static class TempStart implements Route {
-	    @Override
-	    public String handle(Request req, Response res) {
-	    	System.out.println("start is starting");
-	      QueryParamsMap qm = req.queryMap();
-	      String game_name = qm.value("name");
-				//setup ids
-	      int player_number = Integer.parseInt(qm.value("players"));
-				List<String> ids =  new ArrayList();
-				for (int i = 0; i < player_number; i++) {
-					ids.add(Integer.toString(i));
-				}
-
-				gameState = new GameState(ids, new MemorySlot());
-
-	      Map<String, Object> variables = new HashMap<>();
-
-				variables.putAll(gameState.start());
-				variables = ImmutableMap.copyOf(variables);
-
-			  return GSON.toJson(variables);
-	    }
-	}
-
 	private static class BetrayalHandler implements TemplateViewRoute {
 	  @Override
 	  public ModelAndView handle(Request req, Response res) {
@@ -212,41 +185,6 @@ public class Main {
 
 				  return GSON.toJson(variables);
 	  }
-	}
-
-	private static class TileStart implements Route {
-	  @Override
-	  public String handle(Request req, Response res) {
-			QueryParamsMap qm = req.queryMap();
-
-			Map<String, Object> variables = gameState.buildMap(qm);
-
-			variables = ImmutableMap.copyOf(variables);
-
-			return GSON.toJson(variables);
-	  }
-	}
-
-	private static class RequestTile implements Route {
-	@Override
-	  public String handle(Request req, Response res) {
-			QueryParamsMap qm = req.queryMap();
-
-			Map<String, Object> variables = gameState.update(qm);
-			System.out.println(variables);
-			return GSON.toJson(variables);
-	  }
-	}
-
-	private static class ItemHandler implements TemplateViewRoute {
-
-		@Override
-		public ModelAndView handle(Request arg0, Response arg1)
-				throws Exception {
-
-
-			return null;
-		}
 	}
 
 	private static class OmenHandler implements TemplateViewRoute {

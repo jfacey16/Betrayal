@@ -196,6 +196,11 @@ public final class MemorySlot {
     return this;
   }
 
+  public MemorySlot addGameCharacter(GameChar aChar) {
+    gameCharacters.add(aChar);
+    return this;
+  }
+
   /**
    * Gets the list of strings this object stores.
    *
@@ -283,7 +288,7 @@ public final class MemorySlot {
 
   /**
    * Gets the tileMap being stored in memory as tileBeans.
-   * 
+   *
    * @return A list of tileBeans from the tileMap.
    */
   public List<TileBean> getTileBeans() {

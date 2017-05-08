@@ -79,7 +79,7 @@ public class PreHaunt implements GamePhase {
   }
 
   @Override
-  public void run(String name, QueryParamsMap qm, GameChar character,
+  public void run(String name, Map<String, String> qm, GameChar character,
       Map<String, Object> variables) {
     // if person is starting turn reset available actions
     if (mode.equals("start")) {
@@ -119,7 +119,7 @@ public class PreHaunt implements GamePhase {
         phase = 1;
 
         // get the direction the player is trying to move in
-        String direction = qm.value("direction");
+        String direction = qm.get("direction");
 
         // try to move in given direction
         // fails if no door exists
@@ -158,7 +158,7 @@ public class PreHaunt implements GamePhase {
       if (phase == 1) {
         try {
           System.out.println("why am i here?");
-          move.addTile(character, Integer.parseInt(qm.value("rotations")),
+          move.addTile(character, Integer.parseInt(qm.get("rotations")),
               memory.getTileMap());
 
           // send frontend tile map
@@ -223,15 +223,15 @@ public class PreHaunt implements GamePhase {
 
     case "event":
       if (phase == 0) {
-        String eventName = qm.value("event");
+        String eventName = qm.get("event");
         Event event = character.getTile().getEvent(eventName);
         variables.put("event", event);
         phase = 1;
         return;
       } else if (phase == 1) {
-        String eventName = qm.value("event");
+        String eventName = qm.get("event");
         Event event = character.getTile().getEvent(eventName);
-        String statToUse = qm.value("stat");
+        String statToUse = qm.get("stat");
 
         // make sure valid stat is being used
         if (!event.getUsableAsString().contains(statToUse)) {
@@ -248,7 +248,7 @@ public class PreHaunt implements GamePhase {
           return;
         }
 
-        // roll for that stat and add to QueryParamsMap
+        // roll for that stat and add to qm
         List<Integer> rolls = Dice.roll(statVal);
         variables.put("rolls", rolls);
 
@@ -292,7 +292,7 @@ public class PreHaunt implements GamePhase {
       break;
 
     case "use item":
-      String useItemS = qm.value("item");
+      String useItemS = qm.get("item");
       Item useItem = character.getItem(useItemS);
       useItem.use(character, variables);
       variables.put("character", character.getCharBean());
@@ -301,7 +301,7 @@ public class PreHaunt implements GamePhase {
       break;
 
     case "use omen":
-      String useOmenS = qm.value("omen");
+      String useOmenS = qm.get("omen");
       Omen useOmen = character.getOmen(useOmenS);
       useOmen.use(character, variables);
       variables.put("character", character.getCharBean());
@@ -310,7 +310,7 @@ public class PreHaunt implements GamePhase {
       break;
 
     case "pickup item":
-      String pickupItemS = qm.value("item");
+      String pickupItemS = qm.get("item");
       Item pickupItem = character.getItem(pickupItemS);
       pickupItem.add(character);
       variables.put("character", character.getCharBean());
@@ -319,7 +319,7 @@ public class PreHaunt implements GamePhase {
       break;
 
     case "drop item":
-      String dropItemS = qm.value("item");
+      String dropItemS = qm.get("item");
       Item dropItem = character.getItem(dropItemS);
       dropItem.loss(character);
       variables.put("character", character.getCharBean());
@@ -328,7 +328,7 @@ public class PreHaunt implements GamePhase {
       break;
 
     case "pickup omen":
-      String pickupOmenS = qm.value("omen");
+      String pickupOmenS = qm.get("omen");
       Omen pickupOmen = character.getOmen(pickupOmenS);
       pickupOmen.add(character);
       variables.put("character", character.getCharBean());
@@ -337,7 +337,7 @@ public class PreHaunt implements GamePhase {
       break;
 
     case "drop omen":
-      String dropOmenS = qm.value("omen");
+      String dropOmenS = qm.get("omen");
       Omen dropOmen = character.getOmen(dropOmenS);
       dropOmen.loss(character);
       variables.put("character", character.getCharBean());
