@@ -114,6 +114,7 @@ public class PreHaunt implements GamePhase {
         mode = "move";
         phase = 1;
 
+        variables.put("phase", 0);
         // get the direction the player is trying to move in
         String direction = qm.get("direction");
 
@@ -121,7 +122,8 @@ public class PreHaunt implements GamePhase {
         // fails if no door exists
         try {
           move.run(direction, character, variables);
-
+          variables.put("direction", direction);
+          variables.put("finished", move.getFinished());
           // use up one movement
           remaining.put("move", remaining.get("move") - 1);
         } catch (NullPointerException e) {
@@ -145,8 +147,6 @@ public class PreHaunt implements GamePhase {
           addActions(character, variables);
           return;
         }
-        System.out.println("starting to rotate");
-        System.out.println(phase);
         return;
       }
 
@@ -157,6 +157,7 @@ public class PreHaunt implements GamePhase {
 
               memory.getTileMap());
 
+          variables.put("phase", 1);
           // send frontend tile map
           variables.put("tiles", memory.getTileBeans());
 

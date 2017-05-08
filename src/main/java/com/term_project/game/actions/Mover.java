@@ -126,11 +126,7 @@ public class Mover {
 
     // pull a tile from the top of the deck
     toAdd = memory.getTiles().poll();
-      System.out.println("xname: " + toAdd.getName());
-      System.out.println("xn: " + toAdd.hasNorth());
-      System.out.println("xs: " + toAdd.hasSouth());
-      System.out.println("xe: " + toAdd.hasEast());
-      System.out.println("xw: " + toAdd.hasWest());
+
     // get info on the current position of character
     Tile currentTile = character.getTile();
     Pos curPos = currentTile.getPos();
@@ -151,11 +147,6 @@ public class Mover {
         toAdd = memory.getTiles().poll();
       }
     }
-    System.out.println("name: " + toAdd.getName());
-    System.out.println("n:" + toAdd.hasNorth());
-    System.out.println("s:" + toAdd.hasSouth());
-    System.out.println("e:" + toAdd.hasEast());
-    System.out.println("w:" + toAdd.hasWest());
 
     // now that we've retrieved a tile on the same floor, we must
     // set the tile's position
