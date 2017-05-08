@@ -205,29 +205,48 @@ public abstract class AbstractTile implements Tile {
   @Override
   public void addNorth() {
     assert(hasNorth());
+
     doors.put(Direction.NORTH,
-        new Pos(pos.getX(), pos.getY() + 1, pos.getFloor()));
+        new Pos(pos.getX(), pos.getY() - 1, pos.getFloor()));
+
   }
 
   @Override
   public void addSouth() {
     assert(hasSouth());
-    doors.put(Direction.NORTH,
-        new Pos(pos.getX(), pos.getY() - 1, pos.getFloor()));
+
+    doors.put(Direction.SOUTH,
+        new Pos(pos.getX(), pos.getY() + 1, pos.getFloor()));
   }
 
   @Override
   public void addEast() {
     assert(hasEast());
-    doors.put(Direction.NORTH,
+
+    doors.put(Direction.EAST,
         new Pos(pos.getX() + 1, pos.getY(), pos.getFloor()));
+
   }
 
   @Override
   public void addWest() {
     assert(hasWest());
-    doors.put(Direction.NORTH,
+    doors.put(Direction.WEST,
         new Pos(pos.getX() - 1, pos.getY(), pos.getFloor()));
+  }
+
+  @Override
+  public void addUp() {
+    assert(hasUp());
+    doors.put(Direction.UP,
+        new Pos(pos.getX() - 2, pos.getY(), Floor.ATTIC));
+  }
+
+  @Override
+  public void addDown() {
+    assert(hasDown());
+    doors.put(Direction.DOWN,
+        new Pos(pos.getX() + 2, pos.getY(), Floor.GROUND));
   }
 
   @Override
@@ -245,6 +264,7 @@ public abstract class AbstractTile implements Tile {
     // will be placement will switching tiles
     Pos holderOne;
     Pos holderTwo;
+    System.out.println("how did i get here");
 
     // make east value the northern value
     holderOne = doors.get(Direction.EAST);
@@ -334,11 +354,6 @@ public abstract class AbstractTile implements Tile {
       } else
         rem = 0;
     }
-
-    System.out.println("n:" + this.hasNorth());
-    System.out.println("s:" + this.hasSouth());
-    System.out.println("e:" + this.hasEast());
-    System.out.println("w:" + this.hasWest());
   }
 
   @Override

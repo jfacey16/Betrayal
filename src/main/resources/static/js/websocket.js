@@ -50,9 +50,14 @@ const setup_betrayal = () => {
 				choose_character(data);
 				break;
 			case MESSAGE_TYPE.GAMEREADY:
-				console.log(data);
-				console.log(data.payload);
 				set_starting_state(data);
+				draw_map(data);
+				break;
+			case MESSAGE_TYPE.GAMEMOVE:
+				responseJSON = data;
+				update_turn(data.currentTurn);
+				break;
+
 		}
 		
 	}
@@ -92,10 +97,6 @@ const create_lobby = () => {
 function update_lobbies(data) {
 	
 	const lobbies = JSON.parse(data.lobbies);
-	
-	if(!game_started) {
-		console.log(lobbies);
-	}
 	
 	var lobby_text = "<p>";
 	
@@ -193,7 +194,7 @@ function choose_character(data) {
 					type: MESSAGE_TYPE.CHOOSECHARACTER,
 					payload: {
 						id : userId,
-						choice : current_choice,
+						choice : current_choice
 					}
 				}
 
@@ -215,4 +216,23 @@ function choose_character(data) {
 			document.getElementById("choose_error").style.color = "red";
 		}
 	});
+}
+
+function draw_map(data) {
+	const torder = JSON.parse(data.turnOrder);
+	paintBoard(-1, torder.length);
+}
+
+
+function game_move(params) {
+	var message = {
+		type: MESSAGE_TYPE.GAMEMOVE,
+		payload: {
+			id : userId,
+			query : params
+		}
+	}
+
+	const json = JSON.stringify(message);
+	conn.send(json);
 }

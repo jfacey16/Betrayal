@@ -39,7 +39,7 @@ public class GameWebSocket {
   private static Map<String, Queue<Session>> lobbyToSessions = new ConcurrentHashMap<>();
   private static Map<String, String> idToName = new ConcurrentHashMap<>();
   private static Map<String, GameState> lobbyToGameState = new ConcurrentHashMap<>();
-  private static Map<String, String> usersToCharacters = new ConcurrentHashMap<>();
+  private static List<String[]> usersToCharacters = new ArrayList<>();
 
   private static enum MESSAGE_TYPE {
     CONNECT,
@@ -295,7 +295,7 @@ public class GameWebSocket {
     String id = payload.get("id").getAsString();
     String lobbyName = payload.get("lobbyName").getAsString();
     assert id.equals(sessionToId.get(session));
-    assert id.equals(availableLobbies.contains(lobbyName));
+    assert availableLobbies.contains(lobbyName);
 
     //game is starting so no longer an available lobbyName
     availableLobbies.remove(lobbyName);
@@ -323,9 +323,10 @@ public class GameWebSocket {
     JsonObject payload = received.get("payload").getAsJsonObject();
     String id = payload.get("id").getAsString();
     assert id.equals(sessionToId.get(session));
-
+    System.out.println(payload.get("query").toString());
+    
     HashMap<String,String> queryMap = GSON.fromJson(
-        payload.get("query").getAsString(),
+        payload.get("query").toString(),
         new TypeToken<HashMap<String, String>>(){}.getType()
     );
 
@@ -344,6 +345,7 @@ public class GameWebSocket {
     for (Session ses : sessions) {
       ses.getRemote().sendString(update.toString());
     }
+    
   }
 
   private synchronized void chooseCharacter(JsonObject received, Session session) throws IOException {
@@ -351,7 +353,7 @@ public class GameWebSocket {
     String id = payload.get("id").getAsString();
     assert id.equals(sessionToId.get(session));
 
-    usersToCharacters.put(id, payload.get("choice").getAsString());
+    usersToCharacters.add(new String[]{idToName.get(id), payload.get("choice").getAsString()});
 
     String lobby = idToLobby.get(id);
     GameState game = lobbyToGameState.get(lobby);
