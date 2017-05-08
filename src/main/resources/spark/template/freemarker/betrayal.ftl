@@ -15,55 +15,76 @@
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="js/websocket.js"></script>
   <script src="js/begin_game.js"></script>
   <script src="js/all_functions.js"></script>
+  <script src="js/menu.js"></script>
   <script src="js/card_draw.js"></script>
 </head>
 <body>
+
 <div class="game">
 
 	<div id="temp_lobby" class="temp_lobby">
-		<center><p><h2>Let's play Betrayal!</h2>
-
-			<form method="POST" action="/betrayal"> 
+		<div class="option">
+			<center><p><h2>Create a game:</h2>
 			
-			  <p>Select characters for each player, then start the game:</p>
+			  <p>Fill out and submit the following form to create a game:</p>
 			  
-			  <p>Game Name: <input type="text" id="name" name="name" placeholder="Enter Game Name"></p>
+			  <div id="create_error" class="message"></div>
 			  
-			  <p>Player 1: 
-			  <select id="player_1_select"></select></p>
+			  <p>Username: <input type="text" id="username_create" name="name" placeholder="Enter Your Username"></p>
 			  
-			  <p>Player 2: 
-			  <select id="player_2_select"></select></p>
+			  </p><form>
+				  <input type="radio" name="players" value="3" checked> 3 players
+				  <input type="radio" name="players" value="4"> 4 players
+				  <input type="radio" name="players" value="5"> 5 players
+				  <input type="radio" name="players" value="6"> 6 players
+			  </form><p>
 			  
-			  <p>Player 3: 
-			  <select id="player_3_select"></select></p>
-			  
-			  <p>Player 4: 
-			  <select id="player_4_select"></select></p>
-			  
-			  <p>Player 5: 
-			  <select id="player_5_select"></select></p>
-			  
-			  <p>Player 6: 
-			  <select id="player_6_select"></select></p>
-			  
-			  <input type="submit" id="create" value="Create Game"></center>
-			</form>
+			  <button type="button" id="create_game">Create Game</button></center>
+		</div>
+	
+		<div class="option">
+			<center><p><h2>Join a lobby:</h2></p>
+			
+			<p>Fill out your username and select a lobby in order to join a game:</p>
+			
+			<div id="join_error" class="message"></div>
+			
+			<p>Username: <input type="text" id="username_join" name="name" placeholder="Enter Your Username"></p>
+
+			<p>Game "X": 4/6 players ready.</p>
+			
+			<p>Game "Y": 2/3 players ready.</p>
+			
+			<p>Game "Z": 5/6 players ready.</p>
+			
+			<button type="button" id="join_game">Join Lobby</button></center>
+		</div>
+		
+		<style type="text/css">
+		.option{
+			height:95%;
+			width:50%;
+			margin:10px;
+			border-style:solid;
+			border-width:2px;
+			background-color:#eeeeee;}
+		</style>
 	</div>
 
 	<style type="text/css">
     .temp_lobby{
-      display:flex; 
-      flex-direction:column;
-    position:absolute;
-    top:10%;
-    left:10%;
-    float:left;
-    z-index:20;
-    height:500px;
-    width:1000px;
+        display:flex; 
+        flex-direction:row;
+	    position:absolute;
+	    top:10%;
+	    left:10%;
+	    float:left;
+	    z-index:20;
+	    height:500px;
+	    width:1000px;
         border-style:solid;
         border-width:2px;
         margin-bottom:5px;
