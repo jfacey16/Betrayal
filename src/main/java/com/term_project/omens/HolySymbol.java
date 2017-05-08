@@ -8,12 +8,12 @@ public class HolySymbol implements Omen {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public HolySymbol() {
     name = "Holy Symbol";
     description = "A symbol of calm in an unsettling world.";
-    function = "Gain 2 Sanity now.\nLose 2 Sanity if you lose the Holy Symbol.";
+    logic = "Gain 2 Sanity now.\nLose 2 Sanity if you lose the Holy Symbol.";
   }
 
   @Override
@@ -22,8 +22,8 @@ public class HolySymbol implements Omen {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

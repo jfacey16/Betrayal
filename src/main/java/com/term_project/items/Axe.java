@@ -8,13 +8,13 @@ public class Axe implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Axe() {
 
     name = "Axe";
     description = "Very sharp.";
-    function = "You roll 1 additional die when making a Might attack with this weapon.";
+    logic = "You roll 1 additional die when making a Might attack with this weapon.";
   }
 
   @Override
@@ -23,8 +23,8 @@ public class Axe implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

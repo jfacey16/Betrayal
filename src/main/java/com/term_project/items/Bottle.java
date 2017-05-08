@@ -10,12 +10,12 @@ public class Bottle implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Bottle() {
     name = "Bottle";
     description = "An opaque vial containing a black liquid";
-    function = "Once during your turn while the haunt is revealed, "
+    logic = "Once during your turn while the haunt is revealed, "
         + "you can roll 3 dice and drink from the Bottle:\n6 "
         + "Gain 2 Might and 3 Speed.\n5 Gain 2 Might and 2 "
         + "Speed.\n4 Gain 2 Knowledge and 2 Sanity.\n3 Gain "
@@ -30,8 +30,8 @@ public class Bottle implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

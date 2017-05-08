@@ -8,12 +8,12 @@ public class Bell implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Bell() {
     name = "Bell";
     description = "A brass bell that makes a resonant clang.";
-    function = "Gain 1 Sanity now.\nLose 1 Sanity if you lose the Bell.";
+    logic = "Gain 1 Sanity now.\nLose 1 Sanity if you lose the Bell.";
   }
 
   @Override
@@ -22,8 +22,8 @@ public class Bell implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

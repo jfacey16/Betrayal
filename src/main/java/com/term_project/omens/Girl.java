@@ -8,12 +8,12 @@ public class Girl implements Omen {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Girl() {
     name = "Girl";
     description = "Companion.\nA girl.\nTrapped.\nAlone.\nYou free her!";
-    function = "Gain 1 Sanity and 1 Knowledge now.\nLose 1 Sanity "
+    logic = "Gain 1 Sanity and 1 Knowledge now.\nLose 1 Sanity "
         + "and 1 Knowledge if you lose custody of the Girl.\nThis "
         + "omen can't be dropped, traded, or stolen.";
   }
@@ -29,8 +29,8 @@ public class Girl implements Omen {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

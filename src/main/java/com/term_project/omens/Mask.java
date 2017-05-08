@@ -10,7 +10,7 @@ public class Mask implements Omen {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
   // if this is true the mask is off
   // i know this is confusing but i had to cause future
   private boolean maskOff;
@@ -18,7 +18,7 @@ public class Mask implements Omen {
   public Mask() {
     name = "Mask";
     description = "A somber mask to hide your intentions.";
-    function = "Once during your turn, you can attempt a "
+    logic = "Once during your turn, you can attempt a "
         + "Sanity roll to use the Mask:\n4+ You can put on or"
         + "take off the Mask.\nIf you put on the Mask, gain "
         + "2 Knowledge and lose 2 Sanity.\nIf you take off "
@@ -33,8 +33,8 @@ public class Mask implements Omen {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

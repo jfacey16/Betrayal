@@ -8,12 +8,12 @@ public class SacrificialDaggar implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public SacrificialDaggar() {
     name = "Sacrificial Daggar";
     description = "A twisted shard of iron covered in mysterious symbols and stained with blood.";
-    function = "When making a Might attack with this weapon,"
+    logic = "When making a Might attack with this weapon,"
         + " you roll 3 extra dice, but you must make a Knowledge "
         + "roll first:\n6+ No effect.\n3-5 Lose 1 from a mental "
         + "trait.\n0-2 The daggar twists in your hand! Take "
@@ -26,8 +26,8 @@ public class SacrificialDaggar implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

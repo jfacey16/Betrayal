@@ -8,12 +8,12 @@ public class Dog implements Omen {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Dog() {
     name = "Dog";
     description = "Companian.\nThis mangy dog seems friendly. At least you hope it is.";
-    function = "Gain 1 Might and 1 Sanity now.\nLose 1 "
+    logic = "Gain 1 Might and 1 Sanity now.\nLose 1 "
         + "Might and 1 Sanity if you lose custody of the Dog.\nThis "
         + "omen can't be dropped, traded, or stolen.";
   }
@@ -24,8 +24,8 @@ public class Dog implements Omen {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

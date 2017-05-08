@@ -8,13 +8,13 @@ public class Armor implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Armor() {
 
     name = "Armor";
     description = "It's just prop armor from a Renaissance fair, but it's still metal.";
-    function = "Any time you take physical damage, take 1 point less of damage.";
+    logic = "Any time you take physical damage, take 1 point less of damage.";
 
   }
 
@@ -29,8 +29,8 @@ public class Armor implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override
