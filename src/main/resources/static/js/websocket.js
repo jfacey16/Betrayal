@@ -229,7 +229,7 @@ function game_move(params) {
 		type: MESSAGE_TYPE.GAMEMOVE,
 		payload: {
 			id : userId,
-			query : params;
+			query : params
 		}
 	}
 

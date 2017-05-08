@@ -79,152 +79,6 @@ const allow_mouseover = () => {
         document.getElementById('stats_6_popup').style.display = 'none';
     };
 }
-<<<<<<< HEAD
- 
-const setStartingState = () => {
-   
-         
-   
-         const $player_2_stats = $("#stats_2");
-         const $player_3_stats = $("#stats_3");
-         const $player_4_stats = $("#stats_4");
-         const $player_5_stats = $("#stats_5");
-         const $player_6_stats = $("#stats_6");
-       
-       
-         $player_3_stats.html("<center>" + $char_3.speedScale[$char_3.speed] + " " +
-                $char_3.mightScale[$char_3.might] + " " +
-                $char_3.sanityScale[$char_3.sanity] + " " +
-                $char_3.knowledgeScale[$char_3.knowledge] + " " + "</center>");
-       
-         $player_4_stats.html("<center>" + $char_4.speedScale[$char_4.speed] + " " +
-                $char_4.mightScale[$char_4.might] + " " +
-                $char_4.sanityScale[$char_4.sanity] + " " +
-                $char_4.knowledgeScale[$char_4.knowledge] + " " +"</center>");
-       
-         $player_5_stats.html("<center>" + $char_5.speedScale[$char_5.speed] + " " +
-                $char_5.mightScale[$char_5.might] + " " +
-                $char_5.sanityScale[$char_5.sanity] + " " +
-                $char_5.knowledgeScale[$char_5.knowledge] + " " + "</center>");
-       
-         $player_6_stats.html("<center>" + $char_6.speedScale[$char_6.speed] + " " +
-                $char_6.mightScale[$char_6.might] + " " +
-                $char_6.sanityScale[$char_6.sanity] + " " +
-                $char_6.knowledgeScale[$char_6.knowledge] + " " + "</center>");
-       
-         moves = $char_1.speedScale[$char_1.speed - 1];
-         movesp.innerHTML = $char_1.speedScale[$char_1.speed - 1];
-         const $objective_description = $("#objective_description");
-         $objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>");
-        document.getElementById("player_1").style.borderColor = "yellow";
-}
- 
-const update = () => {
-   
-    current_char = turn + 1;
-}
- 
-function set_starting_state(data) {
-   
-    starting_data = JSON.parse(data.payload);
-    console.log(starting_data);
-   
-    $("#temp_lobby").hide();
-   
-    var found = false;
-    var added = 0;
-    var players = JSON.parse(data.turnOrder);
-    total_players = players.length;
-   
-    var first_player = players[0];
-   
-    player_list = new Array(total_players);
-   
-    for(var index = 0; index < total_players; index++) {
-        if(username === players[index]) {
-            player_list[added] = players[index];
-            found = true;
-            added++;
-        } else {
-            if(found) {
-                player_list[added] = players[index];
-                added++;
-            }
-        }
-    }
-   
-    var needed = (total_players - added);
-   
-    if(added != total_players) {
-        for(var i = 0; i <= needed; i++) {
-            player_list[added] = players[i];
-            added++;
-        }
-    }
-   
-    character_list = new Array(total_players);
-   
-    for (var i = 0; i < total_players; i++) {
-        var player = player_list[i];
-        var player_char = "";
-       
-        for(var j = 0; j < JSON.parse(data.users).length; j++) {
-            if(JSON.parse(data.users)[j][0] === player) {
-                player_char = JSON.parse(data.users)[j][1];
-            }
-        }
-       
-        character_list[i] = player_char;
-    }
-   
-    if(total_players === 1) {
-        setup_player_1(true);
-        setup_player_2(false);
-        setup_player_3(false);
-        setup_player_4(false);
-        setup_player_5(false);
-        setup_player_6(false);
-    } else if(total_players === 2) {
-        setup_player_1(true);
-        setup_player_2(true);
-        setup_player_3(false);
-        setup_player_4(false);
-        setup_player_5(false);
-        setup_player_6(false);
-    } else if(total_players === 3) {
-        setup_player_1(true);
-        setup_player_2(true);
-        setup_player_3(true);
-        setup_player_4(false);
-        setup_player_5(false);
-        setup_player_6(false);
-    } else if(total_players === 4) {
-        setup_player_1(true);
-        setup_player_2(true);
-        setup_player_3(true);
-        setup_player_4(true);
-        setup_player_5(false);
-        setup_player_6(false);
-    } else if(total_players === 5) {
-        setup_player_1(true);
-        setup_player_2(true);
-        setup_player_3(true);
-        setup_player_4(true);
-        setup_player_5(true);
-        setup_player_6(false);
-    } else if(total_players === 6) {
-        setup_player_1(true);
-        setup_player_2(true);
-        setup_player_3(true);
-        setup_player_4(true);
-        setup_player_5(true);
-        setup_player_6(true);
-    } else {
-        console.log("ERROR: Weird number of players.");
-    }
-   
-    allow_mouseover();
-=======
 
 function set_starting_state(data) {
 	
@@ -338,7 +192,6 @@ function set_starting_state(data) {
 	update_turn(0);
 	const $objective_description = $("#objective_description");
 	$objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>");
->>>>>>> 70cab0f9ecaa60cb8f57af896408f101ee5d98c7
 }
  
 function setup_player_1(inGame) {
@@ -509,31 +362,6 @@ function setup_player_5(inGame) {
 }
  
 function setup_player_6(inGame) {
-<<<<<<< HEAD
-    if(inGame) {
-        const $player_6_name = $("#name_6");
- 
-        $char_6 = character_list[5];
-        $player_6_name.html("<center>" + $char_6 + "</center>");
-       
-        for(var i = 0; i < total_players; i++) {
-            if($char_6 === starting_data.characters[i].name) {
-                $data_6 = starting_data.characters[i];
-            }
-        }
-       
-        const $player_6_stats = $("#stats_6");
- 
-        $player_6_stats.html("<center>" + $data_6.speedScale[$data_6.speed] + " " +
-            $data_6.mightScale[$data_6.might] + " " +
-            $data_6.sanityScale[$data_6.sanity] + " " +
-            $data_6.knowledgeScale[$data_6.knowledge] + " " + "</center>");
-       
-    } else {
-       
-    }
-}
-=======
 	if(inGame) {
 		const $player_6_name = $("#name_6");
 
@@ -665,6 +493,3 @@ function turn_end() {
 	const json = JSON.stringify(message);
 	conn.send(json);
 }
-
-
->>>>>>> 70cab0f9ecaa60cb8f57af896408f101ee5d98c7
