@@ -55,12 +55,11 @@ public class GameWebSocket {
     ERROR
   }
 
+  //called on intial connect
   @OnWebSocketConnect
   public void connected(Session session) throws IOException {
-    // TODO Add the session to the queue
-    //sessions.add(session);
 
-    // TODO Build the CONNECT message
+    // return the user their id
     JsonObject connect =  new JsonObject();
     connect.addProperty("type", MESSAGE_TYPE.CONNECT.ordinal());
 
@@ -73,21 +72,25 @@ public class GameWebSocket {
     session.getRemote().sendString(connect.toString());
   }
 
+  //called on leave
   @OnWebSocketClose
   public void closed(Session session, int statusCode, String reason) {
     String id = sessionToId.get(session);
 
+    //if person who left was in lobby
     if(idToLobby.get(id) != null) {
       String lobby = idToLobby.get(id);
 
       Queue<Session> sessionsToUpdate = lobbyToSessions.get(lobby);
       sessionsToUpdate.remove(session);
 
+      //lobby is now empty remove it
       if(sessionsToUpdate.size() == 0) {
         lobbyToSessions.remove(lobby);
         availableLobbies.remove(lobby);
       }
 
+      //if the lobby was actually a game throw errors to all members
       if(lobbyToGameState.get(lobby) != null) {
         lobbyToGameState.remove(lobby);
         lobbyToSessions.remove(lobby);
@@ -125,22 +128,22 @@ public class GameWebSocket {
     int type = received.get("type").getAsInt();
     MESSAGE_TYPE[] vals = MESSAGE_TYPE.values();
     switch (vals[type]) {
-      case CHATUPDATE:
+      case CHATUPDATE: //sending a chat message in the chatbox
         chatUpdate(received, session);
         break;
-      case SETNAME:
+      case SETNAME: //set players name
         setName(received, session);
         break;
-      case CREATELOBBY:
+      case CREATELOBBY: //create a lobby
         createLobby(received, session);
         break;
-      case JOINLOBBY:
+      case JOINLOBBY: //join a lobby
         joinLobby(received, session);
         break;
-      case STARTGAME:
+      case STARTGAME: //start a game when in a lobby
         startGame(received, session);
         break;
-      case GAMEMOVE:
+      case GAMEMOVE: //game actions
         gameMove(received, session);
         break;
       default:
@@ -156,7 +159,7 @@ public class GameWebSocket {
     String id = payload.get("id").getAsString();
     assert id.equals(sessionToId.get(session));
 
-    // TODO Send an UPDATE message to all users
+    // message sent to frontend
     JsonObject update =  new JsonObject();
     update.addProperty("type", MESSAGE_TYPE.CHATUPDATE.ordinal());
     update.addProperty("id", id);
@@ -171,7 +174,7 @@ public class GameWebSocket {
   }
 
   private synchronized void updateLobbies() throws IOException {
-    // TODO Send an UPDATE message to all users
+    // Update everyone's lobbies
     JsonObject update =  new JsonObject();
     update.addProperty("type", MESSAGE_TYPE.UPDATELOBBIES.ordinal());
     update.addProperty("lobbies", GSON.toJson(availableLobbies));
@@ -181,6 +184,7 @@ public class GameWebSocket {
     }
   }
 
+  //sets players name
   private synchronized void setName(JsonObject received, Session session) throws IOException {
     JsonObject payload = received.get("payload").getAsJsonObject();
     String id = payload.get("id").getAsString();
@@ -203,6 +207,7 @@ public class GameWebSocket {
     String lobbyName = payload.get("lobbyName").getAsString();
     assert id.equals(sessionToId.get(session));
 
+    //if lobby with the same name already exists throw error to frontend
     if (lobbyToSessions.keySet().contains(lobbyName)) {
       JsonObject update =  new JsonObject();
       update.addProperty("type", MESSAGE_TYPE.ERROR.ordinal());
@@ -224,6 +229,7 @@ public class GameWebSocket {
     String lobbyName = payload.get("lobbyName").getAsString();
     assert id.equals(sessionToId.get(session));
 
+    //if lobby isnt part of available lobbies to join throw error
     if (!availableLobbies.contains(lobbyName)) {
       JsonObject update =  new JsonObject();
       update.addProperty("type", MESSAGE_TYPE.ERROR.ordinal());
@@ -237,12 +243,14 @@ public class GameWebSocket {
     idToLobby.put(id, lobbyName);
     updateLobby(lobbyMembers);
 
+    //startgame if now at max members
     if(lobbyMembers.size() > 5) {
       startGame(received, session);
       updateLobbies();
     }
   }
 
+  //message all members in given lobby who is in it
   private synchronized void updateLobby(Queue<Session> lobbyMembers) throws IOException {
     List<String> members = new ArrayList<>();
     for(Session sess : lobbyMembers) {
