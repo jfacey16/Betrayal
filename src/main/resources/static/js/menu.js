@@ -1,5 +1,7 @@
 $(document).ready(() => {
 	
+	$("#temp_lobby").draggable();
+	
 	$("#join_game").click(event => {
 		
 		console.log("join"); 
@@ -10,27 +12,24 @@ $(document).ready(() => {
 			$("#join_error").html("<center><p>ERROR: Please enter a username before you join a game!</p></center>");
 			document.getElementById("join_error").style.color = "red";
 		} else {
-			create_name($username_join);
+			create_name($username_join.val());
+			
+			enter_lobby();
 		}
 		
 	});
 	
 	$("#create_game").click(event => {
-		
-		console.log("create"); 
-		
 		const $username_create = $("#username_create");
 		
 		if($username_create.val() === "") {
 			$("#create_error").html("<center><p>ERROR: Please enter a username in order to create a game!</p></center>");
 			document.getElementById("create_error").style.color = "red";
 		} else {
-
-//			const $players = $("input[name=players]:checked");
-//
-//			console.log($players.val())
-
-			create_name($username_create);
+			
+			create_name($username_create.val());
+			create_lobby();
+			enter_lobby();
 		}
 		
 	});

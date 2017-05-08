@@ -13,8 +13,8 @@
     background: #eeeeee; border: solid black 1px; border-width: 1px 0 0 2px; z-index: 1;}
   button {padding:5px; margin:5px; background:#eeeeee; font-size:14px; width:130px; height:40px;}
   </style>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script src="js/jquery-3.1.1.js"></script>
+  <script src="js/jquery-3.1.1.js"></script>
+  <script src="js/jquery-ui.js"></script>
   <script src="js/websocket.js"></script>
   <script src="js/begin_game.js"></script>
   <script src="js/all_functions.js"></script>
@@ -29,18 +29,11 @@
 		<div class="option">
 			<center><p><h2>Create a game:</h2>
 			
-			  <p>Fill out and submit the following form to create a game:</p>
+			  <p>Give yourself a username to create a game:</p>
 			  
 			  <div id="create_error" class="message"></div>
 			  
 			  <p>Username: <input type="text" id="username_create" name="name" placeholder="Enter Your Username"></p>
-			  
-			  </p><form>
-				  <input type="radio" name="players" value="3" checked> 3 players
-				  <input type="radio" name="players" value="4"> 4 players
-				  <input type="radio" name="players" value="5"> 5 players
-				  <input type="radio" name="players" value="6"> 6 players
-			  </form><p>
 			  
 			  <button type="button" id="create_game">Create Game</button></center>
 		</div>
@@ -48,17 +41,25 @@
 		<div class="option">
 			<center><p><h2>Join a lobby:</h2></p>
 			
-			<p>Fill out your username and select a lobby in order to join a game:</p>
+			<p>Give yourself a username and select a lobby to join a game:</p>
 			
 			<div id="join_error" class="message"></div>
 			
 			<p>Username: <input type="text" id="username_join" name="name" placeholder="Enter Your Username"></p>
 
-			<p>Game "X": 4/6 players ready.</p>
-			
-			<p>Game "Y": 2/3 players ready.</p>
-			
-			<p>Game "Z": 5/6 players ready.</p>
+			<div id="lobbies" class="lobby_list"></div>
+        
+	        <style type="text/css">
+	        .lobby_list{
+	          overflow-y:auto;
+	          height:200px;
+	          margin:5px;
+	          margin-left:15px;
+	          margin-right:15px;
+			  border-style:solid;
+			  border-width:2px;
+	          background-color:#eeeeee;}
+	        </style>
 			
 			<button type="button" id="join_game">Join Lobby</button></center>
 		</div>
