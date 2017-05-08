@@ -12,9 +12,14 @@ $(document).ready(() => {
 			$("#join_error").html("<center><p>ERROR: Please enter a username before you join a game!</p></center>");
 			document.getElementById("join_error").style.color = "red";
 		} else {
-			create_name($username_join.val());
-			
-			enter_lobby();
+			if(current_lobby_name != "") {
+				create_name($username_join.val());
+				display_lobby();
+				join_lobby();
+			} else {
+				$("#join_error").html("<center><p>ERROR: Please select a lobby before you join a game!</p></center>");
+				document.getElementById("join_error").style.color = "red";
+			}
 		}
 		
 	});
@@ -29,9 +34,25 @@ $(document).ready(() => {
 			
 			create_name($username_create.val());
 			create_lobby();
-			enter_lobby();
+			display_lobby();
 		}
 		
 	});
 
 });
+
+function display_lobby() {
+	
+	console.log("entering lobby");
+	
+	$("#temp_lobby").html("");
+	
+	var lobby_text = "";
+	
+	lobby_text += "<div class=\"option\" style=\"width:100%\">";
+	lobby_text += "<center><h2>You've entered the lobby of " + current_lobby_name + "</h2></center>";
+	lobby_text += "<center><div id=\"members\"></div></center>";
+	lobby_text += "</div>";
+	
+	$("#temp_lobby").html(lobby_text);
+}

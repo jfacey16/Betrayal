@@ -267,7 +267,11 @@ public class GameWebSocket {
     for(Session sess : lobbyMembers) {
       String memId = sessionToId.get(sess);
       members.add(idToName.get(memId));
+      
+      System.out.println(idToName.get(memId));
     }
+    
+    System.out.println("in updateLobby");
 
     JsonObject memberUpdate =  new JsonObject();
     memberUpdate.addProperty("type", MESSAGE_TYPE.UPDATELOBBY.ordinal());

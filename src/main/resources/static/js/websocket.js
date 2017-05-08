@@ -16,7 +16,7 @@ const MESSAGE_TYPE = {
 let conn;
 let userId;
 let username;
-let current_lobby_name;
+let current_lobby_name = "";
 
 $(document).ready(() => {
 	setup_betrayal();
@@ -40,6 +40,9 @@ const setup_betrayal = () => {
 				break;
 			case MESSAGE_TYPE.UPDATELOBBIES:
 				update_lobbies(data);
+				break;
+			case MESSAGE_TYPE.UPDATELOBBY:
+				update_lobby(data);
 				break;
 		
 		
@@ -73,6 +76,8 @@ const create_lobby = () => {
 			lobbyName : username + "'s Game",
 		}
 	}
+	
+	current_lobby_name = username + "'s Game";
 
 	const json = JSON.stringify(message);
 	conn.send(json);
@@ -104,5 +109,41 @@ function update_lobbies(data) {
 	});
 }
 
+function update_lobby(data) {
+	
+	console.log("in update lobby");
+	
+	const members = JSON.parse(data.members);
+	
+	if(!game_started) {
+		console.log(members);
+	}
+	
+	var member_text = "<p><p>Current Lobby Members:</p>";
+	
+	for(index in members) {
+		var count = parseInt(index) + 1;
+		member_text += "<p>" + count + ". " + members[index] + "</p>";
+	}
+	
+	member_text += "</p>";
+	
+	$("#members").html(member_text);
+}
 
+function join_lobby() {
+	
+	console.log("join"); 
+	var message = {
+		type: MESSAGE_TYPE.JOINLOBBY,
+		payload: {
+			id : userId,
+			lobbyName : current_lobby_name,
+		}
+	}
+
+	const json = JSON.stringify(message);
+	conn.send(json);
+	
+}
 
