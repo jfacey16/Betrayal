@@ -228,4 +228,8 @@ public interface GameChar {
   Map<String, Item> getItems();
 
   Map<String, Omen> getOmens();
+
+  boolean getTraitor();
+
+  void setTraitor(boolean traitor);
 }

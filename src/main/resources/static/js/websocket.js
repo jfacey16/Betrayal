@@ -54,7 +54,11 @@ const setup_betrayal = () => {
 				draw_map(data);
 				break;
 			case MESSAGE_TYPE.GAMEMOVE:
-				responseJSON = data;
+				const pay = JSON.parse(data.payload);
+				if (pay.phase === 1) {
+					receiveTile(pay);
+				} else if (pay.phase === 0)
+					actualMovement(data);
 				update_turn(data.currentTurn);
 				break;
 			case MESSAGE_TYPE.CHATUPDATE:

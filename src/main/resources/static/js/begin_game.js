@@ -221,6 +221,7 @@ function set_starting_state(data) {
 	
 	allow_mouseover();
 	allow_chat();
+	allowkeys = true;
 
 	current_char--;
 	current_turn--;

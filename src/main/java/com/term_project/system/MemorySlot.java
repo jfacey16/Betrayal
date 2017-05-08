@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Map.Entry;
+import java.util.Queue;
 
 import com.term_project.builders.EventsBuilder;
 import com.term_project.builders.ItemsBuilder;
 import com.term_project.builders.OmensBuilder;
 import com.term_project.builders.TileBuilder;
+import com.term_project.character.CharBean;
 import com.term_project.character.GameChar;
 import com.term_project.events.Event;
 import com.term_project.game.GameState;
 import com.term_project.house.Pos;
 import com.term_project.house.Tile;
+import com.term_project.house.TileBean;
 import com.term_project.items.Item;
 import com.term_project.omens.Omen;
-import com.term_project.character.CharBean;
-import com.term_project.house.TileBean;
 
 /**
  * This is a class that will be used to hold a peice of information. It is used
@@ -38,6 +38,7 @@ public final class MemorySlot {
   private Queue<Event> events;
   private Queue<Tile> tiles;
   private Map<Pos, Tile> tileMap;
+  private List<Tile> tileList;
   private GameState gameState;
   private List<GameChar> gameCharacters;
 
@@ -58,6 +59,7 @@ public final class MemorySlot {
     omens = new OmensBuilder().build();
     events = new EventsBuilder().build();
     tiles = new TileBuilder(this).build();
+    tileList = new ArrayList<>();
   }
 
   /**
@@ -293,7 +295,7 @@ public final class MemorySlot {
    */
   public List<TileBean> getTileBeans() {
     List<TileBean> tb = new ArrayList<>();
-    for (Entry<Pos, Tile> e: tileMap.entrySet()) {
+    for (Entry<Pos, Tile> e : tileMap.entrySet()) {
       tb.add(e.getValue().getBean());
     }
     return tb;
@@ -324,9 +326,13 @@ public final class MemorySlot {
    */
   public List<CharBean> getCharBeans() {
     List<CharBean> cb = new ArrayList<>();
-    for (GameChar gc: gameCharacters) {
+    for (GameChar gc : gameCharacters) {
       cb.add(gc.getCharBean());
     }
     return cb;
+  }
+
+  public List<Tile> getTileList() {
+    return tileList;
   }
 }

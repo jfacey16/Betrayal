@@ -1,5 +1,7 @@
 package com.term_project.character;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,188 +18,221 @@ public class Cultist implements GameChar {
   private Tile currentTile;
   private Map<String, Item> items;
   private Map<String, Omen> omens;
+  private List<Integer> mightScale;
+  private List<Integer> speedScale;
+  private List<Integer> knowledgeScale;
+  private List<Integer> sanityScale;
+  private boolean traitor;
 
   public Cultist() {
+    might = 4;
+    speed = 4;
+    knowledge = 0;
+    sanity = 4;
 
+    currentTile = null;
+    items = new HashMap<>();
+    omens = new HashMap<>();
+    mightScale = new ArrayList<>();
+    speedScale = new ArrayList<>();
+    knowledgeScale = new ArrayList<>();
+    sanityScale = new ArrayList<>();
+    traitor = false;
   }
 
   @Override
   public String getName() {
-    // TODO Auto-generated method stub
-    return null;
+    return "Cultist";
   }
 
   @Override
   public String getDescription() {
-    // TODO Auto-generated method stub
-    return null;
+    return "A cultist";
   }
 
   @Override
   public Tile getTile() {
-    // TODO Auto-generated method stub
-    return null;
+    return currentTile;
   }
 
   @Override
-  public Item getItem(String item) {
-    // TODO Auto-generated method stub
-    return null;
+  public Item getItem(String itemName) {
+    return items.get(itemName);
   }
 
   @Override
-  public Omen getOmen(String omen) {
-    // TODO Auto-generated method stub
-    return null;
+  public Omen getOmen(String omenName) {
+    return omens.get(omenName);
   }
 
   @Override
   public int getMight() {
-    // TODO Auto-generated method stub
-    return 0;
+    return might;
   }
 
   @Override
   public int getSpeed() {
-    // TODO Auto-generated method stub
-    return 0;
+    return speed;
   }
 
   @Override
   public int getKnowlege() {
-    // TODO Auto-generated method stub
-    return 0;
+    return knowledge;
   }
 
   @Override
   public int getSanity() {
-    // TODO Auto-generated method stub
-    return 0;
+    return sanity;
   }
 
   @Override
   public void setMight(int might) {
-    // TODO Auto-generated method stub
-
+    this.might = might;
   }
 
   @Override
   public void setSpeed(int speed) {
-    // TODO Auto-generated method stub
-
+    this.speed = speed;
   }
 
   @Override
   public void setKnowlege(int knowledge) {
-    // TODO Auto-generated method stub
-
+    this.knowledge = knowledge;
   }
 
   @Override
   public void setSanity(int sanity) {
-    // TODO Auto-generated method stub
-
+    this.sanity = sanity;
   }
 
   @Override
   public void setTile(Tile newTile) {
-    // TODO Auto-generated method stub
-
+    this.currentTile = newTile;
   }
 
   @Override
   public int modMight(int mightModifier) {
-    // TODO Auto-generated method stub
-    return 0;
+    return this.might = this.might + mightModifier;
   }
 
   @Override
   public int modSpeed(int speedModifier) {
-    // TODO Auto-generated method stub
-    return 0;
+    return this.speed = this.speed + speedModifier;
   }
 
   @Override
   public int modKnowlege(int knowledgeModifier) {
-    // TODO Auto-generated method stub
-    return 0;
+    return this.knowledge = this.knowledge + knowledgeModifier;
   }
 
   @Override
   public int modSanity(int sanityModifier) {
-    // TODO Auto-generated method stub
-    return 0;
+    return this.sanity = this.sanity + sanityModifier;
   }
 
   @Override
   public void addItem(Item item) {
-    // TODO Auto-generated method stub
-
+    items.put(item.getName(), item);
   }
 
   @Override
   public void addOmen(Omen omen) {
-    // TODO Auto-generated method stub
-
+    omens.put(omen.getName(), omen);
   }
 
   @Override
   public void removeItem(Item item) {
-    // TODO Auto-generated method stub
-
+    items.remove(item);
   }
 
   @Override
   public void removeOmen(Omen omen) {
-    // TODO Auto-generated method stub
-
+    omens.remove(omen);
   }
 
   @Override
   public void setMightScale(List<Integer> mightScale) {
-    // TODO Auto-generated method stub
-
+    this.mightScale = mightScale;
   }
 
   @Override
   public void setSpeedScale(List<Integer> speedScale) {
-    // TODO Auto-generated method stub
-
+    this.speedScale = speedScale;
   }
 
   @Override
   public void setKnowledgeScale(List<Integer> knowledgeScale) {
-    // TODO Auto-generated method stub
-
+    this.knowledgeScale = knowledgeScale;
   }
 
   @Override
   public void setSanityScale(List<Integer> sanityScale) {
-    // TODO Auto-generated method stub
-
+    this.sanityScale = sanityScale;
   }
 
   @Override
   public int getStatByName(String name) {
-    // TODO Auto-generated method stub
-    return 0;
+    switch (name) {
+    case "MIGHT":
+      return getMight();
+
+    case "SPEED":
+      return getSpeed();
+
+    case "SANITY":
+      return getSanity();
+
+    case "KNOWLEDGE":
+      return getKnowlege();
+
+    default:
+      throw new NullPointerException(
+          "Given stat " + name + " doesn't exist.");
+    }
   }
 
   @Override
   public CharBean getCharBean() {
-    // TODO Auto-generated method stub
-    return null;
+    return new CharBean(getName(), might, speed, knowledge, sanity,
+        mightScale, speedScale, knowledgeScale, sanityScale,
+        currentTile.getBean(), new ArrayList(items.values()),
+        new ArrayList(omens.values()));
   }
 
   @Override
   public Map<String, Item> getItems() {
-    // TODO Auto-generated method stub
-    return null;
+    return items;
   }
 
   @Override
   public Map<String, Omen> getOmens() {
-    // TODO Auto-generated method stub
-    return null;
+    return omens;
+  }
+
+  @Override
+  public boolean getTraitor() {
+    return traitor;
+  }
+
+  @Override
+  public void setTraitor(boolean traitor) {
+    this.traitor = traitor;
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    // TODO: all cultists will be same, may be problem
+    if (object == this)
+      return true;
+    if (!(object instanceof Cultist)) {
+      return false;
+    }
+
+    return this.getName().equals(((Cultist) object).getName());
+  }
+
+  @Override
+  public int hashCode() {
+    return this.getName().hashCode();
   }
 }

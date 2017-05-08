@@ -63,5 +63,4 @@ public class Axe implements Item {
   public int hashCode() {
     return this.getName().hashCode();
   }
-
 }

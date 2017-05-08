@@ -1,6 +1,5 @@
 package com.term_project.house;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,18 +22,19 @@ public abstract class AbstractTile implements Tile {
   private int itemCount;
   private int omenCount;
   private int eventCount;
-  private List<Item> items;
-  private List<Omen> omens;
+  private Map<String, Item> items;
+  private Map<String, Omen> omens;
   private Map<String, Event> events;
   private List<Floor> availableFloors;
   private MemorySlot memory;
   private String name;
 
   public AbstractTile(List<Direction> availableDoors, int items,
-      int events, int omens, List<Floor> availableFloors, MemorySlot memory) {
+      int events, int omens, List<Floor> availableFloors,
+      MemorySlot memory) {
 
-    this.items = new ArrayList<>();
-    this.omens = new ArrayList<>();
+    this.items = new HashMap<>();
+    this.omens = new HashMap<>();
     this.events = new HashMap<>();
 
     this.itemCount = items;
@@ -60,12 +60,12 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public List<Omen> getOmens() {
+  public Map<String, Omen> getOmens() {
     return omens;
   }
 
   @Override
-  public List<Item> getItems() {
+  public Map<String, Item> getItems() {
     return items;
   }
 
@@ -80,7 +80,7 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public void setItems(List<Item> items) {
+  public void setItems(Map<String, Item> items) {
     this.items = items;
   }
 
@@ -90,7 +90,7 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public void setOmens(List<Omen> omens) {
+  public void setOmens(Map<String, Omen> omens) {
     this.omens = omens;
   }
 
@@ -116,7 +116,7 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public Tile getNorth() throws NullPointerException {
-    if(!this.hasNorth()) {
+    if (!this.hasNorth()) {
       throw new NullPointerException(
           "There is no door/tile to the north.");
     }
@@ -126,7 +126,7 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public Tile getSouth() throws NullPointerException {
-    if(!hasSouth()) {
+    if (!hasSouth()) {
       throw new NullPointerException(
           "There is no door/tile to the south.");
     }
@@ -136,7 +136,7 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public Tile getEast() throws NullPointerException {
-    if(!hasEast()) {
+    if (!hasEast()) {
       throw new NullPointerException(
           "There is no door/tile to the south.");
     }
@@ -146,7 +146,7 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public Tile getWest() throws NullPointerException {
-    if(!hasWest()) {
+    if (!hasWest()) {
       throw new NullPointerException(
           "There is no door/tile to the south.");
     }
@@ -156,9 +156,8 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public Tile getUp() throws NullPointerException {
-    if(!hasUp()) {
-      throw new NullPointerException(
-          "There is no door/tile to above.");
+    if (!hasUp()) {
+      throw new NullPointerException("There is no door/tile to above.");
     }
     Tile up = memory.getTileMap().get(doors.get(Direction.UP));
     return up;
@@ -166,9 +165,8 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public Tile getDown() throws NullPointerException {
-    if(!hasDown()) {
-      throw new NullPointerException(
-          "There is no door/tile below.");
+    if (!hasDown()) {
+      throw new NullPointerException("There is no door/tile below.");
     }
     Tile down = memory.getTileMap().get(doors.get(Direction.DOWN));
     return down;
@@ -199,47 +197,56 @@ public abstract class AbstractTile implements Tile {
     return availableDoors.contains(Direction.DOWN);
   }
 
-
   @Override
   public boolean hasUp() {
     return availableDoors.contains(Direction.UP);
   }
 
-
   @Override
   public void addNorth() {
     assert(hasNorth());
-    doors.put(Direction.NORTH, new Pos(pos.getX(), pos.getY() - 1, pos.getFloor()));
+
+    doors.put(Direction.NORTH,
+        new Pos(pos.getX(), pos.getY() - 1, pos.getFloor()));
+
   }
 
   @Override
   public void addSouth() {
     assert(hasSouth());
-    doors.put(Direction.SOUTH, new Pos(pos.getX(), pos.getY() + 1, pos.getFloor()));
+
+    doors.put(Direction.SOUTH,
+        new Pos(pos.getX(), pos.getY() + 1, pos.getFloor()));
   }
 
   @Override
   public void addEast() {
     assert(hasEast());
-    doors.put(Direction.EAST, new Pos(pos.getX() + 1, pos.getY(), pos.getFloor()));
+
+    doors.put(Direction.EAST,
+        new Pos(pos.getX() + 1, pos.getY(), pos.getFloor()));
+
   }
 
   @Override
   public void addWest() {
     assert(hasWest());
-    doors.put(Direction.WEST, new Pos(pos.getX() - 1, pos.getY(), pos.getFloor()));
+    doors.put(Direction.WEST,
+        new Pos(pos.getX() - 1, pos.getY(), pos.getFloor()));
   }
 
-  @Override 
+  @Override
   public void addUp() {
     assert(hasUp());
-    doors.put(Direction.UP, new Pos(pos.getX() - 2, pos.getY(), Floor.ATTIC));
+    doors.put(Direction.UP,
+        new Pos(pos.getX() - 2, pos.getY(), Floor.ATTIC));
   }
 
-  @Override 
+  @Override
   public void addDown() {
     assert(hasDown());
-    doors.put(Direction.DOWN, new Pos(pos.getX() + 2, pos.getY(), Floor.GROUND));
+    doors.put(Direction.DOWN,
+        new Pos(pos.getX() + 2, pos.getY(), Floor.GROUND));
   }
 
   @Override
@@ -261,8 +268,7 @@ public abstract class AbstractTile implements Tile {
 
     // make east value the northern value
     holderOne = doors.get(Direction.EAST);
-    doors.put(Direction.EAST,
-        doors.get(Direction.NORTH));
+    doors.put(Direction.EAST, doors.get(Direction.NORTH));
 
     // make south value the eastern value
     holderTwo = doors.get(Direction.SOUTH);
@@ -277,24 +283,24 @@ public abstract class AbstractTile implements Tile {
     // int rem = availableDoors.size();
 
     // if (availableDoors.contains(Direction.NORTH) && rem > 0) {
-    //   availableDoors.remove(Direction.NORTH);
-    //   availableDoors.add(Direction.EAST);
-    //   rem--;
+    // availableDoors.remove(Direction.NORTH);
+    // availableDoors.add(Direction.EAST);
+    // rem--;
     // }
     // if (availableDoors.contains(Direction.EAST) && rem > 0) {
-    //   availableDoors.remove(Direction.EAST);
-    //   availableDoors.add(Direction.SOUTH);
-    //   rem--;
+    // availableDoors.remove(Direction.EAST);
+    // availableDoors.add(Direction.SOUTH);
+    // rem--;
     // }
     // if (availableDoors.contains(Direction.SOUTH) && rem > 0) {
-    //   availableDoors.remove(Direction.SOUTH);
-    //   availableDoors.add(Direction.WEST);
-    //   rem--;
-    // } 
+    // availableDoors.remove(Direction.SOUTH);
+    // availableDoors.add(Direction.WEST);
+    // rem--;
+    // }
     // if (availableDoors.contains(Direction.WEST) && rem > 0) {
-    //   availableDoors.remove(Direction.WEST);
-    //   availableDoors.add(Direction.NORTH);
-    //   rem--;
+    // availableDoors.remove(Direction.WEST);
+    // availableDoors.add(Direction.NORTH);
+    // rem--;
     // }
     int rem = 0;
     int av = availableDoors.size();
@@ -303,31 +309,31 @@ public abstract class AbstractTile implements Tile {
         rem++;
         if (rem == av) {
           availableDoors.clear();
-          if (av == 3) 
+          if (av == 3)
             availableDoors.add(Direction.WEST);
           availableDoors.add(Direction.EAST);
           availableDoors.add(Direction.NORTH);
           break;
         }
-      } else 
+      } else
         rem = 0;
       if (availableDoors.contains(Direction.EAST)) {
         rem++;
         if (rem == av) {
           availableDoors.clear();
-          if (av == 3) 
+          if (av == 3)
             availableDoors.add(Direction.NORTH);
           availableDoors.add(Direction.SOUTH);
           availableDoors.add(Direction.EAST);
           break;
         }
-      } else 
+      } else
         rem = 0;
       if (availableDoors.contains(Direction.SOUTH)) {
         rem++;
         if (rem == av) {
           availableDoors.clear();
-          if (av == 3) 
+          if (av == 3)
             availableDoors.add(Direction.EAST);
           availableDoors.add(Direction.WEST);
           availableDoors.add(Direction.SOUTH);
@@ -339,13 +345,13 @@ public abstract class AbstractTile implements Tile {
         rem++;
         if (rem == av) {
           availableDoors.clear();
-          if (av == 3) 
+          if (av == 3)
             availableDoors.add(Direction.SOUTH);
           availableDoors.add(Direction.NORTH);
           availableDoors.add(Direction.WEST);
           break;
         }
-      } else 
+      } else
         rem = 0;
     }
   }
@@ -358,8 +364,7 @@ public abstract class AbstractTile implements Tile {
 
     // make east value the southern value
     holderOne = doors.get(Direction.EAST);
-    doors.put(Direction.EAST,
-        doors.get(Direction.SOUTH));
+    doors.put(Direction.EAST, doors.get(Direction.SOUTH));
 
     // make north value the eastern value
     holderTwo = doors.get(Direction.NORTH);
@@ -375,12 +380,12 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public void addItem(Item item) {
-    items.add(item);
+    items.put(item.getName(), item);
   }
 
   @Override
   public void addOmen(Omen omen) {
-    omens.add(omen);
+    omens.put(omen.getName(), omen);
   }
 
   @Override
@@ -400,7 +405,28 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public TileBean getBean(){
-    return new TileBean(availableDoors, itemCount, eventCount , omenCount, pos, name);
+  public TileBean getBean() {
+    return new TileBean(availableDoors, itemCount, eventCount, omenCount,
+        pos, name);
+  }
+
+  @Override
+  public Item getItem(String item) {
+    return items.get(item);
+  }
+
+  @Override
+  public Omen getOmen(String omen) {
+    return omens.get(omen);
+  }
+
+  @Override
+  public Item removeItem(Item item) {
+    return items.remove(item.getName());
+  }
+
+  @Override
+  public Omen removeOmen(Omen omen) {
+    return omens.remove(omen.getName());
   }
 }
