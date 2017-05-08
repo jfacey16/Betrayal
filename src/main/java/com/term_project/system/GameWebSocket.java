@@ -88,6 +88,8 @@ public class GameWebSocket {
       if(sessionsToUpdate.size() == 0) {
         lobbyToSessions.remove(lobby);
         availableLobbies.remove(lobby);
+      } else {
+        updateLobby(sessionsToUpdate);
       }
 
       //if the lobby was actually a game throw errors to all members
@@ -254,6 +256,7 @@ public class GameWebSocket {
   //message all members in given lobby who is in it
   private synchronized void updateLobby(Queue<Session> lobbyMembers) throws IOException {
     List<String> members = new ArrayList<>();
+    //loops through members
     for(Session sess : lobbyMembers) {
       String memId = sessionToId.get(sess);
       members.add(idToName.get(memId));
