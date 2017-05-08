@@ -304,7 +304,9 @@
     
     <div class="board">
     
-    <div id="item" class="card">
+    <div id="item" class="card" draggable="true">
+    
+      <center><div id="item_info"></div></center>
     
       <center><div id="item_name" class="card_name"></div></center>
   
@@ -314,7 +316,9 @@
 	    
 	</div>
 
-	<div id="omen" class="card">
+	<div id="omen" class="card" draggable="true">
+    
+        <center><div id="omen_info"></div></center>
 	    
 	    <center><div id="omen_name" class="card_name"></div></center>
 	  
@@ -324,7 +328,9 @@
 	    
 	</div>
 	
-	<div id="event" class="card">
+	<div id="event" class="card" draggable="true">
+    
+        <center><div id="event_info"></div></center>
 	    
 	    <center><div id="event_name" class="card_name"></div></center>
 	  
@@ -357,8 +363,8 @@
       display:flex; 
       flex-direction:column;
     position:absolute;
-    top:35%;
-    left:37%;
+    top:30%;
+    left:18%;
     float:left;
     z-index:20;
     height:350px;

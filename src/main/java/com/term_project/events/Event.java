@@ -34,7 +34,7 @@ public interface Event {
    * @return The way the event functions
    *
    */
-  String getFunction();
+  String getLogic();
 
   /**
    * Return's the usable stats for this event.

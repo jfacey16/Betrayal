@@ -207,10 +207,23 @@
                     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
                     ctx.strokeRect(positions[turn].posx, positions[turn].posy - T + D, X, D);
                     $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
-                      console.log(rj2);
+                    	
+                    	const responseObj = JSON.parse(rj2);
+                        console.log(responseObj);
                       
-                      //add check fror event/item/omen
-                      
+                        //add check fror event/item/omen
+                        
+                        if(responseObj.item.length >= 1) {
+                        	itemDrawn(responseObj.item[0].name, responseObj.item[0].description, "", responseObj.newTile.name);
+                        }
+                        
+                        if(responseObj.omen.length >= 1) {
+                        	omenDrawn(responseObj.omen[0].name, responseObj.omen[0].description, "", responseObj.newTile.name);
+                        }
+                        
+                        if(responseObj.event.length >= 1) {
+                        	eventDrawn(responseObj.event[0].name, responseObj.event[0].description, "", responseObj.newTile.name);
+                        }
                       
                     });
                     positions[turn].north = true;
@@ -241,10 +254,23 @@
                       ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - T, D, X);
                       ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
                       $.post("/requestTile", {name: "move", rotations: "0"}, rj2 => {
-                        console.log(rj2);
+                      	
+                      	const responseObj = JSON.parse(rj2);
+                          console.log(responseObj);
                         
-                        //add check fror event/item/omen
-                        
+                          //add check fror event/item/omen
+                              
+                          if(responseObj.item.length >= 1) {
+                          	itemDrawn(responseObj.item[0].name, responseObj.item[0].description, "", responseObj.newTile.name);
+                          }
+                          
+                          if(responseObj.omen.length >= 1) {
+                          	omenDrawn(responseObj.omen[0].name, responseObj.omen[0].description, "", responseObj.newTile.name);
+                          }
+                          
+                          if(responseObj.event.length >= 1) {
+                          	eventDrawn(responseObj.event[0].name, responseObj.event[0].description, "", responseObj.newTile.name);
+                          }
                         
                       });
                       positions[turn].north = true;
@@ -269,10 +295,23 @@
                   } else if (responseObject.newtile.availableDoors.length == 1) {
                     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
                     $.post("/requestTile", {name: "move", rotations: "2"}, rj2 => {
-                      console.log(rj2);
+                    	
+                    	const responseObj = JSON.parse(rj2);
+                        console.log(responseObj);
                       
-                      //add check fror event/item/omen
-                      
+                        //add check fror event/item/omen
+                        
+                        if(responseObj.item.length >= 1) {
+                        	itemDrawn(responseObj.item[0].name, responseObj.item[0].description, "", responseObj.newTile.name);
+                        }
+                        
+                        if(responseObj.omen.length >= 1) {
+                        	omenDrawn(responseObj.omen[0].name, responseObj.omen[0].description, "", responseObj.newTile.name);
+                        }
+                        
+                        if(responseObj.event.length >= 1) {
+                        	eventDrawn(responseObj.event[0].name, responseObj.event[0].description, "", responseObj.newTile.name);
+                        }
                       
                     });
                     positions[turn].north = false;

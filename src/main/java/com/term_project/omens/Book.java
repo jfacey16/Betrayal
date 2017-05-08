@@ -8,12 +8,12 @@ public class Book implements Omen {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Book() {
     name = "Book";
     description = "A diary or lab notes? Ancient script or modern ravings?";
-    function = "Gain 2 Knowledge now.\nLose 2 Knowledge if you lose the Book.";
+    logic = "Gain 2 Knowledge now.\nLose 2 Knowledge if you lose the Book.";
   }
 
   @Override
@@ -22,8 +22,8 @@ public class Book implements Omen {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

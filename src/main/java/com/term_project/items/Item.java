@@ -24,7 +24,7 @@ public interface Item {
    * @return The way the item functions
    *
    */
-  String getFunction();
+  String getLogic();
 
   /**
    * Return's the name of the item.

@@ -32,7 +32,7 @@ public interface Omen {
    * @return The way the omen functions
    *
    */
-  String getFunction();
+  String getLogic();
 
   /**
    * Called on the pickup of an omen, producing the effect of the omen

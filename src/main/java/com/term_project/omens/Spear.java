@@ -8,12 +8,12 @@ public class Spear implements Omen {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Spear() {
     name = "Spear";
     description = "A weapon pulsing with power.";
-    function = "You roll 2 additional dice (maximum of 8 dice) when making a Might attack with this weapon.";
+    logic = "You roll 2 additional dice (maximum of 8 dice) when making a Might attack with this weapon.";
   }
 
   @Override
@@ -27,8 +27,8 @@ public class Spear implements Omen {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

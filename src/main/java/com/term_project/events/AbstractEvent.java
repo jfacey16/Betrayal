@@ -9,14 +9,14 @@ import com.term_project.game.Stats;
 public abstract class AbstractEvent implements Event {
   private String name;
   private String description;
-  private String function;
+  private String logic;
   private List<Stats> usable;
 
-  public AbstractEvent(String name, String description, String function,
+  public AbstractEvent(String name, String description, String logic,
       List<Stats> usable) {
     this.name = name;
     this.description = description;
-    this.function = function;
+    this.logic = logic;
     this.usable = usable;
   }
 
@@ -31,8 +31,8 @@ public abstract class AbstractEvent implements Event {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

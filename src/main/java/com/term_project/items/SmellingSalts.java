@@ -8,12 +8,12 @@ public class SmellingSalts implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public SmellingSalts() {
     name = "Smelling Salts";
     description = "Whew, that's a lungful.";
-    function = "If your Knowledge value is below 3, raise the value by 1";
+    logic = "If your Knowledge value is below 3, raise the value by 1";
   }
 
   @Override
@@ -22,8 +22,8 @@ public class SmellingSalts implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override
