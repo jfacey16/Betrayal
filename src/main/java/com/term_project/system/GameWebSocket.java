@@ -163,6 +163,9 @@ public class GameWebSocket {
       case GAMEMOVE: //game actions
         gameMove(received, session);
         break;
+      case CHOOSECHARACTER:
+        chooseCharacter(received, session);
+        break;
       default:
         assert false;
         System.out.println("ERROR: Type does not exists - " + Integer.toString(type));
@@ -275,10 +278,10 @@ public class GameWebSocket {
     for(Session sess : lobbyMembers) {
       String memId = sessionToId.get(sess);
       members.add(idToName.get(memId));
-      
+
       System.out.println(idToName.get(memId));
     }
-    
+
     System.out.println("in updateLobby");
 
     JsonObject memberUpdate =  new JsonObject();
