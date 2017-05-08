@@ -51,7 +51,7 @@ public class GameWebSocket {
     STARTGAME,
     GAMEMOVE,
     CHOOSECHARACTER,
-    GAMERADY,
+    GAMEREADY,
     ERROR
   }
 
@@ -370,7 +370,7 @@ public class GameWebSocket {
       Map<String, Object> init = game.buildMap(null);
 
       JsonObject update =  new JsonObject();
-      update.addProperty("type", MESSAGE_TYPE.GAMERADY.ordinal());
+      update.addProperty("type", MESSAGE_TYPE.GAMEREADY.ordinal());
       update.addProperty("turnOrder", GSON.toJson(nameTurnOrder));
       update.addProperty("currentTurn", game.getCurrentTurn());
       update.addProperty("payload", GSON.toJson(init));
