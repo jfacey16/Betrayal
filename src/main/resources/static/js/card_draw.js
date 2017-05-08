@@ -8,40 +8,45 @@ $(document).ready(() => {
 	$omen_window = $("#omen");
 	$event_window = $("#event");
 	
+	$('#item').draggable();
+	$('#omen').draggable();
+	$('#event').draggable();
+	
 	$item_window.hide();
 	$omen_window.hide();
 	$event_window.hide();
 
-    $(document).keypress(function(e) {
-        
-        if(e.which == 49) {
-            itemDrawn();
-        }
-        
-        if(e.which == 50) {
-            omenDrawn();
-        }
-        
-        if(e.which == 51) {
-            eventDrawn();
-        }
-    });
+//    $(document).keypress(function(e) {
+//        
+//        if(e.which == 49) {
+//            itemDrawn();
+//        }
+//        
+//        if(e.which == 50) {
+//            omenDrawn();
+//        }
+//        
+//        if(e.which == 51) {
+//            eventDrawn();
+//        }
+//    });
 });
 
-const itemDrawn = () => {
+function itemDrawn(name, description, func, room_name) {
 	
 	current_char = turn + 1;
 	
-	if(current_char === 1) name = $char_1.name;
-	if(current_char === 2) name = $char_2.name;
-	if(current_char === 3) name = $char_3.name;
-	if(current_char === 4) name = $char_4.name;
-	if(current_char === 5) name = $char_5.name;
-	if(current_char === 6) name = $char_6.name;
+	if(current_char === 1) char_name = $char_1.name;
+	if(current_char === 2) char_name = $char_2.name;
+	if(current_char === 3) char_name = $char_3.name;
+	if(current_char === 4) char_name = $char_4.name;
+	if(current_char === 5) char_name = $char_5.name;
+	if(current_char === 6) char_name = $char_6.name;
 
 	$item_window.show();
-	$("#item_name").html("NAME");
-	$("#item_description").html(name + " found an item! [ADD DESCRIPTION]");
+	$("#item_info").html(char_name + " has found an item in the " + room_name + ".");
+	$("#item_name").html(name);
+	$("#item_description").html(description);
 	
 	$("#end_turn").unbind().click(event => {
 
@@ -53,13 +58,21 @@ const itemDrawn = () => {
 	
 }
 
-const omenDrawn = () => {
+function omenDrawn(name, description, func, room_name) {
 	
 	current_char = turn + 1;
 	
+	if(current_char === 1) char_name = $char_1.name;
+	if(current_char === 2) char_name = $char_2.name;
+	if(current_char === 3) char_name = $char_3.name;
+	if(current_char === 4) char_name = $char_4.name;
+	if(current_char === 5) char_name = $char_5.name;
+	if(current_char === 6) char_name = $char_6.name;
+	
 	$omen_window.show();
-	$("#omen_name").html("NAME");
-	$("#omen_description").html("You've got an omen! [ADD DESCRIPTION]");
+	$("#omen_info").html(char_name + " has found an omen in the " + room_name + ".");
+	$("#omen_name").html(name);
+	$("#omen_description").html(description);
 	
 	$("#roll_haunt").unbind().click(event => {
 
@@ -71,13 +84,21 @@ const omenDrawn = () => {
 	
 }
 
-const eventDrawn = () => {
+function eventDrawn(name, description, func, room_name) {
 	
 	current_char = turn + 1;
 	
+	if(current_char === 1) char_name = $char_1.name;
+	if(current_char === 2) char_name = $char_2.name;
+	if(current_char === 3) char_name = $char_3.name;
+	if(current_char === 4) char_name = $char_4.name;
+	if(current_char === 5) char_name = $char_5.name;
+	if(current_char === 6) char_name = $char_6.name;
+	
 	$event_window.show();
-	$("#event_name").html("NAME");
-	$("#event_description").html("You've got an event! [ADD DESCRIPTION]");
+	$("#event_info").html(char_name + " has encountered an event in the " + room_name + ".");
+	$("#event_name").html(name);
+	$("#event_description").html(description);
 	
 	$("#event_action").unbind().click(event => {
 		

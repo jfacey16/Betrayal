@@ -12,7 +12,7 @@ public class Rock implements Item {
 
   public Rock() {
     name = "Rock";
-    description = "Its a pretty nice rock.";
+    description = "It's a pretty nice rock.";
     function = "Gain 2 Knowledge now.\nLose 2 Knowledge when you lose the Rock.";
   }
 

@@ -434,10 +434,23 @@
     positions[turn].south = rottile.south;
     positions[turn].west = rottile.west;
     $.post("/requestTile", {name: "move", rotations: "" + rot}, rj2 => {
-      console.log(rj2);
+    	
+    	const responseObj = JSON.parse(rj2);
+        console.log(responseObj);
       
-      //add check fror event/item/omen
-      
+        //add check fror event/item/omen
+        
+        if(responseObj.item.length >= 1) {
+        	itemDrawn(responseObj.item[0].name, responseObj.item[0].description, "", responseObj.newTile.name);
+        }
+        
+        if(responseObj.omen.length >= 1) {
+        	omenDrawn(responseObj.omen[0].name, responseObj.omen[0].description, "", responseObj.newTile.name);
+        }
+        
+        if(responseObj.event.length >= 1) {
+        	eventDrawn(responseObj.event[0].name, responseObj.event[0].description, "", responseObj.newTile.name);
+        }
       
     });
     rotation.disabled = true;
