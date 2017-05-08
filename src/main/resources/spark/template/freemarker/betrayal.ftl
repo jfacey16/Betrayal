@@ -13,11 +13,6 @@
     background: #eeeeee; border: solid black 1px; border-width: 1px 0 0 2px; z-index: 1;}
   button {padding:5px; margin:5px; background:#eeeeee; font-size:14px; width:130px; height:40px;}
   </style>
-  
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/html5bp.css">
-  <link rel="stylesheet" href="css/main.css">
-  
   <script src="js/jquery-3.1.1.js"></script>
   <script src="js/jquery-ui.js"></script>
   <script src="js/websocket.js"></script>
@@ -27,6 +22,12 @@
   <script src="js/card_draw.js"></script>
 </head>
 <body>
+
+<style type="text/css">
+	div {
+		font-family:Verdana, Geneva, sans-serif;}
+	</style>
+	
 
 <div class="game">
 
@@ -57,12 +58,70 @@
 			<button type="button" id="join_game">Join Lobby</button></center>
 		</div>
 	</div>
+	
+	<style type="text/css">
+		.option{
+			height:95%;
+			width:50%;
+			margin:10px;
+			border-style:solid;
+			border-width:2px;
+			background-color:#eeeeee;}
+		</style>
+	
+	<style type="text/css">
+        .lobby_list{
+          overflow-y:auto;
+          height:200px;
+          margin:5px;
+          margin-left:15px;
+          margin-right:15px;
+		  border-style:solid;
+		  border-width:2px;
+          background-color:#eeeeee;}
+        </style>
+
+	<style type="text/css">
+    .temp_lobby{
+        display:flex; 
+        flex-direction:row;
+	    position:absolute;
+	    top:10%;
+	    left:10%;
+	    float:left;
+	    z-index:20;
+	    height:500px;
+	    width:1000px;
+        border-style:solid;
+        border-width:2px;
+        margin-bottom:5px;
+        background-color:#ffffff;}
+    </style>
+
 
   <div class="title_row">
     <div class="title">
        <center><font size="5">Betrayal at House on the Hill</font></center>
     </div>
-
+    
+    <style type="text/css">
+    .title{
+      float:left;
+      width:100%;
+      border-style:solid;
+      border-width:2px;
+      margin:5px;
+      background-color:#eeeeee;}
+    </style>
+  </div>
+  
+  <style type="text/css">
+  .title_row{
+    display:flex; 
+    flex-direction:row;
+    height:30%;}
+  </style>
+  
   <div class="player_row">
   
     <div id="player_2" class="player">
@@ -149,6 +208,79 @@
           <div id="items_6" class="items"></div>
         </div>
     </div>
+    
+    <style type="text/css">
+    .icon{
+      width:100%;
+      border-style:solid;
+      border-width:2px;
+      margin-bottom:5px;
+      background-color:#eeeeee;}
+    </style>
+    
+    <style type="text/css">
+    .stats{
+      width:100%;
+      border-style:solid;
+      border-width:2px;
+      background-color:#eeeeee;}
+    </style>
+    
+    <style type="text/css">
+    .popup_stats{
+      z-index: 20;
+      top:184px;
+      display:none;
+      position:absolute;
+      border-style:solid;
+      border-color:#eeeeee;
+      border-width:2px;
+      background-color:#eeeeee;}
+    </style>
+    
+    <style type="text/css">
+    .image{
+      display:flex; 
+      flex-direction:column;
+      margin:5px;
+      background-color:#eeeeee;}
+    </style>
+    
+    <style type="text/css">
+    .info{
+      display:flex; 
+      flex-direction:column;
+      width:100%;
+      border-style:solid;
+      border-width:2px;
+      margin:5px;
+      background-color:#eeeeee;}
+    </style>
+
+    <style type="text/css">
+    .player{
+      display:flex; 
+      flex-direction:row;
+      width:20%;
+      height:20%;
+      border-style:solid;
+      border-width:2px;
+      margin:5px;
+      background-color:#eeeeee;}
+    </style>
+  </div>
+  
+  <style type="text/css">
+  .player_row{
+    border-style:solid;
+    border-width:2px;
+    margin:5px;
+    display:flex; 
+    flex-direction:row;
+    height:100%;1
+    background-color:#707070;}
+  </style>
+  
   
   <div class="main_game">
     <div id="player_1" class="player_1">
