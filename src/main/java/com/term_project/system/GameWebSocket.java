@@ -39,7 +39,7 @@ public class GameWebSocket {
   private static Map<String, Queue<Session>> lobbyToSessions = new ConcurrentHashMap<>();
   private static Map<String, String> idToName = new ConcurrentHashMap<>();
   private static Map<String, GameState> lobbyToGameState = new ConcurrentHashMap<>();
-  private static Map<String, String> usersToCharacters = new ConcurrentHashMap<>();
+  private static List<String[]> usersToCharacters = new ArrayList<>();
 
   private static enum MESSAGE_TYPE {
     CONNECT,
@@ -351,7 +351,7 @@ public class GameWebSocket {
     String id = payload.get("id").getAsString();
     assert id.equals(sessionToId.get(session));
 
-    usersToCharacters.put(id, payload.get("choice").getAsString());
+    usersToCharacters.add(new String[]{idToName.get(id), payload.get("choice").getAsString()});
 
     String lobby = idToLobby.get(id);
     GameState game = lobbyToGameState.get(lobby);

@@ -93,10 +93,6 @@ function update_lobbies(data) {
 	
 	const lobbies = JSON.parse(data.lobbies);
 	
-	if(!game_started) {
-		console.log(lobbies);
-	}
-	
 	var lobby_text = "<p>";
 	
 	for(index in lobbies) {
