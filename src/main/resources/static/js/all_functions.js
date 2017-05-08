@@ -106,104 +106,34 @@ class Tile {
     $( "#mbasement" ).draggable();
   } );
   function endturn() {
- 
-      if (turn >= 5)
-        turn = 0;
-      else
-        turn++;
+	  turn_end();
      
-      if(turn === 0) {
-          moves = $char_1.speedScale[$char_1.speed];
-          movesp.innerHTML = $char_1.speedScale[$char_1.speed];
-          document.getElementById("player_1").style.borderColor = "yellow";
-          document.getElementById("player_2").style.borderColor = "black";
-          document.getElementById("player_3").style.borderColor = "black";
-          document.getElementById("player_4").style.borderColor = "black";
-          document.getElementById("player_5").style.borderColor = "black";
-          document.getElementById("player_6").style.borderColor = "black";
-      }
-     
-      if(turn === 1) {
-          moves = $char_2.speedScale[$char_2.speed];
-          movesp.innerHTML = $char_2.speedScale[$char_2.speed];
-          document.getElementById("player_1").style.borderColor = "black";
-          document.getElementById("player_2").style.borderColor = "yellow";
-          document.getElementById("player_3").style.borderColor = "black";
-          document.getElementById("player_4").style.borderColor = "black";
-          document.getElementById("player_5").style.borderColor = "black";
-          document.getElementById("player_6").style.borderColor = "black";
-      }
-     
-      if(turn === 2) {
-          moves = $char_3.speedScale[$char_3.speed];
-          movesp.innerHTML = $char_3.speedScale[$char_3.speed];
-          document.getElementById("player_1").style.borderColor = "black";
-          document.getElementById("player_2").style.borderColor = "black";
-          document.getElementById("player_3").style.borderColor = "yellow";
-          document.getElementById("player_4").style.borderColor = "black";
-          document.getElementById("player_5").style.borderColor = "black";
-          document.getElementById("player_6").style.borderColor = "black";
-      }
-     
-      if(turn === 3) {
-          moves = $char_4.speedScale[$char_4.speed];
-          movesp.innerHTML = $char_4.speedScale[$char_4.speed];
-          document.getElementById("player_1").style.borderColor = "black";
-          document.getElementById("player_2").style.borderColor = "black";
-          document.getElementById("player_3").style.borderColor = "black";
-          document.getElementById("player_4").style.borderColor = "yellow";
-          document.getElementById("player_5").style.borderColor = "black";
-          document.getElementById("player_6").style.borderColor = "black";
-      }
-     
-      if(turn === 4) {
-          moves = $char_5.speedScale[$char_5.speed];
-          movesp.innerHTML = $char_5.speedScale[$char_5.speed];
-          document.getElementById("player_1").style.borderColor = "black";
-          document.getElementById("player_2").style.borderColor = "black";
-          document.getElementById("player_3").style.borderColor = "black";
-          document.getElementById("player_4").style.borderColor = "black";
-          document.getElementById("player_5").style.borderColor = "yellow";
-          document.getElementById("player_6").style.borderColor = "black";
-      }
-     
-      if(turn === 5) {
-          moves = $char_6.speedScale[$char_6.speed];
-          movesp.innerHTML = $char_6.speedScale[$char_6.speed];
-          document.getElementById("player_1").style.borderColor = "black";
-          document.getElementById("player_2").style.borderColor = "black";
-          document.getElementById("player_3").style.borderColor = "black";
-          document.getElementById("player_4").style.borderColor = "black";
-          document.getElementById("player_5").style.borderColor = "black";
-          document.getElementById("player_6").style.borderColor = "yellow";
-      }
-     
-      if (positions[turn].floor == 0) {
-        first.style.display = 'none';
-        second.style.display = 'none';
-        basement.style.display = 'block';
-        const xpos = offx - (positions[turn].posx - 600) + edgex[0];
-        const ypos = offy - (positions[turn].posy - 600) + edgey[0];
-        basement.style.top = ypos + 'px';
-        basement.style.left = xpos + 'px';
-      } else if (positions[turn].floor == 1) {
-        first.style.display = 'block';
-        second.style.display = 'none';
-        basement.style.display = 'none';
-        const xpos = offx - (positions[turn].posx - 600) + edgex[1];
-        const ypos = offy - (positions[turn].posy - 600) + edgey[1];
-        first.style.top = ypos + 'px';
-        first.style.left = xpos + 'px';
-      } else if (positions[turn].floor == 2) {
-        first.style.display = 'none';
-        second.style.display = 'block';
-        basement.style.display = 'none';
-        const xpos = offx - (positions[turn].posx - 600) + edgex[2];
-        const ypos = offy - (positions[turn].posy - 600) + edgey[2];
-        second.style.top = ypos + 'px';
-        second.style.left = xpos + 'px';
-      }
-      ending.disabled = false;
+//      if (positions[turn].floor == 0) {
+//        first.style.display = 'none';
+//        second.style.display = 'none';
+//        basement.style.display = 'block';
+//        const xpos = offx - (positions[turn].posx - 600) + edgex[0];
+//        const ypos = offy - (positions[turn].posy - 600) + edgey[0];
+//        basement.style.top = ypos + 'px';
+//        basement.style.left = xpos + 'px';
+//      } else if (positions[turn].floor == 1) {
+//        first.style.display = 'block';
+//        second.style.display = 'none';
+//        basement.style.display = 'none';
+//        const xpos = offx - (positions[turn].posx - 600) + edgex[1];
+//        const ypos = offy - (positions[turn].posy - 600) + edgey[1];
+//        first.style.top = ypos + 'px';
+//        first.style.left = xpos + 'px';
+//      } else if (positions[turn].floor == 2) {
+//        first.style.display = 'none';
+//        second.style.display = 'block';
+//        basement.style.display = 'none';
+//        const xpos = offx - (positions[turn].posx - 600) + edgex[2];
+//        const ypos = offy - (positions[turn].posy - 600) + edgey[2];
+//        second.style.top = ypos + 'px';
+//        second.style.left = xpos + 'px';
+//      }
+//      ending.disabled = false;
   }
  
   function paintBoard(floor, players) {

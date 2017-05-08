@@ -13,7 +13,7 @@ let $data_5;
 let $data_6;
  
 let current_char;
- 
+let current_turn; 
 let total_players;
 let starting_data;
 let player_list;
@@ -79,6 +79,7 @@ const allow_mouseover = () => {
         document.getElementById('stats_6_popup').style.display = 'none';
     };
 }
+<<<<<<< HEAD
  
 const setStartingState = () => {
    
@@ -223,6 +224,121 @@ function set_starting_state(data) {
     }
    
     allow_mouseover();
+=======
+
+function set_starting_state(data) {
+	
+	starting_data = JSON.parse(data.payload);
+	console.log(starting_data);
+	
+	$("#temp_lobby").hide();
+	
+	var found = false;
+	var added = 0;
+	var players = JSON.parse(data.turnOrder);
+	total_players = players.length;
+	current_turn = 0;
+	
+	var first_player = players[0];
+	
+	player_list = new Array(total_players);
+	
+	for(var index = 0; index < total_players; index++) {
+		if(username === players[index]) {
+			player_list[added] = players[index];
+			found = true;
+			added++;
+		} else {
+			if(found) {
+				player_list[added] = players[index];
+				added++;
+			}
+		}
+	}
+	
+	var needed = (total_players - added);
+	
+	if(added != total_players) {
+		for(var i = 0; i <= needed; i++) {
+			player_list[added] = players[i];
+			added++;
+		}
+	}
+	
+	character_list = new Array(total_players);
+	
+	for (var i = 0; i < total_players; i++) {
+		var player = player_list[i];
+		var player_char = "";
+		
+		for(var j = 0; j < JSON.parse(data.users).length; j++) {
+			if(JSON.parse(data.users)[j][0] === player) {
+				player_char = JSON.parse(data.users)[j][1];
+			}
+		}
+		
+		character_list[i] = player_char;
+		
+		if(player === first_player) {
+			current_char = i;
+			console.log(i);
+		}
+	}
+	
+	if(total_players === 1) {
+		setup_player_1(true);
+		setup_player_2(false);
+		setup_player_3(false);
+		setup_player_4(false);
+		setup_player_5(false);
+		setup_player_6(false);
+	} else if(total_players === 2) {
+		setup_player_1(true);
+		setup_player_2(true);
+		setup_player_3(false);
+		setup_player_4(false);
+		setup_player_5(false);
+		setup_player_6(false);
+	} else if(total_players === 3) {
+		setup_player_1(true);
+		setup_player_2(true);
+		setup_player_3(true);
+		setup_player_4(false);
+		setup_player_5(false);
+		setup_player_6(false);
+	} else if(total_players === 4) {
+		setup_player_1(true);
+		setup_player_2(true);
+		setup_player_3(true);
+		setup_player_4(true);
+		setup_player_5(false);
+		setup_player_6(false);
+	} else if(total_players === 5) {
+		setup_player_1(true);
+		setup_player_2(true);
+		setup_player_3(true);
+		setup_player_4(true);
+		setup_player_5(true);
+		setup_player_6(false);
+	} else if(total_players === 6) {
+		setup_player_1(true);
+		setup_player_2(true);
+		setup_player_3(true);
+		setup_player_4(true);
+		setup_player_5(true);
+		setup_player_6(true);
+	} else {
+		console.log("ERROR: Weird number of players.");
+	}
+	
+	allow_mouseover();
+
+	current_char--;
+	current_turn--;
+	update_turn(current_turn);
+	const $objective_description = $("#objective_description");
+	$objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>");
+>>>>>>> 70cab0f9ecaa60cb8f57af896408f101ee5d98c7
 }
  
 function setup_player_1(inGame) {
@@ -393,6 +509,7 @@ function setup_player_5(inGame) {
 }
  
 function setup_player_6(inGame) {
+<<<<<<< HEAD
     if(inGame) {
         const $player_6_name = $("#name_6");
  
@@ -416,3 +533,138 @@ function setup_player_6(inGame) {
        
     }
 }
+=======
+	if(inGame) {
+		const $player_6_name = $("#name_6");
+
+		$char_6 = character_list[5];
+		$player_6_name.html("<center>" + $char_6 + "</center>");
+		
+		for(var i = 0; i < total_players; i++) {
+			if($char_6 === starting_data.characters[i].name) {
+				$data_6 = starting_data.characters[i];
+			}
+		}
+		
+		const $player_6_stats = $("#stats_6");
+
+		$player_6_stats.html("<center>" + $data_6.speedScale[$data_6.speed] + " " +
+			$data_6.mightScale[$data_6.might] + " " + 
+			$data_6.sanityScale[$data_6.sanity] + " " +
+			$data_6.knowledgeScale[$data_6.knowledge] + " " + "</center>");
+		
+	} else {
+		
+	}
+}
+
+function update_turn(currentTurn) {
+	
+	if(currentTurn != current_turn) {
+		console.log(currentTurn + " current turn given vs local " + current_turn);
+	
+		if (current_char === total_players - 1)
+			current_char = 0;
+	      else
+	    	  current_char++;
+	
+		if (current_turn === total_players - 1)
+			current_turn = 0;
+	      else
+	    	  current_turn++;
+		
+		console.log(current_char);
+		console.log(current_turn);
+		
+		if(current_char === 0) {
+		     
+	        moves = $data_1.speedScale[$data_1.speed];
+	        movesp.innerHTML = $data_1.speedScale[$data_1.speed];
+	        document.getElementById("player_1").style.borderColor = "yellow";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 1) {
+	   
+	        moves = $data_2.speedScale[$data_2.speed];
+	        movesp.innerHTML = $data_2.speedScale[$data_2.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "yellow";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 2) {
+	   
+	        moves = $data_3.speedScale[$data_3.speed];
+	        movesp.innerHTML = $data_3.speedScale[$data_3.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "yellow";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 3) {
+	   
+	        moves = $data_4.speedScale[$data_4.speed];
+	        movesp.innerHTML = $data_4.speedScale[$data_4.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "yellow";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 4) {
+	   
+	        moves = $data_5.speedScale[$data_5.speed];
+	        movesp.innerHTML = $data_5.speedScale[$data_5.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "yellow";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 5) {
+	   
+	        moves = $data_6.speedScale[$data_6.speed];
+	        movesp.innerHTML = $data_6.speedScale[$data_6.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "yellow";
+	    }
+	}
+}
+
+function turn_end() {
+	
+	var message = {
+			type: MESSAGE_TYPE.GAMEMOVE,
+			payload: {
+				id : userId,
+				query : {
+					name : "end"
+				}
+			}
+      }
+
+	const json = JSON.stringify(message);
+	conn.send(json);
+}
+
+
+>>>>>>> 70cab0f9ecaa60cb8f57af896408f101ee5d98c7
