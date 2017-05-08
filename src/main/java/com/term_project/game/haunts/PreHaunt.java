@@ -294,6 +294,7 @@ public class PreHaunt implements GamePhase {
       variables.put("character", character.getCharBean());
       variables.put("item", useItem);
       mode = "idle";
+      phase = 0;
       break;
 
     case "use omen":
@@ -303,42 +304,51 @@ public class PreHaunt implements GamePhase {
       variables.put("character", character.getCharBean());
       variables.put("omen", useOmen);
       mode = "idle";
+      phase = 0;
       break;
 
     case "pickup item":
       String pickupItemS = qm.get("item");
-      Item pickupItem = character.getItem(pickupItemS);
+      Item pickupItem = character.getTile().getItem(pickupItemS);
       pickupItem.add(character);
+      character.getTile().removeItem(pickupItem);
       variables.put("character", character.getCharBean());
       variables.put("item", pickupItem);
       mode = "idle";
+      phase = 0;
       break;
 
     case "drop item":
       String dropItemS = qm.get("item");
       Item dropItem = character.getItem(dropItemS);
       dropItem.loss(character);
+      character.getTile().addItem(dropItem);
       variables.put("character", character.getCharBean());
       variables.put("item", dropItem);
       mode = "idle";
+      phase = 0;
       break;
 
     case "pickup omen":
       String pickupOmenS = qm.get("omen");
-      Omen pickupOmen = character.getOmen(pickupOmenS);
+      Omen pickupOmen = character.getTile().getOmen(pickupOmenS);
       pickupOmen.add(character);
+      character.getTile().removeOmen(pickupOmen);
       variables.put("character", character.getCharBean());
       variables.put("omen", pickupOmen);
       mode = "idle";
+      phase = 0;
       break;
 
     case "drop omen":
       String dropOmenS = qm.get("omen");
       Omen dropOmen = character.getOmen(dropOmenS);
       dropOmen.loss(character);
+      character.getTile().addOmen(dropOmen);
       variables.put("character", character.getCharBean());
       variables.put("omen", dropOmen);
       mode = "idle";
+      phase = 0;
       break;
 
     case "end":

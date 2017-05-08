@@ -190,7 +190,7 @@ function set_starting_state(data) {
 
 	current_char--;
 	current_turn--;
-	update_turn(current_turn);
+	update_turn(0);
 	const $objective_description = $("#objective_description");
 	$objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>");
 }
