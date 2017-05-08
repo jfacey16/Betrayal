@@ -8,12 +8,12 @@ public class Medallion implements Omen {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Medallion() {
     name = "Medallion";
     description = "A medallion inscribed with a pentagram.";
-    function = "You are immune to the effects of the Pentagram Chamber, Crypt, and Graveyard.";
+    logic = "You are immune to the effects of the Pentagram Chamber, Crypt, and Graveyard.";
   }
 
   @Override
@@ -27,8 +27,8 @@ public class Medallion implements Omen {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

@@ -8,12 +8,12 @@ public class HealingSalve implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public HealingSalve() {
     name = "Healing Salve";
     description = "A sticky paste in a shallow bowl.";
-    function = "If your Might or Speed value is below 3, raise the stats that are below 3 by 1.";
+    logic = "If your Might or Speed value is below 3, raise the stats that are below 3 by 1.";
   }
 
   @Override
@@ -22,8 +22,8 @@ public class HealingSalve implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

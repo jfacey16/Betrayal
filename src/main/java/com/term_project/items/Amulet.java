@@ -8,12 +8,12 @@ public class Amulet implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Amulet() {
     name = "Amulet of the Ages";
     description = "Ancient silver and inlaid gems, inscribed with blessings.";
-    function = "Gain 1 Might, 1 Speed, 1 Knowledge, and 1 Sanity now.\nLose 3 "
+    logic = "Gain 1 Might, 1 Speed, 1 Knowledge, and 1 Sanity now.\nLose 3 "
         + "Might, 3 Speed, 3 Knowledge, and 3 Sanity if you lose the amulet.";
   }
 
@@ -24,8 +24,8 @@ public class Amulet implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
 
   }
 
