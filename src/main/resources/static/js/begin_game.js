@@ -416,4 +416,3 @@ function setup_player_6(inGame) {
        
     }
 }
-
