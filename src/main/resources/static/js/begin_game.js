@@ -14,8 +14,11 @@ let $char_6;
 
 let responseOject;
 let current_char;
+let game_started;
 
 $(document).ready(() => {
+	
+	game_started = false;
 	
 	$player_1_select = $("#player_1_select");
 	$player_2_select = $("#player_2_select");
@@ -46,6 +49,8 @@ $(document).ready(() => {
     const $create = $("#create");
     
     $create.on('click', function(e) {
+    	
+    	game_started = true;
     	
     	e.preventDefault();
     	

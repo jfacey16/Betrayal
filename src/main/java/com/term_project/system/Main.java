@@ -89,7 +89,7 @@ public class Main {
 
 	private void runSparkServer(int port) {
 		//starts webSocket
-    Spark.webSocket("/gameConnection", GameWebSocket.class);
+    Spark.webSocket("/betrayal_connection", GameWebSocket.class);
 
 	  Spark.port(port);
 	  Spark.externalStaticFileLocation("src/main/resources/static");
@@ -98,9 +98,10 @@ public class Main {
 	  FreeMarkerEngine freeMarker = createEngine();
 
 	  // Setup Spark Routes
-	  Spark.get("/betrayal_menu", new MenuHandler(), freeMarker);
 	  Spark.get("/betrayal", new BetrayalHandler(), freeMarker);
 		Spark.post("/betrayal", new UpdateHandler());
+	  	Spark.post("/betrayal_create", new CreateLobbyHandler());
+	  	Spark.post("/betrayal_join", new JoinLobbyHandler());
 	}
 
 	private static class MenuHandler implements TemplateViewRoute {
@@ -159,6 +160,7 @@ public class Main {
 				return GSON.toJson(variables);
 	    }
 	}
+	
 	private static class BetrayalHandler implements TemplateViewRoute {
 	  @Override
 	  public ModelAndView handle(Request req, Response res) {
@@ -185,28 +187,6 @@ public class Main {
 
 				  return GSON.toJson(variables);
 	  }
-	}
-
-	private static class OmenHandler implements TemplateViewRoute {
-
-		@Override
-		public ModelAndView handle(Request arg0, Response arg1)
-				throws Exception {
-
-
-			return null;
-		}
-	}
-
-	private static class EventHandler implements TemplateViewRoute {
-
-		@Override
-		public ModelAndView handle(Request arg0, Response arg1)
-				throws Exception {
-
-
-			return null;
-		}
 	}
 
 	private static class ExceptionPrinter implements ExceptionHandler {

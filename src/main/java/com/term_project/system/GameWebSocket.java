@@ -221,6 +221,8 @@ public class GameWebSocket {
     lobbyToSessions.get(lobbyName).add(session);
 
     availableLobbies.add(lobbyName);
+    
+    updateLobbies();
   }
 
   private synchronized void joinLobby(JsonObject received, Session session) throws IOException {
