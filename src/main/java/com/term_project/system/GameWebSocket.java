@@ -219,7 +219,7 @@ public class GameWebSocket {
     lobbyToSessions.put(lobbyName, new ConcurrentLinkedQueue<>());
     availableLobbies.add(lobbyName);
 
-    joinLobby(received, Session session);
+    joinLobby(received, session);
 
     updateLobbies();
   }
