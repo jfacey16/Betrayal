@@ -18,6 +18,8 @@ let total_players;
 let starting_data;
 let player_list;
 let character_list;
+
+let message_log ="";
  
 $(document).ready(() => {
    
@@ -25,6 +27,38 @@ $(document).ready(() => {
    
     $temp_lobby.show();
 });
+
+const allow_chat = () => {
+	$("#chat_text").bind("keypress", function(e) {
+		if(e.which == 13) {
+			
+			var mess = $("#chat_text").val();
+			console.log(mess);
+			
+			var message = {
+					type: MESSAGE_TYPE.CHATUPDATE,
+					payload: {
+						id : userId,
+						message : mess
+					}
+		      }
+
+			const json = JSON.stringify(message);
+			conn.send(json);
+			
+			document.getElementById("chat_text").value = "";
+		}
+	});
+}
+
+function display_message(data) {
+	
+	message_log += data.name + ": " + data.message + "<br />";
+	
+	$("#chat_log").html(message_log);
+	var log = document.getElementById("chat_log");
+	log.scrollTop = log.scrollHeight;
+}
  
 const allow_mouseover = () => {
    
@@ -186,6 +220,7 @@ function set_starting_state(data) {
 	}
 	
 	allow_mouseover();
+	allow_chat();
 
 	current_char--;
 	current_turn--;

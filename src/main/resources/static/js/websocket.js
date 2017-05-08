@@ -57,6 +57,10 @@ const setup_betrayal = () => {
 				responseJSON = data;
 				update_turn(data.currentTurn);
 				break;
+			case MESSAGE_TYPE.CHATUPDATE:
+				console.log("message recieved");
+				display_message(data);
+				break;
 
 		}
 		
@@ -170,7 +174,7 @@ function choose_character(data) {
 	var choices_text = "";
 	
 	choices_text += "<div class=\"option\" style=\"width:100%\">";
-	choices_text += "<center><h2>Choose your character and begin the Betrayal!</h2></center>";
+	choices_text += "<center><font size=\"5\">Choose your character and begin the Betrayal!</font></center>";
 	
 	for(index in choices) {
 		choices_text += "<center><div class=\"char_choice\">" + choices[index].name + "</div></center>";
@@ -206,7 +210,7 @@ function choose_character(data) {
 				var waiting_text = "";
 				
 				waiting_text += "<div class=\"option\" style=\"width:100%\">";
-				waiting_text += "<center><h2>Waiting on other players...</h2></center>";
+				waiting_text += "<center><font size=\"5\">Waiting on other players...</font></center>";
 				waiting_text += "<center>You've chosen to play as " + current_choice + "!</center>";
 				waiting_text += "</div>";
 				

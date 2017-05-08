@@ -49,7 +49,7 @@ function display_lobby() {
 	var lobby_text = "";
 	
 	lobby_text += "<div class=\"option\" style=\"width:100%\">";
-	lobby_text += "<center><h2>You've entered the lobby of " + current_lobby_name + "</h2></center>";
+	lobby_text += "<center><font size=\"5\">You've entered the lobby of " + current_lobby_name + "</font></center>";
 	lobby_text += "<center><div id=\"members\"></div></center>";
 	
 	if(game_host) {
