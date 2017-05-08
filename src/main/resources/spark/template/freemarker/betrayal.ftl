@@ -48,23 +48,12 @@
 			<p>Username: <input type="text" id="username_join" name="name" placeholder="Enter Your Username"></p>
 
 			<div id="lobbies" class="lobby_list"></div>
-        
-	        <style type="text/css">
-	        .lobby_list{
-	          overflow-y:auto;
-	          height:200px;
-	          margin:5px;
-	          margin-left:15px;
-	          margin-right:15px;
-			  border-style:solid;
-			  border-width:2px;
-	          background-color:#eeeeee;}
-	        </style>
 			
 			<button type="button" id="join_game">Join Lobby</button></center>
 		</div>
-		
-		<style type="text/css">
+	</div>
+	
+	<style type="text/css">
 		.option{
 			height:95%;
 			width:50%;
@@ -73,7 +62,18 @@
 			border-width:2px;
 			background-color:#eeeeee;}
 		</style>
-	</div>
+	
+	<style type="text/css">
+        .lobby_list{
+          overflow-y:auto;
+          height:200px;
+          margin:5px;
+          margin-left:15px;
+          margin-right:15px;
+		  border-style:solid;
+		  border-width:2px;
+          background-color:#eeeeee;}
+        </style>
 
 	<style type="text/css">
     .temp_lobby{
