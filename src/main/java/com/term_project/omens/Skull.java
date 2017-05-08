@@ -8,12 +8,12 @@ public class Skull implements Omen {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Skull() {
     name = "Skull";
     description = "A skull, cracked and missing teeth.";
-    function = "If you take mental damage, you can take all of it as physical damage instead.";
+    logic = "If you take mental damage, you can take all of it as physical damage instead.";
   }
 
   @Override
@@ -27,8 +27,8 @@ public class Skull implements Omen {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

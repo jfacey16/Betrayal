@@ -10,12 +10,12 @@ public class CrystalBall implements Omen {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public CrystalBall() {
     name = "Crystal Ball";
     description = "Hazy images appear in the glass.";
-    function = "Once during your turn, you can attempt a "
+    logic = "Once during your turn, you can attempt a "
         + "Knowledge roll to peer into the Crystal Ball"
         + ":\n4+ You see the truth. Gain 1 Sanity.\n1-3 "
         + "You avert your eyes. Lose 1 Sanity.\n0 You "
@@ -33,8 +33,8 @@ public class CrystalBall implements Omen {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

@@ -8,12 +8,12 @@ public class Cat implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Cat() {
     name = "Cat";
     description = "The Cat meows. Why is it here?";
-    function = "Gain 2 Sanity now.\nLose 2 Sanity when you lose the Cat.";
+    logic = "Gain 2 Sanity now.\nLose 2 Sanity when you lose the Cat.";
   }
 
   @Override
@@ -22,8 +22,8 @@ public class Cat implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
 
   }
 

@@ -10,12 +10,12 @@ public class MysticCoin implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public MysticCoin() {
     name = "Mystic Coin";
     description = "Heads or Tails?";
-    function = "Once during your turn, you can roll 1 die to flip the "
+    logic = "Once during your turn, you can roll 1 die to flip the "
         + "coin:\n2 It's heads. Gain 1 point in Might.\n1 It's tails. "
         + "Gain 1 point in Knowledge.\n0 It landed on its edge! Lose "
         + "1 point in Might and 1 in Knowledge.";
@@ -27,8 +27,8 @@ public class MysticCoin implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
 
   }
 

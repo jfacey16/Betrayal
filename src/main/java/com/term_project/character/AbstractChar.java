@@ -10,6 +10,7 @@ import com.term_project.items.Item;
 import com.term_project.omens.Omen;
 
 public abstract class AbstractChar implements GameChar {
+
   private int might;
   private int speed;
   private int knowledge;

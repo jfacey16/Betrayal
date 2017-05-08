@@ -8,12 +8,12 @@ public class Rock implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Rock() {
     name = "Rock";
-    description = "Its a pretty nice rock.";
-    function = "Gain 2 Knowledge now.\nLose 2 Knowledge when you lose the Rock.";
+    description = "It's a pretty nice rock.";
+    logic = "Gain 2 Knowledge now.\nLose 2 Knowledge when you lose the Rock.";
   }
 
   @Override
@@ -22,8 +22,8 @@ public class Rock implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
 
   }
 

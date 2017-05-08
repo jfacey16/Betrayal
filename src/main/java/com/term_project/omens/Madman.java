@@ -8,12 +8,12 @@ public class Madman implements Omen {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Madman() {
     name = "Madman";
     description = "Companian.\nA raving, frothing madman.";
-    function = "Gain 2 Might and lose 1 Sanity now.\nLose "
+    logic = "Gain 2 Might and lose 1 Sanity now.\nLose "
         + "2 Might and gain 1 Sanity if you lose custody "
         + "of the Madman.\nThis omen can't be dropped, traded, or stolen.";
   }
@@ -24,8 +24,8 @@ public class Madman implements Omen {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

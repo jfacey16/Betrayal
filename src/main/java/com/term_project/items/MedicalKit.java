@@ -10,12 +10,12 @@ public class MedicalKit implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public MedicalKit() {
     name = "Medical Kit";
     description = "A doctor's bag, depleted in some critical resources.";
-    function = "Once during your turn, you can attempt a Knowledge roll "
+    logic = "Once during your turn, you can attempt a Knowledge roll "
         + "to heal yourself.\n8+ Gain 1 Might and 1 Speed.\n6-7 Gain 1 "
         + "Might.\n4-5 Gain 1 Speed.\n0-3 Nothing happens.";
   }
@@ -26,8 +26,8 @@ public class MedicalKit implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override

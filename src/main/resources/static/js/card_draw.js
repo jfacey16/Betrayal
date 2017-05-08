@@ -12,6 +12,10 @@ $(document).ready(() => {
 	$('#omen').draggable();
 	$('#event').draggable();
 	
+	$('#item').draggable();
+	$('#omen').draggable();
+	$('#event').draggable();
+	
 	$item_window.hide();
 	$omen_window.hide();
 	$event_window.hide();

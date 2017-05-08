@@ -8,12 +8,12 @@ public class Revolver implements Item {
 
   private String name;
   private String description;
-  private String function;
+  private String logic;
 
   public Revolver() {
     name = "Revolver";
     description = "An old, potent-looking weapon.";
-    function = "You can use the Revolver to attack "
+    logic = "You can use the Revolver to attack "
         + "with Speed instead of Might.  Roll 1 "
         + "additional die on your Speed attack "
         + "roll (maximum 8 dice).";
@@ -30,8 +30,8 @@ public class Revolver implements Item {
   }
 
   @Override
-  public String getFunction() {
-    return function;
+  public String getLogic() {
+    return logic;
   }
 
   @Override
