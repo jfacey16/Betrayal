@@ -288,7 +288,7 @@ function setup_player_1(inGame) {
 		 $player_1_sanity.html($sanity + "</center>");
 		
 	} else {
-		
+		console.log("Should never get here! There will always be at least one person in the game.");
 	}
 }
 
