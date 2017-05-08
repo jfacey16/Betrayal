@@ -99,7 +99,12 @@ public class GameWebSocket {
   	        lobbyToSessions.remove(lobby);
   	        availableLobbies.remove(lobby);
   	      } else {
-            updateLobby(sessionsToUpdate);
+            try {
+              updateLobby(sessionsToUpdate);
+            } catch(IOException e) {
+              System.out.println("failed to update lobbies.");
+              e.printStackTrace();
+            }
           }
 
   	      //if the lobby was actually a game throw errors to all members
