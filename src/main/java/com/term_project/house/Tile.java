@@ -74,14 +74,14 @@ public interface Tile {
    *
    * @return A list of Omen.
    */
-  List<Omen> getOmens();
+  Map<String, Omen> getOmens();
 
   /**
    * Returns a list of items on this tile.
    *
    * @return A list of items.
    */
-  List<Item> getItems();
+  Map<String, Item> getItems();
 
   /**
    * Returns a map of events on this tile.
@@ -101,13 +101,13 @@ public interface Tile {
    * Sets a list of events on this tile.
    *
    */
-  void setOmens(List<Omen> omens);
+  void setOmens(Map<String, Omen> omens);
 
   /**
    * Sets a list of items on this tile.
    *
    */
-  void setItems(List<Item> items);
+  void setItems(Map<String, Item> items);
 
   /**
    * Adds an event.
@@ -263,7 +263,6 @@ public interface Tile {
    */
   void addOmen(Omen omen);
 
-
   boolean hasDown();
 
   boolean hasUp();
@@ -273,4 +272,12 @@ public interface Tile {
   Tile getDown() throws NullPointerException;
 
   TileBean getBean();
+
+  Item getItem(String item);
+
+  Omen getOmen(String omen);
+
+  Item removeItem(Item item);
+
+  Omen removeOmen(Omen omen);
 }

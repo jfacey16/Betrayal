@@ -4,17 +4,18 @@ import java.util.Map;
 
 import com.term_project.character.GameChar;
 
-public class Axe implements Item {
+public class Paint implements Item {
 
   private String name;
   private String description;
   private String logic;
 
-  public Axe() {
-
-    name = "Axe";
-    description = "Very sharp.";
-    logic = "You roll 1 additional die when making a Might attack with this weapon.";
+  public Paint() {
+    name = "Paint";
+    description = "A bucket of paint.";
+    logic = "Use this item to desecrate the pentagram. This is"
+        + " done by throwing them into the Pentagram Chamber "
+        + "from an adjacent room. Doing this counts as 1 space of movement.";
   }
 
   @Override
@@ -52,11 +53,11 @@ public class Axe implements Item {
   public boolean equals(Object object) {
     if (object == this)
       return true;
-    if (!(object instanceof Axe)) {
+    if (!(object instanceof Paint)) {
       return false;
     }
 
-    return this.getName().equals(((Axe) object).getName());
+    return this.getName().equals(((Paint) object).getName());
   }
 
   @Override

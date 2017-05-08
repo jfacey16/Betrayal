@@ -22,6 +22,7 @@ public abstract class AbstractChar implements GameChar {
   private Tile currentTile;
   private Map<String, Item> items;
   private Map<String, Omen> omens;
+  private boolean traitor;
 
   public AbstractChar() {
 
@@ -29,6 +30,7 @@ public abstract class AbstractChar implements GameChar {
     currentTile = null;
     items = new HashMap<>();
     omens = new HashMap<>();
+    traitor = false;
   }
 
   @Override
@@ -241,6 +243,16 @@ public abstract class AbstractChar implements GameChar {
   @Override
   public Map<String, Omen> getOmens() {
     return omens;
+  }
+
+  @Override
+  public boolean getTraitor() {
+    return traitor;
+  }
+
+  @Override
+  public void setTraitor(boolean traitor) {
+    this.traitor = traitor;
   }
 
   @Override

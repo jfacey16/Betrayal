@@ -4,14 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import com.term_project.character.Cultist;
 import com.term_project.character.GameChar;
 import com.term_project.events.Event;
 import com.term_project.game.Dice;
 import com.term_project.game.actions.Mover;
+import com.term_project.house.Direction;
+import com.term_project.house.Floor;
+import com.term_project.house.GenericTile;
 import com.term_project.house.Tile;
 import com.term_project.house.TileBean;
 import com.term_project.items.Item;
+import com.term_project.items.Paint;
 import com.term_project.omens.Omen;
 import com.term_project.system.MemorySlot;
 
@@ -25,9 +31,24 @@ public class HauntOne implements GamePhase {
   private Mover move;
   Map<String, Integer> remaining;
 
+  private Integer sacrificePoints;
+  private Integer paintCount;
+  private Integer characters;
+  private Integer alive;
+
   private List<String> toResolve;
 
   public HauntOne(MemorySlot memory) {
+    // TODO: implement attack (i can do this)
+    // TODO: add actions attack (need to know if characters are in same room as
+    // you)
+    // TODO: alter move for holding corpses (move should be 2 when holding)
+    // TODO: add cultists to id map (need to do this in state)
+    // TODO: add to tile list (make sure all tiles add to new list as well as
+    // map)
+    // TODO: position pentagram chamber (add map)
+    // TODO: end game actually happening (what to do when the game ends)
+    // TODO: return construction to front end
     this.memory = memory;
     mode = "start";
     phase = 0;
@@ -35,6 +56,38 @@ public class HauntOne implements GamePhase {
     move = new Mover(memory);
     remaining = new HashMap<>();
     toResolve = new ArrayList<>();
+
+    // sacrifice and paint count for win checking
+    sacrificePoints = 0;
+    paintCount = 0;
+    // number of total characters and alive non-traitors
+    characters = memory.getGameCharacters().size();
+    alive = memory.getGameCharacters().size() - 1;
+    // add paint
+    Random random = new Random();
+    for (int i = 0; i < characters; i++) {
+      int id = random.nextInt(memory.getTileList().size());
+      memory.getTileList().get(id).addItem(new Paint());
+    }
+    // set traitor
+    int c = random.nextInt(characters);
+    memory.getGameCharacters().get(c).setTraitor(true);
+    // add cultists
+    for (int i = 0; i < characters; i++) {
+      memory.getGameCharacters().add(new Cultist());
+
+    }
+    // add pentagram chamber
+    List<Floor> b = new ArrayList<>();
+    b.add(Floor.BASEMENT);
+    List<Direction> d1 = new ArrayList<>();
+    d1.add(Direction.NORTH);
+    Tile penta = new GenericTile(d1, 0, 0, 1, b, memory);
+    penta.setName("Pentagram Chamber");
+
+    if (!memory.getTileList().contains(penta)) {
+      memory.getTileList().add(penta);
+    }
   }
 
   @Override
@@ -234,6 +287,7 @@ public class HauntOne implements GamePhase {
       variables.put("character", character.getCharBean());
       variables.put("item", useItem);
       mode = "idle";
+      phase = 0;
       break;
 
     case "use omen":
@@ -243,42 +297,51 @@ public class HauntOne implements GamePhase {
       variables.put("character", character.getCharBean());
       variables.put("omen", useOmen);
       mode = "idle";
+      phase = 0;
       break;
 
     case "pickup item":
       String pickupItemS = qm.get("item");
-      Item pickupItem = character.getItem(pickupItemS);
+      Item pickupItem = character.getTile().getItem(pickupItemS);
       pickupItem.add(character);
+      character.getTile().removeItem(pickupItem);
       variables.put("character", character.getCharBean());
       variables.put("item", pickupItem);
       mode = "idle";
+      phase = 0;
       break;
 
     case "drop item":
       String dropItemS = qm.get("item");
       Item dropItem = character.getItem(dropItemS);
       dropItem.loss(character);
+      character.getTile().addItem(dropItem);
       variables.put("character", character.getCharBean());
       variables.put("item", dropItem);
       mode = "idle";
+      phase = 0;
       break;
 
     case "pickup omen":
       String pickupOmenS = qm.get("omen");
-      Omen pickupOmen = character.getOmen(pickupOmenS);
+      Omen pickupOmen = character.getTile().getOmen(pickupOmenS);
       pickupOmen.add(character);
+      character.getTile().removeOmen(pickupOmen);
       variables.put("character", character.getCharBean());
       variables.put("omen", pickupOmen);
       mode = "idle";
+      phase = 0;
       break;
 
     case "drop omen":
       String dropOmenS = qm.get("omen");
       Omen dropOmen = character.getOmen(dropOmenS);
       dropOmen.loss(character);
+      character.getTile().addOmen(dropOmen);
       variables.put("character", character.getCharBean());
       variables.put("omen", dropOmen);
       mode = "idle";
+      phase = 0;
       break;
 
     case "end":
@@ -287,15 +350,57 @@ public class HauntOne implements GamePhase {
       break;
 
     case "attack":
+
+      if (this.gameOver("")) {
+
+      }
       break;
 
     case "paint":
+      Item paint = character.getItem("Paint");
+      paint.loss(character);
+      character.getTile().removeItem(paint);
+      paintCount += 1;
+      if (this.gameOver("")) {
+
+      }
       break;
 
-    case "sacrifice":
+    case "sacrifice item":
+      String sacrificeItemS = qm.get("item");
+      Item sacrificeItem = character.getItem(sacrificeItemS);
+      sacrificeItem.loss(character);
+      character.getTile().removeItem(sacrificeItem);
+
+      if (sacrificeItem.getName().equals("Corpse")) {
+        sacrificePoints += 4;
+      } else {
+        sacrificePoints += 1;
+      }
+      if (this.gameOver("")) {
+
+      }
       break;
 
-    case "":
+    case "sacrifice omen":
+      String sacrificeOmenS = qm.get("omen");
+      Omen sacrificeOmen = character.getOmen(sacrificeOmenS);
+      sacrificeOmen.loss(character);
+      character.getTile().removeOmen(sacrificeOmen);
+
+      if (sacrificeOmen.getName().equals("Dog")
+          || sacrificeOmen.getName().equals("Girl")
+          || sacrificeOmen.getName().equals("Madman")) {
+        sacrificePoints += 2;
+      } else {
+        sacrificePoints += 1;
+      }
+      if (this.gameOver("")) {
+
+      }
+      break;
+
+    case "special attack":
       break;
     }
   }
@@ -330,6 +435,27 @@ public class HauntOne implements GamePhase {
 
     if (remaining.get("move") > 0) {
       actions.add("move");
+    }
+
+    if (tile.getEast().getName().equals("Pentagram Chamber")
+        || tile.getWest().getName().equals("Pentagram Chamber")
+        || tile.getNorth().getName().equals("Pentagram Chamber")
+        || tile.getSouth().getName().equals("Pentagram Chamber")
+        || tile.getName().equals("Pentagram Chamber")) {
+      if (remaining.get("move") > 0 && !character.getTraitor()
+          && character.getItem("Paint") != null) {
+        actions.add("paint");
+      }
+    }
+
+    if (tile.getName().equals("Pentagram Chamber")
+        && character.getTraitor() && character.getItems().size() != 0) {
+      actions.add("sacrifice item");
+    }
+
+    if (tile.getName().equals("Pentagram Chamber")
+        && character.getTraitor() && character.getOmens().size() != 0) {
+      actions.add("sacrifice omen");
     }
 
     variables.put("actions", actions);
@@ -439,5 +565,33 @@ public class HauntOne implements GamePhase {
   @Override
   public String getDescription() {
     return "The Stars are Right";
+  }
+
+  public boolean gameOver(String result) {
+
+    if (paintCount == characters) {
+      result = "The house shakes, and you hear glass shattering around "
+          + "you. The walls sweat as the cultists' dread god draws near.\nJust as your world "
+          + "is about to be torn away from you, paint splashes acoress the wooden floor, "
+          + "desecrating the pentagram. You stop the horrible ritual. The world is safe, for "
+          + "now, but the echoes of the cultists' chant still burn in your mind. Clutching "
+          + "at your head, you feel blood dripping steadily from your damaged ears.\nIn time "
+          + "your body will heal...but will your soul?";
+      return true;
+    } else if (sacrificePoints >= 13) {
+      result = "The house shakes and glass shatters as the universe screams. A wound rips through "
+          + "time and space, and through it, your god is reborn. Drenched in the blood of your friends, your god "
+          + "is beautiful and terrrible, a wonder and a blight. The world is laid bare before him, and all within it "
+          + "are his children, his blood...his sacrifices.";
+      return true;
+    } else if (alive == 0) {
+      result = "The house shakes and glass shatters as the universe screams. A wound rips through "
+          + "time and space, and through it, your god is reborn. Drenched in the blood of your friends, your god "
+          + "is beautiful and terrrible, a wonder and a blight. The world is laid bare before him, and all within it "
+          + "are his children, his blood...his sacrifices.";
+      return true;
+    } else {
+      return false;
+    }
   }
 }
