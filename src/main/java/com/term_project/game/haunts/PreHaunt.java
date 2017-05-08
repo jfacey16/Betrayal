@@ -102,16 +102,14 @@ public class PreHaunt implements GamePhase {
     }
 
     // make sure player has enough actions
-    if (remaining.containsKey(name) && remaining.get(name) <= 0) {
+    if (remaining.containsKey(name) && remaining.get(name) <= 0 && 
+      phase == 0) {
       variables.put("Error",
           "Cannot perform action as no more are remaining.");
       addActions(character, variables);
       return;
     }
-
     System.out.println(name);
-    System.out.println(character.getName());
-
     switch (name) {
     case "move":
       if (phase == 0) {
@@ -134,9 +132,7 @@ public class PreHaunt implements GamePhase {
           variables.put("Error", e.getMessage());
           return;
         }
-        System.out.println("phase now " + phase);
         if (move.getFinished()) {
-          System.out.println("move finished");
           mode = "idle";
           phase = 0;
 
@@ -151,13 +147,15 @@ public class PreHaunt implements GamePhase {
           addActions(character, variables);
           return;
         }
-
+        System.out.println("starting to rotate");
+        System.out.println(phase);
         return;
       }
 
       if (phase == 1) {
         try {
-          System.out.println("why am i here?");
+          System.out.println("trying to rot");
+          System.out.println(Integer.parseInt(qm.value("rotations")));
           move.addTile(character, Integer.parseInt(qm.value("rotations")),
               memory.getTileMap());
 

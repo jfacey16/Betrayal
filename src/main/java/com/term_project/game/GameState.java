@@ -65,16 +65,12 @@ public class GameState {
 	public Map<String, Object> start() {
 		Map<String, Object> variables = new HashMap<>();
 		phase.run(null, null, null, variables);
-		System.out.println(phase.getDescription());
-		System.out.println("start is happening");
 		return variables;
 	}
 
 	public Map<String, Object> buildMap(QueryParamsMap qm) {
 		Map<String, Object> variables = new HashMap<>();
-		System.out.println("MAP BUILDING");
 		phase.run(null, qm, null, variables);
-		System.out.println(phase.getDescription());
 		return variables;
 	}
 
@@ -82,11 +78,6 @@ public class GameState {
 		Map<String, Object> variables = new HashMap<>();
 
 		String currentId = idTurnOrder.get(currentTurn);
-		System.out.println("name: " + qm.value("name"));
-		System.out.println(playersCharacters.get(currentId).getTile().getPos().getX());
-		System.out.println(playersCharacters.get(currentId).getTile().getPos().getY());
-		System.out.println(phase.getDescription());
-		// assert(phase instanceof PreHaunt);
 		phase.run(qm.value("name"), qm, playersCharacters.get(currentId), variables);
 
 		if(qm.value("name").equals("end")){

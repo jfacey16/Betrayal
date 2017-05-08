@@ -130,8 +130,6 @@ public class Main {
 
 	      String message = "Your username is \"" + game_name + "\". ";
 	      message += "Waiting for more players to join your lobby of " + player_number + ".";
-	      
-	      System.out.println(message);
 
 	      Map<String, Object> variables = new HashMap<>();
 
@@ -150,8 +148,6 @@ public class Main {
 	      String game_name = qm.value("username");
 
 	      String message = "Your username is \"" + game_name + "\".";
-	      
-	      System.out.println(message);
 
 	      Map<String, Object> variables = new HashMap<>();
 
@@ -165,7 +161,6 @@ public class Main {
 	private static class TempStart implements Route {
 	    @Override
 	    public String handle(Request req, Response res) {
-	    	System.out.println("start is starting");
 	      QueryParamsMap qm = req.queryMap();
 	      String game_name = qm.value("name");
 				//setup ids

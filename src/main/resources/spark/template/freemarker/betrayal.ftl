@@ -357,8 +357,8 @@
       display:flex; 
       flex-direction:column;
     position:absolute;
-    top:35%;
-    left:37%;
+    top:30%;
+    left:18%;
     float:left;
     z-index:20;
     height:350px;

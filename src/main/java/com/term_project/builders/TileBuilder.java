@@ -130,6 +130,8 @@ public class TileBuilder implements Builder<Tile> {
         g, memory);
     coalChute.setName("Coal Chute");
     tileList.add(coalChute);
+    for (Direction d: d1)
+        System.out.println(d);
 
     Tile graveyard = new GenericTile(d1, 0, 1, 0,
         g, memory);
@@ -271,10 +273,12 @@ public class TileBuilder implements Builder<Tile> {
     bg.add(Floor.GROUND);
     bg.add(Floor.BASEMENT);
 
-    Tile kitchen = new GenericTile(d1, 0, 0, 0,
+    Tile kitchen = new GenericTile(d2s, 0, 0, 0,
         bg, memory);
     kitchen.setName("Kitchen");
     tileList.add(kitchen);
+    for (Direction d: d1)
+        System.out.println(d);
 
     Tile abandonedRoom = new GenericTile(d4, 0, 0, 1,
         bg, memory);

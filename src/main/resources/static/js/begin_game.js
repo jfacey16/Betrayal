@@ -294,8 +294,8 @@ const setStartingState = () => {
 		 		$char_6.sanityScale[$char_6.sanity] + " " + 
 		 		$char_6.knowledgeScale[$char_6.knowledge] + " " + "</center>");
 	    
-	     moves = $char_1.speedScale[$char_1.speed - 1];
-	     movesp.innerHTML = $char_1.speedScale[$char_1.speed - 1];
+	     moves = $char_1.speedScale[$char_1.speed];
+	     movesp.innerHTML = $char_1.speedScale[$char_1.speed];
 		 const $objective_description = $("#objective_description");
 		 $objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>");
      	document.getElementById("player_1").style.borderColor = "yellow";
