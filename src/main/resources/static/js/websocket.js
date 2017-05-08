@@ -50,9 +50,12 @@ const setup_betrayal = () => {
 				choose_character(data);
 				break;
 			case MESSAGE_TYPE.GAMEREADY:
-				console.log(data);
-				console.log(data.payload);
 				set_starting_state(data);
+				break;
+			case MESSAGE_TYPE.GAMEMOVE:
+				console.log("update recieved");
+				update_turn(data.currentTurn);
+				break;
 		}
 		
 	}
@@ -189,7 +192,7 @@ function choose_character(data) {
 					type: MESSAGE_TYPE.CHOOSECHARACTER,
 					payload: {
 						id : userId,
-						choice : current_choice,
+						choice : current_choice
 					}
 				}
 

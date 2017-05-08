@@ -13,6 +13,7 @@ let $data_5;
 let $data_6;
 
 let current_char;
+let current_turn; 
 
 let total_players;
 let starting_data;
@@ -80,49 +81,6 @@ const allow_mouseover = () => {
 	};
 }
 
-const setStartingState = () => {
-	
-		 
-	
-		 const $player_2_stats = $("#stats_2");
-		 const $player_3_stats = $("#stats_3");
-		 const $player_4_stats = $("#stats_4");
-		 const $player_5_stats = $("#stats_5");
-		 const $player_6_stats = $("#stats_6");
-		
-		
-		 $player_3_stats.html("<center>" + $char_3.speedScale[$char_3.speed] + " " +
-		 		$char_3.mightScale[$char_3.might] + " " + 
-		 		$char_3.sanityScale[$char_3.sanity] + " " + 
-		 		$char_3.knowledgeScale[$char_3.knowledge] + " " + "</center>");
-		
-		 $player_4_stats.html("<center>" + $char_4.speedScale[$char_4.speed] + " " +
-		 		$char_4.mightScale[$char_4.might] + " " + 
-		 		$char_4.sanityScale[$char_4.sanity] + " " + 
-		 		$char_4.knowledgeScale[$char_4.knowledge] + " " +"</center>");
-		
-		 $player_5_stats.html("<center>" + $char_5.speedScale[$char_5.speed] + " " +
-		 		$char_5.mightScale[$char_5.might] + " " + 
-		 		$char_5.sanityScale[$char_5.sanity] + " " + 
-		 		$char_5.knowledgeScale[$char_5.knowledge] + " " + "</center>");
-		
-		 $player_6_stats.html("<center>" + $char_6.speedScale[$char_6.speed] + " " +
-		 		$char_6.mightScale[$char_6.might] + " " + 
-		 		$char_6.sanityScale[$char_6.sanity] + " " + 
-		 		$char_6.knowledgeScale[$char_6.knowledge] + " " + "</center>");
-	    
-	     moves = $char_1.speedScale[$char_1.speed - 1];
-	     movesp.innerHTML = $char_1.speedScale[$char_1.speed - 1];
-		 const $objective_description = $("#objective_description");
-		 $objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>");
-     	document.getElementById("player_1").style.borderColor = "yellow";
-}
-
-const update = () => {
-	
-	current_char = turn + 1;
-}
-
 function set_starting_state(data) {
 	
 	starting_data = JSON.parse(data.payload);
@@ -134,6 +92,7 @@ function set_starting_state(data) {
 	var added = 0;
 	var players = JSON.parse(data.turnOrder);
 	total_players = players.length;
+	current_turn = 0;
 	
 	var first_player = players[0];
 	
@@ -174,6 +133,11 @@ function set_starting_state(data) {
 		}
 		
 		character_list[i] = player_char;
+		
+		if(player === first_player) {
+			current_char = i;
+			console.log(i);
+		}
 	}
 	
 	if(total_players === 1) {
@@ -223,6 +187,12 @@ function set_starting_state(data) {
 	}
 	
 	allow_mouseover();
+
+	current_char--;
+	current_turn--;
+	turn_end(current_turn);
+	const $objective_description = $("#objective_description");
+	$objective_description.html("<center>Something weird is going on... <p>Explore the house and find out what!</p></center>");
 }
 
 function setup_player_1(inGame) {
@@ -415,6 +385,114 @@ function setup_player_6(inGame) {
 	} else {
 		
 	}
+}
+
+function update_turn(currentTurn) {
+	
+	if(currentTurn != current_turn) {
+		console.log(currentTurn + " current turn given vs local " + current_turn);
+	
+		if (current_char === total_players - 1)
+			current_char = 0;
+	      else
+	    	  current_char++;
+	
+		if (current_turn === total_players - 1)
+			current_turn = 0;
+	      else
+	    	  current_turn++;
+		
+		console.log(current_char);
+		console.log(current_turn);
+		
+		if(current_char === 0) {
+		     
+	        moves = $data_1.speedScale[$data_1.speed];
+	        movesp.innerHTML = $data_1.speedScale[$data_1.speed];
+	        document.getElementById("player_1").style.borderColor = "yellow";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 1) {
+	   
+	        moves = $data_2.speedScale[$data_2.speed];
+	        movesp.innerHTML = $data_2.speedScale[$data_2.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "yellow";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 2) {
+	   
+	        moves = $data_3.speedScale[$data_3.speed];
+	        movesp.innerHTML = $data_3.speedScale[$data_3.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "yellow";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 3) {
+	   
+	        moves = $data_4.speedScale[$data_4.speed];
+	        movesp.innerHTML = $data_4.speedScale[$data_4.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "yellow";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 4) {
+	   
+	        moves = $data_5.speedScale[$data_5.speed];
+	        movesp.innerHTML = $data_5.speedScale[$data_5.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "yellow";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 5) {
+	   
+	        moves = $data_6.speedScale[$data_6.speed];
+	        movesp.innerHTML = $data_6.speedScale[$data_6.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "yellow";
+	    }
+	}
+}
+
+function turn_end() {
+	
+	var message = {
+			type: MESSAGE_TYPE.GAMEMOVE,
+			payload: {
+				id : userId,
+				query : {
+					name : "end"
+				}
+			}
+      }
+
+	const json = JSON.stringify(message);
+	conn.send(json);
 }
 
 
