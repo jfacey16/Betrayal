@@ -51,7 +51,7 @@ public class GameWebSocket {
     STARTGAME,
     GAMEMOVE,
     CHOOSECHARACTER,
-    GAMERADY,
+    GAMEREADY,
     ERROR
   }
 
@@ -162,6 +162,9 @@ public class GameWebSocket {
         break;
       case GAMEMOVE: //game actions
         gameMove(received, session);
+        break;
+      case CHOOSECHARACTER:
+        chooseCharacter(received, session);
         break;
       default:
         assert false;
@@ -275,10 +278,10 @@ public class GameWebSocket {
     for(Session sess : lobbyMembers) {
       String memId = sessionToId.get(sess);
       members.add(idToName.get(memId));
-      
+
       System.out.println(idToName.get(memId));
     }
-    
+
     System.out.println("in updateLobby");
 
     JsonObject memberUpdate =  new JsonObject();
@@ -367,7 +370,7 @@ public class GameWebSocket {
       Map<String, Object> init = game.buildMap(null);
 
       JsonObject update =  new JsonObject();
-      update.addProperty("type", MESSAGE_TYPE.GAMERADY.ordinal());
+      update.addProperty("type", MESSAGE_TYPE.GAMEREADY.ordinal());
       update.addProperty("turnOrder", GSON.toJson(nameTurnOrder));
       update.addProperty("currentTurn", game.getCurrentTurn());
       update.addProperty("payload", GSON.toJson(init));

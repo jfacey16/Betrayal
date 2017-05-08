@@ -72,8 +72,9 @@ public class GameState {
 		phase = new Lobby(memory);
 
 		charGen = new CharacterGen();
-		characters = charGen.build().subList(0, getNumPlayers());
+		characters = charGen.build();
 		Collections.shuffle(characters);
+		characters.subList(0, getNumPlayers());
 	}
 
 	public Map<String, Object> buildMap(Map<String, String> qm) {
