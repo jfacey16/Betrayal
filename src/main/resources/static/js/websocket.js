@@ -49,9 +49,10 @@ const setup_betrayal = () => {
 				console.log("character!");
 				choose_character(data);
 				break;
-		
-		
-		
+			case MESSAGE_TYPE.GAMEREADY:
+				console.log(data);
+				console.log(data.payload);
+				set_starting_state(data);
 		}
 		
 	}
@@ -73,7 +74,6 @@ const create_name = user => {
 }
 
 const create_lobby = () => {
-	console.log("create"); 
 	var message = {
 		type: MESSAGE_TYPE.CREATELOBBY,
 		payload: {
@@ -110,8 +110,6 @@ function update_lobbies(data) {
 	$(".lobby_name").click(function(e) {
 		const current_lobby = $(e.target);
 		current_lobby_name = current_lobby.text();
-		
-		console.log(current_lobby_name);
 	});
 }
 
@@ -120,10 +118,6 @@ function update_lobby(data) {
 	console.log("in update lobby");
 	
 	const members = JSON.parse(data.members);
-	
-	if(!game_started) {
-		console.log(members);
-	}
 	
 	var member_text = "<p><p>Current Lobby Members:</p>";
 	
@@ -139,7 +133,6 @@ function update_lobby(data) {
 
 function join_lobby() {
 	
-	console.log("join"); 
 	var message = {
 		type: MESSAGE_TYPE.JOINLOBBY,
 		payload: {
@@ -154,7 +147,6 @@ function join_lobby() {
 
 function start_game() {
 	
-	console.log("starting"); 
 	var message = {
 		type: MESSAGE_TYPE.STARTGAME,
 		payload: {
@@ -171,7 +163,6 @@ function choose_character(data) {
 	
 	const choices = JSON.parse(data.choices);
 	var current_choice = "";
-	console.log(choices);
 	
 	$("#temp_lobby").html("");
 	
@@ -183,7 +174,8 @@ function choose_character(data) {
 	for(index in choices) {
 		choices_text += "<center><div class=\"char_choice\">" + choices[index].name + "</div></center>";
 	}
-	
+
+	choices_text += "<div id=\"choose_error\" class=\"message\"></div>";
 	choices_text += "<center><button type=\"button\" id=\"choose_character\">Choose Character</button></center>";
 	choices_text += "</div>";
 	
@@ -192,24 +184,35 @@ function choose_character(data) {
 	$(".char_choice").click(function(e) {
 		const choice = $(e.target);
 		current_choice = choice.text();
-		
-		console.log(current_choice);
 	});
 	
 	$("#choose_character").click(event => {
-		var message = {
-			type: MESSAGE_TYPE.CHOOSECHARACTER,
-			payload: {
-				id : userId,
-				choice : current_choice,
-			}
-		}
 		
-		console.log("sending " + current_choice);
+		if(current_choice != "") {
+			var message = {
+					type: MESSAGE_TYPE.CHOOSECHARACTER,
+					payload: {
+						id : userId,
+						choice : current_choice,
+					}
+				}
 
-		const json = JSON.stringify(message);
-		conn.send(json);
+				const json = JSON.stringify(message);
+				conn.send(json);
+				
+				$("#temp_lobby").html("");
+				
+				var waiting_text = "";
+				
+				waiting_text += "<div class=\"option\" style=\"width:100%\">";
+				waiting_text += "<center><h2>Waiting on other players...</h2></center>";
+				waiting_text += "<center>You've chosen to play as " + current_choice + "!</center>";
+				waiting_text += "</div>";
+				
+				$("#temp_lobby").html(waiting_text);
+		} else {
+			$("#choose_error").html("<center><p>ERROR: Please select a character to start the game!</p></center>");
+			document.getElementById("choose_error").style.color = "red";
+		}
 	});
-	
 }
-

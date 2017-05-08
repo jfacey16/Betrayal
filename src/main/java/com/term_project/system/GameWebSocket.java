@@ -39,6 +39,7 @@ public class GameWebSocket {
   private static Map<String, Queue<Session>> lobbyToSessions = new ConcurrentHashMap<>();
   private static Map<String, String> idToName = new ConcurrentHashMap<>();
   private static Map<String, GameState> lobbyToGameState = new ConcurrentHashMap<>();
+  private static Map<String, String> usersToCharacters = new ConcurrentHashMap<>();
 
   private static enum MESSAGE_TYPE {
     CONNECT,
@@ -278,11 +279,7 @@ public class GameWebSocket {
     for(Session sess : lobbyMembers) {
       String memId = sessionToId.get(sess);
       members.add(idToName.get(memId));
-
-      System.out.println(idToName.get(memId));
     }
-
-    System.out.println("in updateLobby");
 
     JsonObject memberUpdate =  new JsonObject();
     memberUpdate.addProperty("type", MESSAGE_TYPE.UPDATELOBBY.ordinal());
@@ -354,12 +351,15 @@ public class GameWebSocket {
     String id = payload.get("id").getAsString();
     assert id.equals(sessionToId.get(session));
 
+    usersToCharacters.put(id, payload.get("choice").getAsString());
+
     String lobby = idToLobby.get(id);
     GameState game = lobbyToGameState.get(lobby);
 
     //if final character has chosen load in map
     if(game.setPlayersCharacter(id, payload.get("choice").getAsString())) {
       //get the turn order
+    	
       List<String> idTurnOrder = game.getTurnOrder();
       List<String> nameTurnOrder = new ArrayList<>();
       for(String aId : idTurnOrder) {
@@ -374,7 +374,10 @@ public class GameWebSocket {
       update.addProperty("turnOrder", GSON.toJson(nameTurnOrder));
       update.addProperty("currentTurn", game.getCurrentTurn());
       update.addProperty("payload", GSON.toJson(init));
+      update.addProperty("users", GSON.toJson(usersToCharacters));
 
+      usersToCharacters.clear();
+      
       //get the sessions to send the message to
       Queue<Session> sessions = lobbyToSessions.get(lobby);
       for (Session ses : sessions) {

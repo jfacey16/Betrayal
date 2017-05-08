@@ -322,4 +322,39 @@ const update = () => {
     });
 }
 
+function set_starting_state(data) {
+	
+	$("#temp_lobby").hide();
+	
+	var found = false;
+	var added = 0;
+	var players = JSON.parse(data.turnOrder);
+	var total_players = players.length;
+	
+	var player_list = new Array(total_players);
+	
+	for(var index = 0; index < total_players; index++) {
+		if(username === players[index]) {
+			player_list[added] = players[index];
+			found = true;
+			added++;
+		} else {
+			if(found) {
+				player_list[added] = players[index];
+				added++;
+			}
+		}
+	}
+	
+	if(added != total_players) {
+		for(var i = 0; i <= (total_players - added); i++) {
+			player_list[added] = players[i];
+			added++;
+		}
+	}
+	
+	console.log(JSON.parse(data.users));
+	
+}
+
 
