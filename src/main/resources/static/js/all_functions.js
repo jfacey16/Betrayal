@@ -32,7 +32,8 @@ class Tile {
   let $player_4_turn;
   let $player_5_turn;
   let $player_6_turn;
- 
+  
+  let responseJSON = null;
   const T = 150;
   const P = 20;
   const D = 50;
@@ -62,14 +63,14 @@ class Tile {
   let posp4 = new Player(600,600,1,true,true,true,false);
   let posp5 = new Player(600,600,1,true,true,true,false);
   let posp6 = new Player(600,600,1,true,true,true,false);
-  const positions = [posp1, posp2, posp3, posp4, posp5, posp6];
+  let positions = [posp1, posp2, posp3, posp4, posp5, posp6];
   const offset1 = new Position(25,30);
   const offset2 = new Position(105,30);
   const offset3 = new Position(25,90);
   const offset4 = new Position(105,90);
   const offset5 = new Position(65,25);
   const offset6 = new Position(65,95);
-  const offsets = [offset1, offset2, offset3, offset4, offset5, offset6];
+  let offsets = [offset1, offset2, offset3, offset4, offset5, offset6];
   const v = new Position(50,10);
   const h = new Position(10,50);
   function tileExists(posx, posy, floor) {
@@ -205,7 +206,9 @@ class Tile {
       ending.disabled = false;
   }
  
-  function paintBoard(floor) {
+  function paintBoard(floor, players) {
+    positions = positions.slice(0, players);
+    offsets = offsets.slice(0, players);
     if (floor == 0 || floor == -1) {
       ctxb.strokeRect(600,600,T,T);
       ctxb.strokeRect(650,600,D,X);
@@ -457,4 +460,3 @@ class Tile {
       movesp.innerHTML = 0;
     }
   }
-
