@@ -225,6 +225,16 @@ public interface Tile {
   void addWest();
 
   /**
+   * Sets the tile that is linked to this tile in the Up.
+   */
+  void addUp();
+
+  /**
+   * Sets the tile that is linked to this tile in the Down.
+   */
+  void addDown();
+
+  /**
    * Sets the tile's position.
    *
    */

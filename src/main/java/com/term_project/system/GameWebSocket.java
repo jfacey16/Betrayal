@@ -295,7 +295,7 @@ public class GameWebSocket {
     String id = payload.get("id").getAsString();
     String lobbyName = payload.get("lobbyName").getAsString();
     assert id.equals(sessionToId.get(session));
-    assert id.equals(availableLobbies.contains(lobbyName));
+    assert availableLobbies.contains(lobbyName);
 
     //game is starting so no longer an available lobbyName
     availableLobbies.remove(lobbyName);

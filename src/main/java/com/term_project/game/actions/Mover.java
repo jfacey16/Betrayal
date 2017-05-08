@@ -30,7 +30,8 @@ public class Mover {
     dir = direction;
 
     assert(direction.equals("NORTH") || direction.equals("SOUTH")
-        || direction.equals("EAST") || direction.equals("WEST"));
+        || direction.equals("EAST") || direction.equals("WEST")) 
+        || direction.equals("UP") || direction.equals("DOWN");
 
     Tile currentTile = character.getTile();
 
@@ -38,10 +39,6 @@ public class Mover {
     case "NORTH":
       try {
         Tile newTile = currentTile.getNorth();
-        if (newTile != null)
-          System.out.println("tile: " + newTile.getName());
-        else 
-          System.out.println("tile: null");
         moveTileHandler(newTile, character, variables);
       } catch (NullPointerException e) {
         throw new NullPointerException("No available tile to the north.");
@@ -74,6 +71,27 @@ public class Mover {
         throw new NullPointerException("No available tile to the west.");
       }
       break;
+    
+
+    case "UP":
+      try {
+        Tile newTile = currentTile.getUp();
+        assert(newTile != null); 
+        moveTileHandler(newTile, character, variables);
+      } catch (NullPointerException e) {
+        throw new NullPointerException("No available tile to the up.");
+      }
+      break;
+
+    case "DOWN":
+      try {
+        Tile newTile = currentTile.getDown();
+        assert(newTile != null);
+        moveTileHandler(newTile, character, variables);
+      } catch (NullPointerException e) {
+        throw new NullPointerException("No available tile to the down.");
+      }
+      break;
     }
   }
 
@@ -96,9 +114,23 @@ public class Mover {
 
   private void prepTileToAdd(Tile newTile, GameChar character,
       Map<String, Object> variables) {
+    // Tile x = memory.getTiles().poll();
+    // while (x != null) {
+    //   System.out.println("xname: " + x.getName());
+    //   System.out.println("xn: " + x.hasNorth());
+    //   System.out.println("xs: " + x.hasSouth());
+    //   System.out.println("xe: " + x.hasEast());
+    //   System.out.println("xw: " + x.hasWest());
+    //   x = memory.getTiles().poll();
+    // }
+
     // pull a tile from the top of the deck
     toAdd = memory.getTiles().poll();
-
+      System.out.println("xname: " + toAdd.getName());
+      System.out.println("xn: " + toAdd.hasNorth());
+      System.out.println("xs: " + toAdd.hasSouth());
+      System.out.println("xe: " + toAdd.hasEast());
+      System.out.println("xw: " + toAdd.hasWest());
     // get info on the current position of character
     Tile currentTile = character.getTile();
     Pos curPos = currentTile.getPos();
@@ -119,6 +151,11 @@ public class Mover {
         toAdd = memory.getTiles().poll();
       }
     }
+    System.out.println("name: " + toAdd.getName());
+    System.out.println("n:" + toAdd.hasNorth());
+    System.out.println("s:" + toAdd.hasSouth());
+    System.out.println("e:" + toAdd.hasEast());
+    System.out.println("w:" + toAdd.hasWest());
 
     // now that we've retrieved a tile on the same floor, we must
     // set the tile's position
@@ -149,7 +186,6 @@ public class Mover {
 
   public void addTile(GameChar character, Integer numClockwiseRotations,
       Map<Pos, Tile> tileMap) throws RuntimeException {
-    System.out.println(numClockwiseRotations);
     for (int i = 0; i < numClockwiseRotations; i++) {
       toAdd.rotateClockwise();
     }
@@ -201,7 +237,6 @@ public class Mover {
     Tile southOfAdded = tileMap.get(new Pos(toAddPos.getX(),
         toAddPos.getY() + 1, toAddPos.getFloor()));
     if (southOfAdded != null && southOfAdded.hasNorth()) {
-
       if (toAdd.hasSouth()) {
         toAdd.addSouth();
         southOfAdded.addNorth();

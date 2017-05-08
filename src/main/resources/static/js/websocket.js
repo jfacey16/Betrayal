@@ -51,11 +51,13 @@ const setup_betrayal = () => {
 				break;
 			case MESSAGE_TYPE.GAMEREADY:
 				set_starting_state(data);
+				draw_map(data);
 				break;
 			case MESSAGE_TYPE.GAMEMOVE:
-				console.log("update recieved");
+				responseJSON = data;
 				update_turn(data.currentTurn);
 				break;
+
 		}
 		
 	}
@@ -214,4 +216,23 @@ function choose_character(data) {
 			document.getElementById("choose_error").style.color = "red";
 		}
 	});
+}
+
+function draw_map(data) {
+	const torder = JSON.parse(data.turnOrder);
+	paintBoard(-1, torder.length);
+}
+
+
+function game_move(params) {
+	var message = {
+		type: MESSAGE_TYPE.GAMEMOVE,
+		payload: {
+			id : userId,
+			query : params;
+		}
+	}
+
+	const json = JSON.stringify(message);
+	conn.send(json);
 }

@@ -271,7 +271,7 @@ public class TileBuilder implements Builder<Tile> {
     bg.add(Floor.GROUND);
     bg.add(Floor.BASEMENT);
 
-    Tile kitchen = new GenericTile(d1, 0, 0, 0,
+    Tile kitchen = new GenericTile(d2s, 0, 0, 0,
         bg, memory);
     kitchen.setName("Kitchen");
     tileList.add(kitchen);

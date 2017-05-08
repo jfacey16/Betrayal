@@ -7,6 +7,10 @@ $(document).ready(() => {
 	$item_window = $("#item");
 	$omen_window = $("#omen");
 	$event_window = $("#event");
+
+	$('#item').draggable();
+	$('#omen').draggable();
+	$('#event').draggable();
 	
 	$('#item').draggable();
 	$('#omen').draggable();
@@ -16,20 +20,20 @@ $(document).ready(() => {
 	$omen_window.hide();
 	$event_window.hide();
 
-//    $(document).keypress(function(e) {
-//        
-//        if(e.which == 49) {
-//            itemDrawn();
-//        }
-//        
-//        if(e.which == 50) {
-//            omenDrawn();
-//        }
-//        
-//        if(e.which == 51) {
-//            eventDrawn();
-//        }
-//    });
+    // $(document).keypress(function(e) {
+        
+    //     if(e.which == 49) {
+    //         itemDrawn();
+    //     }
+        
+    //     if(e.which == 50) {
+    //         omenDrawn();
+    //     }
+        
+    //     if(e.which == 51) {
+    //         eventDrawn();
+    //     }
+    // });
 });
 
 function itemDrawn(name, description, func, room_name) {
