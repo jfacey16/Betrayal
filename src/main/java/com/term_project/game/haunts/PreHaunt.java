@@ -153,11 +153,14 @@ public class PreHaunt implements GamePhase {
 
       if (phase == 1) {
         try {
-
+          System.out.println("here here");
+          try {
           move.addTile(character, Integer.parseInt(qm.get("rotations")),
-
               memory.getTileMap());
-
+          } catch (RuntimeException e) {
+            System.out.println("oh");
+          }
+          System.out.println("still here");
           variables.put("phase", 1);
           // send frontend tile map
           variables.put("tiles", memory.getTileBeans());
@@ -205,6 +208,9 @@ public class PreHaunt implements GamePhase {
             toResolve.add("haunt");
             omenList.add(omen);
           }
+          System.out.println("item:" + itemList.size());
+          System.out.println("omen:" + omenList.size());
+          System.out.println("event:" + eventList.size());
           // push to front end
           variables.put("toResolve", toResolve);
           variables.put("item", itemList);

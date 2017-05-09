@@ -52,13 +52,18 @@ const setup_betrayal = () => {
 			case MESSAGE_TYPE.GAMEREADY:
 				set_starting_state(data);
 				draw_map(data);
+				const using = JSON.parse(data.turnOrder);
+				console.log("hi: " + using.indexOf(username));
 				break;
 			case MESSAGE_TYPE.GAMEMOVE:
 				const pay = JSON.parse(data.payload);
 				if (pay.phase === 1) {
+					console.log("0:" + pay);
 					receiveTile(pay);
-				} else if (pay.phase === 0)
+				} else if (pay.phase === 0) {
+					console.log("1:" + pay);
 					actualMovement(data);
+				}
 				update_turn(data.currentTurn);
 				break;
 			case MESSAGE_TYPE.CHATUPDATE:

@@ -181,9 +181,15 @@ public class Mover {
 
   public void addTile(GameChar character, Integer numClockwiseRotations,
       Map<Pos, Tile> tileMap) throws RuntimeException {
+    System.out.println("why you do");
     for (int i = 0; i < numClockwiseRotations; i++) {
       toAdd.rotateClockwise();
     }
+
+    System.out.println("n:" + toAdd.hasNorth());
+    System.out.println("s:" + toAdd.hasSouth());
+    System.out.println("e:" + toAdd.hasEast());
+    System.out.println("w:" + toAdd.hasWest());
 
     // make sure door links to room we came from, otherwise throw an error
     switch (dir) {

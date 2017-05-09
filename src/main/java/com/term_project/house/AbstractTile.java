@@ -34,9 +34,9 @@ public abstract class AbstractTile implements Tile {
       int events, int omens, List<Floor> availableFloors,
       MemorySlot memory) {
 
-    this.items = new ConcurrentHashMap<>();
-    this.omens = new ConcurrentHashMap<>();
-    this.events = new ConcurrentHashMap<>();
+    this.items = new HashMap<>();
+    this.omens = new HashMap<>();
+    this.events = new HashMap<>();
 
     this.itemCount = items;
     this.omenCount = omens;
@@ -46,77 +46,77 @@ public abstract class AbstractTile implements Tile {
     this.availableDoors = availableDoors;
     this.availableFloors = availableFloors;
     this.memory = memory;
-    this.doors = new ConcurrentHashMap<>();
+    this.doors = new HashMap<>();
   }
 
   @Override
-  public synchronized Tile setName(String newName) {
+  public Tile setName(String newName) {
     name = newName;
     return this;
   }
 
   @Override
-  public synchronized String getName() {
+  public String getName() {
     return name;
   }
 
   @Override
-  public synchronized Map<String, Omen> getOmens() {
+  public Map<String, Omen> getOmens() {
     return omens;
   }
 
   @Override
-  public synchronized Map<String, Item> getItems() {
+  public Map<String, Item> getItems() {
     return items;
   }
 
   @Override
-  public synchronized Map<String, Event> getEvents() {
+  public Map<String, Event> getEvents() {
     return events;
   }
 
   @Override
-  public synchronized Event getEvent(String name) {
+  public Event getEvent(String name) {
     return events.get(name);
   }
 
   @Override
-  public synchronized void setItems(Map<String, Item> items) {
+  public void setItems(Map<String, Item> items) {
     this.items = items;
   }
 
   @Override
-  public synchronized void addEvent(String name, Event event) {
+  public void addEvent(String name, Event event) {
     events.put(name, event);
   }
 
   @Override
-  public synchronized void setOmens(Map<String, Omen> omens) {
+  public void setOmens(Map<String, Omen> omens) {
     this.omens = omens;
   }
 
   @Override
-  public synchronized int getItemCount() {
+  public int getItemCount() {
     return itemCount;
   }
 
   @Override
-  public synchronized int getOmenCount() {
+  public int getOmenCount() {
     return omenCount;
   }
 
   @Override
-  public synchronized int getEventCount() {
+  public int getEventCount() {
     return eventCount;
   }
 
   @Override
-  public synchronized Pos getPos() {
+  public Pos getPos() {
     return pos;
   }
 
   @Override
-  public synchronized Tile getNorth() throws NullPointerException {
+  public Tile getNorth() throws NullPointerException {
     if (!this.hasNorth()) {
       throw new NullPointerException(
           "There is no door/tile to the north.");
@@ -126,7 +126,7 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized Tile getSouth() throws NullPointerException {
+  public Tile getSouth() throws NullPointerException {
     if (!hasSouth()) {
       throw new NullPointerException(
           "There is no door/tile to the south.");
@@ -136,7 +136,7 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized Tile getEast() throws NullPointerException {
+  public Tile getEast() throws NullPointerException {
     if (!hasEast()) {
       throw new NullPointerException(
           "There is no door/tile to the south.");
@@ -148,7 +148,7 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized Tile getWest() throws NullPointerException {
+  public Tile getWest() throws NullPointerException {
     if (!hasWest()) {
       throw new NullPointerException(
           "There is no door/tile to the south.");
@@ -158,7 +158,7 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized Tile getUp() throws NullPointerException {
+  public Tile getUp() throws NullPointerException {
     if (!hasUp()) {
       throw new NullPointerException("There is no door/tile to above.");
     }
@@ -167,7 +167,7 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized Tile getDown() throws NullPointerException {
+  public Tile getDown() throws NullPointerException {
     if (!hasDown()) {
       throw new NullPointerException("There is no door/tile below.");
     }
@@ -176,37 +176,37 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized boolean hasNorth() {
+  public boolean hasNorth() {
     return availableDoors.contains(Direction.NORTH);
   }
 
   @Override
-  public synchronized boolean hasSouth() {
+  public boolean hasSouth() {
     return availableDoors.contains(Direction.SOUTH);
   }
 
   @Override
-  public synchronized boolean hasEast() {
+  public boolean hasEast() {
     return availableDoors.contains(Direction.EAST);
   }
 
   @Override
-  public synchronized boolean hasWest() {
+  public boolean hasWest() {
     return availableDoors.contains(Direction.WEST);
   }
 
   @Override
-  public synchronized boolean hasDown() {
+  public boolean hasDown() {
     return availableDoors.contains(Direction.DOWN);
   }
 
   @Override
-  public synchronized boolean hasUp() {
+  public boolean hasUp() {
     return availableDoors.contains(Direction.UP);
   }
 
   @Override
-  public synchronized void addNorth() {
+  public void addNorth() {
     assert(hasNorth());
 
     doors.put(Direction.NORTH,
@@ -215,7 +215,7 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized void addSouth() {
+  public void addSouth() {
     assert(hasSouth());
 
     doors.put(Direction.SOUTH,
@@ -223,7 +223,7 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized void addEast() {
+  public void addEast() {
     assert(hasEast());
 
     doors.put(Direction.EAST,
@@ -232,38 +232,38 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized void addWest() {
+  public void addWest() {
     assert(hasWest());
     doors.put(Direction.WEST,
         new Pos(pos.getX() - 1, pos.getY(), pos.getFloor()));
   }
 
   @Override
-  public synchronized void addUp() {
+  public void addUp() {
     assert(hasUp());
     doors.put(Direction.UP,
         new Pos(pos.getX() - 2, pos.getY(), Floor.ATTIC));
   }
 
   @Override
-  public synchronized void addDown() {
+  public void addDown() {
     assert(hasDown());
     doors.put(Direction.DOWN,
         new Pos(pos.getX() + 2, pos.getY(), Floor.GROUND));
   }
 
   @Override
-  public synchronized void setPos(Pos newPos) {
+  public void setPos(Pos newPos) {
     pos = newPos;
   }
 
   @Override
-  public synchronized List<Floor> getAvailableFloors() {
+  public List<Floor> getAvailableFloors() {
     return availableFloors;
   }
 
   @Override
-  public synchronized void rotateClockwise() {
+  public void rotateClockwise() {
     // will be placement will switching tiles
     Pos holderOne;
     Pos holderTwo;
@@ -359,7 +359,7 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized void rotateCounterClockwise() {
+  public void rotateCounterClockwise() {
     // will be placement will switching tiles
     Pos holderOne;
     Pos holderTwo;
@@ -381,17 +381,17 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized void addItem(Item item) {
+  public void addItem(Item item) {
     items.put(item.getName(), item);
   }
 
   @Override
-  public synchronized void addOmen(Omen omen) {
+  public void addOmen(Omen omen) {
     omens.put(omen.getName(), omen);
   }
 
   @Override
-  public synchronized boolean equals(Object object) {
+  public boolean equals(Object object) {
     if (object == this)
       return true;
     if (!(object instanceof Tile)) {
@@ -402,33 +402,33 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public synchronized int hashCode() {
+  public int hashCode() {
     return this.getName().hashCode();
   }
 
   @Override
-  public synchronized TileBean getBean() {
+  public TileBean getBean() {
     return new TileBean(availableDoors, itemCount, eventCount, omenCount,
         pos, name);
   }
 
   @Override
-  public synchronized Item getItem(String item) {
+  public Item getItem(String item) {
     return items.get(item);
   }
 
   @Override
-  public synchronized Omen getOmen(String omen) {
+  public Omen getOmen(String omen) {
     return omens.get(omen);
   }
 
   @Override
-  public synchronized Item removeItem(Item item) {
+  public Item removeItem(Item item) {
     return items.remove(item.getName());
   }
 
   @Override
-  public synchronized Omen removeOmen(Omen omen) {
+  public Omen removeOmen(Omen omen) {
     return omens.remove(omen.getName());
   }
 }
