@@ -25,7 +25,8 @@
 
 <style type="text/css">
 	div {
-		font-family:Verdana, Geneva, sans-serif;}
+		font-family:Verdana, Geneva, sans-serif;
+		font-size:14px;}
 	</style>
 	
 

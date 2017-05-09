@@ -368,7 +368,7 @@ function setup_player_4(inGame) {
             $data_4.knowledgeScale[$data_4.knowledge] + " " + "</center>");
        
     } else {
-       
+
     }
 }
  
@@ -393,7 +393,7 @@ function setup_player_5(inGame) {
             $data_5.knowledgeScale[$data_5.knowledge] + " " + "</center>");
        
     } else {
-       
+
     }
 }
  
