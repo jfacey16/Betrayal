@@ -16,6 +16,7 @@ import com.term_project.house.Floor;
 import com.term_project.house.GenericTile;
 import com.term_project.house.Tile;
 import com.term_project.house.TileBean;
+import com.term_project.items.Corpse;
 import com.term_project.items.Item;
 import com.term_project.items.Paint;
 import com.term_project.omens.Omen;
@@ -452,6 +453,7 @@ public class HauntOne implements GamePhase {
             affectedChar.getTile()
                 .addOmen(affectedChar.getOmensList().get(i));
           }
+          affectedChar.getTile().addItem(new Corpse());
           // remove character from game
           memory.getGameState().getCharacters().remove(affectedChar);
           memory.getGameState().getTurnOrder().remove(id);
