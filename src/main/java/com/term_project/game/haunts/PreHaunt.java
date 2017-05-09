@@ -84,7 +84,7 @@ public class PreHaunt implements GamePhase {
       mode = "idle";
       phase = 0;
     }
-    
+
     // make sure backend matches frontend
     if (!mode.equals("idle")) {
       if (!name.equals(mode)) {
@@ -157,16 +157,6 @@ public class PreHaunt implements GamePhase {
           move.addTile(character, Integer.parseInt(qm.get("rotations")),
               memory.getTileMap());
 
-          variables.put("phase", 1);
-          // send frontend tile map
-          variables.put("tiles", memory.getTileBeans());
-
-          // send frontend character
-          variables.put("characters", memory.getCharBeans());
-
-          // send frontend newly added tile
-          variables.put("newTile", character.getTile().getBean());
-
           phase = 0;
           mode = "idle";
 
@@ -187,6 +177,7 @@ public class PreHaunt implements GamePhase {
             Item item = memory.getItems().poll();
             item.add(character);
             itemList.add(item);
+            character.getTile().addItem(item);
           }
 
           for (int i = 0; i < character.getTile().getEventCount(); i++) {
@@ -194,8 +185,7 @@ public class PreHaunt implements GamePhase {
             toResolve.add("event");
             phase = 1;
             eventList.add(event);
-
-            // ADD EVENTS TO TILE HASHMAP
+            character.getTile().addEvent(event);
           }
 
           for (int i = 0; i < character.getTile().getOmenCount(); i++) {
@@ -203,7 +193,19 @@ public class PreHaunt implements GamePhase {
             omen.add(character);
             toResolve.add("haunt");
             omenList.add(omen);
+            character.getTile().addOmen(omen);
           }
+
+          variables.put("phase", 1);
+          // send frontend tile map
+          variables.put("tiles", memory.getTileBeans());
+
+          // send frontend character
+          variables.put("characters", memory.getCharBeans());
+
+          // send frontend newly added tile
+          variables.put("newTile", character.getTile().getBean());
+
           System.out.println("item:" + itemList.size());
           System.out.println("omen:" + omenList.size());
           System.out.println("event:" + eventList.size());
@@ -234,10 +236,10 @@ public class PreHaunt implements GamePhase {
         String statToUse = qm.get("stat");
 
         // make sure valid stat is being used
-        if (!event.getUsableAsString().contains(statToUse)) {
-          variables.put("Error", "Invalid stat for event.");
-          return;
-        }
+//        if (!event.getUsableAsString().contains(statToUse)) {
+//          variables.put("Error", "Invalid stat for event.");
+//          return;
+//        }
 
         // get the players relevant stat
         int statVal;
@@ -257,6 +259,7 @@ public class PreHaunt implements GamePhase {
         String result = event.apply(rollSum, character);
         variables.put("result", result);
         variables.put("character", character.getCharBean());
+
         // send to frontend remaining actions.
         addActions(character, variables);
         mode = "idle";
@@ -358,9 +361,9 @@ public class PreHaunt implements GamePhase {
       break;
 
     case "end":
-    	System.out.println("ending");
       mode = "start";
       memory.getGameState().endTurn();
+      System.out.println(variables);
       break;
     }
   }
