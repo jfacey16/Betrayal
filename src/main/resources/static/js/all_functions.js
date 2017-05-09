@@ -357,31 +357,26 @@ function receiveCard(data) {
   else if (positions[turn].floor == 2)
     ctx = ctxs;
 	var ro = JSON.parse(data.payload);
-  console.log(ro.newTile.availableDoors);
   ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + 1, D + 2, X);
   ctx.clearRect(positions[turn].posx + T - X - 1, positions[turn].posy + D - 1, X, D + 2);
   ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + T - X - 1, D + 2, X);
   ctx.clearRect(positions[turn].posx + 1, positions[turn].posy + D - 1, X, D + 2);
   if (ro.newTile.availableDoors.indexOf("NORTH") !== -1) {
-    console.log(ro.newTile.availableDoors.indexOf("NORTH"));
     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
     positions[turn].north = true;
   } else 
     positions[turn].north = false;
   if (ro.newTile.availableDoors.indexOf("EAST") !== -1) {
-    console.log(ro.newTile.availableDoors.indexOf("EAST"));
     ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
     positions[turn].east = true;
   } else
     positions[turn].east = true;
   if (ro.newTile.availableDoors.indexOf("SOUTH") !== -1) {
-    console.log(ro.newTile.availableDoors.indexOf("SOUTH"));
     ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
     positions[turn].south = true;
   } else 
     positions[turn].south = false;
   if (ro.newTile.availableDoors.indexOf("WEST") !== -1)  {
-    console.log(ro.newTile.availableDoors.indexOf("WEST"));
     ctx.strokeRect(positions[turn].posx, positions[turn].posy + D, X, D);
     positions[turn].west = true;
   } else 
@@ -514,7 +509,6 @@ function actualMovement(responseJSON) {
         ctx.font = "17px Times New Roman";
         ctx.fillText(responseObject.newtile.name, positions[turn].posx + textOff.posx,
           positions[turn].posy + textOff.posy);
-        console.log(responseObject.newtile.name);
         ctx.font = "25px Times New Roman";
         if (responseObject.newtile.eventCount > 0)
           ctx.fillText("E", positions[turn].posx + symbOff.posx, positions[turn].posy + symbOff.posy);
@@ -616,7 +610,6 @@ function actualMovement(responseJSON) {
         ctx.font = "17px Times New Roman";
         ctx.fillText(responseObject.newtile.name, positions[turn].posx + textOff.posx,
           positions[turn].posy + textOff.posy);
-        console.log(responseObject.newtile.name);
         ctx.font = "25px Times New Roman";
         if (responseObject.newtile.eventCount > 0)
           ctx.fillText("E", positions[turn].posx + symbOff.posx, positions[turn].posy + symbOff.posy);
@@ -647,7 +640,6 @@ function actualMovement(responseJSON) {
         ctxm.strokeRect(positions[turn].posx / S, (positions[turn].posy + T) / S, P, P);
         positions[turn].posy = positions[turn].posy + T;
         if (responseObject.newtile.availableDoors.length == 4) {
-          console.log("4");
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
@@ -660,7 +652,6 @@ function actualMovement(responseJSON) {
           const ntile = new Tile(positions[turn].posx, positions[turn].posy, true, true, true, true);
           flo.push(ntile);
         } else if (responseObject.newtile.availableDoors.length == 3) {
-          console.log("3");
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
@@ -678,7 +669,6 @@ function actualMovement(responseJSON) {
           positions[turn].south = true;
           positions[turn].west = false;
         } else if (responseObject.newtile.availableDoors.length == 2) {
-          console.log("2");
           if ((responseObject.newtile.availableDoors.indexOf("NORTH") != -1 &&
             responseObject.newtile.availableDoors.indexOf("SOUTH") != -1) ||
             (responseObject.newtile.availableDoors.indexOf("EAST") != -1 &&
@@ -709,7 +699,6 @@ function actualMovement(responseJSON) {
           }
 
         } else if (responseObject.newtile.availableDoors.length == 1) {
-          console.log("1");
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           game_move({name: "move", rotations: "0"});
           positions[turn].north = true;
@@ -721,7 +710,6 @@ function actualMovement(responseJSON) {
         }
         ctx.font = "17px Times New Roman";
         ctx.fillText(responseObject.newtile.name, positions[turn].posx + textOff.posx, positions[turn].posy + textOff.posy);
-        console.log(responseObject.newtile.name);
         ctx.font = "25px Times New Roman";
         if (responseObject.newtile.eventCount > 0)
           ctx.fillText("E", positions[turn].posx + symbOff.posx, positions[turn].posy + symbOff.posy);
@@ -822,7 +810,6 @@ function actualMovement(responseJSON) {
         ctx.font = "17px Times New Roman";
         ctx.fillText(responseObject.newtile.name, positions[turn].posx + textOff.posx,
           positions[turn].posy + textOff.posy);
-        console.log(responseObject.newtile.name);
         ctx.font = "25px Times New Roman";
         if (responseObject.newtile.eventCount > 0)
           ctx.fillText("E", positions[turn].posx + symbOff.posx, positions[turn].posy + symbOff.posy);
@@ -874,8 +861,6 @@ function actualMovement(responseJSON) {
 
 
 function update_turn(currentTurn) {
-	
-	console.log(currentTurn + " " + current_turn);
 	
 	if(currentTurn != current_turn) {
 		console.log(currentTurn + " current turn given vs local " + current_turn);

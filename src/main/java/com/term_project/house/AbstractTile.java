@@ -132,10 +132,13 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public Tile getEast() throws NullPointerException {
+    System.out.println(hasEast());
     if (!hasEast()) {
+      System.out.println("you gotta be kidding me");
       throw new NullPointerException(
-          "There is no door/tile to the south.");
+          "There is no door/tile to the east.");
     }
+    System.out.println("ha" + doors.get(Direction.EAST));
     Tile east = memory.getTileMap().get(doors.get(Direction.EAST));
     System.out.println("doorx: " + doors.get(Direction.EAST).getX());
     System.out.println("doory: " + doors.get(Direction.EAST).getY());
@@ -146,7 +149,7 @@ public abstract class AbstractTile implements Tile {
   public Tile getWest() throws NullPointerException {
     if (!hasWest()) {
       throw new NullPointerException(
-          "There is no door/tile to the south.");
+          "There is no door/tile to the west.");
     }
     Tile west = memory.getTileMap().get(doors.get(Direction.WEST));
     return west;

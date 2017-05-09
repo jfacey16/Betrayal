@@ -78,7 +78,6 @@ const setup_betrayal = () => {
 					}
 				}
 				console.log(data);
-				console.log(data.currentTurn);
 				update_turn(data.currentTurn);
 				break;
 			case MESSAGE_TYPE.CHATUPDATE:
@@ -260,6 +259,7 @@ function draw_map(data) {
 
 
 function game_move(params) {
+	console.log("you there?");
 	var message = {
 		type: MESSAGE_TYPE.GAMEMOVE,
 		payload: {

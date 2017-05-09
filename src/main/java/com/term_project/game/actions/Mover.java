@@ -181,15 +181,9 @@ public class Mover {
 
   public void addTile(GameChar character, Integer numClockwiseRotations,
       Map<Pos, Tile> tileMap) throws RuntimeException {
-    System.out.println("why you do");
     for (int i = 0; i < numClockwiseRotations; i++) {
       toAdd.rotateClockwise();
     }
-
-    System.out.println("n:" + toAdd.hasNorth());
-    System.out.println("s:" + toAdd.hasSouth());
-    System.out.println("e:" + toAdd.hasEast());
-    System.out.println("w:" + toAdd.hasWest());
 
     // make sure door links to room we came from, otherwise throw an error
     switch (dir) {
@@ -232,7 +226,8 @@ public class Mover {
         toAdd.addNorth();
         northOfAdded.addSouth();
       }
-    }
+    } else if (toAdd.hasNorth())
+      toAdd.addNorth();
 
     // link tile south of added tile to the tile if a door exists.
     Tile southOfAdded = tileMap.get(new Pos(toAddPos.getX(),
@@ -242,7 +237,8 @@ public class Mover {
         toAdd.addSouth();
         southOfAdded.addNorth();
       }
-    }
+    } else if (toAdd.hasSouth())
+      toAdd.addSouth();
 
     // link tiles north of added tile to the tile if a door exists.
     Tile eastOfAdded = tileMap.get(new Pos(toAddPos.getX() + 1,
@@ -253,17 +249,19 @@ public class Mover {
         toAdd.addEast();
         eastOfAdded.addWest();
       }
-    }
+    } else if (toAdd.hasEast())
+      toAdd.addEast();
 
     // link tiles north of added tile to the tile if a door exists.
     Tile westOfAdded = tileMap.get(new Pos(toAddPos.getX() - 1,
         toAddPos.getY(), toAddPos.getFloor()));
     if (westOfAdded != null && westOfAdded.hasEast()) {
-      if (westOfAdded.hasEast()) {
-        toAdd.addEast();
+      if (toAdd.hasWest()) {
+        toAdd.addWest();
         westOfAdded.addEast();
       }
-    }
+    } else if (toAdd.hasWest())
+      toAdd.addWest();
 
     // Add character to the tile we just added!
     character.setTile(toAdd);
