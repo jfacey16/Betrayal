@@ -206,6 +206,18 @@ function eventDrawn(data, card_info, room_name) {
 	
 	$("#roll_speed").unbind().click(event => {
 		
+		document.getElementById("roll_speed").disabled = true;
+		
+		if(might_button) {
+			document.getElementById("roll_might").disabled = true;
+		}
+		if(know_button) {
+			document.getElementById("roll_know").disabled = true;
+		}
+		if(sanity_button) {
+			document.getElementById("roll_sanity").disabled = true;
+		}
+		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,
 				payload: {
@@ -223,6 +235,18 @@ function eventDrawn(data, card_info, room_name) {
     });
 	
 	$("#roll_might").unbind().click(event => {
+		
+		document.getElementById("roll_might").disabled = true;
+		
+		if(speed_button) {
+			document.getElementById("roll_speed").disabled = true;
+		}
+		if(know_button) {
+			document.getElementById("roll_know").disabled = true;
+		}
+		if(sanity_button) {
+			document.getElementById("roll_sanity").disabled = true;
+		}
 		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,
@@ -242,6 +266,18 @@ function eventDrawn(data, card_info, room_name) {
 	
 	$("#roll_know").unbind().click(event => {
 		
+		document.getElementById("roll_know").disabled = true;
+
+		if(might_button) {
+			document.getElementById("roll_might").disabled = true;
+		}
+		if(speed_button) {
+			document.getElementById("roll_speed").disabled = true;
+		}
+		if(sanity_button) {
+			document.getElementById("roll_sanity").disabled = true;
+		}
+		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,
 				payload: {
@@ -259,6 +295,18 @@ function eventDrawn(data, card_info, room_name) {
     });
 	
 	$("#roll_sanity").unbind().click(event => {
+		
+		document.getElementById("roll_sanity").disabled = true;
+		
+		if(might_button) {
+			document.getElementById("roll_might").disabled = true;
+		}
+		if(know_button) {
+			document.getElementById("roll_know").disabled = true;
+		}
+		if(speed_button) {
+			document.getElementById("roll_speed").disabled = true;
+		}
 		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,
