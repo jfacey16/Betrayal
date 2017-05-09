@@ -14,9 +14,9 @@ import com.term_project.game.actions.Mover;
 import com.term_project.house.Direction;
 import com.term_project.house.Floor;
 import com.term_project.house.GenericTile;
-import com.term_project.house.Pos;
 import com.term_project.house.Tile;
 import com.term_project.house.TileBean;
+import com.term_project.items.Corpse;
 import com.term_project.items.Item;
 import com.term_project.items.Paint;
 import com.term_project.omens.Omen;
@@ -40,10 +40,7 @@ public class HauntOne implements GamePhase {
   private List<String> toResolve;
 
   public HauntOne(MemorySlot memory) {
-    // TODO: implement attack (i can do this)
-    // TODO: alter move for holding corpses (move should be 2 when holding)
-    // TODO: add cultists to id map (need to do this in state)
-    // TODO: return construction to front end
+
     this.memory = memory;
     mode = "start";
     phase = 0;
@@ -51,7 +48,10 @@ public class HauntOne implements GamePhase {
     move = new Mover(memory);
     remaining = new HashMap<>();
     toResolve = new ArrayList<>();
+  }
 
+  @Override
+  public void setup(GameChar character, Map<String, Object> variables) {
     // sacrifice and paint count for win checking
     sacrificePoints = 0;
     paintCount = 0;
@@ -64,14 +64,6 @@ public class HauntOne implements GamePhase {
       int id = random.nextInt(memory.getTileList().size());
       memory.getTileList().get(id).addItem(new Paint());
     }
-    // set traitor
-    int c = random.nextInt(characters);
-    memory.getGameCharacters().get(c).setTraitor(true);
-    // add cultists
-    for (int i = 0; i < characters; i++) {
-      memory.getGameCharacters().add(new Cultist());
-
-    }
     // add pentagram chamber
     List<Floor> b = new ArrayList<>();
     b.add(Floor.BASEMENT);
@@ -83,9 +75,29 @@ public class HauntOne implements GamePhase {
     if (!memory.getTileList().contains(penta)) {
       memory.getTiles().remove(penta);
       memory.getTileList().add(penta);
-      // TODO: change this
-      memory.getTileMap().put(new Pos(0, 0, Floor.BASEMENT), penta);
+      character.getTile().setName("Pentagram Chamber");
     }
+    // add cultists
+    int index = memory.getGameState().getCharacters().indexOf(character);
+    String id = memory.getGameState().getTurnOrder().get(index);
+
+    Tile pentagram = null;
+
+    List<Tile> tiles = memory.getTileList();
+
+    for (int i = 0; i < tiles.size(); i++) {
+      if (tiles.get(i).getName().equals("Pentagram Chamber")) {
+        pentagram = tiles.get(i);
+      }
+    }
+    for (int i = 0; i < characters; i++) {
+      Cultist cultist = new Cultist("Cultist " + i);
+      cultist.setTile(pentagram);
+      memory.getGameState().getCharacters().add(index, cultist);
+      memory.getGameState().getTurnOrder().add(index, id);
+    }
+    variables.put("characters", memory.getGameState().getCharacters());
+    variables.put("tiles", memory.getTileList());
   }
 
   @Override
@@ -134,6 +146,13 @@ public class HauntOne implements GamePhase {
         // try to move in given direction
         // fails if no door exists
         try {
+          if (remaining.get("move").equals(1)
+              && character.getItems().containsKey("Corpse")) {
+            remaining.put("move", remaining.get("move") - 1);
+            mode = "idle";
+            phase = 0;
+            return;
+          }
           move.run(direction, character, variables);
 
           // use up one movement
@@ -201,7 +220,6 @@ public class HauntOne implements GamePhase {
           }
 
           for (int i = 0; i < character.getTile().getEventCount(); i++) {
-            // TODO: do event things
             Event event = memory.getEvents().poll();
             toResolve.add("event");
             phase = 1;
@@ -348,16 +366,49 @@ public class HauntOne implements GamePhase {
 
     case "attack":
       if (phase == 0) {
+        toResolve.add("attack");
         // need to be sent character id
         String attackChar = qm.get("opponent");
         // get opponent
         GameChar opponent = memory.getGameState().getCharacters()
             .get(memory.getGameState().getTurnOrder().indexOf(attackChar));
         // roll for current
-        List<Integer> rollsCurrent = Dice.roll(character.getMight());
+        int dice1;
+        if (character.getOmens().containsKey("Spear")) {
+          dice1 = character.getMight() + 2;
+          if (dice1 > 8) {
+            dice1 = 8;
+          }
+        } else {
+          if (character.getItems().containsKey("Axe")) {
+            dice1 = character.getMight() + 1;
+            if (dice1 > 8) {
+              dice1 = 8;
+            }
+          } else {
+            dice1 = character.getMight();
+          }
+        }
+        List<Integer> rollsCurrent = Dice.roll(dice1);
         int sumCurrent = Dice.sum(rollsCurrent);
         // roll for opponent
-        List<Integer> rollsOpponent = Dice.roll(opponent.getMight());
+        int dice2;
+        if (opponent.getOmens().containsKey("Spear")) {
+          dice2 = opponent.getMight() + 2;
+          if (dice2 > 8) {
+            dice2 = 8;
+          }
+        } else {
+          if (opponent.getItems().containsKey("Axe")) {
+            dice2 = opponent.getMight() + 1;
+            if (dice2 > 8) {
+              dice2 = 8;
+            }
+          } else {
+            dice2 = opponent.getMight();
+          }
+        }
+        List<Integer> rollsOpponent = Dice.roll(dice2);
         int sumOpponent = Dice.sum(rollsOpponent);
         // send id of character who lost and how much they lose
         if (sumCurrent == sumOpponent) {
@@ -365,21 +416,57 @@ public class HauntOne implements GamePhase {
           variables.put("amount", 0);
 
         } else if (sumCurrent >= sumOpponent) {
+          if (opponent.getItems().containsKey("Armor")) {
+            variables.put("amount", sumCurrent - sumOpponent - 1);
+          } else {
+            variables.put("amount", sumCurrent - sumOpponent);
+          }
           variables.put("id", attackChar);
-          variables.put("amount", sumCurrent - sumOpponent);
         } else {
+          if (character.getItems().containsKey("Armor")) {
+            variables.put("amount", sumOpponent - sumCurrent - 1);
+          } else {
+            variables.put("amount", sumOpponent - sumCurrent);
+          }
           variables.put("id", memory.getGameState().getTurnOrder().get(
               memory.getGameState().getCharacters().indexOf(character)));
-          variables.put("amount", sumOpponent - sumCurrent);
         }
+        phase = 1;
+        return;
       } else if (phase == 1) {
+        String id = qm.get("character");
+        String mightMod = qm.get("might");
+        String speedMod = qm.get("speed");
+        GameChar affectedChar = memory.getGameState().getCharacters()
+            .get(memory.getGameState().getTurnOrder().indexOf(id));
 
+        if (affectedChar.modMight(Integer.parseInt(mightMod)) < 0
+            || affectedChar.modSpeed(Integer.parseInt(speedMod)) < 0) {
+          // dead
+          variables.put("alive", false);
+          // drop items and omens
+          for (int i = 0; i < affectedChar.getItemsList().size(); i++) {
+            affectedChar.getTile()
+                .addItem(affectedChar.getItemsList().get(i));
+          }
+          for (int i = 0; i < affectedChar.getOmensList().size(); i++) {
+            affectedChar.getTile()
+                .addOmen(affectedChar.getOmensList().get(i));
+          }
+          affectedChar.getTile().addItem(new Corpse());
+          // remove character from game
+          memory.getGameState().getCharacters().remove(affectedChar);
+          memory.getGameState().getTurnOrder().remove(id);
+          variables.put("tile", affectedChar.getTile().getBean());
+        } else {
+          variables.put("tile", affectedChar.getTile().getBean());
+          variables.put("alive", true);
+        }
       }
       String res = "";
       if (this.gameOver(res)) {
         variables.put("gameover", res);
       }
-
       break;
 
     case "paint":
@@ -387,6 +474,7 @@ public class HauntOne implements GamePhase {
       paint.loss(character);
       character.getTile().removeItem(paint);
       paintCount += 1;
+      variables.put("paint", paintCount);
       String resu = "";
       if (this.gameOver(resu)) {
         variables.put("gameover", resu);
@@ -404,6 +492,7 @@ public class HauntOne implements GamePhase {
       } else {
         sacrificePoints += 1;
       }
+      variables.put("sacrifice", sacrificePoints);
       String result = "";
       if (this.gameOver(result)) {
         variables.put("gameover", result);
@@ -423,6 +512,7 @@ public class HauntOne implements GamePhase {
       } else {
         sacrificePoints += 1;
       }
+      variables.put("sacrifice", sacrificePoints);
       String resul = "";
       if (this.gameOver(resul)) {
         variables.put("gameover", resul);

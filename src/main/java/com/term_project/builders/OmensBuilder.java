@@ -13,7 +13,10 @@ import com.term_project.omens.Girl;
 import com.term_project.omens.HolySymbol;
 import com.term_project.omens.Madman;
 import com.term_project.omens.Mask;
+import com.term_project.omens.Medallion;
 import com.term_project.omens.Omen;
+import com.term_project.omens.Skull;
+import com.term_project.omens.Spear;
 
 public class OmensBuilder implements Builder<Omen> {
 
@@ -28,6 +31,9 @@ public class OmensBuilder implements Builder<Omen> {
     omenList.add(new HolySymbol());
     omenList.add(new Madman());
     omenList.add(new Mask());
+    omenList.add(new Medallion());
+    omenList.add(new Skull());
+    omenList.add(new Spear());
 
     Collections.shuffle(omenList);
     Queue<Omen> omenDeck = new LinkedList<>(omenList);

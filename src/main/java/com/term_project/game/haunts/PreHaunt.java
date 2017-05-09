@@ -13,7 +13,6 @@ import com.term_project.house.Tile;
 import com.term_project.house.TileBean;
 import com.term_project.items.Item;
 import com.term_project.omens.Omen;
-import com.term_project.omens.Omen;
 import com.term_project.system.MemorySlot;
 
 public class PreHaunt implements GamePhase {
@@ -100,8 +99,8 @@ public class PreHaunt implements GamePhase {
     }
 
     // make sure player has enough actions
-    if (remaining.containsKey(name) && remaining.get(name) <= 0 && 
-      phase == 0) {
+    if (remaining.containsKey(name) && remaining.get(name) <= 0
+        && phase == 0) {
       variables.put("Error",
           "Cannot perform action as no more are remaining.");
       addActions(character, variables);
@@ -154,13 +153,10 @@ public class PreHaunt implements GamePhase {
       if (phase == 1) {
         try {
           System.out.println("here here");
-          try {
+
           move.addTile(character, Integer.parseInt(qm.get("rotations")),
               memory.getTileMap());
-          } catch (RuntimeException e) {
-            System.out.println("oh");
-          }
-          System.out.println("still here");
+
           variables.put("phase", 1);
           // send frontend tile map
           variables.put("tiles", memory.getTileBeans());
@@ -193,7 +189,6 @@ public class PreHaunt implements GamePhase {
           }
 
           for (int i = 0; i < character.getTile().getEventCount(); i++) {
-            // TODO: do event things
             Event event = memory.getEvents().poll();
             toResolve.add("event");
             phase = 1;
@@ -280,9 +275,12 @@ public class PreHaunt implements GamePhase {
       // apply and return the results of event
       Integer rollSum = Dice.sum(rolls);
 
-      if (rollSum > omenCount) {
+      if (omenCount > rollSum) {
         // generate a random haunt
         GamePhase haunt = new HauntOne(memory);
+        character.setTraitor(true);
+        haunt.setup(character, variables);
+        variables.put("character", character.getCharBean());
         variables.put("description", haunt.getDescription());
         variables.put("traitor", haunt.getTraitorDescription());
         variables.put("explorers", haunt.getExplorersDescription());
@@ -382,5 +380,10 @@ public class PreHaunt implements GamePhase {
     List<String> stringsExplorer = new ArrayList<>();
     stringsExplorer.add("Nothing in this phase.");
     return stringsExplorer;
+  }
+
+  @Override
+  public void setup(GameChar character, Map<String, Object> variables) {
+    return;
   }
 }
