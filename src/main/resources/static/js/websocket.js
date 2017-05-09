@@ -59,7 +59,7 @@ const setup_betrayal = () => {
 			case MESSAGE_TYPE.GAMEMOVE:
 				const pay = JSON.parse(data.payload);
 				if (pay.phase === 1) 
-					receiveCard(pay);
+					receiveCard(data);
 			 	else if (pay.phase === 0)
 					actualMovement(data);
 				
