@@ -8,7 +8,7 @@ import com.term_project.character.GameChar;
 public interface GamePhase {
   /**
    * Executes an action by the specified character.
-   * 
+   *
    * @param character
    *          The character doing the specified action.
    * @param action
@@ -26,4 +26,6 @@ public interface GamePhase {
   List<String> getTraitorDescription();
 
   String getDescription();
+
+  void setup(GameChar character, Map<String, Object> variables);
 }

@@ -22,6 +22,8 @@ public abstract class AbstractChar implements GameChar {
   private Tile currentTile;
   private Map<String, Item> items;
   private Map<String, Omen> omens;
+  private List<Item> itemList;
+  private List<Omen> omenList;
   private boolean traitor;
 
   public AbstractChar() {
@@ -31,6 +33,8 @@ public abstract class AbstractChar implements GameChar {
     items = new HashMap<>();
     omens = new HashMap<>();
     traitor = false;
+    itemList = new ArrayList<>();
+    omenList = new ArrayList<>();
   }
 
   @Override
@@ -167,21 +171,25 @@ public abstract class AbstractChar implements GameChar {
   @Override
   public void addItem(Item item) {
     items.put(item.getName(), item);
+    itemList.add(item);
   }
 
   @Override
   public void addOmen(Omen omen) {
     omens.put(omen.getName(), omen);
+    omenList.add(omen);
   }
 
   @Override
   public void removeItem(Item item) {
     items.remove(item);
+    itemList.remove(item);
   }
 
   @Override
   public void removeOmen(Omen omen) {
     omens.remove(omen);
+    omenList.remove(omen);
   }
 
   @Override
@@ -269,5 +277,15 @@ public abstract class AbstractChar implements GameChar {
   @Override
   public int hashCode() {
     return this.getName().hashCode();
+  }
+
+  @Override
+  public List<Item> getItemsList() {
+    return itemList;
+  }
+
+  @Override
+  public List<Omen> getOmensList() {
+    return omenList;
   }
 }

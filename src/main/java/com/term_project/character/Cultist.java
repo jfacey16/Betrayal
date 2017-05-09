@@ -22,9 +22,13 @@ public class Cultist implements GameChar {
   private List<Integer> speedScale;
   private List<Integer> knowledgeScale;
   private List<Integer> sanityScale;
+  private List<Item> itemList;
+  private List<Omen> omenList;
   private boolean traitor;
+  private String name;
 
-  public Cultist() {
+  public Cultist(String name) {
+    this.name = name;
     might = 4;
     speed = 4;
     knowledge = 0;
@@ -37,12 +41,14 @@ public class Cultist implements GameChar {
     speedScale = new ArrayList<>();
     knowledgeScale = new ArrayList<>();
     sanityScale = new ArrayList<>();
+    itemList = new ArrayList<>();
+    omenList = new ArrayList<>();
     traitor = false;
   }
 
   @Override
   public String getName() {
-    return "Cultist";
+    return name;
   }
 
   @Override
@@ -221,7 +227,6 @@ public class Cultist implements GameChar {
 
   @Override
   public boolean equals(Object object) {
-    // TODO: all cultists will be same, may be problem
     if (object == this)
       return true;
     if (!(object instanceof Cultist)) {
@@ -234,5 +239,15 @@ public class Cultist implements GameChar {
   @Override
   public int hashCode() {
     return this.getName().hashCode();
+  }
+
+  @Override
+  public List<Item> getItemsList() {
+    return itemList;
+  }
+
+  @Override
+  public List<Omen> getOmensList() {
+    return omenList;
   }
 }
