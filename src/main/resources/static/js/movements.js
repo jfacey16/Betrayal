@@ -87,7 +87,7 @@ let m1 = false;
     let edgey = [0, 0, 0];
   $(document).ready(() => {
     $(document).keyup(event => {
-      if (moves > 0 && rotation.disabled && placet.disabled && allowkeys) {
+      if (moves > 0 && rotation.disabled && placet.disabled && allowkeys && turnIndex == turn) {
         let ctx;
         let flo;
         let lev;
@@ -117,12 +117,6 @@ let m1 = false;
         let temp;
         if (positions[turn].posx == 900 && positions[turn].posy == 600 &&
           positions[turn].floor == 1 && event.which == 69) {
-          ctx.clearRect(900 + offsets[turn].posx - 1, 600 + offsets[turn].posy - 1, P + 2, P + 2);
-          ctxs.strokeRect(600 + offsets[turn].posx, 600 + offsets[turn].posy, P, P);
-          ctxm.clearRect((900 + offsets[turn].posx) / S - 1,
-            (600 + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-          ctxms.strokeRect((600 + offsets[turn].posx) / S,
-            (600 + offsets[turn].posy) / S, P / S, P / S);
           const postParameters = {name: "move", direction: "UP"};
           game_move(postParameters);
           first.style.display = 'none';
@@ -130,23 +124,8 @@ let m1 = false;
           basement.style.display = 'none';
           second.style.top = '-425px';
           second.style.left = '-375px';
-          positions[turn].posx = 600;
-          positions[turn].floor = 2;
-          positions[turn].north = true;
-          positions[turn].east = true;
-          positions[turn].south = true;
-          positions[turn].west = true;
-          console.log("fg:" + positions[turn].floor);
-          moves--;
-          movesp.innerHTML = moves;
         } else if (positions[turn].posx == 600 && positions[turn].posy == 600 &&
           positions[turn].floor == 2 && event.which == 69) {
-          ctx.clearRect(600 + offsets[turn].posx - 1, 600 + offsets[turn].posy - 1, P + 2, P + 2);
-          ctxf.strokeRect(900 + offsets[turn].posx, 600 + offsets[turn].posy, P, P);
-          ctxm.clearRect((600 + offsets[turn].posx) / S - 1,
-            (600 + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-          ctxmf.strokeRect((900 + offsets[turn].posx) / S,
-            (600 + offsets[turn].posy) / S, P / S, P / S);
           const postParameters = {name: "move", direction: "DOWN"};
           game_move(postParameters);
           first.style.display = 'block';
@@ -154,15 +133,7 @@ let m1 = false;
           basement.style.display = 'none';
           first.style.top = '-425px';
           first.style.left = '-375px';
-          positions[turn].posx = 900;
-          positions[turn].floor = 1;
-          positions[turn].north = false;
-          positions[turn].east = false;
-          positions[turn].south = false;
-          positions[turn].west = true;
-          moves--;
-          movesp.innerHTML = moves;
-        }else if (event.which == 87) {
+        } else if (event.which == 87) {
           if (positions[turn].posy - T < edgey[positions[turn].floor]) {
             lev.height += 150;
             edgey[positions[turn].floor] -= 150;
@@ -174,57 +145,12 @@ let m1 = false;
           }
           if (((temp = tileExists(positions[turn].posx, positions[turn].posy - T,
            positions[turn].floor)) == -1 || flo[temp].south) && positions[turn].north) {
-            ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
-              positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
-            ctx.strokeRect(positions[turn].posx + offsets[turn].posx,
-              positions[turn].posy - T + offsets[turn].posy, P, P);
-            ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
-              (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-            ctxm.strokeRect((positions[turn].posx + offsets[turn].posx) / S,
-              (positions[turn].posy - T + offsets[turn].posy) / S, P / S, P / S);
-            if (temp == -1) {
-//              const ntile = new Tile(positions[turn].posx, positions[turn].posy - T, r1, r2, true, r3);
-//              flo.push(ntile);
-              if ((positions[turn].posy - T) != 600 || (positions[turn].posx != 600 && positions[turn].posx != 750
-               && positions[turn].posx != 900)) {
-                ctx.strokeRect(positions[turn].posx, positions[turn].posy - T, T, T);
-                ctxm.strokeRect(positions[turn].posx / S, (positions[turn].posy - T) / S, P, P);
-              }
-//              if (r1 == true)
-//                ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - T, D, X);
-//              if (r2 == true)
-//                ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy - T + D, X, D);
-//              if (r3 == true)
-//                ctx.strokeRect(positions[turn].posx, positions[turn].posy - T + D, X, D);
-//             ctx.strokeRect(positions[turn].posx + D, positions[turn].posy - X, D, X);
-//              positions[turn].north = r1;
-//              positions[turn].east = r2;
-//              positions[turn].south = true;
-//              positions[turn].west = r3;
-              const postParameters = {name: "move", direction: "NORTH"};
-              game_move(postParameters);
-              positions[turn].posy = positions[turn].posy - T;
-              moves--;
-              movesp.innerHTML = moves;
-              const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
-              const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
-              lev.style.top = ypos + 'px';
-              lev.style.left = xpos + 'px';      
-            } else {
-              const postParameters = {name: "move", direction: "NORTH"};
-              game_move(postParameters);
-              positions[turn].north = flo[temp].north;
-              positions[turn].east = flo[temp].east;
-              positions[turn].south = flo[temp].south;
-              positions[turn].west = flo[temp].west;
-              positions[turn].posy = positions[turn].posy - T;
-              moves--;
-              movesp.innerHTML = moves;
-              const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
-              const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
-              lev.style.top = ypos + 'px';
-              lev.style.left = xpos + 'px';
-            }
+            const postParameters = {name: "move", direction: "NORTH"};
+            game_move(postParameters);
+            const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
+            const ypos = offy - (positions[turn].posy - T - 600) + edgey[positions[turn].floor];
+            lev.style.top = ypos + 'px';
+            lev.style.left = xpos + 'px';       
           }
         } else if (event.which == 68) {
           if (positions[turn].posx + T >= lev.width + edgex[positions[turn].floor]) {
@@ -237,58 +163,12 @@ let m1 = false;
           }
           if (((temp = tileExists(positions[turn].posx + T, positions[turn].posy,
            positions[turn].floor)) == -1 || flo[temp].west) && positions[turn].east) {
-            ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
-              positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
-            ctx.strokeRect(positions[turn].posx + T + offsets[turn].posx,
-              positions[turn].posy + offsets[turn].posy, P, P);
-            ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
-              (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-            ctxm.strokeRect((positions[turn].posx + T + offsets[turn].posx) / S,
-              (positions[turn].posy + offsets[turn].posy) / S, P / S, P / S);
-            if (temp == -1) {
-              // const ntile = new Tile(positions[turn].posx + T, positions[turn].posy, r1, r2, r3, true);
-              // flo.push(ntile);
-              if ((positions[turn].posy) != 600 || ((positions[turn].posx + T) != 600 && (positions[turn].posx + T) != 750
-             && (positions[turn].posx + T) != 900)) {
-                ctx.strokeRect(positions[turn].posx + T, positions[turn].posy, T, T);
-                ctxm.strokeRect((positions[turn].posx + T) / S, positions[turn].posy / S, P, P);
-              }
-              // if (r1 == true)
-              //   ctx.strokeRect(positions[turn].posx + T + D, positions[turn].posy, D, X);
-              // if (r2 == true)
-              //   ctx.strokeRect(positions[turn].posx + T + T - X, positions[turn].posy + D, X, D);
-              // if (r3 == true)
-              //   ctx.strokeRect(positions[turn].posx + T + D, positions[turn].posy + T - X, D, X);
-              // ctx.strokeRect(positions[turn].posx + T, positions[turn].posy + D, X, D);
-              // positions[turn].north = r1;
-              // positions[turn].east = r2;
-              // positions[turn].south = r3;
-              // positions[turn].west = true;
-              const postParameters = {name: "move", direction: "EAST"};
-              game_move(postParameters);
-              positions[turn].posx = positions[turn].posx + T;
-              moves--;
-              movesp.innerHTML = moves;
-              const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
-              const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
-              lev.style.top = ypos + 'px';
-              lev.style.left = xpos + 'px';
-              
-            } else {
-              const postParameters = {name: "move", direction: "EAST"};
-              game_move(postParameters);
-              positions[turn].north = flo[temp].north;
-              positions[turn].east = flo[temp].east;
-              positions[turn].south = flo[temp].south;
-              positions[turn].west = flo[temp].west;
-              positions[turn].posx = positions[turn].posx + T;
-              moves--;
-              movesp.innerHTML = moves;
-              const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
-              const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
-              lev.style.top = ypos + 'px';
-              lev.style.left = xpos + 'px';
-            }
+            const postParameters = {name: "move", direction: "EAST"};
+            game_move(postParameters);
+            const xpos = offx - (positions[turn].posx + T - 600) + edgex[positions[turn].floor];
+            const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
+            lev.style.top = ypos + 'px';
+            lev.style.left = xpos + 'px'; 
           }
         } else if (event.which == 83) {
           if (positions[turn].posy + T >= lev.height + edgey[positions[turn].floor]) {
@@ -301,57 +181,12 @@ let m1 = false;
           }
           if (((temp = tileExists(positions[turn].posx, positions[turn].posy + T,
            positions[turn].floor)) == -1 || flo[temp].north) && positions[turn].south) {
-            ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
-              positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
-            ctx.strokeRect(positions[turn].posx + offsets[turn].posx,
-              positions[turn].posy + T + offsets[turn].posy, P, P);
-            ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
-              (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-            ctxm.strokeRect((positions[turn].posx + offsets[turn].posx) / S,
-              (positions[turn].posy + T + offsets[turn].posy) / S, P / S, P / S);
-            if (temp == -1) {
-              // const ntile = new Tile(positions[turn].posx, positions[turn].posy + T, true, r1, r2, r3);
-              // flo.push(ntile);
-              if ((positions[turn].posy + T) != 600 || (positions[turn].posx != 600 && positions[turn].posx != 750
-             && positions[turn].posx != 900)) {
-                ctx.strokeRect(positions[turn].posx, positions[turn].posy + T, T, T);
-                ctxm.strokeRect(positions[turn].posx / S, (positions[turn].posy + T) / S, P, P);
-              }
-              // if (r1 == true)
-              //   ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + T + D, X, D);
-              // if (r2 == true)
-              //   ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T + T - X, D, X);
-              // if (r3 == true)
-              //   ctx.strokeRect(positions[turn].posx, positions[turn].posy + T + D, X, D);
-              // ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T, D, X);
-              // positions[turn].north = true;
-              // positions[turn].east = r1;
-              // positions[turn].south = r2;
-              // positions[turn].west = r3;
-              const postParameters = {name: "move", direction: "SOUTH"};
-              game_move(postParameters);
-              positions[turn].posy = positions[turn].posy + T;
-              moves--;
-              movesp.innerHTML = moves;
-              const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
-              const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
-              lev.style.top = ypos + 'px';
-              lev.style.left = xpos + 'px';
-            } else {
-              const postParameters = {name: "move", direction: "SOUTH"};
-              game_move(postParameters);
-              positions[turn].north = flo[temp].north;
-              positions[turn].east = flo[temp].east;
-              positions[turn].south = flo[temp].south;
-              positions[turn].west = flo[temp].west;
-              positions[turn].posy = positions[turn].posy + T;
-              moves--;
-              movesp.innerHTML = moves;
-              const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
-              const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
-              lev.style.top = ypos + 'px';
-              lev.style.left = xpos + 'px';
-            }
+            const postParameters = {name: "move", direction: "SOUTH"};
+            game_move(postParameters);
+            const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
+            const ypos = offy - (positions[turn].posy + T - 600) + edgey[positions[turn].floor];
+            lev.style.top = ypos + 'px';
+            lev.style.left = xpos + 'px';
           }
         } else if (event.which == 65) {
           if (positions[turn].posx - T < edgex[positions[turn].floor]) {
@@ -365,57 +200,12 @@ let m1 = false;
           }
           if (((temp = tileExists(positions[turn].posx - T, positions[turn].posy,
            positions[turn].floor)) == -1 || flo[temp].east) && positions[turn].west) {
-            ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
-              positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
-            ctx.strokeRect(positions[turn].posx - T + offsets[turn].posx,
-              positions[turn].posy + offsets[turn].posy, P, P);
-            ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
-              (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-            ctxm.strokeRect((positions[turn].posx  - T + offsets[turn].posx) / S,
-              (positions[turn].posy + offsets[turn].posy) / S, P / S, P / S);
-            if (temp == -1) {
-              // const ntile = new Tile(positions[turn].posx - T, positions[turn].posy, r1, true, r2, r3);
-              // flo.push(ntile);
-              if ((positions[turn].posy) != 600 || ((positions[turn].posx + T) != 600 && (positions[turn].posx + T) != 750
-             && (positions[turn].posx + T) != 900)) {
-                ctx.strokeRect(positions[turn].posx - T, positions[turn].posy, T, T);
-                ctxm.strokeRect((positions[turn].posx - T) / S, positions[turn].posy / S, P, P);
-              }
-              // if (r1 == true)
-              //   ctx.strokeRect(positions[turn].posx - T + D, positions[turn].posy, D, X);
-              // if (r2 == true)
-              //   ctx.strokeRect(positions[turn].posx - T + D, positions[turn].posy + T - X, D, X);
-              // if (r3 == true)
-              //   ctx.strokeRect(positions[turn].posx - T, positions[turn].posy + D, X, D);
-              // ctx.strokeRect(positions[turn].posx - X, positions[turn].posy + D, X, D);
-              // positions[turn].north = r1;
-              // positions[turn].east = true;
-              // positions[turn].south = r2;
-              // positions[turn].west = r3;
-              const postParameters = {name: "move", direction: "WEST"};
-              game_move(postParameters);
-              positions[turn].posx = positions[turn].posx - T;
-              moves--;
-              movesp.innerHTML = moves;
-              const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
-              const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
-              lev.style.top = ypos + 'px';
-              lev.style.left = xpos + 'px';
-            } else {
-              const postParameters = {name: "move", direction: "WEST"};
-              game_move(postParameters);
-              positions[turn].north = flo[temp].north;
-              positions[turn].east = flo[temp].east;
-              positions[turn].south = flo[temp].south;
-              positions[turn].west = flo[temp].west;
-              positions[turn].posx = positions[turn].posx - T;
-              moves--;
-              movesp.innerHTML = moves;
-              const xpos = offx - (positions[turn].posx - 600) + edgex[positions[turn].floor];
-              const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
-              lev.style.top = ypos + 'px';
-              lev.style.left = xpos + 'px';
-            }
+            const postParameters = {name: "move", direction: "WEST"};
+            game_move(postParameters);
+            const xpos = offx - (positions[turn].posx - T - 600) + edgex[positions[turn].floor];
+            const ypos = offy - (positions[turn].posy - 600) + edgey[positions[turn].floor];
+            lev.style.top = ypos + 'px';
+            lev.style.left = xpos + 'px';
           }
         }
       }

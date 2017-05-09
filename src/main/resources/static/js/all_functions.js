@@ -419,9 +419,20 @@ function actualMovement(responseJSON) {
   }
   responseObject = JSON.parse(responseJSON.payload);
   console.log(responseObject);
-  if (!responseObject.finished) {
-    switch(responseObject.direction) {
-      case "NORTH":
+  switch(responseObject.direction) {
+    case "NORTH":
+      ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
+        positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
+      ctx.strokeRect(positions[turn].posx + offsets[turn].posx,
+        positions[turn].posy - T + offsets[turn].posy, P, P);
+      ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
+        (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
+      ctxm.strokeRect((positions[turn].posx + offsets[turn].posx) / S,
+        (positions[turn].posy - T + offsets[turn].posy) / S, P / S, P / S);
+      if (!responseObject.finished) {
+        ctx.strokeRect(positions[turn].posx, positions[turn].posy - T, T, T);
+        ctxm.strokeRect(positions[turn].posx / S, (positions[turn].posy - T) / S, P, P);
+        positions[turn].posy = positions[turn].posy - T;
         if (responseObject.newtile.availableDoors.length == 4) {
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
@@ -496,8 +507,28 @@ function actualMovement(responseJSON) {
           ctx.fillText("I", positions[turn].posx + symbOff.posx + 6, positions[turn].posy + symbOff.posy);
         else if (responseObject.newtile.omenCount > 0)
           ctx.fillText("O", positions[turn].posx + symbOff.posx - 2, positions[turn].posy + symbOff.posy);
-        break;
-      case "EAST":
+      } else {
+          positions[turn].posy = positions[turn].posy - T;
+          const temp = tileExists(positions[turn].posx, positions[turn].posy, positions[turn].floor);
+          positions[turn].north = flo[temp].north;
+          positions[turn].east = flo[temp].east;
+          positions[turn].south = flo[temp].south;
+          positions[turn].west = flo[temp].west;
+      }
+      break;
+    case "EAST":
+      ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
+        positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
+      ctx.strokeRect(positions[turn].posx + T + offsets[turn].posx,
+        positions[turn].posy + offsets[turn].posy, P, P);
+      ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
+        (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
+      ctxm.strokeRect((positions[turn].posx + T + offsets[turn].posx) / S,
+        (positions[turn].posy + offsets[turn].posy) / S, P / S, P / S);
+      if (!responseObject.finished) {
+        ctx.strokeRect(positions[turn].posx + T, positions[turn].posy, T, T);
+        ctxm.strokeRect((positions[turn].posx + T) / S, positions[turn].posy / S, P, P);
+        positions[turn].posx = positions[turn].posx + T;
         if (responseObject.newtile.availableDoors.length == 4) {
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
@@ -572,8 +603,28 @@ function actualMovement(responseJSON) {
           ctx.fillText("I", positions[turn].posx + symbOff.posx + 6, positions[turn].posy + symbOff.posy);
         else if (responseObject.newtile.omenCount > 0)
           ctx.fillText("O", positions[turn].posx + symbOff.posx - 2, positions[turn].posy + symbOff.posy);
-        break;
-      case "SOUTH":
+      } else {
+          positions[turn].posx = positions[turn].posx + T;
+          const temp = tileExists(positions[turn].posx, positions[turn].posy, positions[turn].floor);
+          positions[turn].north = flo[temp].north;
+          positions[turn].east = flo[temp].east;
+          positions[turn].south = flo[temp].south;
+          positions[turn].west = flo[temp].west;
+      }
+      break;
+    case "SOUTH":
+      ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
+        positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
+      ctx.strokeRect(positions[turn].posx + offsets[turn].posx,
+        positions[turn].posy + T + offsets[turn].posy, P, P);
+      ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
+        (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
+      ctxm.strokeRect((positions[turn].posx + offsets[turn].posx) / S,
+        (positions[turn].posy + T + offsets[turn].posy) / S, P / S, P / S);
+      if (!responseObject.finished) {
+        ctx.strokeRect(positions[turn].posx, positions[turn].posy + T, T, T);
+        ctxm.strokeRect(positions[turn].posx / S, (positions[turn].posy + T) / S, P, P);
+        positions[turn].posy = positions[turn].posy + T;
         if (responseObject.newtile.availableDoors.length == 4) {
           console.log("4");
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
@@ -651,8 +702,28 @@ function actualMovement(responseJSON) {
           ctx.fillText("I", positions[turn].posx + symbOff.posx + 6, positions[turn].posy + symbOff.posy);
         else if (responseObject.newtile.omenCount > 0)
           ctx.fillText("O", positions[turn].posx + symbOff.posx - 2, positions[turn].posy + symbOff.posy);
-        break;
-      case "WEST":
+      } else {
+          positions[turn].posy = positions[turn].posy + T;
+          const temp = tileExists(positions[turn].posx, positions[turn].posy, positions[turn].floor);
+          positions[turn].north = flo[temp].north;
+          positions[turn].east = flo[temp].east;
+          positions[turn].south = flo[temp].south;
+          positions[turn].west = flo[temp].west;
+      }
+      break;
+    case "WEST":
+      ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
+        positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
+      ctx.strokeRect(positions[turn].posx - T + offsets[turn].posx,
+        positions[turn].posy + offsets[turn].posy, P, P);
+      ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
+        (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
+      ctxm.strokeRect((positions[turn].posx  - T + offsets[turn].posx) / S,
+        (positions[turn].posy + offsets[turn].posy) / S, P / S, P / S);
+      if (!responseObject.finished) {
+        ctx.strokeRect(positions[turn].posx - T, positions[turn].posy, T, T);
+        ctxm.strokeRect((positions[turn].posx - T) / S, positions[turn].posy / S, P, P);
+        positions[turn].posx = positions[turn].posx - T;
         if (responseObject.newtile.availableDoors.length == 4) {
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
@@ -726,9 +797,46 @@ function actualMovement(responseJSON) {
           ctx.fillText("I", positions[turn].posx + symbOff.posx + 6, positions[turn].posy + symbOff.posy);
         else if (responseObject.newtile.omenCount > 0)
           ctx.fillText("O", positions[turn].posx + symbOff.posx - 2, positions[turn].posy + symbOff.posy);
-        break;
-    }
+      } else {
+          positions[turn].posx = positions[turn].posx - T;
+          const temp = tileExists(positions[turn].posx, positions[turn].posy, positions[turn].floor);
+          positions[turn].north = flo[temp].north;
+          positions[turn].east = flo[temp].east;
+          positions[turn].south = flo[temp].south;
+          positions[turn].west = flo[temp].west;
+      }
+      break;
+    case "UP":
+      ctx.clearRect(900 + offsets[turn].posx - 1, 600 + offsets[turn].posy - 1, P + 2, P + 2);
+      ctxs.strokeRect(600 + offsets[turn].posx, 600 + offsets[turn].posy, P, P);
+      ctxm.clearRect((900 + offsets[turn].posx) / S - 1,
+        (600 + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
+      ctxms.strokeRect((600 + offsets[turn].posx) / S,
+        (600 + offsets[turn].posy) / S, P / S, P / S);
+      positions[turn].posx = 600;
+      positions[turn].floor = 2;
+      positions[turn].north = true;
+      positions[turn].east = true;
+      positions[turn].south = true;
+      positions[turn].west = true; 
+      break;
+    case "DOWN":
+      ctx.clearRect(600 + offsets[turn].posx - 1, 600 + offsets[turn].posy - 1, P + 2, P + 2);
+      ctxf.strokeRect(900 + offsets[turn].posx, 600 + offsets[turn].posy, P, P);
+      ctxm.clearRect((600 + offsets[turn].posx) / S - 1,
+        (600 + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
+      ctxmf.strokeRect((900 + offsets[turn].posx) / S,
+        (600 + offsets[turn].posy) / S, P / S, P / S);
+      positions[turn].posx = 900;
+      positions[turn].floor = 1;
+      positions[turn].north = false;
+      positions[turn].east = false;
+      positions[turn].south = false;
+      positions[turn].west = true;
+      break;
   }
+  moves--;
+  movesp.innerHTML = moves;
 }
 
 

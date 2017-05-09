@@ -18,6 +18,7 @@ let userId;
 let username;
 let current_lobby_name = "";
 let game_host = false;
+let turnIndex;
 
 $(document).ready(() => {
 	setup_betrayal();
@@ -52,8 +53,8 @@ const setup_betrayal = () => {
 			case MESSAGE_TYPE.GAMEREADY:
 				set_starting_state(data);
 				draw_map(data);
-				const using = JSON.parse(data.turnOrder);
-				console.log("hi: " + using.indexOf(username));
+				const using = JSON.parse(data.idTurnOrder);
+				turnIndex = using.indexOf(userId);
 				break;
 			case MESSAGE_TYPE.GAMEMOVE:
 				const pay = JSON.parse(data.payload);

@@ -374,6 +374,7 @@ public class GameWebSocket {
       JsonObject update =  new JsonObject();
       update.addProperty("type", MESSAGE_TYPE.GAMEREADY.ordinal());
       update.addProperty("turnOrder", GSON.toJson(nameTurnOrder));
+      update.addProperty("idTurnOrder", GSON.toJson(idTurnOrder));
       update.addProperty("currentTurn", game.getCurrentTurn());
       update.addProperty("payload", GSON.toJson(init));
       update.addProperty("users", GSON.toJson(usersToCharacters));
