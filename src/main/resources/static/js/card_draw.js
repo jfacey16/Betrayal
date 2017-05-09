@@ -138,43 +138,31 @@ function eventDrawn(data, card_info, room_name) {
 	console.log(JSON.parse(data.payload));
 	
 	var event_buttons = "<center>";
+	var speed_button = false;
+	var might_button = false;
+	var know_button = false;
+	var sanity_button = false;
 	
 	for(type_index in card_info.usable) {
 		if(card_info.usable[type_index] === "SPEED") {
 			event_buttons += "<button type=\"button\" id=\"roll_speed\">Speed Roll</button>";
 
-			if(current_char != 0) {
-				document.getElementById("roll_speed").disabled = true;
-			} else {
-				document.getElementById("roll_speed").disabled = false;
-			}
+			speed_button = true;
 		}
 		if(card_info.usable[type_index] === "MIGHT") {
 			event_buttons += "<button type=\"button\" id=\"roll_might\">Might Roll</button>";
 
-			if(current_char != 0) {
-				document.getElementById("roll_might").disabled = true;
-			} else {
-				document.getElementById("roll_might").disabled = false;
-			}
+			might_button = true;
 		}
 		if(card_info.usable[type_index] === "KNOWLEGE") {
 			event_buttons += "<button type=\"button\" id=\"roll_know\">Knowledge Roll</button>";
 
-			if(current_char != 0) {
-				document.getElementById("roll_know").disabled = true;
-			} else {
-				document.getElementById("roll_know").disabled = false;
-			}
+			know_button = true;
 		}
 		if(card_info.usable[type_index] === "SANITY") {
 			event_buttons += "<button type=\"button\" id=\"roll_sanity\">Sanity Roll</button>";
 
-			if(current_char != 0) {
-				document.getElementById("roll_sanity").disabled = true;
-			} else {
-				document.getElementById("roll_sanity").disabled = false;
-			}
+			sanity_button = true;
 		}
 	}
 	
@@ -184,7 +172,51 @@ function eventDrawn(data, card_info, room_name) {
 	
 	$("#action_rolls").html(event_buttons);
 	
+	if(speed_button) {
+		if(current_char != 0) {
+			document.getElementById("roll_speed").disabled = true;
+		} else {
+			document.getElementById("roll_speed").disabled = false;
+		}
+	}
+	
+	if(might_button) {
+		if(current_char != 0) {
+			document.getElementById("roll_might").disabled = true;
+		} else {
+			document.getElementById("roll_might").disabled = false;
+		}
+	}
+	
+	if(know_button) {
+		if(current_char != 0) {
+			document.getElementById("roll_know").disabled = true;
+		} else {
+			document.getElementById("roll_know").disabled = false;
+		}
+	}
+	
+	if(sanity_button) {
+		if(current_char != 0) {
+			document.getElementById("roll_sanity").disabled = true;
+		} else {
+			document.getElementById("roll_sanity").disabled = false;
+		}
+	}
+	
 	$("#roll_speed").unbind().click(event => {
+		
+		document.getElementById("roll_speed").disabled = true;
+		
+		if(might_button) {
+			document.getElementById("roll_might").disabled = true;
+		}
+		if(know_button) {
+			document.getElementById("roll_know").disabled = true;
+		}
+		if(sanity_button) {
+			document.getElementById("roll_sanity").disabled = true;
+		}
 		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,
@@ -204,6 +236,18 @@ function eventDrawn(data, card_info, room_name) {
 	
 	$("#roll_might").unbind().click(event => {
 		
+		document.getElementById("roll_might").disabled = true;
+		
+		if(speed_button) {
+			document.getElementById("roll_speed").disabled = true;
+		}
+		if(know_button) {
+			document.getElementById("roll_know").disabled = true;
+		}
+		if(sanity_button) {
+			document.getElementById("roll_sanity").disabled = true;
+		}
+		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,
 				payload: {
@@ -222,6 +266,18 @@ function eventDrawn(data, card_info, room_name) {
 	
 	$("#roll_know").unbind().click(event => {
 		
+		document.getElementById("roll_know").disabled = true;
+
+		if(might_button) {
+			document.getElementById("roll_might").disabled = true;
+		}
+		if(speed_button) {
+			document.getElementById("roll_speed").disabled = true;
+		}
+		if(sanity_button) {
+			document.getElementById("roll_sanity").disabled = true;
+		}
+		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,
 				payload: {
@@ -239,6 +295,18 @@ function eventDrawn(data, card_info, room_name) {
     });
 	
 	$("#roll_sanity").unbind().click(event => {
+		
+		document.getElementById("roll_sanity").disabled = true;
+		
+		if(might_button) {
+			document.getElementById("roll_might").disabled = true;
+		}
+		if(know_button) {
+			document.getElementById("roll_know").disabled = true;
+		}
+		if(speed_button) {
+			document.getElementById("roll_speed").disabled = true;
+		}
 		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,
@@ -274,8 +342,24 @@ function eventRoll(data) {
 		"<center><button type=\"button\" id=\"end_turn_event\">End Turn</button></center>";
 	
 	$("#action_result").html(all_rolls);
-	var omen_info = document.getElementById("event_cont");
-	omen_info.scrollTop = omen_info.scrollHeight;
+	var event_info = document.getElementById("event_cont");
+	event_info.scrollTop = event_info.scrollHeight;
+	
+	if(current_char === 0) {
+		update_player_1(data);
+	} else if(current_char === 1) {
+		update_player_2(data);
+	} else if(current_char === 2) {
+		update_player_3(data);
+	} else if(current_char === 3) {
+		update_player_4(data);
+	} else if(current_char === 4) {
+		update_player_5(data);
+	} else if(current_char === 5) {
+		update_player_6(data);
+	} else {
+		console.log("ERROR: should never get here, bad # of players");
+	}
 	
 	if(current_char != 0) {
 		document.getElementById("end_turn_event").disabled = true;
@@ -305,35 +389,38 @@ function addItem(data, card_info) {
 	
 	if(current_char === 0) {
 		document.getElementById("items_1").innerHTML += "<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
-		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>"
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>";
 		
-//		$("#items_1").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
-//				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>");
 		update_player_1(data);
 		
 	} else if(current_char === 1) {
-		$("#items_2").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
+		document.getElementById("items_2").innerHTML += "<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>";
+		
 		update_player_2(data);
 		
 	} else if(current_char === 2) {
-		$("#items_3").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
+		document.getElementById("items_3").innerHTML += "<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>";
+		
 		update_player_3(data);
 		
 	} else if(current_char === 3) {
-		$("#items_4").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
+		document.getElementById("items_4").innerHTML += "<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>";
+		
 		update_player_4(data);
 		
 	} else if(current_char === 4) {
-		$("#items_5").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
+		document.getElementById("items_5").innerHTML += "<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>";
+		
 		update_player_5(data);
 		
 	} else if(current_char === 5) {
-		$("#items_6").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
+		document.getElementById("items_6").innerHTML += "<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>";
+		
 		update_player_6(data);
 		
 	} else {
@@ -357,36 +444,38 @@ function addOmen(data, card_info) {
 	
 	if(current_char === 0) {
 		document.getElementById("items_1").innerHTML += "<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
-		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>"
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>";
 		
-		
-//		("#items_1").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
-//				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>");
 		update_player_1(data);
 		
 	} else if(current_char === 1) {
-		$("#items_2").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
+		document.getElementById("items_2").innerHTML += "<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>";
+		
 		update_player_2(data);
 		
 	} else if(current_char === 2) {
-		$("#items_3").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
+		document.getElementById("items_3").innerHTML += "<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>";
+		
 		update_player_3(data);
 		
 	} else if(current_char === 3) {
-		$("#items_4").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
+		document.getElementById("items_4").innerHTML += "<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>";
+		
 		update_player_4(data);
 		
 	} else if(current_char === 4) {
-		$("#items_5").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
+		document.getElementById("items_5").innerHTML += "<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>";
+		
 		update_player_5(data);
 		
 	} else if(current_char === 5) {
-		$("#items_6").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
+		document.getElementById("items_6").innerHTML += "<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>";
+		
 		update_player_6(data);
 		
 	} else {

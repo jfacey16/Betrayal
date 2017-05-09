@@ -84,7 +84,7 @@ const setup_betrayal = () => {
 				if(pay.character) {
 					if(pay.item.length >= 1) {
 						addItem(pay.character, pay.item[0]);
-					} else if(pay.omen.length) {
+					} else if(pay.omen.length >= 1) {
 						addOmen(pay.character, pay.omen[0]);
 					}
 				}
