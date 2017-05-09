@@ -28,8 +28,6 @@ function itemDrawn(data, card_info, room_name) {
 	$("#end_turn").unbind().click(event => {
 
 		$item_window.hide();
-
-		addItem(JSON.parse(data.payload).character, card_info);
 		
 		turn_end();
 		
@@ -62,8 +60,6 @@ function omenDrawn(data, card_info, room_name) {
 	$("#omen_logic").html(card_info.logic);
 	
 	$("#roll_haunt").unbind().click(event => {
-		
-		addOmen(JSON.parse(data.payload).character, card_info);
 		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,
@@ -260,14 +256,17 @@ function addItem(data, card_info) {
 	console.log("refresh game and add item");
 	
 	if(current_char === 0) {
-		$("#items_1").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>");
+		document.getElementById("items_1").innerHTML += "<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>"
+		
+//		$("#items_1").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+//				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>");
 		update_player_1(data);
 		
 	} else if(current_char === 1) {
 		$("#items_2").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
 				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
-		update_player_21(data);
+		update_player_2(data);
 		
 	} else if(current_char === 2) {
 		$("#items_3").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
@@ -309,8 +308,12 @@ function addOmen(data, card_info) {
 	console.log("refresh game and add omen");
 	
 	if(current_char === 0) {
-		$("#items_1").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>");
+		document.getElementById("items_1").innerHTML += "<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>"
+		
+		
+//		("#items_1").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+//				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>");
 		update_player_1(data);
 		
 	} else if(current_char === 1) {
