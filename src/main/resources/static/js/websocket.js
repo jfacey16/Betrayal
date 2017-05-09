@@ -80,6 +80,7 @@ const setup_betrayal = () => {
 				
 				console.log(data);
 				console.log(pay);
+				console.log("current " + current_char);
 				if(pay.character) {
 					if(pay.item.length >= 1) {
 						addItem(pay.character, pay.item[0]);
