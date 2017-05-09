@@ -87,16 +87,25 @@ public class Lobby implements GamePhase {
     frontDoorConnected.add(Direction.NORTH);
     frontDoorConnected.add(Direction.SOUTH);
     frontDoorConnected.add(Direction.EAST);
+    frontDoor.addNorth();
+    frontDoor.addSouth();
+    frontDoor.addEast();
  
     // connect mid door
     midConnected.add(Direction.NORTH);
     midConnected.add(Direction.SOUTH);
     midConnected.add(Direction.EAST);
     midConnected.add(Direction.WEST);
+    mid.addNorth();
+    mid.addSouth();
+    mid.addEast();
+    mid.addWest();
  
     // connect stairs
     stairsConnected.add(Direction.WEST);
     stairsConnected.add(Direction.UP);
+    stairs.addUp();
+    stairs.addWest();
  
     // connect upper
     upperConnected.add(Direction.NORTH);
@@ -104,13 +113,22 @@ public class Lobby implements GamePhase {
     upperConnected.add(Direction.EAST);
     upperConnected.add(Direction.WEST);
     upperConnected.add(Direction.DOWN);
+    upper.addNorth();
+    upper.addSouth();
+    upper.addEast();
+    upper.addWest();
+    upper.addDown();
  
     // connect basement
     basementConnected.add(Direction.NORTH);
     basementConnected.add(Direction.SOUTH);
     basementConnected.add(Direction.EAST);
     basementConnected.add(Direction.WEST);
- 
+    basement.addNorth();
+    basement.addSouth();
+    basement.addEast();
+    basement.addWest();
+
     // add tiles to tileMap
     Map<Pos, Tile> tileMap = memory.getTileMap();
     tileMap.put(frontDoor.getPos(), frontDoor);
