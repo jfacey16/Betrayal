@@ -3,16 +3,27 @@ input[type="number"] {
 }
 
 body {
-	height:100%;
-	width:99.9%;
+	margin: 0;
+  padding: 0;
 }
 
 .game {
   display:flex;
   flex-direction:column;
-      border-style:solid;
-      border-width:2px;
-  background-color:#727272;
+  border-style:solid;
+  border-width:0px !important;
+
+  background: url(dg_wall.jpg) #016d0f no-repeat;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  width:100%;
+  height: 100%;
 }
 
 .main_game {
@@ -35,7 +46,6 @@ body {
   height:50%;
   border-style:solid;
   border-width:2px;
-  background-color:#eeeeee;
 }
 
 .log {
@@ -201,47 +211,242 @@ body {
   display:flex;
   flex-direction:row;
   height:30%;
+  border-width:0px;
+  background: rgba(54, 25, 25, 0);
 }
 
-.temp_lobby{
+.gameTitle{
+  float:left;
+  border-width:0px;
+  background: rgba(54, 25, 25, 0) !important;
+
+  width:100%;
+  margin:5px;
+  font-family: 'Squada One', cursive;
+  font-weight: bold;
+  color: #eaeaea;
+  font-size: 3em;
+  margin: 0px;
+  text-align:center;
+}
+
+/*CHAT*/
+#chat_text {
+  margin-left: 5px;
+}
+
+/* LOBBY */
+
+.main_menu{
   display:flex;
   flex-direction:row;
   position:absolute;
-  top:10%;
-  left:10%;
+  top:0;
+  left:0;
   float:left;
   z-index:20;
-  height:500px;
-  width:1000px;
-  border-style:solid;
-  border-right: 2px double #ff0000;
-  margin-bottom:5px;
-  background-color:#ffffff;
-}
-
-.lobby_list{
-  overflow-y:auto;
-  height:200px;
-  margin:5px;
-  margin-left:15px;
-  margin-right:15px;
-}
-
-.title{
-  float:left;
+  height:100%;
   width:100%;
-  border-style:solid;
-  margin:5px;
+  background: url(dg_wall.jpg) #016d0f no-repeat;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .option{
-  height:95%;
-  width:50%;
-  margin:10px;
+  height:80%;
+  width:70%;
+  margin-top:5%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 0%;
+
+  background-color: #232323 !important;
+  border-radius: 1px;
+
+  border-color: #000000;
+  border-width: 5px black !important;
+
+  color: white;
 }
 
+.option .title {
+  font-family: 'Squada One', cursive;
+  font-weight: bold;
+  color: #eaeaea;
+  font-size: 4em;
+  margin: 0px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-width: 0px;
+  text-align:center;
+}
+
+.option .contents {
+  text-align: left;
+  margin: 15px;
+  height: 100%;
+}
+
+#lobbies{
+  overflow-y:auto;
+  height:50%;
+  border-style:solid;
+  border-width:0px;
+  background-color: #afafaf;
+}
+
+#players {
+  overflow-y:auto;
+  height: 60%;
+  border-style:solid;
+  border-width:0px;
+  background-color: #afafaf;
+}
+
+#members {
+  height: 100%;
+}
+
+input[type=text]{
+    border: 2px solid white;
+    -webkit-box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    -moz-box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    padding: 5px;
+    background: rgba(255,255,255,0.5);
+    margin: 0 0 10px 0;
+    color: #eaeaea;
+    font-family: 'Squada One', cursive;
+    font-size: 1em;
+}
+
+.message {
+  margin: 0 !important;
+  padding: 0;
+}
+
+.lobby_name {
+  margin-top: 5px;
+  margin-left: 5px;
+  font-size: 1.2em;
+  width: 99%;
+
+  border-width: 3px !important;
+  border-bottom: solid #9b9b9b;
+  border-radius: 1.5px;
+}
+
+.lobby_name:hover {
+  background-color: #9b9b9b;
+}
+
+.selected_lobby {
+  background-color: #9b9b9b;
+}
+
+.member_name {
+  margin-top: 5px;
+  margin-left: 5px;
+  font-size: 1.2em;
+  width: 99%;
+
+  border-width: 3px !important;
+  border-bottom: solid #9b9b9b;
+  border-radius: 1.5px;
+}
+
+.member_name:hover {
+  background-color: #9b9b9b;
+}
+
+
+/* GENERIC */
+
 .wrapper {
+  position:relative;
   border-style:solid;
   border-width:2px;
   background-color:#eeeeee;
+}
+
+.text_title {
+  font-family: 'Squada One', cursive;
+  font-size: 1em;
+  color: #eaeaea;
+  margin-bottom: 10px;
+}
+.text_normal {
+  font-family: 'Scada', sans-serif !important;
+  font-size: 1em;
+  color: #eaeaea;
+}
+
+.menu_button {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 5px;
+}
+
+
+.myButton {
+	-moz-box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	-webkit-box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	background-color:#a73f2d;
+	border:1px solid #241d13;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:9px 23px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #7a2a1d;
+  width:10em;
+}
+.myButton:hover {
+	background-color:#b34332;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+.dark_bg {
+  background-color: #232323 !important;
+  color: #eaeaea;
+}
+
+.user_text {
+  border-width: 0;
+}
+
+.box {
+  background-color: #afafaf !important;
+  border-radius: 5px;
+}
+
+.light_bg {
+  border-width:0px;
+  background-color: #afafaf;
+}
+
+.center {
+  text-align: center;
+  margin-bottom: 0px !important;
+}
+
+.big {
+  font-size: 2em;
 }
