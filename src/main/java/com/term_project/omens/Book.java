@@ -13,7 +13,7 @@ public class Book implements Omen {
   public Book() {
     name = "Book";
     description = "A diary or lab notes? Ancient script or modern ravings?";
-    logic = "Gain 2 Knowledge now.\nLose 2 Knowledge if you lose the Book.";
+    logic = "Gain 2 Knowledge now.<br />Lose 2 Knowledge if you lose the Book.";
   }
 
   @Override

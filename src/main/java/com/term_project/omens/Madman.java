@@ -12,10 +12,10 @@ public class Madman implements Omen {
 
   public Madman() {
     name = "Madman";
-    description = "Companian.\nA raving, frothing madman.";
-    logic = "Gain 2 Might and lose 1 Sanity now.\nLose "
+    description = "Companian.<br />A raving, frothing madman.";
+    logic = "Gain 2 Might and lose 1 Sanity now.<br />Lose "
         + "2 Might and gain 1 Sanity if you lose custody "
-        + "of the Madman.\nThis omen can't be dropped, traded, or stolen.";
+        + "of the Madman.<br />This omen can't be dropped, traded, or stolen.";
   }
 
   @Override

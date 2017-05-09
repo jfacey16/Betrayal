@@ -19,10 +19,10 @@ public class Mask implements Omen {
     name = "Mask";
     description = "A somber mask to hide your intentions.";
     logic = "Once during your turn, you can attempt a "
-        + "Sanity roll to use the Mask:\n4+ You can put on or"
-        + "take off the Mask.\nIf you put on the Mask, gain "
-        + "2 Knowledge and lose 2 Sanity.\nIf you take off "
-        + "the Mask, gain 2 Sanity and lose 2 Knowledge.\n0-3 "
+        + "Sanity roll to use the Mask:<br />4+ You can put on or"
+        + "take off the Mask.<br />If you put on the Mask, gain "
+        + "2 Knowledge and lose 2 Sanity.<br />If you take off "
+        + "the Mask, gain 2 Sanity and lose 2 Knowledge.<br />0-3 "
         + "You can't use the Mask this turn.";
     maskOff = true;
   }

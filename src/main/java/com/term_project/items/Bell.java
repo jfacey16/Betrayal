@@ -13,7 +13,7 @@ public class Bell implements Item {
   public Bell() {
     name = "Bell";
     description = "A brass bell that makes a resonant clang.";
-    logic = "Gain 1 Sanity now.\nLose 1 Sanity if you lose the Bell.";
+    logic = "Gain 1 Sanity now.<br />Lose 1 Sanity if you lose the Bell.";
   }
 
   @Override

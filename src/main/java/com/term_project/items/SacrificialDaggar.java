@@ -15,8 +15,8 @@ public class SacrificialDaggar implements Item {
     description = "A twisted shard of iron covered in mysterious symbols and stained with blood.";
     logic = "When making a Might attack with this weapon,"
         + " you roll 3 extra dice, but you must make a Knowledge "
-        + "roll first:\n6+ No effect.\n3-5 Lose 1 from a mental "
-        + "trait.\n0-2 The daggar twists in your hand! Take "
+        + "roll first:<br />6+ No effect.<br />3-5 Lose 1 from a mental "
+        + "trait. 0-2 The daggar twists in your hand! Take "
         + "1 Might damage and 1 Speed damage. You can't attack this turn.";
   }
 

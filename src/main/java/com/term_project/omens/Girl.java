@@ -12,9 +12,9 @@ public class Girl implements Omen {
 
   public Girl() {
     name = "Girl";
-    description = "Companion.\nA girl.\nTrapped.\nAlone.\nYou free her!";
-    logic = "Gain 1 Sanity and 1 Knowledge now.\nLose 1 Sanity "
-        + "and 1 Knowledge if you lose custody of the Girl.\nThis "
+    description = "Companion.<br />A girl.<br />Trapped.<br />Alone.<br />You free her!";
+    logic = "Gain 1 Sanity and 1 Knowledge now.<br />Lose 1 Sanity "
+        + "and 1 Knowledge if you lose custody of the Girl.<br />This "
         + "omen can't be dropped, traded, or stolen.";
   }
 
