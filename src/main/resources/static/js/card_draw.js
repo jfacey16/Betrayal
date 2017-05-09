@@ -25,11 +25,15 @@ function itemDrawn(data, card_info, room_name) {
 	$("#item_description").html(card_info.description);
 	$("#item_logic").html(card_info.logic);
 	
+	if(current_char != 0) {
+		document.getElementById("end_turn").disabled = true;
+	} else {
+		document.getElementById("end_turn").disabled = false;
+	}
+	
 	$("#end_turn").unbind().click(event => {
 
 		$item_window.hide();
-
-		addItem(JSON.parse(data.payload).character, card_info);
 		
 		turn_end();
 		
@@ -60,10 +64,14 @@ function omenDrawn(data, card_info, room_name) {
 	$("#omen_name").html("<font size=\"4px\">" + card_info.name + "</font>");
 	$("#omen_description").html(card_info.description);
 	$("#omen_logic").html(card_info.logic);
+
+	if(current_char != 0) {
+		document.getElementById("roll_haunt").disabled = true;
+	} else {
+		document.getElementById("roll_haunt").disabled = false;
+	}
 	
 	$("#roll_haunt").unbind().click(event => {
-		
-		addOmen(JSON.parse(data.payload).character, card_info);
 		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,
@@ -98,6 +106,12 @@ function omenRoll(data) {
 	$("#omen_roll").html(all_rolls);
 	var omen_info = document.getElementById("omen_cont");
 	omen_info.scrollTop = omen_info.scrollHeight;
+	
+	if(current_char != 0) {
+		document.getElementById("end_turn_omen").disabled = true;
+	} else {
+		document.getElementById("end_turn_omen").disabled = false;
+	}
 		
 	$("#end_turn_omen").unbind().click(event => {
 
@@ -128,15 +142,39 @@ function eventDrawn(data, card_info, room_name) {
 	for(type_index in card_info.usable) {
 		if(card_info.usable[type_index] === "SPEED") {
 			event_buttons += "<button type=\"button\" id=\"roll_speed\">Speed Roll</button>";
+
+			if(current_char != 0) {
+				document.getElementById("roll_speed").disabled = true;
+			} else {
+				document.getElementById("roll_speed").disabled = false;
+			}
 		}
 		if(card_info.usable[type_index] === "MIGHT") {
 			event_buttons += "<button type=\"button\" id=\"roll_might\">Might Roll</button>";
+
+			if(current_char != 0) {
+				document.getElementById("roll_might").disabled = true;
+			} else {
+				document.getElementById("roll_might").disabled = false;
+			}
 		}
 		if(card_info.usable[type_index] === "KNOWLEGE") {
 			event_buttons += "<button type=\"button\" id=\"roll_know\">Knowledge Roll</button>";
+
+			if(current_char != 0) {
+				document.getElementById("roll_know").disabled = true;
+			} else {
+				document.getElementById("roll_know").disabled = false;
+			}
 		}
 		if(card_info.usable[type_index] === "SANITY") {
 			event_buttons += "<button type=\"button\" id=\"roll_sanity\">Sanity Roll</button>";
+
+			if(current_char != 0) {
+				document.getElementById("roll_sanity").disabled = true;
+			} else {
+				document.getElementById("roll_sanity").disabled = false;
+			}
 		}
 	}
 	
@@ -238,6 +276,12 @@ function eventRoll(data) {
 	$("#action_result").html(all_rolls);
 	var omen_info = document.getElementById("event_cont");
 	omen_info.scrollTop = omen_info.scrollHeight;
+	
+	if(current_char != 0) {
+		document.getElementById("end_turn_event").disabled = true;
+	} else {
+		document.getElementById("end_turn_event").disabled = false;
+	}
 		
 	$("#end_turn_event").unbind().click(event => {
 
@@ -260,14 +304,17 @@ function addItem(data, card_info) {
 	console.log("refresh game and add item");
 	
 	if(current_char === 0) {
-		$("#items_1").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>");
+		document.getElementById("items_1").innerHTML += "<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>"
+		
+//		$("#items_1").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+//				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>");
 		update_player_1(data);
 		
 	} else if(current_char === 1) {
 		$("#items_2").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
 				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\">" + card_info.logic + "</div>");
-		update_player_21(data);
+		update_player_2(data);
 		
 	} else if(current_char === 2) {
 		$("#items_3").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
@@ -309,8 +356,12 @@ function addOmen(data, card_info) {
 	console.log("refresh game and add omen");
 	
 	if(current_char === 0) {
-		$("#items_1").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
-				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>");
+		document.getElementById("items_1").innerHTML += "<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+		"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>"
+		
+		
+//		("#items_1").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+//				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\">" + card_info.logic + "</div>");
 		update_player_1(data);
 		
 	} else if(current_char === 1) {

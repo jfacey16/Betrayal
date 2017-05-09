@@ -77,7 +77,17 @@ const setup_betrayal = () => {
 						omenRoll(pay);
 					}
 				}
+				
 				console.log(data);
+				console.log(pay);
+				console.log("current " + current_char);
+				if(pay.character) {
+					if(pay.item.length >= 1) {
+						addItem(pay.character, pay.item[0]);
+					} else if(pay.omen.length) {
+						addOmen(pay.character, pay.omen[0]);
+					}
+				}
 				update_turn(data.currentTurn);
 				break;
 			case MESSAGE_TYPE.CHATUPDATE:
