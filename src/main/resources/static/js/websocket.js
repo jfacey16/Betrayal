@@ -70,10 +70,15 @@ const setup_betrayal = () => {
 					actualMovement(data);
 				
 				if(pay.rolls) {
-					console.log("omen roll sent");
-					omenRoll(pay);
+					if(pay.result) {
+						eventRoll(pay);
+					} else {
+						console.log("omen roll sent");
+						omenRoll(pay);
+					}
 				}
-				console.log("hi");
+				console.log(pay);
+				console.log(data.currentTurn);
 				update_turn(data.currentTurn);
 				break;
 			case MESSAGE_TYPE.CHATUPDATE:

@@ -874,8 +874,9 @@ function actualMovement(responseJSON) {
 
 
 function update_turn(currentTurn) {
-	console.log("cT:" + currentTurn);
-  console.log("ct:" + current_turn);
+	
+	console.log(currentTurn + " " + current_turn);
+	
 	if(currentTurn != current_turn) {
 		console.log(currentTurn + " current turn given vs local " + current_turn);
 	
@@ -891,6 +892,10 @@ function update_turn(currentTurn) {
 		
 		console.log(current_char);
 		console.log(current_turn);
+
+		$('#item').hide();
+		$('#omen').hide();
+		$('#event').hide();
 		
 		if(current_char === 0) {
 		     
