@@ -252,6 +252,7 @@ html, body {
 /*CHAT*/
 #chat_text {
   margin-left: 5px;
+  color: black;
 }
 
 /* LOBBY */
