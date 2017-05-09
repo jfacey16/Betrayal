@@ -129,44 +129,101 @@ function eventDrawn(data, card_info, room_name) {
 	
 	var event_buttons = "<center>";
 	
-	for(type_index in JSON.parse(data.payload)) {
-		if(JSON.parse(data.payload)[type_index] === "SPEED") {
+	for(type_index in card_info.usable) {
+		if(card_info.usable[type_index] === "SPEED") {
 			event_buttons += "<button type=\"button\" id=\"roll_speed\">Speed Roll</button>";
 		}
-		if(JSON.parse(data.payload)[type_index] === "MIGHT") {
-			event_buttons += "<button type=\"button\" id=\"roll_speed\">Might Roll</button>";
+		if(card_info.usable[type_index] === "MIGHT") {
+			event_buttons += "<button type=\"button\" id=\"roll_might\">Might Roll</button>";
 		}
-		if(JSON.parse(data.payload)[type_index] === "KNOWLEDGE") {
-			event_buttons += "<button type=\"button\" id=\"roll_speed\">Knowledge Roll</button>";
+		if(card_info.usable[type_index] === "KNOWLEDGE") {
+			event_buttons += "<button type=\"button\" id=\"roll_know\">Knowledge Roll</button>";
 		}
-		if(JSON.parse(data.payload)[type_index] === "SANITY") {
-			event_buttons += "<button type=\"button\" id=\"roll_speed\">Sanity Roll</button>";
+		if(card_info.usable[type_index] === "SANITY") {
+			event_buttons += "<button type=\"button\" id=\"roll_sanity\">Sanity Roll</button>";
 		}
 	}
 	
 	event_buttons += "</center>";
 	
-	$("#event_action").unbind().click(event => {
+	console.log(event_buttons);
+	
+	$("#action_rolls").html(event_buttons);
+	
+	$("#roll_speed").unbind().click(event => {
 		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,
 				payload: {
 					id : userId,
 					query : {
-						name : "event"
+						name : "event",
+						event : card_info.name,
+						stat : "SPEED"
 					}
 				}
 	      }
 
 		const json = JSON.stringify(message);
 		conn.send(json);
-		
-//		$event_window.hide();
-		
-		//do event stuff
-
     });
 	
+	$("#roll_might").unbind().click(event => {
+		
+		var message = {
+				type: MESSAGE_TYPE.GAMEMOVE,
+				payload: {
+					id : userId,
+					query : {
+						name : "event",
+						event : card_info.name,
+						stat : "MIGHT"
+					}
+				}
+	      }
+
+		const json = JSON.stringify(message);
+		conn.send(json);
+    });
+	
+	$("#roll_know").unbind().click(event => {
+		
+		var message = {
+				type: MESSAGE_TYPE.GAMEMOVE,
+				payload: {
+					id : userId,
+					query : {
+						name : "event",
+						event : card_info.name,
+						stat : "KNOWLEDGE"
+					}
+				}
+	      }
+
+		const json = JSON.stringify(message);
+		conn.send(json);
+    });
+	
+	$("#roll_sanity").unbind().click(event => {
+		
+		var message = {
+				type: MESSAGE_TYPE.GAMEMOVE,
+				payload: {
+					id : userId,
+					query : {
+						name : "event",
+						event : card_info.name,
+						stat : "SANITY"
+					}
+				}
+	      }
+
+		const json = JSON.stringify(message);
+		conn.send(json);
+    });
+	
+
+//	$event_window.hide();
 }
 
 function addItem(data, card_info) {
