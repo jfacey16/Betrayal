@@ -372,10 +372,42 @@ public class HauntOne implements GamePhase {
         GameChar opponent = memory.getGameState().getCharacters()
             .get(memory.getGameState().getTurnOrder().indexOf(attackChar));
         // roll for current
-        List<Integer> rollsCurrent = Dice.roll(character.getMight());
+        int dice1;
+        if (character.getOmens().containsKey("Spear")) {
+          dice1 = character.getMight() + 2;
+          if (dice1 > 8) {
+            dice1 = 8;
+          }
+        } else {
+          if (character.getItems().containsKey("Axe")) {
+            dice1 = character.getMight() + 1;
+            if (dice1 > 8) {
+              dice1 = 8;
+            }
+          } else {
+            dice1 = character.getMight();
+          }
+        }
+        List<Integer> rollsCurrent = Dice.roll(dice1);
         int sumCurrent = Dice.sum(rollsCurrent);
         // roll for opponent
-        List<Integer> rollsOpponent = Dice.roll(opponent.getMight());
+        int dice2;
+        if (opponent.getOmens().containsKey("Spear")) {
+          dice2 = opponent.getMight() + 2;
+          if (dice2 > 8) {
+            dice2 = 8;
+          }
+        } else {
+          if (opponent.getItems().containsKey("Axe")) {
+            dice2 = opponent.getMight() + 1;
+            if (dice2 > 8) {
+              dice2 = 8;
+            }
+          } else {
+            dice2 = opponent.getMight();
+          }
+        }
+        List<Integer> rollsOpponent = Dice.roll(dice2);
         int sumOpponent = Dice.sum(rollsOpponent);
         // send id of character who lost and how much they lose
         if (sumCurrent == sumOpponent) {
@@ -383,12 +415,20 @@ public class HauntOne implements GamePhase {
           variables.put("amount", 0);
 
         } else if (sumCurrent >= sumOpponent) {
+          if (opponent.getItems().containsKey("Armor")) {
+            variables.put("amount", sumCurrent - sumOpponent - 1);
+          } else {
+            variables.put("amount", sumCurrent - sumOpponent);
+          }
           variables.put("id", attackChar);
-          variables.put("amount", sumCurrent - sumOpponent);
         } else {
+          if (character.getItems().containsKey("Armor")) {
+            variables.put("amount", sumOpponent - sumCurrent - 1);
+          } else {
+            variables.put("amount", sumOpponent - sumCurrent);
+          }
           variables.put("id", memory.getGameState().getTurnOrder().get(
               memory.getGameState().getCharacters().indexOf(character)));
-          variables.put("amount", sumOpponent - sumCurrent);
         }
         phase = 1;
         return;
