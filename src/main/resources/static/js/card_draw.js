@@ -37,19 +37,6 @@ function itemDrawn(data, card_info, room_name) {
 		
 		turn_end();
 		
-		var message = {
-				type: MESSAGE_TYPE.GAMEMOVE,
-				payload: {
-					id : userId,
-					query : {
-						name : "end"
-					}
-				}
-	      }
-
-		const json = JSON.stringify(message);
-		conn.send(json);
-
 		$("#item_info").html("");
 		$("#item_name").html("");
 		$("#item_description").html("");
