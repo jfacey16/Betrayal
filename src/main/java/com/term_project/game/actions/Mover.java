@@ -30,7 +30,7 @@ public class Mover {
     dir = direction;
 
     assert(direction.equals("NORTH") || direction.equals("SOUTH")
-        || direction.equals("EAST") || direction.equals("WEST")) 
+        || direction.equals("EAST") || direction.equals("WEST"))
         || direction.equals("UP") || direction.equals("DOWN");
 
     Tile currentTile = character.getTile();
@@ -76,12 +76,11 @@ public class Mover {
         throw new NullPointerException("No available tile to the west.");
       }
       break;
-    
 
     case "UP":
       try {
         Tile newTile = currentTile.getUp();
-        assert(newTile != null); 
+        assert(newTile != null);
         moveTileHandler(newTile, character, variables);
       } catch (NullPointerException e) {
         throw new NullPointerException("No available tile to the up.");
@@ -121,12 +120,12 @@ public class Mover {
       Map<String, Object> variables) {
     // Tile x = memory.getTiles().poll();
     // while (x != null) {
-    //   System.out.println("xname: " + x.getName());
-    //   System.out.println("xn: " + x.hasNorth());
-    //   System.out.println("xs: " + x.hasSouth());
-    //   System.out.println("xe: " + x.hasEast());
-    //   System.out.println("xw: " + x.hasWest());
-    //   x = memory.getTiles().poll();
+    // System.out.println("xname: " + x.getName());
+    // System.out.println("xn: " + x.hasNorth());
+    // System.out.println("xs: " + x.hasSouth());
+    // System.out.println("xe: " + x.hasEast());
+    // System.out.println("xw: " + x.hasWest());
+    // x = memory.getTiles().poll();
     // }
 
     // pull a tile from the top of the deck
@@ -266,6 +265,7 @@ public class Mover {
 
     // Finally add tile to tileMap
     memory.getTileMap().put(toAdd.getPos(), toAdd);
+    memory.getTileList().add(toAdd);
     finished = true;
   }
 }

@@ -172,40 +172,44 @@
 
     <div id="item" class="card" draggable="true">
 
-      <center><div id="item_info"></div></center>
-
       <center><div id="item_name" class="card_name"></div></center>
 
-	  <center><div id="item_description" class="card_description"></div></center>
+      <div class="card_cont">
+      	<center><div id="item_info" class="card_info"></div></center>
 
+	  	<center><div id="item_description" class="card_description"></div></center>
+
+	  	<center><div id="item_logic" class="card_logic"></div></center>
+	  </div>
 	  <p><center><button type="button" id="end_turn">End Turn</button></center></p>
 
 	</div>
 
 	<div id="omen" class="card" draggable="true">
-
-        <center><div id="omen_info"></div></center>
-
 	    <center><div id="omen_name" class="card_name"></div></center>
 
-	    <center><div id="omen_description" class="card_description"></div></center>
+        <div class="card_cont">
+        	<center><div id="omen_info" class="card_info"></div></center>
 
+	    	<center><div id="omen_description" class="card_description"></div></center>
+
+	    	<center><div id="omen_logic" class="card_logic"></div></center>
+	    </div>
 	    <p><center><button type="button" id="roll_haunt">Roll for Haunt</button></center></p>
 
 	</div>
 
 	<div id="event" class="card" draggable="true">
-
-        <center><div id="event_info"></div></center>
-
 	    <center><div id="event_name" class="card_name"></div></center>
 
-	    <center><div id="event_description" class="card_description"></div></center>
+      <div class="card_cont">
+      	<center><div id="event_info" class="card_info"></div></center>
+      	<center><div id="event_description" class="card_description"></div></center>
+      	<center><div id="event_logic" class="card_logic"></div></center>
+      </div>
 
 	  	<p><center><button type="button" id="event_action">ACTION BUTTON</button></center></p>
-
 	</div>
-
 <div id="container">
   <div id="map">
     <div id="mapf"><canvas id="mfirst"></canvas></div>
