@@ -62,7 +62,7 @@
 
     <div id="player_2" class="player">
        <div class="image">
-          <div class="icon">
+          <div id="icon_2" class="icon">
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 2" style="width:75px;height:75px;"></center>
         </div>
 
@@ -79,7 +79,7 @@
 
     <div id="player_3" class="player">
         <div class="image">
-          <div class="icon">
+          <div id="icon_3" class="icon">
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 3" style="width:75px;height:75px;"></center>
         </div>
 
@@ -96,7 +96,7 @@
 
     <div id="player_4" class="player">
        <div class="image">
-          <div class="icon">
+          <div id="icon_4" class="icon">
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 4" style="width:75px;height:75px;"></center>
         </div>
 
@@ -113,7 +113,7 @@
 
     <div id="player_5" class="player">
        <div class="image">
-          <div class="icon">
+          <div id="icon_5" class="icon">
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 5" style="width:75px;height:75px;"></center>
         </div>
 
@@ -130,7 +130,7 @@
 
     <div id="player_6" class="player">
        <div class="image">
-          <div class="icon">
+          <div id="icon_6" class="icon">
             <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 6" style="width:75px;height:75px;"></center>
         </div>
 
@@ -151,7 +151,7 @@
 
       <div id="name_1" class="name"><center> X </center></div>
 
-      <div class="icon_1">
+      <div id="icon_1" class="icon_1">
           <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 1" style="width:100px;height:100px;border-style:solid;border-width:2px;"></center>
       </div>
 
@@ -202,9 +202,10 @@
       	<center><div id="event_info" class="card_info"></div></center>
       	<center><div id="event_description" class="card_description"></div></center>
       	<div id="event_logic" class="card_logic"></div>
+	  	<center><div id="action_rolls"></div></center>
+	    <div id="action_result"></div>
       </div>
 
-	  	<center><button type="button" id="event_action">ACTION BUTTON</button></center>
 	</div>
 	
 <div id="container">
@@ -220,8 +221,8 @@
     <div id="descr">
     <center><div> Speed Left: <span id="moves">10</span></div></center>
     <center><button id="end" onclick="endturn();">End Turn</button></center>
-    <center><button disabled>Attack</button></center>
-    <center><button disabled>Pick up Items</button></center>
+    <!-- <center><button disabled>Attack</button></center>
+    <center><button disabled>Pick up Items</button></center> -->
     <!-- <center><button disabled>Interact w/Room</button></center> -->
     <center><button id="plat" onclick="placeTile();" disabled>Place Tile</button></center>
     <center><button id="rot" onclick="rotate();" disabled>Rotate Clockwise</button></center>

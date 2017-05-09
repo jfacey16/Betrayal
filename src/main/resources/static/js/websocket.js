@@ -19,6 +19,7 @@ let username;
 let current_lobby_name = "";
 let game_host = false;
 let turnIndex;
+let numPlayers;
 
 $(document).ready(() => {
 	setup_betrayal();
@@ -47,14 +48,19 @@ const setup_betrayal = () => {
 				update_lobby(data);
 				break;
 			case MESSAGE_TYPE.CHOOSECHARACTER:
-				console.log("character!");
 				choose_character(data);
 				break;
 			case MESSAGE_TYPE.GAMEREADY:
 				set_starting_state(data);
 				draw_map(data);
 				const using = JSON.parse(data.idTurnOrder);
+				numPlayers = using.length;
 				turnIndex = using.indexOf(userId);
+				turn = 0;
+				console.log("t:" + turn);
+				console.log("ti:" + turnIndex);
+				if (turn != turnIndex)
+					ending.disabled = true;
 				break;
 			case MESSAGE_TYPE.GAMEMOVE:
 				const pay = JSON.parse(data.payload);
@@ -64,11 +70,24 @@ const setup_betrayal = () => {
 					actualMovement(data);
 				
 				if(pay.rolls) {
-					console.log("omen roll sent");
-					omenRoll(pay);
+					if(pay.result) {
+						eventRoll(pay);
+					} else {
+						console.log("omen roll sent");
+						omenRoll(pay);
+					}
 				}
 				
+				console.log(data);
 				console.log(pay);
+				console.log("current " + current_char);
+				if(pay.character) {
+					if(pay.item.length >= 1) {
+						addItem(pay.character, pay.item[0]);
+					} else if(pay.omen.length) {
+						addOmen(pay.character, pay.omen[0]);
+					}
+				}
 				update_turn(data.currentTurn);
 				break;
 			case MESSAGE_TYPE.CHATUPDATE:
@@ -250,6 +269,7 @@ function draw_map(data) {
 
 
 function game_move(params) {
+	console.log("you there?");
 	var message = {
 		type: MESSAGE_TYPE.GAMEMOVE,
 		payload: {

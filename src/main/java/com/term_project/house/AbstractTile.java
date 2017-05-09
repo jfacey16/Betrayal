@@ -86,11 +86,6 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public void addEvent(String name, Event event) {
-    events.put(name, event);
-  }
-
-  @Override
   public void setOmens(Map<String, Omen> omens) {
     this.omens = omens;
   }
@@ -137,10 +132,13 @@ public abstract class AbstractTile implements Tile {
 
   @Override
   public Tile getEast() throws NullPointerException {
+    System.out.println(hasEast());
     if (!hasEast()) {
+      System.out.println("you gotta be kidding me");
       throw new NullPointerException(
-          "There is no door/tile to the south.");
+          "There is no door/tile to the east.");
     }
+    System.out.println("ha" + doors.get(Direction.EAST));
     Tile east = memory.getTileMap().get(doors.get(Direction.EAST));
     System.out.println("doorx: " + doors.get(Direction.EAST).getX());
     System.out.println("doory: " + doors.get(Direction.EAST).getY());
@@ -151,7 +149,7 @@ public abstract class AbstractTile implements Tile {
   public Tile getWest() throws NullPointerException {
     if (!hasWest()) {
       throw new NullPointerException(
-          "There is no door/tile to the south.");
+          "There is no door/tile to the west.");
     }
     Tile west = memory.getTileMap().get(doors.get(Direction.WEST));
     return west;
@@ -267,7 +265,7 @@ public abstract class AbstractTile implements Tile {
     // will be placement will switching tiles
     Pos holderOne;
     Pos holderTwo;
-    
+
     // make east value the northern value
     holderOne = doors.get(Direction.EAST);
     doors.put(Direction.EAST, doors.get(Direction.NORTH));
@@ -388,6 +386,11 @@ public abstract class AbstractTile implements Tile {
   @Override
   public void addOmen(Omen omen) {
     omens.put(omen.getName(), omen);
+  }
+
+  @Override
+  public void addEvent(Event event) {
+    events.put(event.getName(), event);
   }
 
   @Override

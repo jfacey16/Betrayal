@@ -108,33 +108,7 @@ $( function() {
 } );
 function endturn() {
   turn_end();
-   
-//      if (positions[turn].floor == 0) {
-//        first.style.display = 'none';
-//        second.style.display = 'none';
-//        basement.style.display = 'block';
-//        const xpos = offx - (positions[turn].posx - 600) + edgex[0];
-//        const ypos = offy - (positions[turn].posy - 600) + edgey[0];
-//        basement.style.top = ypos + 'px';
-//        basement.style.left = xpos + 'px';
-//      } else if (positions[turn].floor == 1) {
-//        first.style.display = 'block';
-//        second.style.display = 'none';
-//        basement.style.display = 'none';
-//        const xpos = offx - (positions[turn].posx - 600) + edgex[1];
-//        const ypos = offy - (positions[turn].posy - 600) + edgey[1];
-//        first.style.top = ypos + 'px';
-//        first.style.left = xpos + 'px';
-//      } else if (positions[turn].floor == 2) {
-//        first.style.display = 'none';
-//        second.style.display = 'block';
-//        basement.style.display = 'none';
-//        const xpos = offx - (positions[turn].posx - 600) + edgex[2];
-//        const ypos = offy - (positions[turn].posy - 600) + edgey[2];
-//        second.style.top = ypos + 'px';
-//        second.style.left = xpos + 'px';
-//      }
-//      ending.disabled = false;
+  ending.disabled = true;
 }
 
 function paintBoard(floor, players) {
@@ -341,6 +315,7 @@ function rotate() {
 }
 
 function placeTile() {
+  console.log("numrot:" + rot);
   if (tempdir == 0) {
     if (!rottile.south)
       return;
@@ -372,13 +347,43 @@ function placeTile() {
   game_move({name: "move", rotations: "" + rot});
   rotation.disabled = true;
   placet.disabled = true;
+  ending.disabled = false;
   rot = 0;
 }
 
 function receiveCard(data) {
+  if (positions[turn].floor == 0)
+    ctx = ctxb;
+  else if (positions[turn].floor == 1)
+    ctx = ctxf;
+  else if (positions[turn].floor == 2)
+    ctx = ctxs;
 	var ro = JSON.parse(data.payload);
+  ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + 1, D + 2, X);
+  ctx.clearRect(positions[turn].posx + T - X - 1, positions[turn].posy + D - 1, X, D + 2);
+  ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + T - X - 1, D + 2, X);
+  ctx.clearRect(positions[turn].posx + 1, positions[turn].posy + D - 1, X, D + 2);
+  if (ro.newTile.availableDoors.indexOf("NORTH") !== -1) {
+    ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
+    positions[turn].north = true;
+  } else 
+    positions[turn].north = false;
+  if (ro.newTile.availableDoors.indexOf("EAST") !== -1) {
+    ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
+    positions[turn].east = true;
+  } else
+    positions[turn].east = true;
+  if (ro.newTile.availableDoors.indexOf("SOUTH") !== -1) {
+    ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
+    positions[turn].south = true;
+  } else 
+    positions[turn].south = false;
+  if (ro.newTile.availableDoors.indexOf("WEST") !== -1)  {
+    ctx.strokeRect(positions[turn].posx, positions[turn].posy + D, X, D);
+    positions[turn].west = true;
+  } else 
+    positions[turn].west = false;
   if (ro.item.length > 0 || ro.omen.length > 0 || ro.event.length > 0) {
-    console.log("hello there");
     if (ro.item.length > 0)
       itemDrawn(data, ro.item[0], ro.newTile.name);
     else if (ro.omen.length > 0)
@@ -386,6 +391,7 @@ function receiveCard(data) {
     else if (ro.event.length > 0)
       eventDrawn(data, ro.event[0], ro.newTile.name);
     ending.disabled = true;
+    console.log("moving " + moves);
     moves = 0;
     movesp.innerHTML = 0;
   }
@@ -450,8 +456,11 @@ function actualMovement(responseJSON) {
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy , D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
-          rotation.disabled = false;
-          placet.disabled = false;
+          if (turnIndex == turn) {
+            rotation.disabled = false;
+            placet.disabled = false;
+            ending.disabled = true;
+          }
           rot = 0;
           avdoor = 3;
           tempdir = 0;
@@ -475,8 +484,11 @@ function actualMovement(responseJSON) {
           } else {
             ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
             ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
-            rotation.disabled = false;
-            placet.disabled = false;
+            if (turnIndex == turn) {
+              rotation.disabled = false;
+              placet.disabled = false;
+              ending.disabled = true;
+            }
             rot = 1;
             avdoor = 2;
             tempdir = 0;
@@ -500,7 +512,6 @@ function actualMovement(responseJSON) {
         ctx.font = "17px Times New Roman";
         ctx.fillText(responseObject.newtile.name, positions[turn].posx + textOff.posx,
           positions[turn].posy + textOff.posy);
-        console.log(responseObject.newtile.name);
         ctx.font = "25px Times New Roman";
         if (responseObject.newtile.eventCount > 0)
           ctx.fillText("E", positions[turn].posx + symbOff.posx, positions[turn].posy + symbOff.posy);
@@ -546,8 +557,11 @@ function actualMovement(responseJSON) {
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
           ctx.strokeRect(positions[turn].posx, positions[turn].posy + D, X, D);
-          rotation.disabled = false;
-          placet.disabled = false;
+          if (turnIndex == turn) {
+            rotation.disabled = false;
+            placet.disabled = false;
+            ending.disabled = true;
+          }
           rot = 1;
           avdoor = 3;
           tempdir = 1;
@@ -571,8 +585,11 @@ function actualMovement(responseJSON) {
           } else {
             ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
             ctx.strokeRect(positions[turn].posx, positions[turn].posy + D, X, D);
-            rotation.disabled = false;
-            placet.disabled = false;
+            if (turnIndex == turn) {
+              rotation.disabled = false;
+              placet.disabled = false;
+              ending.disabled = true;
+            }
             rot = 2;
             avdoor = 2;
             tempdir = 1;
@@ -596,7 +613,6 @@ function actualMovement(responseJSON) {
         ctx.font = "17px Times New Roman";
         ctx.fillText(responseObject.newtile.name, positions[turn].posx + textOff.posx,
           positions[turn].posy + textOff.posy);
-        console.log(responseObject.newtile.name);
         ctx.font = "25px Times New Roman";
         if (responseObject.newtile.eventCount > 0)
           ctx.fillText("E", positions[turn].posx + symbOff.posx, positions[turn].posy + symbOff.posy);
@@ -627,7 +643,6 @@ function actualMovement(responseJSON) {
         ctxm.strokeRect(positions[turn].posx / S, (positions[turn].posy + T) / S, P, P);
         positions[turn].posy = positions[turn].posy + T;
         if (responseObject.newtile.availableDoors.length == 4) {
-          console.log("4");
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
@@ -640,12 +655,14 @@ function actualMovement(responseJSON) {
           const ntile = new Tile(positions[turn].posx, positions[turn].posy, true, true, true, true);
           flo.push(ntile);
         } else if (responseObject.newtile.availableDoors.length == 3) {
-          console.log("3");
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
-          rotation.disabled = false;
-          placet.disabled = false;
+          if (turnIndex == turn) {
+            rotation.disabled = false;
+            placet.disabled = false;
+            ending.disabled = true;
+          }
           rot = 0;
           avdoor = 3;
           tempdir = 2;
@@ -655,7 +672,6 @@ function actualMovement(responseJSON) {
           positions[turn].south = true;
           positions[turn].west = false;
         } else if (responseObject.newtile.availableDoors.length == 2) {
-          console.log("2");
           if ((responseObject.newtile.availableDoors.indexOf("NORTH") != -1 &&
             responseObject.newtile.availableDoors.indexOf("SOUTH") != -1) ||
             (responseObject.newtile.availableDoors.indexOf("EAST") != -1 &&
@@ -670,8 +686,11 @@ function actualMovement(responseJSON) {
           } else {
             ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
             ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
-            rotation.disabled = false;
-            placet.disabled = false;
+            if (turnIndex == turn) {
+              rotation.disabled = false;
+              placet.disabled = false;
+              ending.disabled = true;
+            }
             rot = 0;
             avdoor = 2;
             tempdir = 2;
@@ -683,7 +702,6 @@ function actualMovement(responseJSON) {
           }
 
         } else if (responseObject.newtile.availableDoors.length == 1) {
-          console.log("1");
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           game_move({name: "move", rotations: "0"});
           positions[turn].north = true;
@@ -695,7 +713,6 @@ function actualMovement(responseJSON) {
         }
         ctx.font = "17px Times New Roman";
         ctx.fillText(responseObject.newtile.name, positions[turn].posx + textOff.posx, positions[turn].posy + textOff.posy);
-        console.log(responseObject.newtile.name);
         ctx.font = "25px Times New Roman";
         if (responseObject.newtile.eventCount > 0)
           ctx.fillText("E", positions[turn].posx + symbOff.posx, positions[turn].posy + symbOff.posy);
@@ -741,8 +758,11 @@ function actualMovement(responseJSON) {
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
-          rotation.disabled = false;
-          placet.disabled = false;
+          if (turnIndex == turn) {
+            rotation.disabled = false;
+            placet.disabled = false;
+            ending.disabled = true;
+          }
           rot = 0;
           avdoor = 3;
           tempdir = 3;
@@ -766,8 +786,11 @@ function actualMovement(responseJSON) {
           } else {
             ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
             ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
-            rotation.disabled = false;
-            placet.disabled = false;
+            if (turnIndex == turn) {
+              rotation.disabled = false;
+              placet.disabled = false;
+              ending.disabled = true;
+            }
             rot = 0;
             avdoor = 2;
             tempdir = 3;
@@ -790,7 +813,6 @@ function actualMovement(responseJSON) {
         ctx.font = "17px Times New Roman";
         ctx.fillText(responseObject.newtile.name, positions[turn].posx + textOff.posx,
           positions[turn].posy + textOff.posy);
-        console.log(responseObject.newtile.name);
         ctx.font = "25px Times New Roman";
         if (responseObject.newtile.eventCount > 0)
           ctx.fillText("E", positions[turn].posx + symbOff.posx, positions[turn].posy + symbOff.posy);
@@ -836,6 +858,7 @@ function actualMovement(responseJSON) {
       positions[turn].west = true;
       break;
   }
+  console.log("changing:" + moves);
   moves--;
   movesp.innerHTML = moves;
 }
@@ -858,6 +881,26 @@ function update_turn(currentTurn) {
 		
 		console.log(current_char);
 		console.log(current_turn);
+
+		$('#item').hide();
+		$('#omen').hide();
+		$('#event').hide();
+		
+		$("#item_info").html("");
+		$("#item_name").html("");
+		$("#item_description").html("");
+		$("#item_logic").html("");
+		$("#omen_roll").html("");
+		$("#omen_info").html("");
+		$("#omen_name").html("");
+		$("#omen_description").html("");
+		$("#omen_logic").html("");
+		$("#action_result").html("");
+		$("#action_rolls1").html("");
+		$("#event_info").html("");
+		$("#event_name").html("");
+		$("#event_description").html("");
+		$("#event_logic").html("");
 		
 		if(current_char === 0) {
 		     
@@ -936,6 +979,41 @@ function update_turn(currentTurn) {
 	        document.getElementById("player_5").style.borderColor = "black";
 	        document.getElementById("player_6").style.borderColor = "yellow";
 	    }
+    if (turn + 1 == numPlayers) 
+      turn = 0;
+    else
+      turn++;
+    console.log("xt:" + turn);
+    console.log("xti: " + turnIndex);
+    if (turn == turnIndex) {
+      ending.disabled = false;
+      if (positions[turn].floor == 0) {
+        first.style.display = 'none';
+        second.style.display = 'none';
+        basement.style.display = 'block';
+        const xpos = offx - (positions[turn].posx - 600) + edgex[0];
+        const ypos = offy - (positions[turn].posy - 600) + edgey[0];
+        basement.style.top = ypos + 'px';
+        basement.style.left = xpos + 'px';
+      } else if (positions[turn].floor == 1) {
+        first.style.display = 'block';
+        second.style.display = 'none';
+        basement.style.display = 'none';
+        const xpos = offx - (positions[turn].posx - 600) + edgex[1];
+        const ypos = offy - (positions[turn].posy - 600) + edgey[1];
+        first.style.top = ypos + 'px';
+        first.style.left = xpos + 'px';
+      } else if (positions[turn].floor == 2) {
+        first.style.display = 'none';
+        second.style.display = 'block';
+        basement.style.display = 'none';
+        const xpos = offx - (positions[turn].posx - 600) + edgex[2];
+        const ypos = offy - (positions[turn].posy - 600) + edgey[2];
+        second.style.top = ypos + 'px';
+        second.style.left = xpos + 'px';
+      }
+    }
+
 	}
 }
 

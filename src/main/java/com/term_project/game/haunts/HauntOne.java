@@ -185,20 +185,13 @@ public class HauntOne implements GamePhase {
 
       if (phase == 1) {
         try {
-          System.out.println("why am i here?");
+          System.out.println("here here");
+
           move.addTile(character, Integer.parseInt(qm.get("rotations")),
               memory.getTileMap());
 
-          // send frontend tile map
-          variables.put("tiles", memory.getTileBeans());
-
-          // send frontend character
-          variables.put("characters", memory.getCharBeans());
-
-          // send frontend newly added tile
-          variables.put("newTile", character.getTile().getBean());
-
           phase = 0;
+          mode = "idle";
 
           /* This adding method doesn't really make a ton of sense to me. */
           /*
@@ -217,6 +210,7 @@ public class HauntOne implements GamePhase {
             Item item = memory.getItems().poll();
             item.add(character);
             itemList.add(item);
+            character.getTile().addItem(item);
           }
 
           for (int i = 0; i < character.getTile().getEventCount(); i++) {
@@ -224,8 +218,7 @@ public class HauntOne implements GamePhase {
             toResolve.add("event");
             phase = 1;
             eventList.add(event);
-
-            // ADD EVENTS TO TILE HASHMAP
+            character.getTile().addEvent(event);
           }
 
           for (int i = 0; i < character.getTile().getOmenCount(); i++) {
@@ -233,7 +226,22 @@ public class HauntOne implements GamePhase {
             omen.add(character);
             toResolve.add("haunt");
             omenList.add(omen);
+            character.getTile().addOmen(omen);
           }
+
+          variables.put("phase", 1);
+          // send frontend tile map
+          variables.put("tiles", memory.getTileBeans());
+
+          // send frontend character
+          variables.put("characters", memory.getCharBeans());
+
+          // send frontend newly added tile
+          variables.put("newTile", character.getTile().getBean());
+
+          System.out.println("item:" + itemList.size());
+          System.out.println("omen:" + omenList.size());
+          System.out.println("event:" + eventList.size());
           // push to front end
           variables.put("toResolve", toResolve);
           variables.put("item", itemList);

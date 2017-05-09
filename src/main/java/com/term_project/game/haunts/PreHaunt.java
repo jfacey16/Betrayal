@@ -84,7 +84,7 @@ public class PreHaunt implements GamePhase {
       mode = "idle";
       phase = 0;
     }
-
+    
     // make sure backend matches frontend
     if (!mode.equals("idle")) {
       if (!name.equals(mode)) {
@@ -358,6 +358,7 @@ public class PreHaunt implements GamePhase {
       break;
 
     case "end":
+    	System.out.println("ending");
       mode = "start";
       memory.getGameState().endTurn();
       break;

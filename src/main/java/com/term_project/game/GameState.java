@@ -77,16 +77,10 @@ public class GameState {
 
     String currentId = idTurnOrder.get(currentTurn);
     GameChar currentPlayer = chars.get(currentTurn);
-    System.out.println("name: " + qm.get("name"));
-    System.out.println(currentPlayer.getTile().getPos().getX());
-    System.out.println(currentPlayer.getTile().getPos().getY());
-    System.out.println(phase.getDescription());
+
     // assert(phase instanceof PreHaunt);
     phase.run(qm.get("name"), qm, currentPlayer, variables);
 
-    if (qm.get("name").equals("end")) {
-      endTurn();
-    }
     return variables;
   }
 

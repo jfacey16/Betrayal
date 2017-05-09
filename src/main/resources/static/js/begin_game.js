@@ -294,6 +294,50 @@ function setup_player_1(inGame) {
          $player_1_knowledge.html($knowledge + "</center>");
          $player_1_sanity.html($sanity + "</center>");
        
+         var icon = $("#icon_1");
+         
+         switch($char_1) {
+         	default :
+         		console.log("should not get here!");
+         		break;
+         	case "Darrin 'Flash' Williams" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/10e75595bcbe2b3fe1ed07d7e2198a62/tumblr_opoocmb3Yj1tfi4hzo1_1280.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         	case "Ox Bellows" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/f44f78562f3abc6a79b366af80662a36/tumblr_opoocmb3Yj1tfi4hzo2_1280.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         	case "Brandon Jaspers" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/919f4e70b1690921871a355205bd9c00/tumblr_opoodwJKtX1tfi4hzo5_1280.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         	case "Peter Akimoto" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/a6c6d7e2ca1f0387081274d2083e7342/tumblr_opoodwJKtX1tfi4hzo4_1280.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         	case "Professor Longfellow" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/efbd829de01b6f643e2eccaa2e12db55/tumblr_opoocmb3Yj1tfi4hzo6_250.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         	case "Father Rhinehardt" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/24ba17f9cd903f4d1543801ce4c5dc4f/tumblr_opoocmb3Yj1tfi4hzo5_250.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         	case "Missy Dubourde" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/3868e3003998973b749ec97ee7385c58/tumblr_opoocmb3Yj1tfi4hzo3_250.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         	case "Zoe Ingstrom" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/0342acaff6cb1c673ff3d9f140cbc1d5/tumblr_opoocmb3Yj1tfi4hzo4_250.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         	case "Heather Granville" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/5d4c0001b5f4f4a7a9998d3ba5d47819/tumblr_opoodwJKtX1tfi4hzo3_250.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         	case "Jenny LeClerc" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/95069d02b4d42d3ea41224a4aad743c2/tumblr_opoodwJKtX1tfi4hzo6_250.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         	case "Vivian Lopez" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/bb340e320709c3886f8ed9dce91d8819/tumblr_opoodwJKtX1tfi4hzo1_250.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         	case "Madame Zostra" :
+         		icon.html("<center><img src=\"http://68.media.tumblr.com/abde61c175160ed4d997a98ada201b76/tumblr_opoodwJKtX1tfi4hzo2_250.jpg\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
+         		break;
+         }
+         
     } else {
        
     }
@@ -318,6 +362,50 @@ function setup_player_2(inGame) {
             $data_2.mightScale[$data_2.might] + " " +
             $data_2.sanityScale[$data_2.sanity] + " " +
             $data_2.knowledgeScale[$data_2.knowledge] + " " + "</center>");
+        
+        var icon = $("#icon_2");
+        
+        switch($char_2) {
+        	default :
+        		console.log("should not get here!");
+        		break;
+        	case "Darrin 'Flash' Williams" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/10e75595bcbe2b3fe1ed07d7e2198a62/tumblr_opoocmb3Yj1tfi4hzo1_1280.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Ox Bellows" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/f44f78562f3abc6a79b366af80662a36/tumblr_opoocmb3Yj1tfi4hzo2_1280.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Brandon Jaspers" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/919f4e70b1690921871a355205bd9c00/tumblr_opoodwJKtX1tfi4hzo5_1280.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Peter Akimoto" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/a6c6d7e2ca1f0387081274d2083e7342/tumblr_opoodwJKtX1tfi4hzo4_1280.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Professor Longfellow" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/efbd829de01b6f643e2eccaa2e12db55/tumblr_opoocmb3Yj1tfi4hzo6_250.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Father Rhinehardt" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/24ba17f9cd903f4d1543801ce4c5dc4f/tumblr_opoocmb3Yj1tfi4hzo5_250.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Missy Dubourde" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/3868e3003998973b749ec97ee7385c58/tumblr_opoocmb3Yj1tfi4hzo3_250.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Zoe Ingstrom" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/0342acaff6cb1c673ff3d9f140cbc1d5/tumblr_opoocmb3Yj1tfi4hzo4_250.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Heather Granville" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/5d4c0001b5f4f4a7a9998d3ba5d47819/tumblr_opoodwJKtX1tfi4hzo3_250.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Jenny LeClerc" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/95069d02b4d42d3ea41224a4aad743c2/tumblr_opoodwJKtX1tfi4hzo6_250.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Vivian Lopez" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/bb340e320709c3886f8ed9dce91d8819/tumblr_opoodwJKtX1tfi4hzo1_250.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Madame Zostra" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/abde61c175160ed4d997a98ada201b76/tumblr_opoodwJKtX1tfi4hzo2_250.jpg\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        }
        
     } else {
     	const $player_2_name = $("#name_2");
@@ -346,6 +434,50 @@ function setup_player_3(inGame) {
             $data_3.mightScale[$data_3.might] + " " +
             $data_3.sanityScale[$data_3.sanity] + " " +
             $data_3.knowledgeScale[$data_3.knowledge] + " " + "</center>");
+        
+        var icon = $("#icon_3");
+        
+        switch($char_3) {
+        	default :
+        		console.log("should not get here!");
+        		break;
+        	case "Darrin 'Flash' Williams" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/10e75595bcbe2b3fe1ed07d7e2198a62/tumblr_opoocmb3Yj1tfi4hzo1_1280.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Ox Bellows" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/f44f78562f3abc6a79b366af80662a36/tumblr_opoocmb3Yj1tfi4hzo2_1280.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Brandon Jaspers" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/919f4e70b1690921871a355205bd9c00/tumblr_opoodwJKtX1tfi4hzo5_1280.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Peter Akimoto" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/a6c6d7e2ca1f0387081274d2083e7342/tumblr_opoodwJKtX1tfi4hzo4_1280.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Professor Longfellow" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/efbd829de01b6f643e2eccaa2e12db55/tumblr_opoocmb3Yj1tfi4hzo6_250.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Father Rhinehardt" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/24ba17f9cd903f4d1543801ce4c5dc4f/tumblr_opoocmb3Yj1tfi4hzo5_250.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Missy Dubourde" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/3868e3003998973b749ec97ee7385c58/tumblr_opoocmb3Yj1tfi4hzo3_250.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Zoe Ingstrom" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/0342acaff6cb1c673ff3d9f140cbc1d5/tumblr_opoocmb3Yj1tfi4hzo4_250.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Heather Granville" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/5d4c0001b5f4f4a7a9998d3ba5d47819/tumblr_opoodwJKtX1tfi4hzo3_250.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Jenny LeClerc" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/95069d02b4d42d3ea41224a4aad743c2/tumblr_opoodwJKtX1tfi4hzo6_250.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Vivian Lopez" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/bb340e320709c3886f8ed9dce91d8819/tumblr_opoodwJKtX1tfi4hzo1_250.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Madame Zostra" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/abde61c175160ed4d997a98ada201b76/tumblr_opoodwJKtX1tfi4hzo2_250.jpg\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        }
        
     } else {
     	const $player_3_name = $("#name_3");
@@ -374,7 +506,50 @@ function setup_player_4(inGame) {
             $data_4.mightScale[$data_4.might] + " " +
             $data_4.sanityScale[$data_4.sanity] + " " +
             $data_4.knowledgeScale[$data_4.knowledge] + " " + "</center>");
-       
+
+        var icon = $("#icon_4");
+        
+        switch($char_4) {
+        	default :
+        		console.log("should not get here!");
+        		break;
+        	case "Darrin 'Flash' Williams" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/10e75595bcbe2b3fe1ed07d7e2198a62/tumblr_opoocmb3Yj1tfi4hzo1_1280.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Ox Bellows" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/f44f78562f3abc6a79b366af80662a36/tumblr_opoocmb3Yj1tfi4hzo2_1280.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Brandon Jaspers" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/919f4e70b1690921871a355205bd9c00/tumblr_opoodwJKtX1tfi4hzo5_1280.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Peter Akimoto" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/a6c6d7e2ca1f0387081274d2083e7342/tumblr_opoodwJKtX1tfi4hzo4_1280.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Professor Longfellow" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/efbd829de01b6f643e2eccaa2e12db55/tumblr_opoocmb3Yj1tfi4hzo6_250.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Father Rhinehardt" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/24ba17f9cd903f4d1543801ce4c5dc4f/tumblr_opoocmb3Yj1tfi4hzo5_250.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Missy Dubourde" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/3868e3003998973b749ec97ee7385c58/tumblr_opoocmb3Yj1tfi4hzo3_250.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Zoe Ingstrom" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/0342acaff6cb1c673ff3d9f140cbc1d5/tumblr_opoocmb3Yj1tfi4hzo4_250.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Heather Granville" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/5d4c0001b5f4f4a7a9998d3ba5d47819/tumblr_opoodwJKtX1tfi4hzo3_250.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Jenny LeClerc" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/95069d02b4d42d3ea41224a4aad743c2/tumblr_opoodwJKtX1tfi4hzo6_250.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Vivian Lopez" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/bb340e320709c3886f8ed9dce91d8819/tumblr_opoodwJKtX1tfi4hzo1_250.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Madame Zostra" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/abde61c175160ed4d997a98ada201b76/tumblr_opoodwJKtX1tfi4hzo2_250.jpg\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        }
     } else {
     	const $player_4_name = $("#name_4");
     	$player_4_name.html("<center> Another victim of the house... </center>");
@@ -402,7 +577,50 @@ function setup_player_5(inGame) {
             $data_5.mightScale[$data_5.might] + " " +
             $data_5.sanityScale[$data_5.sanity] + " " +
             $data_5.knowledgeScale[$data_5.knowledge] + " " + "</center>");
-       
+
+        var icon = $("#icon_5");
+        
+        switch($char_5) {
+        	default :
+        		console.log("should not get here!");
+        		break;
+        	case "Darrin 'Flash' Williams" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/10e75595bcbe2b3fe1ed07d7e2198a62/tumblr_opoocmb3Yj1tfi4hzo1_1280.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Ox Bellows" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/f44f78562f3abc6a79b366af80662a36/tumblr_opoocmb3Yj1tfi4hzo2_1280.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Brandon Jaspers" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/919f4e70b1690921871a355205bd9c00/tumblr_opoodwJKtX1tfi4hzo5_1280.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Peter Akimoto" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/a6c6d7e2ca1f0387081274d2083e7342/tumblr_opoodwJKtX1tfi4hzo4_1280.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Professor Longfellow" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/efbd829de01b6f643e2eccaa2e12db55/tumblr_opoocmb3Yj1tfi4hzo6_250.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Father Rhinehardt" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/24ba17f9cd903f4d1543801ce4c5dc4f/tumblr_opoocmb3Yj1tfi4hzo5_250.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Missy Dubourde" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/3868e3003998973b749ec97ee7385c58/tumblr_opoocmb3Yj1tfi4hzo3_250.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Zoe Ingstrom" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/0342acaff6cb1c673ff3d9f140cbc1d5/tumblr_opoocmb3Yj1tfi4hzo4_250.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Heather Granville" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/5d4c0001b5f4f4a7a9998d3ba5d47819/tumblr_opoodwJKtX1tfi4hzo3_250.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Jenny LeClerc" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/95069d02b4d42d3ea41224a4aad743c2/tumblr_opoodwJKtX1tfi4hzo6_250.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Vivian Lopez" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/bb340e320709c3886f8ed9dce91d8819/tumblr_opoodwJKtX1tfi4hzo1_250.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Madame Zostra" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/abde61c175160ed4d997a98ada201b76/tumblr_opoodwJKtX1tfi4hzo2_250.jpg\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        }
     } else {
     	const $player_5_name = $("#name_5");
     	$player_5_name.html("<center> Another victim of the house... </center>");
@@ -430,7 +648,50 @@ function setup_player_6(inGame) {
 			$data_6.mightScale[$data_6.might] + " " + 
 			$data_6.sanityScale[$data_6.sanity] + " " +
 			$data_6.knowledgeScale[$data_6.knowledge] + " " + "</center>");
-		
+
+        var icon = $("#icon_6");
+        
+        switch($char_6) {
+        	default :
+        		console.log("should not get here!");
+        		break;
+        	case "Darrin 'Flash' Williams" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/10e75595bcbe2b3fe1ed07d7e2198a62/tumblr_opoocmb3Yj1tfi4hzo1_1280.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Ox Bellows" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/f44f78562f3abc6a79b366af80662a36/tumblr_opoocmb3Yj1tfi4hzo2_1280.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Brandon Jasprs" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/919f4e70b1690921871a355205bd9c00/tumblr_opoodwJKtX1tfi4hzo5_1280.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Peter Akimoto" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/a6c6d7e2ca1f0387081274d2083e7342/tumblr_opoodwJKtX1tfi4hzo4_1280.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Professor Longfellow" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/efbd829de01b6f643e2eccaa2e12db55/tumblr_opoocmb3Yj1tfi4hzo6_250.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Father Rhinehardt" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/24ba17f9cd903f4d1543801ce4c5dc4f/tumblr_opoocmb3Yj1tfi4hzo5_250.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Missy Dubourde" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/3868e3003998973b749ec97ee7385c58/tumblr_opoocmb3Yj1tfi4hzo3_250.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Zoe Ingstrom" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/0342acaff6cb1c673ff3d9f140cbc1d5/tumblr_opoocmb3Yj1tfi4hzo4_250.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Heather Granville" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/5d4c0001b5f4f4a7a9998d3ba5d47819/tumblr_opoodwJKtX1tfi4hzo3_250.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Jenny LeClerc" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/95069d02b4d42d3ea41224a4aad743c2/tumblr_opoodwJKtX1tfi4hzo6_250.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Vivian Lopez" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/bb340e320709c3886f8ed9dce91d8819/tumblr_opoodwJKtX1tfi4hzo1_250.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        	case "Madame Zostra" :
+        		icon.html("<center><img src=\"http://68.media.tumblr.com/abde61c175160ed4d997a98ada201b76/tumblr_opoodwJKtX1tfi4hzo2_250.jpg\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+        		break;
+        }
 	} else {
     	const $player_6_name = $("#name_6");
     	$player_6_name.html("<center> Another victim of the house... </center>");
