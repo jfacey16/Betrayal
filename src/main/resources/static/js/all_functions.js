@@ -374,14 +374,15 @@ function placeTile() {
   rot = 0;
 }
 
-function receiveCard(ro) {
+function receiveCard(data) {
+	var ro = JSON.parse(data.payload);
   if (ro.item.length > 0 || ro.omen.length > 0 || ro.event.length > 0) {
     if (ro.item.length > 0)
-      itemDrawn(ro.item[0], ro.newTile.name);
+      itemDrawn(data, ro.item[0], ro.newTile.name);
     else if (ro.omen.length > 0)
-      omenDrawn(ro.omen[0], ro.newTile.name);
+      omenDrawn(data, ro.omen[0], ro.newTile.name);
     else if (ro.event.length > 0)
-      eventDrawn(ro.event[0], ro.newTile.name);
+      eventDrawn(data, ro.event[0], ro.newTile.name);
     ending.disabled = true;
     moves = 0;
     movesp.innerHTML = 0;

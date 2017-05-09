@@ -11,7 +11,7 @@
   #container {display:flex; flex-direction:row;}
   #descr {position: absolute; right: 0; bottom: 0; width:150px; height:514px;
     background: #eeeeee; border: solid black 1px; border-width: 1px 0 0 2px; z-index: 1;}
-  button {padding:5px; margin:5px; background:#eeeeee; font-size:14px; width:130px; height:40px;}
+  button {padding:5px; margin:5px; margin-bottom:10px; background:#eeeeee; font-size:14px; width:130px; height:40px;}
   </style>
   <link rel="stylesheet" href="css/main.css">
   <script src="js/jquery-3.1.1.js"></script>
@@ -176,42 +176,40 @@
 
       <center><div id="item_name" class="card_name"></div></center>
 
-      <div class="card_cont">
+      <div id="item_cont" class="card_cont">
       	<center><div id="item_info" class="card_info"></div></center>
-
 	  	<center><div id="item_description" class="card_description"></div></center>
-
-	  	<center><div id="item_logic" class="card_logic"></div></center>
+	  	<div id="item_logic" class="card_logic"></div>
 	  </div>
-	  <p><center><button type="button" id="end_turn">End Turn</button></center></p>
+	  <center><button type="button" id="end_turn">End Turn</button></center>
 
 	</div>
 
 	<div id="omen" class="card" draggable="true">
 	    <center><div id="omen_name" class="card_name"></div></center>
 
-        <div class="card_cont">
+        <div id="omen_cont" class="card_cont">
         	<center><div id="omen_info" class="card_info"></div></center>
-
 	    	<center><div id="omen_description" class="card_description"></div></center>
-
-	    	<center><div id="omen_logic" class="card_logic"></div></center>
+	    	<div id="omen_logic" class="card_logic"></div>
+	    	<center><button type="button" id="roll_haunt">Roll for Haunt</button></center>
+	    	<div id="omen_roll" class="omen_roll"></div>
 	    </div>
-	    <p><center><button type="button" id="roll_haunt">Roll for Haunt</button></center></p>
 
 	</div>
 
 	<div id="event" class="card" draggable="true">
 	    <center><div id="event_name" class="card_name"></div></center>
 
-      <div class="card_cont">
+      <div id="event_cont" class="card_cont">
       	<center><div id="event_info" class="card_info"></div></center>
       	<center><div id="event_description" class="card_description"></div></center>
-      	<center><div id="event_logic" class="card_logic"></div></center>
+      	<div id="event_logic" class="card_logic"></div>
       </div>
 
-	  	<p><center><button type="button" id="event_action">ACTION BUTTON</button></center></p>
+	  	<center><button type="button" id="event_action">ACTION BUTTON</button></center>
 	</div>
+	
 <div id="container">
   <div id="map">
     <div id="mapf"><canvas id="mfirst"></canvas></div>

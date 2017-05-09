@@ -13,7 +13,6 @@ import com.term_project.house.Tile;
 import com.term_project.house.TileBean;
 import com.term_project.items.Item;
 import com.term_project.omens.Omen;
-import com.term_project.omens.Omen;
 import com.term_project.system.MemorySlot;
 
 public class PreHaunt implements GamePhase {
@@ -169,7 +168,8 @@ public class PreHaunt implements GamePhase {
           variables.put("newTile", character.getTile().getBean());
 
           phase = 0;
-
+          mode = "idle";
+          
           /* This adding method doesn't really make a ton of sense to me. */
           /*
            * classes are supposed to encapsulate an idea, why would the idea of
@@ -274,7 +274,7 @@ public class PreHaunt implements GamePhase {
       // apply and return the results of event
       Integer rollSum = Dice.sum(rolls);
 
-      if (rollSum > omenCount) {
+      if (omenCount > rollSum) {
         // generate a random haunt
         GamePhase haunt = new HauntOne(memory);
         variables.put("description", haunt.getDescription());

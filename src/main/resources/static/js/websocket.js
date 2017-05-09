@@ -57,9 +57,17 @@ const setup_betrayal = () => {
 				const pay = JSON.parse(data.payload);
 				if (pay.phase === 1) {
 					console.log(pay);
-					receiveCard(pay);
-				} else if (pay.phase === 0)
+					receiveCard(data);
+				} else if (pay.phase === 0) {
 					actualMovement(data);
+				}
+				
+				if(pay.rolls) {
+					console.log("omen roll sent");
+					omenRoll(pay);
+				}
+				
+				console.log(pay);
 				update_turn(data.currentTurn);
 				break;
 			case MESSAGE_TYPE.CHATUPDATE:
