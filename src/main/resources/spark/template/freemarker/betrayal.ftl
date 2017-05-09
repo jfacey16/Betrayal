@@ -335,44 +335,66 @@
     
     <div id="item" class="card" draggable="true">
     
-      <center><div id="item_info"></div></center>
-    
       <center><div id="item_name" class="card_name"></div></center>
+    
+      <div class="card_cont">
+      	<center><div id="item_info" class="card_info"></div></center>
   
-	  <center><div id="item_description" class="card_description"></div></center>
+	  	<center><div id="item_description" class="card_description"></div></center>
+	  
+	  	<center><div id="item_logic" class="card_logic"></div></center>
+	  </div>
 	  
 	  <p><center><button type="button" id="end_turn">End Turn</button></center></p>
 	    
 	</div>
 
 	<div id="omen" class="card" draggable="true">
-    
-        <center><div id="omen_info"></div></center>
 	    
 	    <center><div id="omen_name" class="card_name"></div></center>
+    
+        <div class="card_cont">
+        	<center><div id="omen_info" class="card_info"></div></center>
 	  
-	    <center><div id="omen_description" class="card_description"></div></center>
+	    	<center><div id="omen_description" class="card_description"></div></center>
+	    
+	    	<center><div id="omen_logic" class="card_logic"></div></center>
+	    </div>
 	    
 	    <p><center><button type="button" id="roll_haunt">Roll for Haunt</button></center></p>
 	    
 	</div>
 	
 	<div id="event" class="card" draggable="true">
-    
-        <center><div id="event_info"></div></center>
 	    
 	    <center><div id="event_name" class="card_name"></div></center>
+    
+        <div class="card_cont">
+        	<center><div id="event_info" class="card_info"></div></center>
 	  
-	    <center><div id="event_description" class="card_description"></div></center>
+	    	<center><div id="event_description" class="card_description"></div></center>
+	    
+	    	<center><div id="event_logic" class="card_logic"></div></center>
+        </div>
 	  
 	  	<p><center><button type="button" id="event_action">ACTION BUTTON</button></center></p>
 	    
 	</div>
   
+       <style type="text/css">
+  .card_info{
+    width:95%;
+        border-style:solid;
+        border-width:2px;
+        margin-top:5px;
+        margin-bottom:5px;
+        pading: 2px;
+        background-color:#eeeeee;}
+     </style>
+  
   <style type="text/css">
   .card_name{
     width:100%;
-    height:10%;
         margin-bottom:5px;
         background-color:#ffffff;}
      </style>
@@ -380,11 +402,28 @@
      <style type="text/css">
   .card_description{
     width:95%;
-    height:80%;
         border-style:solid;
         border-width:2px;
         margin-bottom:5px;
+        pading: 2px;
         background-color:#eeeeee;}
+     </style>
+     
+    <style type="text/css">
+  .card_logic{
+    width:95%;
+        border-style:solid;
+        border-width:2px;
+        margin-bottom:5px;
+        pading: 2px;
+        background-color:#eeeeee;}
+     </style>
+     
+       <style type="text/css">
+  .card_cont{
+      display:flex; 
+      flex-direction:column;
+	  overflow_y:auto;}
      </style>
 
   <style type="text/css">
