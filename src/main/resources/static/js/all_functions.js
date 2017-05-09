@@ -897,6 +897,22 @@ function update_turn(currentTurn) {
 		$('#omen').hide();
 		$('#event').hide();
 		
+		$("#item_info").html("");
+		$("#item_name").html("");
+		$("#item_description").html("");
+		$("#item_logic").html("");
+		$("#omen_roll").html("");
+		$("#omen_info").html("");
+		$("#omen_name").html("");
+		$("#omen_description").html("");
+		$("#omen_logic").html("");
+		$("#action_result").html("");
+		$("#action_rolls1").html("");
+		$("#event_info").html("");
+		$("#event_name").html("");
+		$("#event_description").html("");
+		$("#event_logic").html("");
+		
 		if(current_char === 0) {
 		     
 			current_char_name = $data_1.name;
