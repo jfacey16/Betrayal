@@ -284,13 +284,13 @@ public class PreHaunt implements GamePhase {
         GamePhase haunt = new HauntOne(memory);
         character.setTraitor(true);
         haunt.setup(character, variables);
-        variables.put("omencount", omenCount);
         variables.put("character", character.getCharBean());
         variables.put("description", haunt.getDescription());
         variables.put("traitor", haunt.getTraitorDescription());
         variables.put("explorers", haunt.getExplorersDescription());
         memory.getGameState().setPhase(haunt);
       }
+      variables.put("omencount", omenCount);
       toResolve.remove("haunt");
 
       mode = "idle";

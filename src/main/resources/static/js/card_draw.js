@@ -37,19 +37,6 @@ function itemDrawn(data, card_info, room_name) {
 		
 		turn_end();
 		
-		var message = {
-				type: MESSAGE_TYPE.GAMEMOVE,
-				payload: {
-					id : userId,
-					query : {
-						name : "end"
-					}
-				}
-	      }
-
-		const json = JSON.stringify(message);
-		conn.send(json);
-
 		$("#item_info").html("");
 		$("#item_name").html("");
 		$("#item_description").html("");
@@ -345,6 +332,28 @@ function eventRoll(data) {
 	var event_info = document.getElementById("event_cont");
 	event_info.scrollTop = event_info.scrollHeight;
 	
+	if(current_char != 0) {
+		document.getElementById("end_turn_event").disabled = true;
+	} else {
+		document.getElementById("end_turn_event").disabled = false;
+	}
+	
+	$("#end_turn_event").unbind().click(event => {
+
+		$event_window.hide();
+		
+		turn_end();
+		
+		$("#action_result").html("");
+		$("#action_rolls1").html("");
+		$("#event_info").html("");
+		$("#event_name").html("");
+		$("#event_description").html("");
+		$("#event_logic").html("");
+    });
+}
+
+function updateEvent(data) {
 	if(current_char === 0) {
 		update_player_1(data);
 	} else if(current_char === 1) {
@@ -360,26 +369,6 @@ function eventRoll(data) {
 	} else {
 		console.log("ERROR: should never get here, bad # of players");
 	}
-	
-	if(current_char != 0) {
-		document.getElementById("end_turn_event").disabled = true;
-	} else {
-		document.getElementById("end_turn_event").disabled = false;
-	}
-		
-	$("#end_turn_event").unbind().click(event => {
-
-		$event_window.hide();
-		
-		turn_end();
-		
-		$("#action_result").html("");
-		$("#action_rolls1").html("");
-		$("#event_info").html("");
-		$("#event_name").html("");
-		$("#event_description").html("");
-		$("#event_logic").html("");
-    });
 }
 
 function addItem(data, card_info) {
@@ -516,6 +505,8 @@ function update_player_1(data) {
     }
   
     const $player_1_sanity = $("#sanity_1");
+    
+    console.log($player_1_sanity);
     var $sanity = "<center>";
 
     for (let i = 0, len = data.sanityScale.length; i < len; i++) {
@@ -525,6 +516,7 @@ function update_player_1(data) {
            $sanity += data.sanityScale[i] + " ";
        }
     }
+    console.log($player_1_sanity);
 
     const $player_1_knowledge = $("#knowledge_1");
     var $knowledge = "<center>";
