@@ -125,9 +125,33 @@ function eventDrawn(data, card_info, room_name) {
 	$("#event_description").html(card_info.description);
 	$("#event_logic").html(card_info.logic);
 	
+	console.log(JSON.parse(data.payload));
+	
+	var speed_usable = false;
+	var might_usable = false;
+	var know_usable = false;
+	var sanity_usable = false;
+	
+	for(type_index in JSON.parse(data.payload)) {
+		
+	}
+	
 	$("#event_action").unbind().click(event => {
 		
-		$event_window.hide();
+		var message = {
+				type: MESSAGE_TYPE.GAMEMOVE,
+				payload: {
+					id : userId,
+					query : {
+						name : "event"
+					}
+				}
+	      }
+
+		const json = JSON.stringify(message);
+		conn.send(json);
+		
+//		$event_window.hide();
 		
 		//do event stuff
 
