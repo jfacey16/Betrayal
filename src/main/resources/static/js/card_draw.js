@@ -59,6 +59,8 @@ function omenDrawn(data, card_info, room_name) {
 	}
 	
 	$("#roll_haunt").unbind().click(event => {
+
+		document.getElementById("roll_haunt").disabled = true;
 		
 		var message = {
 				type: MESSAGE_TYPE.GAMEMOVE,

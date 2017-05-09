@@ -65,6 +65,7 @@ let posp4 = new Player(600,600,1,true,true,true,false);
 let posp5 = new Player(600,600,1,true,true,true,false);
 let posp6 = new Player(600,600,1,true,true,true,false);
 let positions = [posp1, posp2, posp3, posp4, posp5, posp6];
+
 const offset1 = new Position(25,30);
 const offset2 = new Position(105,30);
 const offset3 = new Position(25,90);

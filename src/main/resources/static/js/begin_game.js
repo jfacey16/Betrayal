@@ -234,6 +234,7 @@ function set_starting_state(data) {
  
 function setup_player_1(inGame) {
     if(inGame) {
+    	
         const $player_1_name = $("#name_1");
  
         $char_1 = character_list[0];
