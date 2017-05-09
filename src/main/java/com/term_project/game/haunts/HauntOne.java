@@ -14,6 +14,7 @@ import com.term_project.game.actions.Mover;
 import com.term_project.house.Direction;
 import com.term_project.house.Floor;
 import com.term_project.house.GenericTile;
+import com.term_project.house.Pos;
 import com.term_project.house.Tile;
 import com.term_project.house.TileBean;
 import com.term_project.items.Item;
@@ -44,9 +45,6 @@ public class HauntOne implements GamePhase {
     // you)
     // TODO: alter move for holding corpses (move should be 2 when holding)
     // TODO: add cultists to id map (need to do this in state)
-    // TODO: add to tile list (make sure all tiles add to new list as well as
-    // map)
-    // TODO: position pentagram chamber (add map)
     // TODO: end game actually happening (what to do when the game ends)
     // TODO: return construction to front end
     this.memory = memory;
@@ -86,7 +84,10 @@ public class HauntOne implements GamePhase {
     penta.setName("Pentagram Chamber");
 
     if (!memory.getTileList().contains(penta)) {
+      memory.getTiles().remove(penta);
       memory.getTileList().add(penta);
+      // TODO: change this
+      memory.getTileMap().put(new Pos(0, 0, Floor.BASEMENT), penta);
     }
   }
 
@@ -469,46 +470,46 @@ public class HauntOne implements GamePhase {
         + " sinister tomes. Horrible titles speak of evil, death, madness, "
         + "and the names of Things That Should Not Be. Why did your "
         + "companion bring you to this macabre collection? What forbidden "
-        + "knowledge would she hope to gain?\nYour questions are answered "
+        + "knowledge would she hope to gain?<br />Your questions are answered "
         + "when rhythmic chanting echoes through the corridors. The cult that "
         + "inhabits this house is shouting to summon an ancient creature-and the "
         + "loudest voice is that of your traitorous companion. The traitor "
         + "is here to complete the ritual by bringing the cultists everything "
         + "they need...including human sacrifices.";
     stringsExplorer.add(lore);
-    String rightNow = "Right Now:\nPaint tokens equal to the number "
+    String rightNow = "Right Now:<br />Paint tokens equal to the number "
         + "of players will be randomly distributed through the house.";
     stringsExplorer.add(rightNow);
-    String whatYouKnow = "What You Know About the Bad Guys:\nThe traitor "
+    String whatYouKnow = "What You Know About the Bad Guys:<br />The traitor "
         + "is working with a fanatic cult. The Cultists are trying to summon "
         + "their god by bringing sacrifices into the Pentagram Chamber. They "
         + "can sacrifice items and a few specific omens-along with the explorers'"
         + " You don't know how many sacrifices are needed, so you must stop the "
         + "Cultists as quickly as possible.";
     stringsExplorer.add(whatYouKnow);
-    String youWin = "You Win When...\n...you desecrate the pentagram before the"
+    String youWin = "You Win When...<br />...you desecrate the pentagram before the"
         + " god is summoned.";
     stringsExplorer.add(youWin);
-    String how = "How to Desecrate the Pentagram:\nYou can desecrate the "
+    String how = "How to Desecrate the Pentagram:<br />You can desecrate the "
         + "pentagram by finding cans of paint (Paint tokens) and throwing them "
-        + "on the floor of the Pentagram Chamber.\nPick up the Paint tokens "
+        + "on the floor of the Pentagram Chamber.<br />Pick up the Paint tokens "
         + "scattered around the house. You can carry only one Paint token at"
-        + " a time.\nYou can throw a Paint token into the Pentagram Chamber from an "
+        + " a time.<br />You can throw a Paint token into the Pentagram Chamber from an "
         + "adjacent room with a connecting door. Doing this counts as 1 space of movement."
-        + "\nYou must throw every Paint token in the house into the Pentagram "
+        + "<br />You must throw every Paint token in the house into the Pentagram "
         + "Chamber to desecrate the pentagram.";
     stringsExplorer.add(how);
-    String special = "Special Attack Rules:\nIf your explorer is killed, tip that figure "
+    String special = "Special Attack Rules:<br />If your explorer is killed, tip that figure "
         + "over in its room to mark his or her corpse. A Cultist or the traitor can then "
         + "pick up your explorer's corpse like an item and carry it. While the traitor "
         + "or a Cultist is carrying your corpse, it uses 2 spaces of movement to enter a room.";
     stringsExplorer.add(special);
-    String win = "If You Win...\nThe house shakes, and you hear glass shattering around "
-        + "you. The walls sweat as the cultists' dread god draws near.\nJust as your world "
+    String win = "If You Win...<br />The house shakes, and you hear glass shattering around "
+        + "you. The walls sweat as the cultists' dread god draws near.<br />Just as your world "
         + "is about to be torn away from you, paint splashes acoress the wooden floor, "
         + "desecrating the pentagram. You stop the horrible ritual. The world is safe, for "
         + "now, but the echoes of the cultists' chant still burn in your mind. Clutching "
-        + "at your head, you feel blood dripping steadily from your damaged ears.\nIn time "
+        + "at your head, you feel blood dripping steadily from your damaged ears.<br />In time "
         + "your body will heal...but will your soul?";
     stringsExplorer.add(win);
 
@@ -526,35 +527,35 @@ public class HauntOne implements GamePhase {
         + "that your sacrifices will be accepted tonight. The cult is praying that your "
         + "dread god will appear before you...and bathe in the blood of your friends.";
     stringsTraitor.add(lore);
-    String rightNow = "Right Now:\nYour explorer is still in the game but has turned traitor.\n"
+    String rightNow = "Right Now:<br />Your explorer is still in the game but has turned traitor.<br />"
         + "A number of small purple monster tokens are placed in the Pentagram Chamber equal to the"
         + " number of other players (representing Cultists).";
     stringsTraitor.add(rightNow);
-    String youWin = "Your Win When...\n...either all the heros are dea or you summon your god.";
+    String youWin = "Your Win When...<br />...either all the heros are dea or you summon your god.";
     stringsTraitor.add(youWin);
-    String whatYouKnow = "What You Know About the Heroes:\nThe only way they can stop you "
+    String whatYouKnow = "What You Know About the Heroes:<br />The only way they can stop you "
         + "from summoning your god is by desecrating the Pentagram Chamber. To do so, they will use"
         + " the cans of paint (represented by Paint tokens) that are hidden throughout the house.";
     stringsTraitor.add(whatYouKnow);
-    String how = "How to Summon the God:\nYou must make sacrifices to summon your god. Build up"
+    String how = "How to Summon the God:<br />You must make sacrifices to summon your god. Build up"
         + " a total of 13 sacrifice points by bringing the following sacrifices into the Pentagram "
-        + "Chamber.\nSacrifice, Points\nExplorer's Corpse: 4\nGirl, Madman, or Dog: 2\nAny other "
-        + "tradable omen or item: 1\nItem and omen cards that you sacrifice are removed from the game "
+        + "Chamber.<br />Sacrifice, Points<br />Explorer's Corpse: 4<br />Girl, Madman, or Dog: 2<br />Any other "
+        + "tradable omen or item: 1<br />Item and omen cards that you sacrifice are removed from the game "
         + "and kept in a seperate pile. Keep track of sacrifice points on a piece of paper. You can "
         + "sacrifice the Girl, Madman, or Dog when you have that card and are in the Pentagram Chamber."
-        + " You can't steal, carry, or sacrifice Paint tokens.\nCultists can carry items and explorers'"
+        + " You can't steal, carry, or sacrifice Paint tokens.<br />Cultists can carry items and explorers'"
         + " corpses. Any items they carry do not affect their traits or give them abilities. They cannot "
         + "carry Paint tokens.";
     stringsTraitor.add(how);
-    String cultists = "Cultists:\n Speed 4, Might 4, Sanity 4";
+    String cultists = "Cultists:<br /> Speed 4, Might 4, Sanity 4";
     stringsTraitor.add(cultists);
-    String attack = "Special Attack Rules:\nA cultist can steal an item from an explorer, "
-        + "just like explorers can.\nIf an explorer is killed, tip that figure over "
-        + "in its room to mark his or her corpse.\nA Cultist can pick up a corpse and carry it like an item, "
+    String attack = "Special Attack Rules:<br />A cultist can steal an item from an explorer, "
+        + "just like explorers can.<br />If an explorer is killed, tip that figure over "
+        + "in its room to mark his or her corpse.<br />A Cultist can pick up a corpse and carry it like an item, "
         + "but while it's doing this, it uses 2 spaces of movement to enter a room. You can also carry "
         + "corpses with the same restriction as Cultists. Take an explorer's figure when you're carrying its corpse.";
     stringsTraitor.add(attack);
-    String win = "If You Win...\nThe house shakes and glass shatters as the universe screams. A wound rips through "
+    String win = "If You Win...<br />The house shakes and glass shatters as the universe screams. A wound rips through "
         + "time and space, and through it, your god is reborn. Drenched in the blood of your friends, your god "
         + "is beautiful and terrrible, a wonder and a blight. The world is laid bare before him, and all within it "
         + "are his children, his blood...his sacrifices.";
@@ -571,11 +572,11 @@ public class HauntOne implements GamePhase {
 
     if (paintCount == characters) {
       result = "The house shakes, and you hear glass shattering around "
-          + "you. The walls sweat as the cultists' dread god draws near.\nJust as your world "
+          + "you. The walls sweat as the cultists' dread god draws near.<br />Just as your world "
           + "is about to be torn away from you, paint splashes acoress the wooden floor, "
           + "desecrating the pentagram. You stop the horrible ritual. The world is safe, for "
           + "now, but the echoes of the cultists' chant still burn in your mind. Clutching "
-          + "at your head, you feel blood dripping steadily from your damaged ears.\nIn time "
+          + "at your head, you feel blood dripping steadily from your damaged ears.<br />In time "
           + "your body will heal...but will your soul?";
       return true;
     } else if (sacrificePoints >= 13) {
