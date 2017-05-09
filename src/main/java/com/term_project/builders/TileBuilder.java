@@ -2,10 +2,8 @@ package com.term_project.builders;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 
 import com.term_project.house.Direction;
@@ -16,9 +14,11 @@ import com.term_project.system.MemorySlot;
 
 public class TileBuilder implements Builder<Tile> {
   MemorySlot memory;
+
   public TileBuilder(MemorySlot memory) {
     this.memory = memory;
   }
+
   @Override
   public Queue<Tile> build() {
     List<Tile> tileList = new ArrayList<>();
@@ -55,33 +55,27 @@ public class TileBuilder implements Builder<Tile> {
     bga.add(Floor.BASEMENT);
     bga.add(Floor.GROUND);
 
-    Tile junkRoom = new GenericTile(d4, 0, 0, 1,
-        bga, memory);
+    Tile junkRoom = new GenericTile(d4, 0, 0, 1, bga, memory);
     junkRoom.setName("Junk Room");
     tileList.add(junkRoom);
 
-    Tile gameRoom = new GenericTile(d3, 0, 1, 0,
-        bga, memory);
+    Tile gameRoom = new GenericTile(d3, 0, 1, 0, bga, memory);
     gameRoom.setName("Game Room");
     tileList.add(gameRoom);
 
-    Tile organRoom = new GenericTile(d2s, 0, 1, 0,
-        bga, memory);
+    Tile organRoom = new GenericTile(d2s, 0, 1, 0, bga, memory);
     organRoom.setName("Organ Room");
     tileList.add(organRoom);
 
-    Tile statuaryCorridor = new GenericTile(d2a, 0, 1, 0,
-        bga, memory);
+    Tile statuaryCorridor = new GenericTile(d2a, 0, 1, 0, bga, memory);
     statuaryCorridor.setName("Statuary Corridor");
     tileList.add(statuaryCorridor);
 
-    Tile creakyHallway = new GenericTile(d4, 0, 0, 0,
-        bga, memory);
+    Tile creakyHallway = new GenericTile(d4, 0, 0, 0, bga, memory);
     creakyHallway.setName("Creaky Hallway");
     tileList.add(creakyHallway);
 
-    Tile dustyHallway = new GenericTile(d4, 0, 0, 0,
-        bga, memory);
+    Tile dustyHallway = new GenericTile(d4, 0, 0, 0, bga, memory);
     dustyHallway.setName("Dusty Hallway");
     tileList.add(dustyHallway);
 
@@ -89,13 +83,11 @@ public class TileBuilder implements Builder<Tile> {
     List<Floor> a = new ArrayList<>();
     a.add(Floor.ATTIC);
 
-    Tile balcony = new GenericTile(d2a, 0, 0, 1,
-        a, memory);
+    Tile balcony = new GenericTile(d2a, 0, 0, 1, a, memory);
     balcony.setName("Balcony");
     tileList.add(balcony);
 
-    Tile gallery = new GenericTile(d1, 1, 0, 0,
-        a, memory);
+    Tile gallery = new GenericTile(d1, 1, 0, 0, a, memory);
     gallery.setName("Gallery");
     tileList.add(gallery);
 
@@ -103,13 +95,11 @@ public class TileBuilder implements Builder<Tile> {
     attic.setName("Attic");
     tileList.add(attic);
 
-    Tile masterBedroom = new GenericTile(d2s, 0, 0, 0,
-        a, memory);
+    Tile masterBedroom = new GenericTile(d2s, 0, 0, 0, a, memory);
     masterBedroom.setName("Master Bedroom");
     tileList.add(masterBedroom);
 
-    Tile bedroom = new GenericTile(d2a, 0, 1, 0,
-        a, memory);
+    Tile bedroom = new GenericTile(d2a, 0, 1, 0, a, memory);
     bedroom.setName("Bedroom");
     tileList.add(bedroom);
 
@@ -121,23 +111,19 @@ public class TileBuilder implements Builder<Tile> {
     List<Floor> g = new ArrayList<>();
     g.add(Floor.GROUND);
 
-    Tile diningRoom = new GenericTile(d2s, 0, 0, 1,
-        g, memory);
+    Tile diningRoom = new GenericTile(d2s, 0, 0, 1, g, memory);
     diningRoom.setName("Dining Room");
     tileList.add(diningRoom);
 
-    Tile coalChute = new GenericTile(d1, 0, 0, 0,
-        g, memory);
+    Tile coalChute = new GenericTile(d1, 0, 0, 0, g, memory);
     coalChute.setName("Coal Chute");
     tileList.add(coalChute);
 
-    Tile graveyard = new GenericTile(d1, 0, 1, 0,
-        g, memory);
+    Tile graveyard = new GenericTile(d1, 0, 1, 0, g, memory);
     graveyard.setName("Graveyard");
     tileList.add(graveyard);
 
-    Tile gardens = new GenericTile(d2a, 0, 1, 0,
-        g, memory);
+    Tile gardens = new GenericTile(d2a, 0, 1, 0, g, memory);
     gardens.setName("Gardens");
     tileList.add(gardens);
 
@@ -145,8 +131,7 @@ public class TileBuilder implements Builder<Tile> {
     patio.setName("Patio");
     tileList.add(patio);
 
-    Tile ballroom = new GenericTile(d4, 0, 1, 0,
-        g, memory);
+    Tile ballroom = new GenericTile(d4, 0, 1, 0, g, memory);
     ballroom.setName("Ballroom");
     tileList.add(ballroom);
 
@@ -154,18 +139,15 @@ public class TileBuilder implements Builder<Tile> {
     List<Floor> b = new ArrayList<>();
     b.add(Floor.BASEMENT);
 
-    Tile stairsFromBasement = new GenericTile(d2a, 0, 0, 0,
-        b, memory);
+    Tile stairsFromBasement = new GenericTile(d2a, 0, 0, 0, b, memory);
     stairsFromBasement.setName("Stairs From Basement");
     tileList.add(stairsFromBasement);
 
-    Tile pentagramChamber = new GenericTile(d1, 0, 0, 1,
-        b, memory);
+    Tile pentagramChamber = new GenericTile(d1, 0, 0, 1, b, memory);
     pentagramChamber.setName("Pentagram Chamber");
     tileList.add(pentagramChamber);
 
-    Tile larder = new GenericTile(d2a, 1, 0, 0,
-        b, memory);
+    Tile larder = new GenericTile(d2a, 1, 0, 0, b, memory);
     larder.setName("Larder");
     tileList.add(larder);
 
@@ -177,23 +159,19 @@ public class TileBuilder implements Builder<Tile> {
     crypt.setName("Crypt");
     tileList.add(crypt);
 
-    Tile catacombs = new GenericTile(d2a, 0, 0, 1,
-        b, memory);
+    Tile catacombs = new GenericTile(d2a, 0, 0, 1, b, memory);
     catacombs.setName("Catacombs");
     tileList.add(catacombs);
 
-    Tile furnaceRoom = new GenericTile(d3, 0, 0, 1,
-        b, memory);
+    Tile furnaceRoom = new GenericTile(d3, 0, 0, 1, b, memory);
     furnaceRoom.setName("Furnace Room");
     tileList.add(furnaceRoom);
 
-    Tile undergroundLake = new GenericTile(d2s, 0, 1, 0,
-        b, memory);
+    Tile undergroundLake = new GenericTile(d2s, 0, 1, 0, b, memory);
     undergroundLake.setName("Underground Lake");
     tileList.add(undergroundLake);
 
-    Tile wineCellar = new GenericTile(d2a, 1, 0, 0,
-        b, memory);
+    Tile wineCellar = new GenericTile(d2a, 1, 0, 0, b, memory);
     wineCellar.setName("Wine Cellar");
     tileList.add(wineCellar);
 
@@ -202,18 +180,15 @@ public class TileBuilder implements Builder<Tile> {
     ba.add(Floor.BASEMENT);
     ba.add(Floor.ATTIC);
 
-    Tile researchLabratory = new GenericTile(d2a, 0, 0, 0,
-        ba, memory);
+    Tile researchLabratory = new GenericTile(d2a, 0, 0, 0, ba, memory);
     researchLabratory.setName("Research Laboratory");
     tileList.add(researchLabratory);
 
-    Tile operatingLabratory = new GenericTile(d2s, 0, 0, 0,
-        ba, memory);
+    Tile operatingLabratory = new GenericTile(d2s, 0, 0, 0, ba, memory);
     operatingLabratory.setName("Operating Laboratory");
     tileList.add(operatingLabratory);
 
-    Tile gymnasium = new GenericTile(d2s, 0, 0, 1,
-        ba, memory);
+    Tile gymnasium = new GenericTile(d2s, 0, 0, 1, ba, memory);
     gymnasium.setName("Gymnasium");
     tileList.add(gymnasium);
 
@@ -221,13 +196,11 @@ public class TileBuilder implements Builder<Tile> {
     vault.setName("Vault");
     tileList.add(vault);
 
-    Tile storeroom = new GenericTile(d1, 1, 0, 0,
-        ba, memory);
+    Tile storeroom = new GenericTile(d1, 1, 0, 0, ba, memory);
     storeroom.setName("Storeroom");
     tileList.add(storeroom);
 
-    Tile serventsQuarters = new GenericTile(d4, 0, 0, 1,
-        ba, memory);
+    Tile serventsQuarters = new GenericTile(d4, 0, 0, 1, ba, memory);
     serventsQuarters.setName("Servants Quarters");
     tileList.add(serventsQuarters);
 
@@ -236,33 +209,27 @@ public class TileBuilder implements Builder<Tile> {
     ga.add(Floor.GROUND);
     ga.add(Floor.ATTIC);
 
-    Tile library = new GenericTile(d2s, 0, 1, 0,
-        ga, memory);
+    Tile library = new GenericTile(d2s, 0, 1, 0, ga, memory);
     library.setName("Library");
     tileList.add(library);
 
-    Tile collapsedRoom = new GenericTile(d4, 0, 0, 0,
-        ga, memory);
+    Tile collapsedRoom = new GenericTile(d4, 0, 0, 0, ga, memory);
     collapsedRoom.setName("Collapsed Room");
     tileList.add(collapsedRoom);
 
-    Tile charredRoom = new GenericTile(d4, 1, 0, 0,
-        ga, memory);
+    Tile charredRoom = new GenericTile(d4, 1, 0, 0, ga, memory);
     charredRoom.setName("Charred Room");
     tileList.add(charredRoom);
 
-    Tile bloodyRoom = new GenericTile(d4, 1, 0, 0,
-        ga, memory);
+    Tile bloodyRoom = new GenericTile(d4, 1, 0, 0, ga, memory);
     bloodyRoom.setName("Bloody Room");
     tileList.add(bloodyRoom);
 
-    Tile conservatory = new GenericTile(d1, 0, 1, 0,
-        ga, memory);
+    Tile conservatory = new GenericTile(d1, 0, 1, 0, ga, memory);
     conservatory.setName("Conservatory");
     tileList.add(conservatory);
 
-    Tile chapel = new GenericTile(d1, 0, 1, 0,
-        ga, memory);
+    Tile chapel = new GenericTile(d1, 0, 1, 0, ga, memory);
     chapel.setName("Chapel");
     tileList.add(chapel);
 
@@ -271,13 +238,11 @@ public class TileBuilder implements Builder<Tile> {
     bg.add(Floor.GROUND);
     bg.add(Floor.BASEMENT);
 
-    Tile kitchen = new GenericTile(d2s, 0, 0, 0,
-        bg, memory);
+    Tile kitchen = new GenericTile(d2s, 0, 0, 1, bg, memory);
     kitchen.setName("Kitchen");
     tileList.add(kitchen);
 
-    Tile abandonedRoom = new GenericTile(d4, 0, 0, 1,
-        bg, memory);
+    Tile abandonedRoom = new GenericTile(d4, 0, 0, 1, bg, memory);
     abandonedRoom.setName("Abandoned Room");
     tileList.add(abandonedRoom);
 
