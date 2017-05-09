@@ -64,11 +64,11 @@ const setup_betrayal = () => {
 				break;
 			case MESSAGE_TYPE.GAMEMOVE:
 				const pay = JSON.parse(data.payload);
-				if (pay.phase === 1) 
+				if (pay.phase === 1)
 					receiveCard(data);
 			 	else if (pay.phase === 0)
 					actualMovement(data);
-				
+
 				if(pay.rolls) {
 					if(pay.result) {
 						eventRoll(pay);
@@ -77,7 +77,7 @@ const setup_betrayal = () => {
 						omenRoll(pay);
 					}
 				}
-				
+
 				console.log(data);
 				console.log(pay);
 				console.log("current " + current_char);
@@ -213,11 +213,45 @@ function choose_character(data) {
 	var choices_text = `
 	<div class="option wrapper">
 		<p class="title"> Choose your character </p>
+    <div id="choose_error" class="message"></div>
 		<div class="contents">
+
 	`;
 
 	for(index in choices) {
-		choices_text += "<div class=\"char_choice text_normal\">" + choices[index].name + "</div>";
+    switch(choices[index].name) {
+        case "Professor Longfellow":
+            choices_text += '<img class="char_choice resize_choice" src="css/Proffessor_Longfellow_Choose.jpg" alt="Professor Longfellow"></img>';
+            break;
+        case "Father Rhinehardt":
+            choices_text += '<img class="char_choice resize_choice" src="css/Father_Reihnhart_Choose.jpg" alt="Father Rhinehardt"></img>';
+            break;
+        case "Jenny LeClerc":
+            choices_text += '<img class="char_choice resize_choice" src="css/Jenny_Leclerk_Choose.jpg" alt="Jenny LeClerc"></img>';
+            break;
+        case "Heather Granville":
+            choices_text += '<img class="char_choice resize_choice" src="css/Heather_Granville_Choose.jpg" alt="Heather Granville"></img>';
+            break;
+        case "Brandon Jaspers":
+            choices_text += '<img class="char_choice resize_choice" src="css/Brandon_Jaspers_Choose.jpg" alt="Brandon Jaspers"></img>';
+            break;
+        case "Peter Akimoto":
+            choices_text += '<img class="char_choice resize_choice" src="css/Peter_Akimoto_Choose.jpg" alt="Peter Akimoto"></img>';
+            break;
+        case "Ox Bellows":
+            choices_text += '<img class="char_choice resize_choice" src="css/Ox_Bellows_Choose.jpg" alt="Ox Bellows"></img>';
+            break;
+        case "Darrin 'Flash' Williams":
+            choices_text += '<img class="char_choice resize_choice" src="css/Darrin_Choose.jpg" alt="Darrin \'Flash\' Williams"></img>';
+            break;
+        case "Madame Zostra":
+            choices_text += '<img class="char_choice resize_choice" src="css/Madame_Zostra_Choose.jpg" alt="Madame Zostra"></img>';
+            break;
+        case "Vivian Lopez":
+            choices_text += '<img class="char_choice resize_choice" src="css/Vivian_Lopez_Choose.jpg" alt="Peter Akimoto"></img>';
+            break;
+    }
+
 	}
 
   choices_text += "</div>"
@@ -226,9 +260,13 @@ function choose_character(data) {
 
 	$("#temp_lobby").html(choices_text);
 
+  $('.contents').each(function() {
+    $(this).addClass('center');
+  });
+
 	$(".char_choice").click(function(e) {
 		const choice = $(e.target);
-		current_choice = choice.text();
+		current_choice = choice.attr("alt");
 	});
 
 	$("#choose_character").click(event => {
