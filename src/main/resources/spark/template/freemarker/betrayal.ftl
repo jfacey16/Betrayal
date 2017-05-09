@@ -13,6 +13,8 @@
     background: #eeeeee; border: solid black 1px; border-width: 1px 0 0 2px; z-index: 1;}
   button {padding:5px; margin:5px; margin-bottom:10px; background:#eeeeee; font-size:14px; width:130px; height:40px;}
   </style>
+  <link href="https://fonts.googleapis.com/css?family=Squada+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Scada" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
   <script src="js/jquery-3.1.1.js"></script>
   <script src="js/jquery-ui.js"></script>
@@ -27,37 +29,32 @@
 
 <div class="game">
 
-	<div id="temp_lobby" class="temp_lobby">
+	<div id="temp_lobby" class="main_menu">
 		<div class="option wrapper">
-			<center><p><font size="5">Create a game:</font>
+			<p class="title">Betrayal</p>
+        <div class="contents">
 
-			  <p>Give yourself a username to create a game:</p>
+          <div class = "text_normal">
+            <h2>
+    			       <div class = "text_title">Username*: <input type="text" id="username" name="name" placeholder="" class = "text_normal"></p></div>
+            </h2>
+            <div id="menu_error" class="message"></div>
 
-			  <div id="create_error" class="message"></div>
+          </div>
 
-			  <p>Username: <input type="text" id="username_create" name="name" placeholder="Enter Your Username"></p>
+          <div id="lobbies" class="wrapper text_normal"></div>
 
-			  <button type="button" id="create_game">Create Game</button></center>
-		</div>
-
-		<div class="option">
-			<center><p><font size="5">Join a lobby:</font></p>
-
-			<p>Give yourself a username and select a lobby to join a game:</p>
-
-			<div id="join_error" class="message"></div>
-
-			<p>Username: <input type="text" id="username_join" name="name" placeholder="Enter Your Username"></p>
-
-			<div id="lobbies" class="lobby_list wrapper"></div>
-
-			<button type="button" id="join_game">Join Lobby</button></center>
-		</div>
-	</div>
+          <div class="menu_button">
+  			       <button type="button" id="create_game" class="myButton">Create Game</button>
+               <button type="button" id="join_game"  class="myButton">Join Game</button>
+          </div>
+		   </div>
+    </div>
+  </div>
 
   <div class="title_row">
-    <div class="title wrapper">
-       <center><font size="5">Betrayal at House on the Hill</font></center>
+    <div class="gameTitle">
+       Betrayal at House on the Hill
     </div>
   </div>
 
@@ -242,12 +239,12 @@
 
       </div>
 
-      <div class="chat">
-        <center>Chat</center>
-        <div class="log" id="chat_log"></div>
+      <div class="chat box">
+        <div class="text_title center big">Chat</div>
+        <div class="log dark_bg" id="chat_log"></div>
 
         <div class="user_text">
-          <center><input type="text" id="chat_text" name="chat_text" placeholder="Enter Message" style="width:95%;"></center>
+          <input type="text" id="chat_text" name="chat_text" placeholder="Enter Message" style="width:85%;" class = "text_normal">
         </div>
 
       </div>

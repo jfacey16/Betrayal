@@ -1,69 +1,73 @@
 $(document).ready(() => {
-	
-	$("#temp_lobby").draggable();
-	
+
 	$("#join_game").click(event => {
-		
-		console.log("join"); 
-		
-		const $username_join = $("#username_join");
-		
-		if($username_join.val() === "") {
-			$("#join_error").html("<center><p>ERROR: Please enter a username before you join a game!</p></center>");
-			document.getElementById("join_error").style.color = "red";
+
+		console.log("join");
+
+		const $username = $("#username");
+
+		if($username.val() === "") {
+			$("#menu_error").html("<center>ERROR: Please enter a username before you join a game!</center>");
+			document.getElementById("menu_error").style.color = "red";
 		} else {
 			if(current_lobby_name != "") {
-				create_name($username_join.val());
+				create_name($username.val());
 				display_lobby();
 				join_lobby();
 			} else {
-				$("#join_error").html("<center><p>ERROR: Please select a lobby before you join a game!</p></center>");
-				document.getElementById("join_error").style.color = "red";
+				$("#menu_error").html("<center>ERROR: Please select a lobby before you join a game!</center>");
+				document.getElementById("menu_error").style.color = "red";
 			}
 		}
-		
+
 	});
-	
+
 	$("#create_game").click(event => {
-		const $username_create = $("#username_create");
-		
-		if($username_create.val() === "") {
-			$("#create_error").html("<center><p>ERROR: Please enter a username in order to create a game!</p></center>");
-			document.getElementById("create_error").style.color = "red";
+		const $username = $("#username");
+
+		if($username.val() === "") {
+			$("#menu_error").html("<center>ERROR: Please enter a username in order to create a game!</center>");
+			document.getElementById("menu_error").style.color = "red";
 		} else {
-			
-			create_name($username_create.val());
+
+			create_name($username.val());
 			create_lobby();
 			display_lobby();
 		}
-		
+
 	});
 });
 
 function display_lobby() {
-	
+
 	console.log("entering lobby");
-	
+
 	$("#temp_lobby").html("");
-	
-	var lobby_text = "";
-	
+
+	var lobby_text = `
+	<div class="option wrapper">
+		<p class="title">` + current_lobby_name + `</p>
+		<div class="contents">
+				<div id="members"></div>
+	`;
+
+	/*
 	lobby_text += "<div class=\"option\" style=\"width:100%\">";
 	lobby_text += "<center><font size=\"5\">You've entered the lobby of " + current_lobby_name + "</font></center>";
 	lobby_text += "<center><div id=\"members\"></div></center>";
-	
+	*/
 	if(game_host) {
-		lobby_text += "<center><button type=\"button\" id=\"start_game\">Start Game</button></center>";
+		lobby_text += "<div class=\"menu_button\"><button type=\"button\" id=\"start_game\" class=\"myButton\">Start Game</button></div>";
 	}
-	
-	lobby_text += "</div>";
-	
+
+	lobby_text += "</div></div>";
+
 	$("#temp_lobby").html(lobby_text);
-	
+
 	$("#start_game").click(event => {
-		
+
 		console.log("start clicked");
-		
+
 		start_game();
 	});
 }
