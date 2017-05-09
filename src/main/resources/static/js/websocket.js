@@ -77,7 +77,7 @@ const setup_betrayal = () => {
 						omenRoll(pay);
 					}
 				}
-				console.log(pay);
+				console.log(data);
 				console.log(data.currentTurn);
 				update_turn(data.currentTurn);
 				break;
