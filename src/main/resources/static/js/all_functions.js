@@ -315,6 +315,7 @@ function rotate() {
 }
 
 function placeTile() {
+  console.log("numrot:" + rot);
   if (tempdir == 0) {
     if (!rottile.south)
       return;
@@ -346,6 +347,7 @@ function placeTile() {
   game_move({name: "move", rotations: "" + rot});
   rotation.disabled = true;
   placet.disabled = true;
+  ending.disabled = false;
   rot = 0;
 }
 
@@ -389,6 +391,7 @@ function receiveCard(data) {
     else if (ro.event.length > 0)
       eventDrawn(data, ro.event[0], ro.newTile.name);
     ending.disabled = true;
+    console.log("moving " + moves);
     moves = 0;
     movesp.innerHTML = 0;
   }
@@ -855,6 +858,7 @@ function actualMovement(responseJSON) {
       positions[turn].west = true;
       break;
   }
+  console.log("changing:" + moves);
   moves--;
   movesp.innerHTML = moves;
 }

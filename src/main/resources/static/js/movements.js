@@ -52,7 +52,7 @@ let m1 = false;
 //        descr.innerHTML = xpos + " " + ypos;
 //     }
 //  });
-    let moves = 10;
+    let moves = -1;
     const first = document.getElementById("first");
     const second = document.getElementById("second");
     const basement = document.getElementById("basement");

@@ -226,7 +226,7 @@ public class Mover {
         toAdd.addNorth();
         northOfAdded.addSouth();
       }
-    } else if (toAdd.hasNorth())
+    } else if (toAdd.hasNorth() && northOfAdded == null)
       toAdd.addNorth();
 
     // link tile south of added tile to the tile if a door exists.
@@ -237,7 +237,7 @@ public class Mover {
         toAdd.addSouth();
         southOfAdded.addNorth();
       }
-    } else if (toAdd.hasSouth())
+    } else if (toAdd.hasSouth() && southOfAdded == null)
       toAdd.addSouth();
 
     // link tiles north of added tile to the tile if a door exists.
@@ -249,7 +249,7 @@ public class Mover {
         toAdd.addEast();
         eastOfAdded.addWest();
       }
-    } else if (toAdd.hasEast())
+    } else if (toAdd.hasEast() && eastOfAdded == null)
       toAdd.addEast();
 
     // link tiles north of added tile to the tile if a door exists.
@@ -260,7 +260,7 @@ public class Mover {
         toAdd.addWest();
         westOfAdded.addEast();
       }
-    } else if (toAdd.hasWest())
+    } else if (toAdd.hasWest() && westOfAdded == null)
       toAdd.addWest();
 
     // Add character to the tile we just added!
