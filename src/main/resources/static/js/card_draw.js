@@ -12,10 +12,6 @@ $(document).ready(() => {
 	$('#omen').draggable();
 	$('#event').draggable();
 	
-	$('#item').draggable();
-	$('#omen').draggable();
-	$('#event').draggable();
-	
 	$item_window.hide();
 	$omen_window.hide();
 	$event_window.hide();
@@ -136,7 +132,7 @@ function eventDrawn(data, card_info, room_name) {
 		if(card_info.usable[type_index] === "MIGHT") {
 			event_buttons += "<button type=\"button\" id=\"roll_might\">Might Roll</button>";
 		}
-		if(card_info.usable[type_index] === "KNOWLEDGE") {
+		if(card_info.usable[type_index] === "KNOWLEGE") {
 			event_buttons += "<button type=\"button\" id=\"roll_know\">Knowledge Roll</button>";
 		}
 		if(card_info.usable[type_index] === "SANITY") {
@@ -224,7 +220,7 @@ function eventDrawn(data, card_info, room_name) {
 }
 
 
-function omenRoll(data) {
+function eventRoll(data) {
 	
 	var rolls = data.rolls;
 	var all_rolls = "<center>You rolled the following values:</center><br /><center>";
@@ -250,7 +246,7 @@ function omenRoll(data) {
 		turn_end();
 		
 		$("#action_result").html("");
-		$("#action_rolls").html("");
+		$("#action_rolls1").html("");
 		$("#event_info").html("");
 		$("#event_name").html("");
 		$("#event_description").html("");
