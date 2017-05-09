@@ -86,6 +86,9 @@ const setup_betrayal = () => {
 						addItem(pay.character, pay.item[0]);
 					} else if(pay.omen.length >= 1) {
 						addOmen(pay.character, pay.omen[0]);
+					} else if(pay.event.length >= 1) {
+						console.log("updating event!");
+						updateEvent(pay.character);
 					}
 				}
 				update_turn(data.currentTurn);
