@@ -12,9 +12,9 @@ public class Dog implements Omen {
 
   public Dog() {
     name = "Dog";
-    description = "Companian.\nThis mangy dog seems friendly. At least you hope it is.";
-    logic = "Gain 1 Might and 1 Sanity now.\nLose 1 "
-        + "Might and 1 Sanity if you lose custody of the Dog.\nThis "
+    description = "Companian.<br />This mangy dog seems friendly. At least you hope it is.";
+    logic = "Gain 1 Might and 1 Sanity now.<br />Lose 1 "
+        + "Might and 1 Sanity if you lose custody of the Dog.<br />This "
         + "omen can't be dropped, traded, or stolen.";
   }
 

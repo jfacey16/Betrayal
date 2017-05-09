@@ -13,7 +13,7 @@ public class Amulet implements Item {
   public Amulet() {
     name = "Amulet of the Ages";
     description = "Ancient silver and inlaid gems, inscribed with blessings.";
-    logic = "Gain 1 Might, 1 Speed, 1 Knowledge, and 1 Sanity now.\nLose 3 "
+    logic = "Gain 1 Might, 1 Speed, 1 Knowledge, and 1 Sanity now.<br />Lose 3 "
         + "Might, 3 Speed, 3 Knowledge, and 3 Sanity if you lose the amulet.";
   }
 

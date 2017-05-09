@@ -13,7 +13,7 @@ public class HolySymbol implements Omen {
   public HolySymbol() {
     name = "Holy Symbol";
     description = "A symbol of calm in an unsettling world.";
-    logic = "Gain 2 Sanity now.\nLose 2 Sanity if you lose the Holy Symbol.";
+    logic = "Gain 2 Sanity now.<br />Lose 2 Sanity if you lose the Holy Symbol.";
   }
 
   @Override

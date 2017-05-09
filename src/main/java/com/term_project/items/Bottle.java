@@ -16,11 +16,11 @@ public class Bottle implements Item {
     name = "Bottle";
     description = "An opaque vial containing a black liquid";
     logic = "Once during your turn while the haunt is revealed, "
-        + "you can roll 3 dice and drink from the Bottle:\n6 "
-        + "Gain 2 Might and 3 Speed.\n5 Gain 2 Might and 2 "
-        + "Speed.\n4 Gain 2 Knowledge and 2 Sanity.\n3 Gain "
-        + "1 Knowledge and lose 1 Might.\n2 Lose 2 Knowledge "
-        + "and 2 Sanity.\n1 Lose 2 Might and 2 Speed.\n0 Lose "
+        + "you can roll 3 dice and drink from the Bottle:<br />6 "
+        + "Gain 2 Might and 3 Speed.<br />5 Gain 2 Might and 2 "
+        + "Speed.<br />4 Gain 2 Knowledge and 2 Sanity.<br />3 Gain "
+        + "1 Knowledge and lose 1 Might.<br />2 Lose 2 Knowledge "
+        + "and 2 Sanity.<br />1 Lose 2 Might and 2 Speed.<br />0 Lose "
         + "2 from each trait.";
   }
 

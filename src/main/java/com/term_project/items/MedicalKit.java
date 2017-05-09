@@ -16,8 +16,8 @@ public class MedicalKit implements Item {
     name = "Medical Kit";
     description = "A doctor's bag, depleted in some critical resources.";
     logic = "Once during your turn, you can attempt a Knowledge roll "
-        + "to heal yourself.\n8+ Gain 1 Might and 1 Speed.\n6-7 Gain 1 "
-        + "Might.\n4-5 Gain 1 Speed.\n0-3 Nothing happens.";
+        + "to heal yourself.<br />8+ Gain 1 Might and 1 Speed.<br />6-7 Gain 1 "
+        + "Might.<br />4-5 Gain 1 Speed.<br />0-3 Nothing happens.";
   }
 
   @Override

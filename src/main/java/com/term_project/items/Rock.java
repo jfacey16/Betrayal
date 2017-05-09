@@ -13,7 +13,7 @@ public class Rock implements Item {
   public Rock() {
     name = "Rock";
     description = "It's a pretty nice rock.";
-    logic = "Gain 2 Knowledge now.\nLose 2 Knowledge when you lose the Rock.";
+    logic = "Gain 2 Knowledge now.<br />Lose 2 Knowledge when you lose the Rock.";
   }
 
   @Override

@@ -16,8 +16,8 @@ public class MysticCoin implements Item {
     name = "Mystic Coin";
     description = "Heads or Tails?";
     logic = "Once during your turn, you can roll 1 die to flip the "
-        + "coin:\n2 It's heads. Gain 1 point in Might.\n1 It's tails. "
-        + "Gain 1 point in Knowledge.\n0 It landed on its edge! Lose "
+        + "coin:<br />2 It's heads. Gain 1 point in Might.<br />1 It's tails. "
+        + "Gain 1 point in Knowledge.<br />0 It landed on its edge! Lose "
         + "1 point in Might and 1 in Knowledge.";
   }
 

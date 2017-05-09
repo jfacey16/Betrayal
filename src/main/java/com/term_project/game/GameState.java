@@ -126,4 +126,8 @@ public class GameState {
   public List<String> getTurnOrder() {
     return idTurnOrder;
   }
+
+  public List<GameChar> getCharacters() {
+    return chars;
+  }
 }
