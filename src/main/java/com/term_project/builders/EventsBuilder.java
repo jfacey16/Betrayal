@@ -16,7 +16,6 @@ import com.term_project.events.Funeral;
 import com.term_project.events.HideousShriek;
 import com.term_project.events.Mist;
 import com.term_project.events.NightView;
-import com.term_project.events.PhoneCall;
 import com.term_project.events.Rotten;
 import com.term_project.events.ShriekingWind;
 import com.term_project.events.Silence;
@@ -96,15 +95,19 @@ public class EventsBuilder implements Builder<Event> {
     List<Stats> s7 = new ArrayList<>();
     s7.add(Stats.SPEED);
     eventList.add(new SomethingSlimey(name, description, function, s7));
-
-    name = "Phone Call";
-    description = "A phone rings in the room. You feel compelled to answer it.";
-    function = "Roll 2 dice. A sweet little granny voice says:<br />4 'Tea and cakes"
-        + "!' Gain 1 Sanity.<br />3 'I'm always here for you. Watching...' Gain "
-        + "1 Knowledge.<br />1-2 I'm here! Give us a kiss! Take 1 Sanity damage.<br />"
-        + "0 'Bad little children must be punished!' Take 1 Might and 1 Speed damage.";
-    List<Stats> s8 = new ArrayList<>();
-    eventList.add(new PhoneCall(name, description, function, s8));
+    //
+    // name = "Phone Call";
+    // description = "A phone rings in the room. You feel compelled to answer
+    // it.";
+    // function = "Roll 2 dice. A sweet little granny voice says:<br />4 'Tea
+    // and cakes"
+    // + "!' Gain 1 Sanity.<br />3 'I'm always here for you. Watching...' Gain "
+    // + "1 Knowledge.<br />1-2 I'm here! Give us a kiss! Take 1 Sanity
+    // damage.<br />"
+    // + "0 'Bad little children must be punished!' Take 1 Might and 1 Speed
+    // damage.";
+    // List<Stats> s8 = new ArrayList<>();
+    // eventList.add(new PhoneCall(name, description, function, s8));
 
     name = "Debris";
     description = "Plaster falls from the walls and ceiling";
