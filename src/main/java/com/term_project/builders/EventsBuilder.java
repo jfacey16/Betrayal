@@ -174,6 +174,7 @@ public class EventsBuilder implements Builder<Event> {
     stats.add(Stats.SANITY);
     eventList.add(new Mist(name, description, function, stats));
 
+    Collections.shuffle(eventList);
     Queue<Event> eventDeck = new LinkedList<>(eventList);
     return eventDeck;
   }
