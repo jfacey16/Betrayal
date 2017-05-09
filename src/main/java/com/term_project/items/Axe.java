@@ -14,7 +14,7 @@ public class Axe implements Item {
 
     name = "Axe";
     description = "Very sharp.";
-    logic = "You roll 1 additional die when making a Might attack with this weapon.";
+    logic = "You roll 1 additional die (maximum of 8 dice) when making a Might attack with this weapon.";
   }
 
   @Override

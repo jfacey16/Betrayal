@@ -232,4 +232,8 @@ public interface GameChar {
   boolean getTraitor();
 
   void setTraitor(boolean traitor);
+
+  List<Item> getItemsList();
+
+  List<Omen> getOmensList();
 }

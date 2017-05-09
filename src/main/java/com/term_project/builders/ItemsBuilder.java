@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Queue;
 
 import com.term_project.items.Amulet;
+import com.term_project.items.Armor;
+import com.term_project.items.Axe;
 import com.term_project.items.Bell;
 import com.term_project.items.Bottle;
 import com.term_project.items.Cat;
@@ -32,6 +34,8 @@ public class ItemsBuilder implements Builder<Item> {
     itemList.add(new MedicalKit());
     itemList.add(new HealingSalve());
     itemList.add(new SmellingSalts());
+    itemList.add(new Armor());
+    itemList.add(new Axe());
 
     Collections.shuffle(itemList);
     Queue<Item> itemDeck = new LinkedList<>(itemList);
