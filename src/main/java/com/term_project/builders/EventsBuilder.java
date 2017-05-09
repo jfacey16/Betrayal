@@ -160,12 +160,12 @@ public class EventsBuilder implements Builder<Event> {
         + " Take 1 Sanity damage.<br />0 Take 2 Sanity damage.";
     eventList.add(new HideousShriek(name, description, function, stats));
 
-    name = "Footsteps";
-    description = "The footsteps slowly creak. Dust rises. Footprints appear "
-        + "on the dirty flor. And then, as they reach you, they are gone.";
-    function = "Roll 2 dice.<br />3-4 Gain 1 Might.<br />2 Lose 1 Sanity.<br />1 Lose 1 Speed.<br />0 Lose 1 Might.";
-    stats = new ArrayList<>();
-    eventList.add(new Footsteps(name, description, function, stats));
+//    name = "Footsteps";
+//    description = "The footsteps slowly creak. Dust rises. Footprints appear "
+//        + "on the dirty floor. And then, as they reach you, they are gone.";
+//    function = "Roll 2 dice.<br />3-4 Gain 1 Might.<br />2 Lose 1 Sanity.<br />1 Lose 1 Speed.<br />0 Lose 1 Might.";
+//    stats = new ArrayList<>();
+//    eventList.add(new Footsteps(name, description, function, stats));
 
     name = "Mist From the Walls";
     description = "Mists pour out from the walls. There are faces in the mist, human and ... inhuman. ";

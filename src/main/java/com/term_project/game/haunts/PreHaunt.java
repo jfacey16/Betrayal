@@ -366,6 +366,7 @@ public class PreHaunt implements GamePhase {
     case "end":
       mode = "start";
       memory.getGameState().endTurn();
+      System.out.println(variables);
       break;
     }
   }

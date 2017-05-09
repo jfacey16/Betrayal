@@ -102,7 +102,7 @@ function omenRoll(data) {
 	$("#end_turn_omen").unbind().click(event => {
 
 		$omen_window.hide();
-		
+		console.log("woah there");
 		turn_end();
 		
 		$("#omen_roll").html("");

@@ -91,6 +91,7 @@ public class GameState {
   }
 
   public void endTurn() {
+    System.out.println("this should work");
     currentTurn = (currentTurn + 1) % getNumPlayers();
   }
 

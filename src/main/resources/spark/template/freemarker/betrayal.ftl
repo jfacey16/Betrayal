@@ -221,8 +221,8 @@
     <div id="descr">
     <center><div> Speed Left: <span id="moves">10</span></div></center>
     <center><button id="end" onclick="endturn();">End Turn</button></center>
-    <center><button disabled>Attack</button></center>
-    <center><button disabled>Pick up Items</button></center>
+    <!-- <center><button disabled>Attack</button></center>
+    <center><button disabled>Pick up Items</button></center> -->
     <!-- <center><button disabled>Interact w/Room</button></center> -->
     <center><button id="plat" onclick="placeTile();" disabled>Place Tile</button></center>
     <center><button id="rot" onclick="rotate();" disabled>Rotate Clockwise</button></center>

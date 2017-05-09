@@ -108,33 +108,7 @@ $( function() {
 } );
 function endturn() {
   turn_end();
-   
-//      if (positions[turn].floor == 0) {
-//        first.style.display = 'none';
-//        second.style.display = 'none';
-//        basement.style.display = 'block';
-//        const xpos = offx - (positions[turn].posx - 600) + edgex[0];
-//        const ypos = offy - (positions[turn].posy - 600) + edgey[0];
-//        basement.style.top = ypos + 'px';
-//        basement.style.left = xpos + 'px';
-//      } else if (positions[turn].floor == 1) {
-//        first.style.display = 'block';
-//        second.style.display = 'none';
-//        basement.style.display = 'none';
-//        const xpos = offx - (positions[turn].posx - 600) + edgex[1];
-//        const ypos = offy - (positions[turn].posy - 600) + edgey[1];
-//        first.style.top = ypos + 'px';
-//        first.style.left = xpos + 'px';
-//      } else if (positions[turn].floor == 2) {
-//        first.style.display = 'none';
-//        second.style.display = 'block';
-//        basement.style.display = 'none';
-//        const xpos = offx - (positions[turn].posx - 600) + edgex[2];
-//        const ypos = offy - (positions[turn].posy - 600) + edgey[2];
-//        second.style.top = ypos + 'px';
-//        second.style.left = xpos + 'px';
-//      }
-//      ending.disabled = false;
+  ending.disabled = true;
 }
 
 function paintBoard(floor, players) {
@@ -376,9 +350,43 @@ function placeTile() {
 }
 
 function receiveCard(data) {
+  if (positions[turn].floor == 0)
+    ctx = ctxb;
+  else if (positions[turn].floor == 1)
+    ctx = ctxf;
+  else if (positions[turn].floor == 2)
+    ctx = ctxs;
 	var ro = JSON.parse(data.payload);
+  console.log(ro.newTile.availableDoors);
+  ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + 1, D + 2, X);
+  ctx.clearRect(positions[turn].posx + T - X - 1, positions[turn].posy + D - 1, X, D + 2);
+  ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + T - X - 1, D + 2, X);
+  ctx.clearRect(positions[turn].posx + 1, positions[turn].posy + D - 1, X, D + 2);
+  if (ro.newTile.availableDoors.indexOf("NORTH") !== -1) {
+    console.log(ro.newTile.availableDoors.indexOf("NORTH"));
+    ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
+    positions[turn].north = true;
+  } else 
+    positions[turn].north = false;
+  if (ro.newTile.availableDoors.indexOf("EAST") !== -1) {
+    console.log(ro.newTile.availableDoors.indexOf("EAST"));
+    ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
+    positions[turn].east = true;
+  } else
+    positions[turn].east = true;
+  if (ro.newTile.availableDoors.indexOf("SOUTH") !== -1) {
+    console.log(ro.newTile.availableDoors.indexOf("SOUTH"));
+    ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
+    positions[turn].south = true;
+  } else 
+    positions[turn].south = false;
+  if (ro.newTile.availableDoors.indexOf("WEST") !== -1)  {
+    console.log(ro.newTile.availableDoors.indexOf("WEST"));
+    ctx.strokeRect(positions[turn].posx, positions[turn].posy + D, X, D);
+    positions[turn].west = true;
+  } else 
+    positions[turn].west = false;
   if (ro.item.length > 0 || ro.omen.length > 0 || ro.event.length > 0) {
-    console.log("hello there");
     if (ro.item.length > 0)
       itemDrawn(data, ro.item[0], ro.newTile.name);
     else if (ro.omen.length > 0)
@@ -450,8 +458,11 @@ function actualMovement(responseJSON) {
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy , D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
-          rotation.disabled = false;
-          placet.disabled = false;
+          if (turnIndex == turn) {
+            rotation.disabled = false;
+            placet.disabled = false;
+            ending.disabled = true;
+          }
           rot = 0;
           avdoor = 3;
           tempdir = 0;
@@ -475,8 +486,11 @@ function actualMovement(responseJSON) {
           } else {
             ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
             ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
-            rotation.disabled = false;
-            placet.disabled = false;
+            if (turnIndex == turn) {
+              rotation.disabled = false;
+              placet.disabled = false;
+              ending.disabled = true;
+            }
             rot = 1;
             avdoor = 2;
             tempdir = 0;
@@ -546,8 +560,11 @@ function actualMovement(responseJSON) {
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
           ctx.strokeRect(positions[turn].posx, positions[turn].posy + D, X, D);
-          rotation.disabled = false;
-          placet.disabled = false;
+          if (turnIndex == turn) {
+            rotation.disabled = false;
+            placet.disabled = false;
+            ending.disabled = true;
+          }
           rot = 1;
           avdoor = 3;
           tempdir = 1;
@@ -571,8 +588,11 @@ function actualMovement(responseJSON) {
           } else {
             ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
             ctx.strokeRect(positions[turn].posx, positions[turn].posy + D, X, D);
-            rotation.disabled = false;
-            placet.disabled = false;
+            if (turnIndex == turn) {
+              rotation.disabled = false;
+              placet.disabled = false;
+              ending.disabled = true;
+            }
             rot = 2;
             avdoor = 2;
             tempdir = 1;
@@ -644,8 +664,11 @@ function actualMovement(responseJSON) {
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
-          rotation.disabled = false;
-          placet.disabled = false;
+          if (turnIndex == turn) {
+            rotation.disabled = false;
+            placet.disabled = false;
+            ending.disabled = true;
+          }
           rot = 0;
           avdoor = 3;
           tempdir = 2;
@@ -670,8 +693,11 @@ function actualMovement(responseJSON) {
           } else {
             ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
             ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
-            rotation.disabled = false;
-            placet.disabled = false;
+            if (turnIndex == turn) {
+              rotation.disabled = false;
+              placet.disabled = false;
+              ending.disabled = true;
+            }
             rot = 0;
             avdoor = 2;
             tempdir = 2;
@@ -741,8 +767,11 @@ function actualMovement(responseJSON) {
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
           ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
           ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
-          rotation.disabled = false;
-          placet.disabled = false;
+          if (turnIndex == turn) {
+            rotation.disabled = false;
+            placet.disabled = false;
+            ending.disabled = true;
+          }
           rot = 0;
           avdoor = 3;
           tempdir = 3;
@@ -766,8 +795,11 @@ function actualMovement(responseJSON) {
           } else {
             ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
             ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
-            rotation.disabled = false;
-            placet.disabled = false;
+            if (turnIndex == turn) {
+              rotation.disabled = false;
+              placet.disabled = false;
+              ending.disabled = true;
+            }
             rot = 0;
             avdoor = 2;
             tempdir = 3;
@@ -942,6 +974,41 @@ function update_turn(currentTurn) {
 	        document.getElementById("player_5").style.borderColor = "black";
 	        document.getElementById("player_6").style.borderColor = "yellow";
 	    }
+    if (turn + 1 == numPlayers) 
+      turn = 0;
+    else
+      turn++;
+    console.log("xt:" + turn);
+    console.log("xti: " + turnIndex);
+    if (turn == turnIndex) {
+      ending.disabled = false;
+      if (positions[turn].floor == 0) {
+        first.style.display = 'none';
+        second.style.display = 'none';
+        basement.style.display = 'block';
+        const xpos = offx - (positions[turn].posx - 600) + edgex[0];
+        const ypos = offy - (positions[turn].posy - 600) + edgey[0];
+        basement.style.top = ypos + 'px';
+        basement.style.left = xpos + 'px';
+      } else if (positions[turn].floor == 1) {
+        first.style.display = 'block';
+        second.style.display = 'none';
+        basement.style.display = 'none';
+        const xpos = offx - (positions[turn].posx - 600) + edgex[1];
+        const ypos = offy - (positions[turn].posy - 600) + edgey[1];
+        first.style.top = ypos + 'px';
+        first.style.left = xpos + 'px';
+      } else if (positions[turn].floor == 2) {
+        first.style.display = 'none';
+        second.style.display = 'block';
+        basement.style.display = 'none';
+        const xpos = offx - (positions[turn].posx - 600) + edgex[2];
+        const ypos = offy - (positions[turn].posy - 600) + edgey[2];
+        second.style.top = ypos + 'px';
+        second.style.left = xpos + 'px';
+      }
+    }
+
 	}
 }
 
