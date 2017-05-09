@@ -14,7 +14,6 @@ import com.term_project.game.actions.Mover;
 import com.term_project.house.Direction;
 import com.term_project.house.Floor;
 import com.term_project.house.GenericTile;
-import com.term_project.house.Pos;
 import com.term_project.house.Tile;
 import com.term_project.house.TileBean;
 import com.term_project.items.Item;
@@ -75,16 +74,25 @@ public class HauntOne implements GamePhase {
     if (!memory.getTileList().contains(penta)) {
       memory.getTiles().remove(penta);
       memory.getTileList().add(penta);
-      // TODO: change this
-      memory.getTileMap().put(new Pos(0, 0, Floor.BASEMENT), penta);
+      character.getTile().setName("Pentagram Chamber");
     }
     // add cultists
     int index = memory.getGameState().getCharacters().indexOf(character);
     String id = memory.getGameState().getTurnOrder().get(index);
 
+    Tile pentagram = null;
+
+    List<Tile> tiles = memory.getTileList();
+
+    for (int i = 0; i < tiles.size(); i++) {
+      if (tiles.get(i).getName().equals("Pentagram Chamber")) {
+        pentagram = tiles.get(i);
+      }
+    }
     for (int i = 0; i < characters; i++) {
-      memory.getGameState().getCharacters().add(index,
-          new Cultist("Cultist " + i));
+      Cultist cultist = new Cultist("Cultist " + i);
+      cultist.setTile(pentagram);
+      memory.getGameState().getCharacters().add(index, cultist);
       memory.getGameState().getTurnOrder().add(index, id);
     }
     variables.put("characters", memory.getGameState().getCharacters());
