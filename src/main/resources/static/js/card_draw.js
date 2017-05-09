@@ -127,14 +127,24 @@ function eventDrawn(data, card_info, room_name) {
 	
 	console.log(JSON.parse(data.payload));
 	
-	var speed_usable = false;
-	var might_usable = false;
-	var know_usable = false;
-	var sanity_usable = false;
+	var event_buttons = "<center>";
 	
 	for(type_index in JSON.parse(data.payload)) {
-		
+		if(JSON.parse(data.payload)[type_index] === "SPEED") {
+			event_buttons += "<button type=\"button\" id=\"roll_speed\">Speed Roll</button>";
+		}
+		if(JSON.parse(data.payload)[type_index] === "MIGHT") {
+			event_buttons += "<button type=\"button\" id=\"roll_speed\">Might Roll</button>";
+		}
+		if(JSON.parse(data.payload)[type_index] === "KNOWLEDGE") {
+			event_buttons += "<button type=\"button\" id=\"roll_speed\">Knowledge Roll</button>";
+		}
+		if(JSON.parse(data.payload)[type_index] === "SANITY") {
+			event_buttons += "<button type=\"button\" id=\"roll_speed\">Sanity Roll</button>";
+		}
 	}
+	
+	event_buttons += "</center>";
 	
 	$("#event_action").unbind().click(event => {
 		
