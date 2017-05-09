@@ -236,10 +236,10 @@ public class PreHaunt implements GamePhase {
         String statToUse = qm.get("stat");
 
         // make sure valid stat is being used
-//        if (!event.getUsableAsString().contains(statToUse)) {
-//          variables.put("Error", "Invalid stat for event.");
-//          return;
-//        }
+        // if (!event.getUsableAsString().contains(statToUse)) {
+        // variables.put("Error", "Invalid stat for event.");
+        // return;
+        // }
 
         // get the players relevant stat
         int statVal;
@@ -290,6 +290,7 @@ public class PreHaunt implements GamePhase {
         variables.put("explorers", haunt.getExplorersDescription());
         memory.getGameState().setPhase(haunt);
       }
+      variables.put("omencount", omenCount);
       toResolve.remove("haunt");
 
       mode = "idle";
@@ -300,6 +301,7 @@ public class PreHaunt implements GamePhase {
       String useItemS = qm.get("item");
       Item useItem = character.getItem(useItemS);
       useItem.use(character, variables);
+      variables.put("tiles", memory.getTileMap());
       variables.put("character", character.getCharBean());
       variables.put("item", useItem);
       mode = "idle";
@@ -310,6 +312,7 @@ public class PreHaunt implements GamePhase {
       String useOmenS = qm.get("omen");
       Omen useOmen = character.getOmen(useOmenS);
       useOmen.use(character, variables);
+      variables.put("tiles", memory.getTileMap());
       variables.put("character", character.getCharBean());
       variables.put("omen", useOmen);
       mode = "idle";
@@ -321,6 +324,7 @@ public class PreHaunt implements GamePhase {
       Item pickupItem = character.getTile().getItem(pickupItemS);
       pickupItem.add(character);
       character.getTile().removeItem(pickupItem);
+      variables.put("tiles", memory.getTileMap());
       variables.put("character", character.getCharBean());
       variables.put("item", pickupItem);
       mode = "idle";
@@ -332,6 +336,7 @@ public class PreHaunt implements GamePhase {
       Item dropItem = character.getItem(dropItemS);
       dropItem.loss(character);
       character.getTile().addItem(dropItem);
+      variables.put("tiles", memory.getTileMap());
       variables.put("character", character.getCharBean());
       variables.put("item", dropItem);
       mode = "idle";
@@ -343,6 +348,7 @@ public class PreHaunt implements GamePhase {
       Omen pickupOmen = character.getTile().getOmen(pickupOmenS);
       pickupOmen.add(character);
       character.getTile().removeOmen(pickupOmen);
+      variables.put("tiles", memory.getTileMap());
       variables.put("character", character.getCharBean());
       variables.put("omen", pickupOmen);
       mode = "idle";
@@ -354,6 +360,7 @@ public class PreHaunt implements GamePhase {
       Omen dropOmen = character.getOmen(dropOmenS);
       dropOmen.loss(character);
       character.getTile().addOmen(dropOmen);
+      variables.put("tiles", memory.getTileMap());
       variables.put("character", character.getCharBean());
       variables.put("omen", dropOmen);
       mode = "idle";
@@ -361,6 +368,8 @@ public class PreHaunt implements GamePhase {
       break;
 
     case "end":
+      System.out.println("ending");
+
       mode = "start";
       memory.getGameState().endTurn();
       System.out.println(variables);
