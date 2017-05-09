@@ -153,10 +153,9 @@ public class PreHaunt implements GamePhase {
       if (phase == 1) {
         try {
           System.out.println("here here");
-          try {
-          move.addTile(character, Integer.parseInt(qm.get("rotations")),
 
-          memory.getTileMap());
+          move.addTile(character, Integer.parseInt(qm.get("rotations")),
+              memory.getTileMap());
 
           variables.put("phase", 1);
           // send frontend tile map
