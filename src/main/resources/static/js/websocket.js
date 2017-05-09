@@ -57,12 +57,10 @@ const setup_betrayal = () => {
 				break;
 			case MESSAGE_TYPE.GAMEMOVE:
 				const pay = JSON.parse(data.payload);
-				if (pay.phase === 1) {
-					console.log(pay);
+				if (pay.phase === 1) 
 					receiveCard(pay);
-				} else if (pay.phase === 0)
+			 	else if (pay.phase === 0)
 					actualMovement(data);
-				}
 				update_turn(data.currentTurn);
 				break;
 			case MESSAGE_TYPE.CHATUPDATE:
