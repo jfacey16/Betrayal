@@ -17,8 +17,8 @@ public class CrystalBall implements Omen {
     description = "Hazy images appear in the glass.";
     logic = "Once during your turn, you can attempt a "
         + "Knowledge roll to peer into the Crystal Ball"
-        + ":\n4+ You see the truth. Gain 1 Sanity.\n1-3 "
-        + "You avert your eyes. Lose 1 Sanity.\n0 You "
+        + ":<br />4+ You see the truth. Gain 1 Sanity.<br />1-3 "
+        + "You avert your eyes. Lose 1 Sanity.<br />0 You "
         + "stare into hell. Lose 2 Sanity.";
   }
 

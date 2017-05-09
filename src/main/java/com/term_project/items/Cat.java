@@ -13,7 +13,7 @@ public class Cat implements Item {
   public Cat() {
     name = "Cat";
     description = "The Cat meows. Why is it here?";
-    logic = "Gain 2 Sanity now.\nLose 2 Sanity when you lose the Cat.";
+    logic = "Gain 2 Sanity now.<br />Lose 2 Sanity when you lose the Cat.";
   }
 
   @Override
