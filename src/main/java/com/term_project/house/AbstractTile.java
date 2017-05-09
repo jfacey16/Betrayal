@@ -141,6 +141,8 @@ public abstract class AbstractTile implements Tile {
           "There is no door/tile to the south.");
     }
     Tile east = memory.getTileMap().get(doors.get(Direction.EAST));
+    System.out.println("doorx: " + doors.get(Direction.EAST).getX());
+    System.out.println("doory: " + doors.get(Direction.EAST).getY());
     return east;
   }
 
