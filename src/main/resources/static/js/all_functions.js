@@ -376,9 +376,26 @@ function placeTile() {
 }
 
 function receiveCard(data) {
+  if (positions[turn].floor == 0)
+    ctx = ctxb;
+  else if (positions[turn].floor == 1)
+    ctx = ctxf;
+  else if (positions[turn].floor == 2)
+    ctx = ctxs;
 	var ro = JSON.parse(data.payload);
+  ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + 1, D + 2, X);
+  ctx.clearRect(positions[turn].posx + T - X - 1, positions[turn].posy + D - 1, X, D + 2);
+  ctx.clearRect(positions[turn].posx + D - 1, positions[turn].posy + T - X - 1, D + 2, X);
+  ctx.clearRect(positions[turn].posx + 1, positions[turn].posy + D - 1, X, D + 2);
+  if (positions[turn].north) 
+    ctx.strokeRect(positions[turn].posx + D, positions[turn].posy, D, X);
+  if (positions[turn].east)
+    ctx.strokeRect(positions[turn].posx + T - X, positions[turn].posy + D, X, D);
+  if (positions[turn].south)
+    ctx.strokeRect(positions[turn].posx + D, positions[turn].posy + T - X, D, X);
+  if (positions[turn].west) 
+    ctx.strokeRect(positions[turn].posx, positions[turn].posy + D, X, D);
   if (ro.item.length > 0 || ro.omen.length > 0 || ro.event.length > 0) {
-    console.log("hello there");
     if (ro.item.length > 0)
       itemDrawn(data, ro.item[0], ro.newTile.name);
     else if (ro.omen.length > 0)
