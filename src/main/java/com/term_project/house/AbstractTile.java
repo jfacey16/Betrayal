@@ -86,11 +86,6 @@ public abstract class AbstractTile implements Tile {
   }
 
   @Override
-  public void addEvent(String name, Event event) {
-    events.put(name, event);
-  }
-
-  @Override
   public void setOmens(Map<String, Omen> omens) {
     this.omens = omens;
   }
@@ -267,7 +262,7 @@ public abstract class AbstractTile implements Tile {
     // will be placement will switching tiles
     Pos holderOne;
     Pos holderTwo;
-    
+
     // make east value the northern value
     holderOne = doors.get(Direction.EAST);
     doors.put(Direction.EAST, doors.get(Direction.NORTH));
@@ -388,6 +383,11 @@ public abstract class AbstractTile implements Tile {
   @Override
   public void addOmen(Omen omen) {
     omens.put(omen.getName(), omen);
+  }
+
+  @Override
+  public void addEvent(Event event) {
+    events.put(event.getName(), event);
   }
 
   @Override

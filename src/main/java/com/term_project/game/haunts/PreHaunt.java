@@ -157,19 +157,9 @@ public class PreHaunt implements GamePhase {
           move.addTile(character, Integer.parseInt(qm.get("rotations")),
               memory.getTileMap());
 
-          variables.put("phase", 1);
-          // send frontend tile map
-          variables.put("tiles", memory.getTileBeans());
-
-          // send frontend character
-          variables.put("characters", memory.getCharBeans());
-
-          // send frontend newly added tile
-          variables.put("newTile", character.getTile().getBean());
-
           phase = 0;
           mode = "idle";
-          
+
           /* This adding method doesn't really make a ton of sense to me. */
           /*
            * classes are supposed to encapsulate an idea, why would the idea of
@@ -187,6 +177,7 @@ public class PreHaunt implements GamePhase {
             Item item = memory.getItems().poll();
             item.add(character);
             itemList.add(item);
+            character.getTile().addItem(item);
           }
 
           for (int i = 0; i < character.getTile().getEventCount(); i++) {
@@ -194,8 +185,7 @@ public class PreHaunt implements GamePhase {
             toResolve.add("event");
             phase = 1;
             eventList.add(event);
-
-            // ADD EVENTS TO TILE HASHMAP
+            character.getTile().addEvent(event);
           }
 
           for (int i = 0; i < character.getTile().getOmenCount(); i++) {
@@ -203,7 +193,19 @@ public class PreHaunt implements GamePhase {
             omen.add(character);
             toResolve.add("haunt");
             omenList.add(omen);
+            character.getTile().addOmen(omen);
           }
+
+          variables.put("phase", 1);
+          // send frontend tile map
+          variables.put("tiles", memory.getTileBeans());
+
+          // send frontend character
+          variables.put("characters", memory.getCharBeans());
+
+          // send frontend newly added tile
+          variables.put("newTile", character.getTile().getBean());
+
           System.out.println("item:" + itemList.size());
           System.out.println("omen:" + omenList.size());
           System.out.println("event:" + eventList.size());
@@ -232,12 +234,16 @@ public class PreHaunt implements GamePhase {
         String eventName = qm.get("event");
         Event event = character.getTile().getEvent(eventName);
         String statToUse = qm.get("stat");
+        
+        
+        System.out.println(event.getUsableAsString().contains("sanity"));
+        System.out.println(event.getUsableAsString().contains("SANITY"));
 
         // make sure valid stat is being used
-        if (!event.getUsableAsString().contains(statToUse)) {
-          variables.put("Error", "Invalid stat for event.");
-          return;
-        }
+//        if (!event.getUsableAsString().contains(statToUse)) {
+//          variables.put("Error", "Invalid stat for event.");
+//          return;
+//        }
 
         // get the players relevant stat
         int statVal;

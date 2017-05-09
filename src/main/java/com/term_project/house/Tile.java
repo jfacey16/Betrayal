@@ -113,7 +113,7 @@ public interface Tile {
    * Adds an event.
    *
    */
-  void addEvent(String name, Event event);
+  void addEvent(Event event);
 
   /**
    * Returns the number of items needed to be generated.
