@@ -114,6 +114,7 @@ let m1 = false;
           ctxm = ctxms;
           levm = msecond;
         }
+        console.log("f:" + positions[turn].floor);
         let temp;
         if (positions[turn].posx == 900 && positions[turn].posy == 600 &&
           positions[turn].floor == 1 && event.which == 69) {
@@ -125,8 +126,6 @@ let m1 = false;
             (600 + offsets[turn].posy) / S, P / S, P / S);
           const postParameters = {name: "move", direction: "UP"};
           game_move(postParameters);
-          const responseObject = responseJSON.payload;
-          console.log(responseObject);
           first.style.display = 'none';
           second.style.display = 'block';
           basement.style.display = 'none';
@@ -138,6 +137,7 @@ let m1 = false;
           positions[turn].east = true;
           positions[turn].south = true;
           positions[turn].west = true;
+          console.log("fg:" + positions[turn].floor);
           moves--;
           movesp.innerHTML = moves;
         } else if (positions[turn].posx == 600 && positions[turn].posy == 600 &&
@@ -150,8 +150,6 @@ let m1 = false;
             (600 + offsets[turn].posy) / S, P / S, P / S);
           const postParameters = {name: "move", direction: "DOWN"};
           game_move(postParameters);
-          const responseObject = responseJSON.payload;
-          console.log(responseObject);
           first.style.display = 'block';
           second.style.display = 'none';
           basement.style.display = 'none';
