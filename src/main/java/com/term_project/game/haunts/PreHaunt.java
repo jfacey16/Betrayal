@@ -84,7 +84,7 @@ public class PreHaunt implements GamePhase {
       mode = "idle";
       phase = 0;
     }
-
+    
     // make sure backend matches frontend
     if (!mode.equals("idle")) {
       if (!name.equals(mode)) {

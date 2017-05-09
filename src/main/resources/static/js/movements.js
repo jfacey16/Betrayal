@@ -200,6 +200,7 @@ let m1 = false;
           }
           if (((temp = tileExists(positions[turn].posx - T, positions[turn].posy,
            positions[turn].floor)) == -1 || flo[temp].east) && positions[turn].west) {
+            console.log("just in case");
             const postParameters = {name: "move", direction: "WEST"};
             game_move(postParameters);
             const xpos = offx - (positions[turn].posx - T - 600) + edgex[positions[turn].floor];
