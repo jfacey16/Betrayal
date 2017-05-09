@@ -169,7 +169,7 @@ public class PreHaunt implements GamePhase {
 
           phase = 0;
           mode = "idle";
-          
+
           /* This adding method doesn't really make a ton of sense to me. */
           /*
            * classes are supposed to encapsulate an idea, why would the idea of
@@ -256,7 +256,7 @@ public class PreHaunt implements GamePhase {
         Integer rollSum = Dice.sum(rolls);
         String result = event.apply(rollSum, character);
         variables.put("result", result);
-
+        variables.put("character", character.getCharBean());
         // send to frontend remaining actions.
         addActions(character, variables);
         mode = "idle";
