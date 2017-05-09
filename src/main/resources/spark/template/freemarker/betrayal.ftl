@@ -202,9 +202,10 @@
       	<center><div id="event_info" class="card_info"></div></center>
       	<center><div id="event_description" class="card_description"></div></center>
       	<div id="event_logic" class="card_logic"></div>
+	  	<center><div id="action_rolls"></div></center>
+	    <div id="action_result"></div>
       </div>
 
-	  	<center><button type="button" id="event_action">ACTION BUTTON</button></center>
 	</div>
 	
 <div id="container">
