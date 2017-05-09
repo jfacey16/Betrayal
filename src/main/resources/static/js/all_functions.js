@@ -47,6 +47,7 @@ let rottile = null;
 let avdoor = 0;
 let tempdir = 0;
 let turnorder = -1;
+let omen = 0;
 const textOff = new Position(5, 135);
 const symbOff = new Position(130, 143);
 const outside = new Tile(450,600,false,false,false,false);

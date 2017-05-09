@@ -52,7 +52,6 @@ let m1 = false;
 //        descr.innerHTML = xpos + " " + ypos;
 //     }
 //  });
-    descr.innerHTML = "Omen Count:";
     let moves = -1;
     const first = document.getElementById("first");
     const second = document.getElementById("second");
@@ -65,6 +64,7 @@ let m1 = false;
     const rotation = document.getElementById("rot");
     const placet = document.getElementById("plat");
     const ending = document.getElementById("end");
+    descr.innerHTML = "Omen Count: 0";
 
     first.width = 1350;
     first.height = 1350;

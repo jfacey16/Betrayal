@@ -226,7 +226,7 @@
     <!-- <center><button disabled>Interact w/Room</button></center> -->
     <center><button id="plat" onclick="placeTile();" disabled>Place Tile</button></center>
     <center><button id="rot" onclick="rotate();" disabled>Rotate Clockwise</button></center>
-    <div id="scription"></div>
+    <center><div id="scription"></div></center>
     </div>
   </div>
 </div>
