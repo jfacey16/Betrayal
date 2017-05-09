@@ -377,11 +377,11 @@ function placeTile() {
 function receiveTile(ro) {
   if (ro.item.length > 0 || ro.omen.length > 0 || ro.event.length > 0) {
     if (ro.item.length > 0)
-      itemDrawn(ro.item[0].name, ro.item[0].description, "", ro.newTile.name);
+      itemDrawn(ro.item[0], ro.newTile.name);
     else if (ro.omen.length > 0)
-      omenDrawn(ro.omen[0].name, ro.omen[0].description, "", ro.newTile.name);
+      omenDrawn(ro.omen[0], ro.newTile.name);
     else if (ro.event.length > 0)
-      eventDrawn(ro.event[0].name, ro.event[0].description, "", ro.newTile.name);
+      eventDrawn(ro.event[0], ro.newTile.name);
     ending.disabled = true;
     moves = 0;
     movesp.innerHTML = 0;
@@ -727,4 +727,119 @@ function actualMovement(responseJSON) {
         break;
     }
   }
+}
+
+
+function update_turn(currentTurn) {
+	
+	if(currentTurn != current_turn) {
+		console.log(currentTurn + " current turn given vs local " + current_turn);
+	
+		if (current_char === total_players - 1)
+			current_char = 0;
+	      else
+	    	  current_char++;
+	
+		if (current_turn === total_players - 1)
+			current_turn = 0;
+	      else
+	    	  current_turn++;
+		
+		console.log(current_char);
+		console.log(current_turn);
+		
+		if(current_char === 0) {
+		     
+			current_char_name = $data_1.name;
+	        moves = $data_1.speedScale[$data_1.speed];
+	        movesp.innerHTML = $data_1.speedScale[$data_1.speed];
+	        document.getElementById("player_1").style.borderColor = "yellow";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 1) {
+
+			current_char_name = $data_2.name;
+	        moves = $data_2.speedScale[$data_2.speed];
+	        movesp.innerHTML = $data_2.speedScale[$data_2.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "yellow";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 2) {
+
+			current_char_name = $data_3.name;
+	        moves = $data_3.speedScale[$data_3.speed];
+	        movesp.innerHTML = $data_3.speedScale[$data_3.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "yellow";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 3) {
+
+			current_char_name = $data_4.name;
+	        moves = $data_4.speedScale[$data_4.speed];
+	        movesp.innerHTML = $data_4.speedScale[$data_4.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "yellow";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 4) {
+
+			current_char_name = $data_5.name;
+	        moves = $data_5.speedScale[$data_5.speed];
+	        movesp.innerHTML = $data_5.speedScale[$data_5.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "yellow";
+	        document.getElementById("player_6").style.borderColor = "black";
+	    }
+	   
+	    if(current_char === 5) {
+
+			current_char_name = $data_6.name;
+	        moves = $data_6.speedScale[$data_6.speed];
+	        movesp.innerHTML = $data_6.speedScale[$data_6.speed];
+	        document.getElementById("player_1").style.borderColor = "black";
+	        document.getElementById("player_2").style.borderColor = "black";
+	        document.getElementById("player_3").style.borderColor = "black";
+	        document.getElementById("player_4").style.borderColor = "black";
+	        document.getElementById("player_5").style.borderColor = "black";
+	        document.getElementById("player_6").style.borderColor = "yellow";
+	    }
+	}
+}
+
+function turn_end() {
+	
+	var message = {
+			type: MESSAGE_TYPE.GAMEMOVE,
+			payload: {
+				id : userId,
+				query : {
+					name : "end"
+				}
+			}
+      }
+
+	const json = JSON.stringify(message);
+	conn.send(json);
 }

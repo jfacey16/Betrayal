@@ -11,6 +11,8 @@ let $data_3;
 let $data_4;
 let $data_5;
 let $data_6;
+
+let current_char_name = "";
  
 let current_char;
 let current_turn; 
@@ -435,112 +437,4 @@ function setup_player_6(inGame) {
     	const $player_6_stats = $("#stats_6");
     	$player_6_stats.html("<center>X X X X</center>");
 	}
-}
-
-function update_turn(currentTurn) {
-	
-	if(currentTurn != current_turn) {
-		console.log(currentTurn + " current turn given vs local " + current_turn);
-	
-		if (current_char === total_players - 1)
-			current_char = 0;
-	      else
-	    	  current_char++;
-	
-		if (current_turn === total_players - 1)
-			current_turn = 0;
-	      else
-	    	  current_turn++;
-		
-		console.log(current_char);
-		console.log(current_turn);
-		
-		if(current_char === 0) {
-		     
-	        moves = $data_1.speedScale[$data_1.speed];
-	        movesp.innerHTML = $data_1.speedScale[$data_1.speed];
-	        document.getElementById("player_1").style.borderColor = "yellow";
-	        document.getElementById("player_2").style.borderColor = "black";
-	        document.getElementById("player_3").style.borderColor = "black";
-	        document.getElementById("player_4").style.borderColor = "black";
-	        document.getElementById("player_5").style.borderColor = "black";
-	        document.getElementById("player_6").style.borderColor = "black";
-	    }
-	   
-	    if(current_char === 1) {
-	   
-	        moves = $data_2.speedScale[$data_2.speed];
-	        movesp.innerHTML = $data_2.speedScale[$data_2.speed];
-	        document.getElementById("player_1").style.borderColor = "black";
-	        document.getElementById("player_2").style.borderColor = "yellow";
-	        document.getElementById("player_3").style.borderColor = "black";
-	        document.getElementById("player_4").style.borderColor = "black";
-	        document.getElementById("player_5").style.borderColor = "black";
-	        document.getElementById("player_6").style.borderColor = "black";
-	    }
-	   
-	    if(current_char === 2) {
-	   
-	        moves = $data_3.speedScale[$data_3.speed];
-	        movesp.innerHTML = $data_3.speedScale[$data_3.speed];
-	        document.getElementById("player_1").style.borderColor = "black";
-	        document.getElementById("player_2").style.borderColor = "black";
-	        document.getElementById("player_3").style.borderColor = "yellow";
-	        document.getElementById("player_4").style.borderColor = "black";
-	        document.getElementById("player_5").style.borderColor = "black";
-	        document.getElementById("player_6").style.borderColor = "black";
-	    }
-	   
-	    if(current_char === 3) {
-	   
-	        moves = $data_4.speedScale[$data_4.speed];
-	        movesp.innerHTML = $data_4.speedScale[$data_4.speed];
-	        document.getElementById("player_1").style.borderColor = "black";
-	        document.getElementById("player_2").style.borderColor = "black";
-	        document.getElementById("player_3").style.borderColor = "black";
-	        document.getElementById("player_4").style.borderColor = "yellow";
-	        document.getElementById("player_5").style.borderColor = "black";
-	        document.getElementById("player_6").style.borderColor = "black";
-	    }
-	   
-	    if(current_char === 4) {
-	   
-	        moves = $data_5.speedScale[$data_5.speed];
-	        movesp.innerHTML = $data_5.speedScale[$data_5.speed];
-	        document.getElementById("player_1").style.borderColor = "black";
-	        document.getElementById("player_2").style.borderColor = "black";
-	        document.getElementById("player_3").style.borderColor = "black";
-	        document.getElementById("player_4").style.borderColor = "black";
-	        document.getElementById("player_5").style.borderColor = "yellow";
-	        document.getElementById("player_6").style.borderColor = "black";
-	    }
-	   
-	    if(current_char === 5) {
-	   
-	        moves = $data_6.speedScale[$data_6.speed];
-	        movesp.innerHTML = $data_6.speedScale[$data_6.speed];
-	        document.getElementById("player_1").style.borderColor = "black";
-	        document.getElementById("player_2").style.borderColor = "black";
-	        document.getElementById("player_3").style.borderColor = "black";
-	        document.getElementById("player_4").style.borderColor = "black";
-	        document.getElementById("player_5").style.borderColor = "black";
-	        document.getElementById("player_6").style.borderColor = "yellow";
-	    }
-	}
-}
-
-function turn_end() {
-	
-	var message = {
-			type: MESSAGE_TYPE.GAMEMOVE,
-			payload: {
-				id : userId,
-				query : {
-					name : "end"
-				}
-			}
-      }
-
-	const json = JSON.stringify(message);
-	conn.send(json);
 }
