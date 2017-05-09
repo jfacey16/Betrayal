@@ -335,6 +335,7 @@ public class GameWebSocket {
     Map<String, Object> toReturn = game.update(queryMap);
 
     // TODO Send an UPDATE message to all users
+    System.out.println(toReturn.isEmpty());
     JsonObject update =  new JsonObject();
     update.addProperty("type", MESSAGE_TYPE.GAMEMOVE.ordinal());
     update.addProperty("player", idToName.get(id));
