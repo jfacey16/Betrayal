@@ -186,31 +186,31 @@ public class Mover {
     }
 
     // make sure door links to room we came from, otherwise throw an error
-    switch (dir) {
-    case "NORTH":
-      if (!toAdd.hasSouth()) {
-        throw new RuntimeException("Must link to previous door.");
-      }
-      break;
+    // switch (dir) {
+    // case "NORTH":
+    //   if (!toAdd.hasSouth()) {
+    //     throw new RuntimeException("Must link to previous door.");
+    //   }
+    //   break;
 
-    case "SOUTH":
-      if (!toAdd.hasNorth()) {
-        throw new RuntimeException("Must link to previous door.");
-      }
-      break;
+    // case "SOUTH":
+    //   if (!toAdd.hasNorth()) {
+    //     throw new RuntimeException("Must link to previous door.");
+    //   }
+    //   break;
 
-    case "EAST":
-      if (!toAdd.hasWest()) {
-        throw new RuntimeException("Must link to previous door.");
-      }
-      break;
+    // case "EAST":
+    //   if (!toAdd.hasWest()) {
+    //     throw new RuntimeException("Must link to previous door.");
+    //   }
+    //   break;
 
-    case "WEST":
-      if (!toAdd.hasEast()) {
-        throw new RuntimeException("Must link to previous door.");
-      }
-      break;
-    }
+    // case "WEST":
+    //   if (!toAdd.hasEast()) {
+    //     throw new RuntimeException("Must link to previous door.");
+    //   }
+    //   break;
+    // }
 
     // If it does add the tile and link it to surrounding tiles.
 
