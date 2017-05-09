@@ -104,15 +104,81 @@ function eventDrawn(card_info, room_name) {
 	
 }
 
-function addItem(name, logic) {
+function addItem(card_info) {
 	///refresh values
 	
-	console.log("add item");
+	console.log("refresh game and add item");
 	
+	if(current_char === 0) {
+		$("#items_1").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\"></div>");
+	} else if(current_char === 1) {
+		$("#items_2").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\"></div>");
+	} else if(current_char === 2) {
+		$("#items_3").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\"></div>");
+	} else if(current_char === 3) {
+		$("#items_4").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\"></div>");
+	} else if(current_char === 4) {
+		$("#items_5").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\"></div>");
+	} else if(current_char === 5) {
+		$("#items_6").html("<div id=\"" + card_info.name + "\" class=\"item\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\"></div>");
+	} else {
+		console.log("ERROR: should never get here, bad # of players");
+	}
+	
+    const new_item = document.getElementById(card_info.name);
+	
+    new_item.onmouseover = function() {
+        $("#" + card_info.name + "_popup").html(card_info.logic);
+        console.log($("#" + card_info.name + "_popup").val());
+        document.getElementById(card_info.name + "_popup").style.display = 'block';
+    };
+   
+    new_item.onmouseout = function() {
+        document.getElementById(card_info.name + "_popup").style.display = 'none';
+    };
 }
 
-function addOmen(name, logic) {
+function addOmen(card_info) {
 
-	console.log("add omen");
+	console.log("refresh game and add omen");
 	
+	if(current_char === 0) {
+		$("#omens_1").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:500px\"></div>");
+	} else if(current_char === 1) {
+		$("#omens_2").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\"></div>");
+	} else if(current_char === 2) {
+		$("#omens_3").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\"></div>");
+	} else if(current_char === 3) {
+		$("#omens_4").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\"></div>");
+	} else if(current_char === 4) {
+		$("#omens_5").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\"></div>");
+	} else if(current_char === 5) {
+		$("#omens_6").html("<div id=\"" + card_info.name + "\" class=\"omen\">" + card_info.name + "</div>" +
+				"<div id=\"" + card_info.name + "_popup\" class=\"popup_stats\" style=\"top:150px\"></div>");
+	} else {
+		console.log("ERROR: should never get here, bad # of players");
+	}
+
+    const new_omen = document.getElementById(card_info.name);
+	
+    new_omen.onmouseover = function() {
+        $("#" + card_info.name + "_popup").html(card_info.logic);
+        console.log($("#" + card_info.name + "_popup").val());
+        document.getElementById(card_info.name + "_popup").style.display = 'block';
+    };
+   
+    new_omen.onmouseout = function() {
+        document.getElementById(card_info.name + "_popup").style.display = 'none';
+    };
 }

@@ -374,7 +374,7 @@ function placeTile() {
   rot = 0;
 }
 
-function receiveTile(ro) {
+function receiveCard(ro) {
   if (ro.item.length > 0 || ro.omen.length > 0 || ro.event.length > 0) {
     if (ro.item.length > 0)
       itemDrawn(ro.item[0], ro.newTile.name);

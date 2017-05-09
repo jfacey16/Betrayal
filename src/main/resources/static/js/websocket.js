@@ -57,7 +57,7 @@ const setup_betrayal = () => {
 				const pay = JSON.parse(data.payload);
 				if (pay.phase === 1) {
 					console.log(pay);
-					receiveTile(pay);
+					receiveCard(pay);
 				} else if (pay.phase === 0)
 					actualMovement(data);
 				update_turn(data.currentTurn);

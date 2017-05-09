@@ -165,6 +165,8 @@
       <center><div id="sanity_1" class="stat"><center> X </center></div></center>
 
       <center><div id="knowledge_1" class="stat"><center> X </center></div></center>
+      
+      <center><div id="items_1"></div></center>
 
     </div>
 
