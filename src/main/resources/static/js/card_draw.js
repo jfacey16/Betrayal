@@ -342,8 +342,24 @@ function eventRoll(data) {
 		"<center><button type=\"button\" id=\"end_turn_event\">End Turn</button></center>";
 	
 	$("#action_result").html(all_rolls);
-	var omen_info = document.getElementById("event_cont");
-	omen_info.scrollTop = omen_info.scrollHeight;
+	var event_info = document.getElementById("event_cont");
+	event_info.scrollTop = event_info.scrollHeight;
+	
+	if(current_char === 0) {
+		update_player_1(data);
+	} else if(current_char === 1) {
+		update_player_2(data);
+	} else if(current_char === 2) {
+		update_player_3(data);
+	} else if(current_char === 3) {
+		update_player_4(data);
+	} else if(current_char === 4) {
+		update_player_5(data);
+	} else if(current_char === 5) {
+		update_player_6(data);
+	} else {
+		console.log("ERROR: should never get here, bad # of players");
+	}
 	
 	if(current_char != 0) {
 		document.getElementById("end_turn_event").disabled = true;
