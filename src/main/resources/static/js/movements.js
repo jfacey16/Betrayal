@@ -114,7 +114,6 @@ let m1 = false;
           ctxm = ctxms;
           levm = msecond;
         }
-        console.log("f:" + positions[turn].floor);
         let temp;
         if (positions[turn].posx == 900 && positions[turn].posy == 600 &&
           positions[turn].floor == 1 && event.which == 69) {

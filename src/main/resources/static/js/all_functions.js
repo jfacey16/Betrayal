@@ -46,6 +46,7 @@ let rot = 0;
 let rottile = null;
 let avdoor = 0;
 let tempdir = 0;
+let turnorder = -1;
 const textOff = new Position(5, 135);
 const symbOff = new Position(130, 143);
 const outside = new Tile(450,600,false,false,false,false);
@@ -374,8 +375,9 @@ function placeTile() {
   rot = 0;
 }
 
-function receiveTile(ro) {
+function receiveCard(ro) {
   if (ro.item.length > 0 || ro.omen.length > 0 || ro.event.length > 0) {
+    console.log("hello there");
     if (ro.item.length > 0)
       itemDrawn(ro.item[0], ro.newTile.name);
     else if (ro.omen.length > 0)
