@@ -132,6 +132,7 @@ public class PreHaunt implements GamePhase {
           variables.put("Error", e.getMessage());
           return;
         }
+        System.out.println("move: " + move.getFinished());
         if (move.getFinished()) {
           mode = "idle";
           phase = 0;

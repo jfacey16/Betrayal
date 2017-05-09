@@ -34,6 +34,7 @@ public class Mover {
         || direction.equals("UP") || direction.equals("DOWN");
 
     Tile currentTile = character.getTile();
+    System.out.println(currentTile.getName());
 
     switch (direction) {
     case "NORTH":
@@ -57,6 +58,10 @@ public class Mover {
     case "EAST":
       try {
         Tile newTile = currentTile.getEast();
+        if (newTile == null)
+          System.out.println("etile: null");
+        else 
+          System.out.println("etile: " + newTile.getName());
         moveTileHandler(newTile, character, variables);
       } catch (NullPointerException e) {
         throw new NullPointerException("No available tile to the east.");

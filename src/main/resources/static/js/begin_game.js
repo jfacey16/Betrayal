@@ -318,7 +318,10 @@ function setup_player_2(inGame) {
             $data_2.knowledgeScale[$data_2.knowledge] + " " + "</center>");
        
     } else {
-       
+    	const $player_2_name = $("#name_2");
+    	$player_2_name.html("<center> Another victim of the house... </center>");
+    	const $player_2_stats = $("#stats_2");
+    	$player_2_stats.html("<center>X X X X</center>");
     }
 }
  
@@ -343,7 +346,10 @@ function setup_player_3(inGame) {
             $data_3.knowledgeScale[$data_3.knowledge] + " " + "</center>");
        
     } else {
-       
+    	const $player_3_name = $("#name_3");
+    	$player_3_name.html("<center> Another victim of the house... </center>");
+    	const $player_3_stats = $("#stats_3");
+    	$player_3_stats.html("<center>X X X X</center>");
     }
 }
  
@@ -368,7 +374,10 @@ function setup_player_4(inGame) {
             $data_4.knowledgeScale[$data_4.knowledge] + " " + "</center>");
        
     } else {
-       
+    	const $player_4_name = $("#name_4");
+    	$player_4_name.html("<center> Another victim of the house... </center>");
+    	const $player_4_stats = $("#stats_4");
+    	$player_4_stats.html("<center>X X X X</center>");
     }
 }
  
@@ -393,7 +402,10 @@ function setup_player_5(inGame) {
             $data_5.knowledgeScale[$data_5.knowledge] + " " + "</center>");
        
     } else {
-       
+    	const $player_5_name = $("#name_5");
+    	$player_5_name.html("<center> Another victim of the house... </center>");
+    	const $player_5_stats = $("#stats_5");
+    	$player_5_stats.html("<center>X X X X</center>");
     }
 }
  
@@ -418,7 +430,10 @@ function setup_player_6(inGame) {
 			$data_6.knowledgeScale[$data_6.knowledge] + " " + "</center>");
 		
 	} else {
-		
+    	const $player_6_name = $("#name_6");
+    	$player_6_name.html("<center> Another victim of the house... </center>");
+    	const $player_6_stats = $("#stats_6");
+    	$player_6_stats.html("<center>X X X X</center>");
 	}
 }
 
