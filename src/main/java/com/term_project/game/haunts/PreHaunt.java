@@ -234,12 +234,16 @@ public class PreHaunt implements GamePhase {
         String eventName = qm.get("event");
         Event event = character.getTile().getEvent(eventName);
         String statToUse = qm.get("stat");
+        
+        
+        System.out.println(event.getUsableAsString().contains("sanity"));
+        System.out.println(event.getUsableAsString().contains("SANITY"));
 
         // make sure valid stat is being used
-        if (!event.getUsableAsString().contains(statToUse)) {
-          variables.put("Error", "Invalid stat for event.");
-          return;
-        }
+//        if (!event.getUsableAsString().contains(statToUse)) {
+//          variables.put("Error", "Invalid stat for event.");
+//          return;
+//        }
 
         // get the players relevant stat
         int statVal;

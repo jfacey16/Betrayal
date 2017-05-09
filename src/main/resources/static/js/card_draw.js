@@ -221,9 +221,41 @@ function eventDrawn(data, card_info, room_name) {
 		const json = JSON.stringify(message);
 		conn.send(json);
     });
-	
+}
 
-//	$event_window.hide();
+
+function omenRoll(data) {
+	
+	var rolls = data.rolls;
+	var all_rolls = "<center>You rolled the following values:</center><br /><center>";
+	var sum = 0;
+
+	for(roll in rolls) {
+		all_rolls += rolls[roll] + " ";
+		sum += rolls[roll];
+	}
+	
+	all_rolls += " = " + sum + "</center>" +
+		data.result + 
+		"<center><button type=\"button\" id=\"end_turn_event\">End Turn</button></center>";
+	
+	$("#action_result").html(all_rolls);
+	var omen_info = document.getElementById("event_cont");
+	omen_info.scrollTop = omen_info.scrollHeight;
+		
+	$("#end_turn_event").unbind().click(event => {
+
+		$event_window.hide();
+		
+		turn_end();
+		
+		$("#action_result").html("");
+		$("#action_rolls").html("");
+		$("#event_info").html("");
+		$("#event_name").html("");
+		$("#event_description").html("");
+		$("#event_logic").html("");
+    });
 }
 
 function addItem(data, card_info) {
