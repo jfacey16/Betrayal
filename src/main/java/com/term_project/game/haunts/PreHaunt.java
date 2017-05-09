@@ -84,7 +84,7 @@ public class PreHaunt implements GamePhase {
       mode = "idle";
       phase = 0;
     }
-    
+
     // make sure backend matches frontend
     if (!mode.equals("idle")) {
       if (!name.equals(mode)) {
@@ -281,6 +281,7 @@ public class PreHaunt implements GamePhase {
         GamePhase haunt = new HauntOne(memory);
         character.setTraitor(true);
         haunt.setup(character, variables);
+        variables.put("omencount", omenCount);
         variables.put("character", character.getCharBean());
         variables.put("description", haunt.getDescription());
         variables.put("traitor", haunt.getTraitorDescription());
@@ -358,7 +359,7 @@ public class PreHaunt implements GamePhase {
       break;
 
     case "end":
-    	System.out.println("ending");
+      System.out.println("ending");
       mode = "start";
       memory.getGameState().endTurn();
       break;
