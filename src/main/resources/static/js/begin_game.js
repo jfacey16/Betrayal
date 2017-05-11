@@ -225,6 +225,13 @@ function set_starting_state(data) {
 	allow_chat();
 	allowkeys = true;
 
+    const slice1 = colors.slice(0, turnIndex);
+    console.log(slice1);
+    const slice2 = colors.slice(turnIndex, colors.length);
+    console.log(slice2);
+    const combin = slice2.concat(slice1);
+    colors = combin;
+
 	current_char--;
 	current_turn--;
 	update_turn(0);
@@ -297,47 +304,7 @@ function setup_player_1(inGame) {
        
          var icon = $("#icon_1");
          
-         switch($char_1) {
-         	default :
-         		console.log("should not get here!");
-         		break;
-         	case "Darrin 'Flash' Williams" :
-         		icon.html("<center><img src=\"css/Darrin.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         	case "Ox Bellows" :
-         		icon.html("<center><img src=\"css/Ox_Bellows.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         	case "Brandon Jaspers" :
-         		icon.html("<center><img src=\"css/Brandon_Jaspers.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         	case "Peter Akimoto" :
-         		icon.html("<center><img src=\"css/Peter_Akimoto.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         	case "Professor Longfellow" :
-         		icon.html("<center><img src=\"css/Professor_Longfellow.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         	case "Father Rhinehardt" :
-         		icon.html("<center><img src=\"css/Father_Reihnhardt.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         	case "Missy Dubourde" :
-         		icon.html("<center><img src=\"css/Missy.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         	case "Zoe Ingstrom" :
-         		icon.html("<center><img src=\"css/Zoe.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         	case "Heather Granville" :
-         		icon.html("<center><img src=\"css/Heather_Granville.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         	case "Jenny LeClerc" :
-         		icon.html("<center><img src=\"css/Jenny_Leclerc.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         	case "Vivian Lopez" :
-         		icon.html("<center><img src=\"css/Vivian_Lopez.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         	case "Madame Zostra" :
-         		icon.html("<center><img src=\"css/Madame_Zostra.JPG\" alt=\"Player 1\" style=\"width:100px;height:100px;border-style:solid;border-width:2px;\"></center>");
-         		break;
-         }
+         set_character($char_1, icon);
          
     } else {
        
@@ -366,47 +333,7 @@ function setup_player_2(inGame) {
         
         var icon = $("#icon_2");
         
-        switch($char_2) {
-        	default :
-        		console.log("should not get here!");
-        		break;
-        	case "Darrin 'Flash' Williams" :
-        		icon.html("<center><img src=\"css/Darrin.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        	case "Ox Bellows" :
-        		icon.html("<center><img src=\"css/Ox_Bellows.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        	case "Brandon Jaspers" :
-        		icon.html("<center><img src=\"css/Brandon_Jaspers.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        	case "Peter Akimoto" :
-        		icon.html("<center><img src=\"css/Peter_Akimoto.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        	case "Professor Longfellow" :
-        		icon.html("<center><img src=\"css/Professor_Longfellow.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        	case "Father Rhinehardt" :
-        		icon.html("<center><img src=\"css/Father_Reihnhardt.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        	case "Missy Dubourde" :
-        		icon.html("<center><img src=\"css/Missy.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        	case "Zoe Ingstrom" :
-        		icon.html("<center><img src=\"css/Zoe.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        	case "Heather Granville" :
-        		icon.html("<center><img src=\"css/Heather_Granville.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        	case "Jenny LeClerc" :
-        		icon.html("<center><img src=\"css/Jenny_Leclerc.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        	case "Vivian Lopez" :
-        		icon.html("<center><img src=\"css/Vivian_Lopez.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        	case "Madame Zostra" :
-        		icon.html("<center><img src=\"css/Madame_Zostra.JPG\" alt=\"Player 2\" style=\"width:75px;height75px;\"></center>");
-        		break;
-        }
+        set_character($char_2, icon);
        
     } else {
     	const $player_2_name = $("#name_2");
@@ -438,47 +365,7 @@ function setup_player_3(inGame) {
         
         var icon = $("#icon_3");
         
-        switch($char_3) {
-    	default :
-    		console.log("should not get here!");
-    		break;
-    	case "Darrin 'Flash' Williams" :
-    		icon.html("<center><img src=\"css/Darrin.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Ox Bellows" :
-    		icon.html("<center><img src=\"css/Ox_Bellows.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Brandon Jaspers" :
-    		icon.html("<center><img src=\"css/Brandon_Jaspers.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Peter Akimoto" :
-    		icon.html("<center><img src=\"css/Peter_Akimoto.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Professor Longfellow" :
-    		icon.html("<center><img src=\"css/Professor_Longfellow.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Father Rhinehardt" :
-    		icon.html("<center><img src=\"css/Father_Reihnhardt.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Missy Dubourde" :
-    		icon.html("<center><img src=\"css/Missy.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Zoe Ingstrom" :
-    		icon.html("<center><img src=\"css/Zoe.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Heather Granville" :
-    		icon.html("<center><img src=\"css/Heather_Granville.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Jenny LeClerc" :
-    		icon.html("<center><img src=\"css/Jenny_Leclerc.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Vivian Lopez" :
-    		icon.html("<center><img src=\"css/Vivian_Lopez.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Madame Zostra" :
-    		icon.html("<center><img src=\"css/Madame_Zostra.JPG\" alt=\"Player 3\" style=\"width:75px;height75px;\"></center>");
-    		break;
-        }
+        set_character($char_3, icon);
        
     } else {
     	const $player_3_name = $("#name_3");
@@ -510,47 +397,7 @@ function setup_player_4(inGame) {
 
         var icon = $("#icon_4");
         
-        switch($char_4) {
-    	default :
-    		console.log("should not get here!");
-    		break;
-    	case "Darrin 'Flash' Williams" :
-    		icon.html("<center><img src=\"css/Darrin.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Ox Bellows" :
-    		icon.html("<center><img src=\"css/Ox_Bellows.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Brandon Jaspers" :
-    		icon.html("<center><img src=\"css/Brandon_Jaspers.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Peter Akimoto" :
-    		icon.html("<center><img src=\"css/Peter_Akimoto.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Professor Longfellow" :
-    		icon.html("<center><img src=\"css/Professor_Longfellow.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Father Rhinehardt" :
-    		icon.html("<center><img src=\"css/Father_Reihnhardt.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Missy Dubourde" :
-    		icon.html("<center><img src=\"css/Missy.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Zoe Ingstrom" :
-    		icon.html("<center><img src=\"css/Zoe.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Heather Granville" :
-    		icon.html("<center><img src=\"css/Heather_Granville.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Jenny LeClerc" :
-    		icon.html("<center><img src=\"css/Jenny_Leclerc.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Vivian Lopez" :
-    		icon.html("<center><img src=\"css/Vivian_Lopez.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Madame Zostra" :
-    		icon.html("<center><img src=\"css/Madame_Zostra.JPG\" alt=\"Player 4\" style=\"width:75px;height75px;\"></center>");
-    		break;
-        }
+        set_character($char_4, icon);
     } else {
     	const $player_4_name = $("#name_4");
     	$player_4_name.html("<center> Another victim of the house... </center>");
@@ -581,47 +428,7 @@ function setup_player_5(inGame) {
 
         var icon = $("#icon_5");
         
-        switch($char_5) {
-    	default :
-    		console.log("should not get here!");
-    		break;
-    	case "Darrin 'Flash' Williams" :
-    		icon.html("<center><img src=\"css/Darrin.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Ox Bellows" :
-    		icon.html("<center><img src=\"css/Ox_Bellows.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Brandon Jaspers" :
-    		icon.html("<center><img src=\"css/Brandon_Jaspers.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Peter Akimoto" :
-    		icon.html("<center><img src=\"css/Peter_Akimoto.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Professor Longfellow" :
-    		icon.html("<center><img src=\"css/Professor_Longfellow.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Father Rhinehardt" :
-    		icon.html("<center><img src=\"css/Father_Reihnhardt.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Missy Dubourde" :
-    		icon.html("<center><img src=\"css/Missy.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Zoe Ingstrom" :
-    		icon.html("<center><img src=\"css/Zoe.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Heather Granville" :
-    		icon.html("<center><img src=\"css/Heather_Granville.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Jenny LeClerc" :
-    		icon.html("<center><img src=\"css/Jenny_Leclerc.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Vivian Lopez" :
-    		icon.html("<center><img src=\"css/Vivian_Lopez.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Madame Zostra" :
-    		icon.html("<center><img src=\"css/Madame_Zostra.JPG\" alt=\"Player 5\" style=\"width:75px;height75px;\"></center>");
-    		break;
-        }
+        set_character($char_5, icon);
     } else {
     	const $player_5_name = $("#name_5");
     	$player_5_name.html("<center> Another victim of the house... </center>");
@@ -652,51 +459,67 @@ function setup_player_6(inGame) {
 
         var icon = $("#icon_6");
         
-        switch($char_6) {
-    	default :
-    		console.log("should not get here!");
-    		break;
-    	case "Darrin 'Flash' Williams" :
-    		icon.html("<center><img src=\"css/Darrin.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Ox Bellows" :
-    		icon.html("<center><img src=\"css/Ox_Bellows.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Brandon Jaspers" :
-    		icon.html("<center><img src=\"css/Brandon_Jaspers.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Peter Akimoto" :
-    		icon.html("<center><img src=\"css/Peter_Akimoto.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Professor Longfellow" :
-    		icon.html("<center><img src=\"css/Professor_Longfellow.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Father Rhinehardt" :
-    		icon.html("<center><img src=\"css/Father_Reihnhardt.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Missy Dubourde" :
-    		icon.html("<center><img src=\"css/Missy.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Zoe Ingstrom" :
-    		icon.html("<center><img src=\"css/Zoe.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Heather Granville" :
-    		icon.html("<center><img src=\"css/Heather_Granville.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Jenny LeClerc" :
-    		icon.html("<center><img src=\"css/Jenny_Leclerc.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Vivian Lopez" :
-    		icon.html("<center><img src=\"css/Vivian_Lopez.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-    	case "Madame Zostra" :
-    		icon.html("<center><img src=\"css/Madame_Zostra.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-    		break;
-        }
+        set_character($char_6, icon);
 	} else {
     	const $player_6_name = $("#name_6");
     	$player_6_name.html("<center> Another victim of the house... </center>");
     	const $player_6_stats = $("#stats_6");
     	$player_6_stats.html("<center>X X X X</center>");
 	}
+}
+
+function set_character(character, icon) {
+    switch(character) {
+        default :
+            console.log("should not get here!");
+            break;
+        case "Darrin 'Flash' Williams" :
+            icon.html("<center><img src=\"css/Darrin.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#CC0000");
+            break;
+        case "Ox Bellows" :
+            icon.html("<center><img src=\"css/Ox_Bellows.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#CC0000");
+            break;
+        case "Brandon Jaspers" :
+            icon.html("<center><img src=\"css/Brandon_Jaspers.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#00CC00");
+            break;
+        case "Peter Akimoto" :
+            icon.html("<center><img src=\"css/Peter_Akimoto.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#00CC00");
+            break;
+        case "Professor Longfellow" :
+            icon.html("<center><img src=\"css/Professor_Longfellow.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#CCCCCC");
+            break;
+        case "Father Rhinehardt" :
+            icon.html("<center><img src=\"css/Father_Reihnhart.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#CCCCCC");
+            break;
+        case "Missy Dubourde" :
+            icon.html("<center><img src=\"css/Missy.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#FF9900");
+            break;
+        case "Zoe Ingstrom" :
+            icon.html("<center><img src=\"css/Zoe.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#FF9900");
+            break;
+        case "Heather Granville" :
+            icon.html("<center><img src=\"css/Heather_Granville.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#CC00CC");
+            break;
+        case "Jenny LeClerc" :
+            icon.html("<center><img src=\"css/Jenny_Leclerc.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#CC00CC");
+            break;
+        case "Vivian Lopez" :
+            icon.html("<center><img src=\"css/Vivian_Lopez.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#0000CC");
+            break;
+        case "Madame Zostra" :
+            icon.html("<center><img src=\"css/Madame_Zostra.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
+            colors.push("#0000CC");
+            break;
+    }
 }

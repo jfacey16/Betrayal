@@ -11,6 +11,8 @@
   #container {display:flex; flex-direction:row;}
   #descr {position: absolute; right: 0; bottom: 0; width:150px; height:514px;
     background: #eeeeee; border: solid black 1px; border-width: 1px 0 0 2px; z-index: 1;}
+  #scription {position: absolute; bottom: 0; font: 30px Times New Roman;}
+  .objective {position: relative;}
   button {padding:5px; margin:5px; margin-bottom:10px; background:#eeeeee; font-size:14px; width:130px; height:40px;}
   </style>
   <link href="https://fonts.googleapis.com/css?family=Squada+One" rel="stylesheet">
@@ -230,7 +232,6 @@
     <!-- <center><button disabled>Interact w/Room</button></center> -->
     <center><button id="plat" onclick="placeTile();" disabled>Place Tile</button></center>
     <center><button id="rot" onclick="rotate();" disabled>Rotate Clockwise</button></center>
-    <center><div id="scription"></div></center>
     </div>
   </div>
 </div>
@@ -241,7 +242,7 @@
         <center>Objectives</center>
 
         <div id="objective_description" class="obj_info"></div>
-
+        <center><div id="scription"></div></center>
       </div>
 
       <div class="chat box">
