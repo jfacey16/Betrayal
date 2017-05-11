@@ -304,7 +304,7 @@ function setup_player_1(inGame) {
        
          var icon = $("#icon_1");
          
-         set_character($char_1, icon);
+         set_character(true, $char_1, icon);
          
     } else {
        
@@ -333,7 +333,7 @@ function setup_player_2(inGame) {
         
         var icon = $("#icon_2");
         
-        set_character($char_2, icon);
+        set_character(false, $char_2, icon);
        
     } else {
     	const $player_2_name = $("#name_2");
@@ -365,7 +365,7 @@ function setup_player_3(inGame) {
         
         var icon = $("#icon_3");
         
-        set_character($char_3, icon);
+        set_character(false, $char_3, icon);
        
     } else {
     	const $player_3_name = $("#name_3");
@@ -397,7 +397,7 @@ function setup_player_4(inGame) {
 
         var icon = $("#icon_4");
         
-        set_character($char_4, icon);
+        set_character(false, $char_4, icon);
     } else {
     	const $player_4_name = $("#name_4");
     	$player_4_name.html("<center> Another victim of the house... </center>");
@@ -428,7 +428,7 @@ function setup_player_5(inGame) {
 
         var icon = $("#icon_5");
         
-        set_character($char_5, icon);
+        set_character(false, $char_5, icon);
     } else {
     	const $player_5_name = $("#name_5");
     	$player_5_name.html("<center> Another victim of the house... </center>");
@@ -459,7 +459,7 @@ function setup_player_6(inGame) {
 
         var icon = $("#icon_6");
         
-        set_character($char_6, icon);
+        set_character(false, $char_6, icon);
 	} else {
     	const $player_6_name = $("#name_6");
     	$player_6_name.html("<center> Another victim of the house... </center>");
@@ -468,58 +468,114 @@ function setup_player_6(inGame) {
 	}
 }
 
-function set_character(character, icon) {
-    switch(character) {
-        default :
-            console.log("should not get here!");
-            break;
-        case "Darrin 'Flash' Williams" :
-            icon.html("<center><img src=\"css/Darrin.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#CC0000");
-            break;
-        case "Ox Bellows" :
-            icon.html("<center><img src=\"css/Ox_Bellows.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#CC0000");
-            break;
-        case "Brandon Jaspers" :
-            icon.html("<center><img src=\"css/Brandon_Jaspers.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#00CC00");
-            break;
-        case "Peter Akimoto" :
-            icon.html("<center><img src=\"css/Peter_Akimoto.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#00CC00");
-            break;
-        case "Professor Longfellow" :
-            icon.html("<center><img src=\"css/Professor_Longfellow.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#CCCCCC");
-            break;
-        case "Father Rhinehardt" :
-            icon.html("<center><img src=\"css/Father_Reihnhart.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#CCCCCC");
-            break;
-        case "Missy Dubourde" :
-            icon.html("<center><img src=\"css/Missy.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#FF9900");
-            break;
-        case "Zoe Ingstrom" :
-            icon.html("<center><img src=\"css/Zoe.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#FF9900");
-            break;
-        case "Heather Granville" :
-            icon.html("<center><img src=\"css/Heather_Granville.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#CC00CC");
-            break;
-        case "Jenny LeClerc" :
-            icon.html("<center><img src=\"css/Jenny_Leclerc.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#CC00CC");
-            break;
-        case "Vivian Lopez" :
-            icon.html("<center><img src=\"css/Vivian_Lopez.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#0000CC");
-            break;
-        case "Madame Zostra" :
-            icon.html("<center><img src=\"css/Madame_Zostra.JPG\" alt=\"Player 6\" style=\"width:75px;height75px;\"></center>");
-            colors.push("#0000CC");
-            break;
-    }
+function set_character(player_1, character, icon) {
+	if(player_1) {
+	    switch(character) {
+	        default :
+	            console.log("should not get here!");
+	            break;
+	        case "Darrin 'Flash' Williams" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Darrin.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CC0000");
+	            break;
+	        case "Ox Bellows" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Ox_Bellows.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CC0000");
+	            break;
+	        case "Brandon Jaspers" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Brandon_Jaspers.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#00CC00");
+	            break;
+	        case "Peter Akimoto" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Peter_Akimoto.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#00CC00");
+	            break;
+	        case "Professor Longfellow" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Professor_Longfellow.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CCCCCC");
+	            break;
+	        case "Father Rhinehardt" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Father_Reihnhart.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CCCCCC");
+	            break;
+	        case "Missy Dubourde" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Missy.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#FF9900");
+	            break;
+	        case "Zoe Ingstrom" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Zoe.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#FF9900");
+	            break;
+	        case "Heather Granville" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Heather_Granville.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CC00CC");
+	            break;
+	        case "Jenny LeClerc" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Jenny_Leclerc.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CC00CC");
+	            break;
+	        case "Vivian Lopez" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Vivian_Lopez.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#0000CC");
+	            break;
+	        case "Madame Zostra" :
+	            icon.html("<center><img style=\"border:2px solid black;width:100px;height100px;\" src=\"css/Madame_Zostra.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#0000CC");
+	            break;
+	    }
+	} else {
+	    switch(character) {
+	        default :
+	            console.log("should not get here!");
+	            break;
+	        case "Darrin 'Flash' Williams" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Darrin.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CC0000");
+	            break;
+	        case "Ox Bellows" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Ox_Bellows.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CC0000");
+	            break;
+	        case "Brandon Jaspers" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Brandon_Jaspers.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#00CC00");
+	            break;
+	        case "Peter Akimoto" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Peter_Akimoto.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#00CC00");
+	            break;
+	        case "Professor Longfellow" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Professor_Longfellow.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CCCCCC");
+	            break;
+	        case "Father Rhinehardt" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Father_Reihnhart.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CCCCCC");
+	            break;
+	        case "Missy Dubourde" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Missy.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#FF9900");
+	            break;
+	        case "Zoe Ingstrom" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Zoe.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#FF9900");
+	            break;
+	        case "Heather Granville" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Heather_Granville.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CC00CC");
+	            break;
+	        case "Jenny LeClerc" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Jenny_Leclerc.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#CC00CC");
+	            break;
+	        case "Vivian Lopez" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Vivian_Lopez.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#0000CC");
+	            break;
+	        case "Madame Zostra" :
+	            icon.html("<center><img style=\"border:2px solid black;width:75px;height75px;\" src=\"css/Madame_Zostra.JPG\" alt=\"Player X\"></center>");
+	            colors.push("#0000CC");
+	            break;
+	    }
+	}
 }

@@ -60,12 +60,12 @@
     </div>
   </div>
 
-  <div class="player_row">
+  <div class="player_row box text_basic">
 
     <div id="player_2" class="player">
        <div class="image">
           <div id="icon_2" class="icon">
-            <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 2" style="width:75px;height:75px;"></center>
+            <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 2" style="width:75px;height:75px;border:2px solid black;"></center>
         </div>
 
         <div id="stats_2" class="stats"><center> X </center></div>
@@ -82,7 +82,7 @@
     <div id="player_3" class="player">
         <div class="image">
           <div id="icon_3" class="icon">
-            <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 3" style="width:75px;height:75px;"></center>
+            <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 3" style="width:75px;height:75px;border:2px solid black;"></center>
         </div>
 
         <div id="stats_3" class="stats"><center> X </center></div>
@@ -99,7 +99,7 @@
     <div id="player_4" class="player">
        <div class="image">
           <div id="icon_4" class="icon">
-            <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 4" style="width:75px;height:75px;"></center>
+            <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 4" style="width:75px;height:75px;border:2px solid black;"></center>
         </div>
 
         <div id="stats_4" class="stats"><center> X </center></div>
@@ -116,7 +116,7 @@
     <div id="player_5" class="player">
        <div class="image">
           <div id="icon_5" class="icon">
-            <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 5" style="width:75px;height:75px;"></center>
+            <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 5" style="width:75px;height:75px;border:2px solid black;"></center>
         </div>
 
         <div id="stats_5" class="stats"><center> X </center></div>
@@ -133,7 +133,7 @@
     <div id="player_6" class="player">
        <div class="image">
           <div id="icon_6" class="icon">
-            <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 6" style="width:75px;height:75px;"></center>
+            <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 6" style="width:75px;height:75px;border:2px solid black;"></center>
         </div>
 
         <div id="stats_6" class="stats"><center> X </center></div>
@@ -148,8 +148,8 @@
     </div>
   </div>
 
-  <div class="main_game">
-    <div id="player_1" class="player_1">
+  <div class="main_game text_basic">
+    <div id="player_1" class="player_1 box">
 
       <div id="name_1" class="name"><center> X </center></div>
 
@@ -238,8 +238,8 @@
 </div>
 
     <div class="interaction">
-      <div class="objective">
-        <center>Objectives</center>
+      <div class="objective box">
+        <div class="text_title center big">Objectives</div>
 
         <div id="objective_description" class="obj_info"></div>
         <center><div id="scription"></div></center>
@@ -249,8 +249,8 @@
         <div class="text_title center big">Chat</div>
         <div class="log dark_bg" id="chat_log"></div>
 
-        <div class="user_text">
-          <input type="text" id="chat_text" name="chat_text" placeholder="Enter Message" style="width:85%;" class = "text_normal">
+        <div class="user_text center">
+          <input type="text" id="chat_text" name="chat_text" placeholder="Enter Message" class = "text_normal">
         </div>
 
       </div>

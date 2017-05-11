@@ -28,54 +28,25 @@ html, body {
   height: 100% !important;
 }
 
+.gameTitle{
+  float:left;
+  border-width:0px;
+  background: rgba(54, 25, 25, 0) !important;
+
+  width:100%;
+  margin:5px;
+  font-family: 'Squada One', cursive;
+  font-weight: bold;
+  color: #eaeaea;
+  font-size: 3em;
+  margin: 0px;
+  text-align:center;
+}
+
 .main_game {
   display:flex;
   flex-direction:row;
-  height:70%;
-}
-
-.interaction {
-  display:flex;
-  flex-direction:column;
-  width:25%;
-  margin:5px;
-}
-
-.chat {
-  display:flex;
-  flex-direction:column;
-  width:99%;
-  height:50%;
-  border-style:solid;
-  border-width:2px;
-}
-
-.log {
-  font-family:Arial;
-  overflow-y:auto;
-  width:93%;
-  height:75%;
-  border-color:#eeeeee;
-  border-width:2px;
-  margin:5px;
-  background-color:#eeeeee;
-}
-
-
-.objective {
-  width:99%;
-  height:50%;
-  border-style:solid;
-  border-width:2px;
-  margin-bottom:10px;
-  background-color:#eeeeee;
-}
-
-.obj_info {
-  overflow-y:auto;
-  height:85%;
-  margin:5px;
-  background-color:#eeeeee;
+  height:73%;
 }
 
 .board {
@@ -85,6 +56,7 @@ html, body {
   border-width:2px;
   margin:5px;
   background-color:#eeeeee;
+  border-radius:5px;
 }
 
 .card_description {
@@ -156,18 +128,14 @@ html, body {
 
 .icon_1 {
   margin:5px;
-  background-color:#eeeeee;
 }
 
 .player_row {
-  border-style:solid;
-  margin: 0;
+  margin: 5px;
   padding: 0;
-  border-width:0;
   display:flex;
   flex-direction:row;
   height:20%;
-  background-color:#707070;
 }
 
 .player {
@@ -175,13 +143,14 @@ html, body {
   flex-direction:row;
   width:20%;
   height:80%;
-  border-style:solid;
-  border-width:2px;
   margin-top:1%;
   margin-bottom:1%;
   margin-left:5px;
   margin-right:5px;
-  background-color:#eeeeee;
+  background-color:#707070;
+  border-radius: 5px;
+  border-style:solid;
+  border-width:2px;
 }
 
 .info {
@@ -198,7 +167,6 @@ html, body {
   display:flex;
   flex-direction:column;
   margin:5px;
-  background-color:#eeeeee;
 }
 
 .popup_stats {
@@ -221,38 +189,59 @@ html, body {
 
 .icon {
   width:100%;
-  border-style:solid;
-  border-width:2px;
-  margin-bottom:5px;
-  background-color:#eeeeee;
+  margin-left:2px;
+  margin-top:2px;
 }
 
 .title_row {
   display:flex;
   flex-direction:row;
-  height:10%;
+  height:7%;
   border-width:0px;
   background: rgba(54, 25, 25, 0);
 }
 
-.gameTitle{
-  float:left;
-  border-width:0px;
-  background: rgba(54, 25, 25, 0) !important;
+/*OBJECTIVES*/
 
-  width:100%;
+.interaction {
+  display:flex;
+  flex-direction:column;
+  width:25%;
+}
+
+.objective {
+  height:50%;
   margin:5px;
-  font-family: 'Squada One', cursive;
-  font-weight: bold;
-  color: #eaeaea;
-  font-size: 3em;
-  margin: 0px;
-  text-align:center;
+}
+
+.obj_info {
+  overflow-y:auto;
+  height:80%;
+  margin:5px;
+  background-color:#eeeeee;
 }
 
 /*CHAT*/
+
+.chat {
+  display:flex;
+  flex-direction:column;
+  height:50%;
+  margin:5px;
+}
+
+.log {
+  font-family:Arial;
+  overflow-y:auto;
+  height:75%;
+  border-color:#eeeeee;
+  border-width:2px;
+  margin:5px;
+  background-color:#eeeeee;
+}
+
 #chat_text {
-  margin-left: 5px;
+  width:90%;
   color: black;
 }
 
@@ -405,10 +394,17 @@ input[type=text]{
   color: #eaeaea;
   margin-bottom: 10px;
 }
+
 .text_normal {
   font-family: 'Scada', sans-serif !important;
   font-size: 1em;
   color: #eaeaea;
+}
+
+.text_basic {
+  font-family: 'Scada', sans-serif !important;
+  font-size: 1em;
+  color: black;
 }
 
 .menu_button {
