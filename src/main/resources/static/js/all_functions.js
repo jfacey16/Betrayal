@@ -41,12 +41,14 @@ const S = 7.5;
 const offx = -375;
 const offy = -425;
 let allowkeys = false;
-let turn = 0;
+let turn = -1;
 let rot = 0;
 let rottile = null;
 let avdoor = 0;
 let tempdir = 0;
 let turnorder = -1;
+let omen = 0;
+let colors = [];
 const textOff = new Position(5, 135);
 const symbOff = new Position(130, 143);
 const outside = new Tile(450,600,false,false,false,false);
@@ -207,22 +209,28 @@ function paintBoard(floor, players) {
   for (let i = 0; i < positions.length; i++) {
     if (floor == positions[i].floor || floor == -1) {
       if (positions[i].floor == 0) {
-        ctxb.strokeRect(positions[i].posx + offsets[i].posx, positions[i].posy + offsets[i].posy, P, P);
-        ctxmb.strokeRect((positions[i].posx + offsets[i].posx) / S,
+        ctxb.fillStyle = colors[i];
+        ctxb.fillRect(positions[i].posx + offsets[i].posx, positions[i].posy + offsets[i].posy, P, P);
+        ctxmb.fillRect((positions[i].posx + offsets[i].posx) / S,
           (positions[i].posy + offsets[i].posy) / S, P / S, P / S);
       }
       else if (positions[i].floor == 1) {
-        ctxf.strokeRect(positions[i].posx + offsets[i].posx, positions[i].posy + offsets[i].posy, P, P);
-        ctxmf.strokeRect((positions[i].posx + offsets[i].posx) / S,
+        ctxf.fillStyle = colors[i];
+        ctxf.fillRect(positions[i].posx + offsets[i].posx, positions[i].posy + offsets[i].posy, P, P);
+        ctxmf.fillRect((positions[i].posx + offsets[i].posx) / S,
           (positions[i].posy + offsets[i].posy) / S, P / S, P / S);
       }
       else if (positions[i].floor == 2) {
-        ctxs.strokeRect(positions[i].posx + offsets[i].posx, positions[i].posy + offsets[i].posy, P, P);
-        ctxms.strokeRect((positions[i].posx + offsets[i].posx) / S,
+        ctxs.fillStyle = colors[i];
+        ctxs.fillRect(positions[i].posx + offsets[i].posx, positions[i].posy + offsets[i].posy, P, P);
+        ctxms.fillRect((positions[i].posx + offsets[i].posx) / S,
           (positions[i].posy + offsets[i].posy) / S, P / S, P / S);
       }
     }
   }
+  ctxb.fillStyle = "black";
+  ctxf.fillStyle = "black";
+  ctxs.fillStyle = "black";
 }
 
 function rotate() {
@@ -425,18 +433,22 @@ function actualMovement(responseJSON) {
     ctxm = ctxms;
     levm = msecond;
   }
+  ctx.fillStyle = colors[turn];
+  ctxm.fillStyle = colors[turn];
   responseObject = JSON.parse(responseJSON.payload);
   console.log(responseObject);
   switch(responseObject.direction) {
     case "NORTH":
       ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
         positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
-      ctx.strokeRect(positions[turn].posx + offsets[turn].posx,
+      ctx.fillRect(positions[turn].posx + offsets[turn].posx,
         positions[turn].posy - T + offsets[turn].posy, P, P);
       ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
         (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-      ctxm.strokeRect((positions[turn].posx + offsets[turn].posx) / S,
+      ctxm.fillRect((positions[turn].posx + offsets[turn].posx) / S,
         (positions[turn].posy - T + offsets[turn].posy) / S, P / S, P / S);
+      ctx.fillStyle = "black";
+      ctxm.fillStyle = "black";
       if (!responseObject.finished) {
         ctx.strokeRect(positions[turn].posx, positions[turn].posy - T, T, T);
         ctxm.strokeRect(positions[turn].posx / S, (positions[turn].posy - T) / S, P, P);
@@ -532,12 +544,14 @@ function actualMovement(responseJSON) {
     case "EAST":
       ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
         positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
-      ctx.strokeRect(positions[turn].posx + T + offsets[turn].posx,
+      ctx.fillRect(positions[turn].posx + T + offsets[turn].posx,
         positions[turn].posy + offsets[turn].posy, P, P);
       ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
         (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-      ctxm.strokeRect((positions[turn].posx + T + offsets[turn].posx) / S,
+      ctxm.fillRect((positions[turn].posx + T + offsets[turn].posx) / S,
         (positions[turn].posy + offsets[turn].posy) / S, P / S, P / S);
+      ctx.fillStyle = "black";
+      ctxm.fillStyle = "black";
       if (!responseObject.finished) {
         ctx.strokeRect(positions[turn].posx + T, positions[turn].posy, T, T);
         ctxm.strokeRect((positions[turn].posx + T) / S, positions[turn].posy / S, P, P);
@@ -633,12 +647,14 @@ function actualMovement(responseJSON) {
     case "SOUTH":
       ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
         positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
-      ctx.strokeRect(positions[turn].posx + offsets[turn].posx,
+      ctx.fillRect(positions[turn].posx + offsets[turn].posx,
         positions[turn].posy + T + offsets[turn].posy, P, P);
       ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
         (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-      ctxm.strokeRect((positions[turn].posx + offsets[turn].posx) / S,
+      ctxm.fillRect((positions[turn].posx + offsets[turn].posx) / S,
         (positions[turn].posy + T + offsets[turn].posy) / S, P / S, P / S);
+      ctx.fillStyle = "black";
+      ctxm.fillStyle = "black";
       if (!responseObject.finished) {
         ctx.strokeRect(positions[turn].posx, positions[turn].posy + T, T, T);
         ctxm.strokeRect(positions[turn].posx / S, (positions[turn].posy + T) / S, P, P);
@@ -733,12 +749,14 @@ function actualMovement(responseJSON) {
     case "WEST":
       ctx.clearRect(positions[turn].posx + offsets[turn].posx - 1,
         positions[turn].posy + offsets[turn].posy - 1, P + 2, P + 2);
-      ctx.strokeRect(positions[turn].posx - T + offsets[turn].posx,
+      ctx.fillRect(positions[turn].posx - T + offsets[turn].posx,
         positions[turn].posy + offsets[turn].posy, P, P);
       ctxm.clearRect((positions[turn].posx + offsets[turn].posx) / S - 1,
         (positions[turn].posy + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-      ctxm.strokeRect((positions[turn].posx  - T + offsets[turn].posx) / S,
+      ctxm.fillRect((positions[turn].posx  - T + offsets[turn].posx) / S,
         (positions[turn].posy + offsets[turn].posy) / S, P / S, P / S);
+      ctx.fillStyle = "black";
+      ctxm.fillStyle = "black";
       if (!responseObject.finished) {
         ctx.strokeRect(positions[turn].posx - T, positions[turn].posy, T, T);
         ctxm.strokeRect((positions[turn].posx - T) / S, positions[turn].posy / S, P, P);
@@ -832,11 +850,13 @@ function actualMovement(responseJSON) {
       break;
     case "UP":
       ctx.clearRect(900 + offsets[turn].posx - 1, 600 + offsets[turn].posy - 1, P + 2, P + 2);
-      ctxs.strokeRect(600 + offsets[turn].posx, 600 + offsets[turn].posy, P, P);
+      ctxs.fillRect(600 + offsets[turn].posx, 600 + offsets[turn].posy, P, P);
       ctxm.clearRect((900 + offsets[turn].posx) / S - 1,
         (600 + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-      ctxms.strokeRect((600 + offsets[turn].posx) / S,
+      ctxms.fillRect((600 + offsets[turn].posx) / S,
         (600 + offsets[turn].posy) / S, P / S, P / S);
+      ctx.fillStyle = "black";
+      ctxm.fillStyle = "black";
       positions[turn].posx = 600;
       positions[turn].floor = 2;
       positions[turn].north = true;
@@ -846,11 +866,13 @@ function actualMovement(responseJSON) {
       break;
     case "DOWN":
       ctx.clearRect(600 + offsets[turn].posx - 1, 600 + offsets[turn].posy - 1, P + 2, P + 2);
-      ctxf.strokeRect(900 + offsets[turn].posx, 600 + offsets[turn].posy, P, P);
+      ctxf.fillRect(900 + offsets[turn].posx, 600 + offsets[turn].posy, P, P);
       ctxm.clearRect((600 + offsets[turn].posx) / S - 1,
         (600 + offsets[turn].posy) / S - 1, P / S + 2, P / S + 2);
-      ctxmf.strokeRect((900 + offsets[turn].posx) / S,
+      ctxmf.fillRect((900 + offsets[turn].posx) / S,
         (600 + offsets[turn].posy) / S, P / S, P / S);
+      ctx.fillStyle = "black";
+      ctxm.fillStyle = "black";
       positions[turn].posx = 900;
       positions[turn].floor = 1;
       positions[turn].north = false;
@@ -980,6 +1002,7 @@ function update_turn(currentTurn) {
 	        document.getElementById("player_5").style.borderColor = "black";
 	        document.getElementById("player_6").style.borderColor = "yellow";
 	    }
+    console.log(turn);
     if (turn + 1 == numPlayers) 
       turn = 0;
     else

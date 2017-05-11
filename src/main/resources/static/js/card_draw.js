@@ -76,6 +76,8 @@ function omenDrawn(data, card_info, room_name) {
 		conn.send(json);
 		
     });
+    omen++;
+    descr.innerHTML = "Omen Count: " + omen;
 }
 
 function omenRoll(data) {

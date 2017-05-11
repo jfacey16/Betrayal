@@ -51,20 +51,17 @@ const setup_betrayal = () => {
 				choose_character(data);
 				break;
 			case MESSAGE_TYPE.GAMEREADY:
-				set_starting_state(data);
-				draw_map(data);
 				const using = JSON.parse(data.idTurnOrder);
 				numPlayers = using.length;
 				turnIndex = using.indexOf(userId);
-				turn = 0;
-//				console.log("t:" + turn);
-//				console.log("ti:" + turnIndex);
+				set_starting_state(data);
+				draw_map(data);
 				if (turn != turnIndex)
 					ending.disabled = true;
 				break;
 			case MESSAGE_TYPE.GAMEMOVE:
 				const pay = JSON.parse(data.payload);
-				if (pay.phase === 1)
+				if (pay.phase === 1) 
 					receiveCard(data);
 			 	else if (pay.phase === 0)
 					actualMovement(data);

@@ -64,6 +64,7 @@ let m1 = false;
     const rotation = document.getElementById("rot");
     const placet = document.getElementById("plat");
     const ending = document.getElementById("end");
+    descr.innerHTML = "Omen Count: 0";
 
     first.width = 1350;
     first.height = 1350;
