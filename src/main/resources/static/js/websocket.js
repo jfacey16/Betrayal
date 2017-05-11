@@ -64,6 +64,8 @@ const setup_betrayal = () => {
 				break;
 			case MESSAGE_TYPE.GAMEMOVE:
 				const pay = JSON.parse(data.payload);
+				const playerc = data.player;
+				console.log("color: " + playerc);
 				if (pay.phase === 1) 
 					receiveCard(data);
 			 	else if (pay.phase === 0)
