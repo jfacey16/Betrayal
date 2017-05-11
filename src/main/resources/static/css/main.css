@@ -208,7 +208,7 @@ html, body {
   border-style:solid;
   border-color:#eeeeee;
   border-width:2px;
-  background-color:#eeeeee;
+  background-color:#ffffff;
 }
 
 .stats {
@@ -471,6 +471,13 @@ input[type=text]{
   font-size: 2em;
 }
 
+.resize_choice {
+  width:45% !important;
+  height:80% !important;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
 
 /*CANVAS*/
 #container {
@@ -484,4 +491,8 @@ input[type=text]{
 
 #descr {
   height: 100%
+}
+
+.center{
+  text-align: center !important;
 }

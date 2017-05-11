@@ -154,13 +154,17 @@
       <div id="icon_1" class="icon_1">
           <center><img src="http://www.thecatalystagency.com/wp-content/uploads/2015/06/placeholder-user-anon.png" alt="Player 1" style="width:100px;height:100px;border-style:solid;border-width:2px;"></center>
       </div>
-
+	
+		Speed:
       <center><div id="speed_1" class="stat"><center> X </center></div></center>
 
+		Might:
       <center><div id="might_1" class="stat"><center> X </center></div></center>
 
+		Sanity:
       <center><div id="sanity_1" class="stat"><center> X </center></div></center>
-
+	
+		Knowledge:
       <center><div id="knowledge_1" class="stat"><center> X </center></div></center>
       
       <center><div id="items_1"></div></center>

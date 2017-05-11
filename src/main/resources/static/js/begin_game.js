@@ -71,7 +71,7 @@ const allow_mouseover = () => {
     const stats_6 = document.getElementById("stats_6");
    
     stats_2.onmouseover = function() {
-        $("#stats_2_popup").html("PLAYER 2 STATS");
+        $("#stats_2_popup").html("Speed - Might - Sanity - Knowledge");
         document.getElementById('stats_2_popup').style.display = 'block';
     };
    
@@ -80,7 +80,7 @@ const allow_mouseover = () => {
     };
  
     stats_3.onmouseover = function() {
-        $("#stats_3_popup").html("PLAYER 3 STATS");
+        $("#stats_3_popup").html("Speed - Might - Sanity - Knowledge");
         document.getElementById('stats_3_popup').style.display = 'block';
     };
  
@@ -89,7 +89,7 @@ const allow_mouseover = () => {
     };
  
     stats_4.onmouseover = function() {
-        $("#stats_4_popup").html("PLAYER 4 STATS");
+        $("#stats_4_popup").html("Speed - Might - Sanity - Knowledge");
         document.getElementById('stats_4_popup').style.display = 'block';
     };
  
@@ -98,7 +98,7 @@ const allow_mouseover = () => {
     };
  
     stats_5.onmouseover = function() {
-        $("#stats_5_popup").html("PLAYER 5 STATS");
+        $("#stats_5_popup").html("Speed - Might - Sanity - Knowledge");
         document.getElementById('stats_5_popup').style.display = 'block';
     };
  
@@ -107,7 +107,7 @@ const allow_mouseover = () => {
     };
  
     stats_6.onmouseover = function() {
-        $("#stats_6_popup").html("PLAYER 6 STATS");
+        $("#stats_6_popup").html("Speed - Might - Sanity - Knowledge");
         document.getElementById('stats_6_popup').style.display = 'block';
     };
  
@@ -234,6 +234,7 @@ function set_starting_state(data) {
  
 function setup_player_1(inGame) {
     if(inGame) {
+    	
         const $player_1_name = $("#name_1");
  
         $char_1 = character_list[0];
