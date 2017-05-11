@@ -51,6 +51,7 @@ html, body {
 }
 
 .log {
+  font-family:Arial;
   overflow-y:auto;
   width:93%;
   height:75%;
@@ -416,7 +417,6 @@ input[type=text]{
   bottom: 0;
   margin: 5px;
 }
-
 
 .myButton {
 	-moz-box-shadow:inset 0px 34px 0px -15px #b54b3a;

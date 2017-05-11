@@ -57,8 +57,8 @@ const setup_betrayal = () => {
 				numPlayers = using.length;
 				turnIndex = using.indexOf(userId);
 				turn = 0;
-				console.log("t:" + turn);
-				console.log("ti:" + turnIndex);
+//				console.log("t:" + turn);
+//				console.log("ti:" + turnIndex);
 				if (turn != turnIndex)
 					ending.disabled = true;
 				break;
@@ -75,21 +75,21 @@ const setup_betrayal = () => {
 					if(pay.result) {
 						eventRoll(pay);
 					} else {
-						console.log("omen roll sent");
 						omenRoll(pay);
 					}
 				}
 
 				console.log(data);
 				console.log(pay);
-				console.log("current " + current_char);
+				
 				if(pay.character) {
-					if(pay.item) {
-						if(pay.item.length >= 1)
-							addItem(pay.character, pay.item[0]);
-					} else if(pay.omen) {
-						if(pay.omen.length)
-							addOmen(pay.character, pay.omen[0]);
+					console.log("current " + pay.character.name);
+					if(pay.item && pay.item.length >= 1) {
+						console.log("item found by " + pay.character.name);
+						addItem(pay.character, pay.item[0]);
+					} else if(pay.omen && pay.omen.length >= 1) {
+						console.log("omen found by " + pay.character.name);
+						addOmen(pay.character, pay.omen[0]);
 					} else {
 						console.log("updating event!");
 						updateEvent(pay.character);
@@ -98,7 +98,6 @@ const setup_betrayal = () => {
 				update_turn(data.currentTurn);
 				break;
 			case MESSAGE_TYPE.CHATUPDATE:
-				console.log("message recieved");
 				display_message(data);
 				break;
 
