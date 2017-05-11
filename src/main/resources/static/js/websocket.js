@@ -254,13 +254,13 @@ function choose_character(data) {
             choices_text += '<img class="char_choice resize_choice" src="css/Madame_Zostra_Choose.jpg" alt="Madame Zostra"></img>';
             break;
         case "Vivian Lopez":
-            choices_text += '<img class="char_choice resize_choice" src="css/Vivian_Lopez_Choose.jpg" alt="Peter Akimoto"></img>';
+            choices_text += '<img class="char_choice resize_choice" src="css/Vivian_Lopez_Choose.jpg" alt="Vivian Lopez"></img>';
             break;
         case "Missy Dubourde":
-            choices_text += '<img class="char_choice resize_choice" src="css/Missy_Choose.jpg" alt="Madame Zostra"></img>';
+            choices_text += '<img class="char_choice resize_choice" src="css/Missy_Choose.jpg" alt="Missy Dubourde"></img>';
             break;
         case "Zoe Ingstrom":
-            choices_text += '<img class="char_choice resize_choice" src="css/Zoe_Choose.jpg" alt="Peter Akimoto"></img>';
+            choices_text += '<img class="char_choice resize_choice" src="css/Zoe_Choose.jpg" alt="Zoe Ingstrom"></img>';
             break;
     }
 
