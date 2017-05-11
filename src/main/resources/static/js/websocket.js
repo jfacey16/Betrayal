@@ -210,6 +210,8 @@ function start_game() {
 }
 
 function choose_character(data) {
+	
+	console.log(JSON.parse(data.choices));
 
 	const choices = JSON.parse(data.choices);
 	var current_choice = "";
@@ -255,6 +257,12 @@ function choose_character(data) {
             break;
         case "Vivian Lopez":
             choices_text += '<img class="char_choice resize_choice" src="css/Vivian_Lopez_Choose.jpg" alt="Peter Akimoto"></img>';
+            break;
+        case "Missy Dubourde":
+            choices_text += '<img class="char_choice resize_choice" src="css/Missy_Choose.jpg" alt="Madame Zostra"></img>';
+            break;
+        case "Zoe Ingstrom":
+            choices_text += '<img class="char_choice resize_choice" src="css/Zoe_Choose.jpg" alt="Peter Akimoto"></img>';
             break;
     }
 
