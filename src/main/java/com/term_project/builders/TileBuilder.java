@@ -174,7 +174,7 @@ public class TileBuilder implements Builder<Tile> {
     Tile wineCellar = new GenericTile(d2a, 1, 0, 0, b, memory);
     wineCellar.setName("Wine Cellar");
     tileList.add(wineCellar);
-
+     
     // start of upper/basement
     List<Floor> ba = new ArrayList<>();
     ba.add(Floor.BASEMENT);

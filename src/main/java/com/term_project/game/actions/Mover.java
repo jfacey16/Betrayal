@@ -152,6 +152,12 @@ public class Mover {
       }
     }
 
+    System.out.println("xname: " + toAdd.getName());
+    System.out.println("xn: " + toAdd.hasNorth());
+    System.out.println("xs: " + toAdd.hasSouth());
+    System.out.println("xe: " + toAdd.hasEast());
+    System.out.println("xw: " + toAdd.hasWest());
+
     // now that we've retrieved a tile on the same floor, we must
     // set the tile's position
     switch (dir) {

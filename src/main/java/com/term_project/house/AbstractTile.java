@@ -315,6 +315,20 @@ public abstract class AbstractTile implements Tile {
       availableDoors.clear();
       availableDoors.add(Direction.NORTH);
       availableDoors.add(Direction.SOUTH);
+    } else if (av == 1) {
+      if (availableDoors.contains(Direction.NORTH)) {
+        availableDoors.clear();
+        availableDoors.add(Direction.EAST);
+      } else if (availableDoors.contains(Direction.EAST)) {
+        availableDoors.clear();
+        availableDoors.add(Direction.SOUTH);
+      } else if (availableDoors.contains(Direction.SOUTH)) {
+        availableDoors.clear();
+        availableDoors.add(Direction.WEST);
+      } else if (availableDoors.contains(Direction.WEST)) {
+        availableDoors.clear();
+        availableDoors.add(Direction.NORTH);
+      }
     }
     else while (true) {
       if (availableDoors.contains(Direction.NORTH)) {

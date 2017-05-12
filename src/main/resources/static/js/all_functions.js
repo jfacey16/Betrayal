@@ -849,6 +849,8 @@ function actualMovement(responseJSON) {
       }
       break;
     case "UP":
+      ctxs.fillStyle = colors[turn];
+      ctxms.fillStyle = colors[turn];
       ctx.clearRect(900 + offsets[turn].posx - 1, 600 + offsets[turn].posy - 1, P + 2, P + 2);
       ctxs.fillRect(600 + offsets[turn].posx, 600 + offsets[turn].posy, P, P);
       ctxm.clearRect((900 + offsets[turn].posx) / S - 1,
@@ -865,6 +867,8 @@ function actualMovement(responseJSON) {
       positions[turn].west = true; 
       break;
     case "DOWN":
+      ctxf.fillStyle = colors[turn];
+      ctxmf.fillStyle = colors[turn];
       ctx.clearRect(600 + offsets[turn].posx - 1, 600 + offsets[turn].posy - 1, P + 2, P + 2);
       ctxf.fillRect(900 + offsets[turn].posx, 600 + offsets[turn].posy, P, P);
       ctxm.clearRect((600 + offsets[turn].posx) / S - 1,
