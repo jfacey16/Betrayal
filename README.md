@@ -48,10 +48,3 @@ If you reveal an item tile while discovering a new room, you get an item (everyo
 Until the haunt starts, the objective of everyone is to explore the house. Everybody is on the same team. Once the haunt starts, though, there are new objectives for everybody depending on the haunt. (All objectives are shown on the right strip; it’ll show different things depending on whether you are a traitor or not). Usually, there is a traitor, and the traitor has different objectives from everyone else from now on. The traitor knows things that other players don’t, and the players usually know things that the traitor doesn’t as well. Once the objective is fulfilled, either by the traitor or the rest of the players, the game ends.
 
 Once the haunt starts, traitors (and anything on the traitor’s side; sometimes, the traitor works with monsters or other things that appear once the haunt starts) can attack other players, and vice-versa. You can only attack someone if you are in the same room as them. To attack, you roll dice equal to your might (another stat), and so does the character you are attacking. The difference is taken in damage to any of your stats, depending on which result is higher.
-
-
-## Project Design Presentation
-_A link to your design presentation/document will go here!_
-
-## How to Build and Run
-_A necessary part of any README!_
